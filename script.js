@@ -1,700 +1,1116 @@
-// script.js - بورتفوليو مهندس
+// ===========================================
+// بورتفوليو صانع محتوى محترف 2025
+// ===========================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    // نظام الترجمة الكامل للمهندس
-    const translations = {
-        ar: {
-            // التنقل
-            logo: "أحمد",
-            navHome: "الرئيسية",
-            navProfile: "حوال",
-            navServices: "الخدمات",
-            navPortfolio: "مشاريعي",
-            navSkills: "المهارات",
-            navContact: "اتصل",
-            language: "EN",
+    // تهيئة جميع المكونات
+    initNavigation();
+    initThemeSwitcher();
+    initLanguageSwitcher();
+    initCurrentYear();
+    initScrollAnimations();
+    initVideoModal();
+    initContactForm();
+    initScrollProgress();
+    initSmoothScrolling();
+    initPageAnimations();
+    initTypewriter();
+    initCounters();
+    initModeSwitcher();
+    initAnimatedBackground();
+    
+    // تعيين اللغة الافتراضية إلى العربية
+    setTimeout(() => {
+        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+        if (currentLang === 'ar') {
+            setLanguage('ar');
+            updateLangText('ar');
+        }
+    }, 100);
+});
+
+// ===========================================
+// الترجمات الكاملة للعربية والإنجليزية
+// ===========================================
+
+const translations = {
+    en: {
+        // الموقع
+        'site.title': 'Karim | Professional Content Creator',
+        
+        // شريط التنقل
+        'nav.logo': 'Karim',
+        'nav.creator': 'Content Creator',
+        'nav.home': 'Home',
+        'nav.videos': 'My Videos',
+        'nav.services': 'Services',
+        'nav.process': 'Why Choose Me',
+        'nav.contact': 'Collaborate',
+        'lang.ar': 'AR',
+        'lang.en': 'EN',
+        
+        // مبدل الوضع
+        'mode.reels': 'Reels',
+        'mode.stories': 'Stories',
+        
+        // قسم البطل
+        'hero.subtitle': 'Short-form, trending visuals, brand-ready content',
+        'hero.videos': 'Videos',
+        'hero.clients': 'Clients',
+        'hero.views': 'Views',
+        'hero.viewVideos': 'View My Videos',
+        'hero.collaborate': 'Collaborate',
+        'hero.explore': 'Explore',
+        
+        // قسم الفيديوهات
+        'videos.title': 'My Featured Videos',
+        'videos.subtitle': 'Best performing content that went viral',
+        'videos.trend': 'Trend',
+        'videos.branding': 'Branding',
+        'videos.lifestyle': 'Lifestyle',
+        'videos.ads': 'Ad',
+        'videos.educational': 'Educational',
+        'videos.challenge': 'Challenge',
+        'videos.video1.title': '24-Hour Challenge',
+        'videos.video1.description': 'Video that went viral in 48 hours',
+        'videos.video2.title': 'Product Review',
+        'videos.video2.description': 'Collaboration with global brand',
+        'videos.video3.title': 'Morning Routine',
+        'videos.video3.description': 'Daily content with high engagement',
+        'videos.video4.title': 'Ad Campaign',
+        'videos.video4.description': 'Campaign for a startup',
+        'videos.video5.title': 'Content Tips',
+        'videos.video5.description': 'Educational video shared with followers',
+        'videos.video6.title': 'Short Videos Series',
+        'videos.video6.description': 'Daily short videos series',
+        'videos.result1': '+120K views in 48 hours',
+        'videos.result2': '+40% increase in sales',
+        'videos.result3': '+15K new followers',
+        'videos.result4': '8.5% CTR above average',
+        'videos.result5': '+5K shares',
+        'videos.result6': 'Viral on 3 platforms',
+        
+        // قسم الريلز
+        'reels.title': 'Short Reels',
+        'reels.subtitle': 'Watch my best animated reels',
+        'reels.reel1': "Today's Trend",
+        'reels.reel2': 'Fast Editing',
+        'reels.reel3': 'Special Effects',
+        'reels.reel4': 'Engaging Audio',
+        
+        // قسم الخدمات
+        'services.title': 'My Creator Services',
+        'services.subtitle': 'Complete content solutions for your brand',
+        'services.service1.title': 'Short-form Content Creation',
+        'services.service1.description': 'Reels, TikTok, impactful short videos',
+        'services.service1.feature1': 'Professional filming',
+        'services.service1.feature2': 'Fast editing',
+        'services.service1.feature3': 'Modern effects',
+        'services.service1.feature4': 'Curated music',
+        'services.service2.title': 'Product Shots for Reels',
+        'services.service2.description': 'Product photography for social media',
+        'services.service2.feature1': 'Professional lighting',
+        'services.service2.feature2': 'Creative angles',
+        'services.service2.feature3': 'Cinematic movement',
+        'services.service2.feature4': 'Fast delivery',
+        'services.service3.title': 'Brand Collaborations',
+        'services.service3.description': 'Partnerships with suitable brands',
+        'services.service3.feature1': 'Content strategy',
+        'services.service3.feature2': 'Professional negotiation',
+        'services.service3.feature3': 'Smooth execution',
+        'services.service3.feature4': 'Performance reports',
+        'services.service4.title': 'Editing & Trend Adaptation',
+        'services.service4.description': 'Professional editing & adapting global trends',
+        'services.service4.feature1': 'Fast editing',
+        'services.service4.feature2': 'Trend tracking',
+        'services.service4.feature3': 'Special effects',
+        'services.service4.feature4': 'Instant delivery',
+        'services.service5.title': 'UGC Videos',
+        'services.service5.description': 'Authentic user content promoting your product',
+        'services.service5.feature1': 'Natural content',
+        'services.service5.feature2': 'Real influence',
+        'services.service5.feature3': 'Cost effective',
+        'services.service5.feature4': 'Tangible results',
+        'services.service6.title': 'Script & Filming',
+        'services.service6.description': 'Professional script writing & high-quality filming',
+        'services.service6.feature1': 'Creative script',
+        'services.service6.feature2': 'Complete planning',
+        'services.service6.feature3': 'Professional filming',
+        'services.service6.feature4': 'Review & adjustments',
+        'services.popular': 'Most Popular',
+        
+        // قسم الجدول الزمني
+        'timeline.title': 'Why Choose Me?',
+        'timeline.subtitle': 'Key features that make me the optimal choice',
+        'timeline.item1.title': 'Consistent Aesthetic',
+        'timeline.item1.description': 'Maintaining unified visual identity in all content',
+        'timeline.item2.title': 'Trend Prediction',
+        'timeline.item2.description': 'Predicting trends before they go viral',
+        'timeline.item3.title': 'Fast Editing',
+        'timeline.item3.description': 'Content delivery in the fastest time possible',
+        'timeline.item4.title': 'High Engagement',
+        'timeline.item4.description': 'Content achieving highest interaction rates',
+        'timeline.item5.title': 'Storytelling Style',
+        'timeline.item5.description': 'Turning products into impactful stories',
+        'timeline.item6.title': 'Professional Gear',
+        'timeline.item6.description': 'High-quality cameras and lighting',
+        
+        // قسم العلامات التجارية
+        'brands.title': 'Worked With',
+        'brands.subtitle': 'Brands that trusted me with their content',
+        
+        // قسم آراء العملاء
+        'testimonials.title': 'Client Testimonials',
+        'testimonials.subtitle': 'What they say about working with me',
+        'testimonials.testimonial1': '"The content Karim made for our launch video went viral in 24 hours! The engagement was crazy and sales increased by 60%."',
+        'testimonials.testimonial2': '"Fastest content creator I have ever seen! Video ready within hours and quality is amazing. Followers keep asking for more."',
+        'testimonials.position1': 'Marketing Manager, Fashion Brand',
+        'testimonials.position2': 'Cafe Owner',
+        
+        // قسم الدعوة للعمل
+        'cta.title': 'Ready for Your Viral Moment?',
+        'cta.subtitle': "Let's create unforgettable content together",
+        'cta.button': 'Start Your Project Now',
+        
+        // قسم الاتصال
+        'contact.formTitle': 'Start Your Project',
+        'contact.formSubtitle': 'Tell me about your idea and I will get back to you within 24 hours',
+        'contact.form.name': 'Full Name',
+        'contact.form.email': 'Email Address',
+        'contact.form.select': 'Select Project Type',
+        'contact.form.reels': 'Short Reels',
+        'contact.form.branding': 'Brand Collaboration',
+        'contact.form.ugc': 'UGC Videos',
+        'contact.form.editing': 'Content Editing',
+        'contact.form.other': 'Other Project',
+        'contact.form.message': 'Project Details',
+        'contact.form.submit': 'Send Collaboration Request',
+        
+        // الفوتر
+        'footer.logo': 'Karim',
+        'footer.tagline': 'Professional Content Creator',
+        'footer.home': 'Home',
+        'footer.videos': 'My Videos',
+        'footer.services': 'Services',
+        'footer.process': 'Why Choose Me',
+        'footer.contact': 'Collaborate',
+        'footer.name': 'Karim',
+        'footer.rights': 'All rights reserved',
+        
+        // نافذة الفيديو
+        'modal.video': 'Video Preview'
+    },
+    ar: {
+        // الموقع
+        'site.title': 'كريم | صانع محتوى محترف',
+        
+        // شريط التنقل
+        'nav.logo': 'كريم',
+        'nav.creator': 'صانع محتوى',
+        'nav.home': 'الرئيسية',
+        'nav.videos': 'فيديوهاتي',
+        'nav.services': 'خدماتي',
+        'nav.process': 'لماذا تختارني',
+        'nav.contact': 'تعاون معي',
+        'lang.ar': 'عربي',
+        'lang.en': 'EN',
+        
+        // مبدل الوضع
+        'mode.reels': 'ريلز',
+        'mode.stories': 'ستوريز',
+        
+        // قسم البطل
+        'hero.subtitle': 'محتوى قصير، مرئيات عصرية، جاهز للعلامات التجارية',
+        'hero.videos': 'فيديو',
+        'hero.clients': 'عميل',
+        'hero.views': 'مشاهدة',
+        'hero.viewVideos': 'شاهد الفيديوهات',
+        'hero.collaborate': 'تعاون معي',
+        'hero.explore': 'استكشف',
+        
+        // قسم الفيديوهات
+        'videos.title': 'فيديوهاتي البارزة',
+        'videos.subtitle': 'أفضل المحتوى الذي حقق انتشاراً واسعاً',
+        'videos.trend': 'تريند',
+        'videos.branding': 'براندينج',
+        'videos.lifestyle': 'أسلوب حياة',
+        'videos.ads': 'إعلان',
+        'videos.educational': 'تعليمي',
+        'videos.challenge': 'تحدي',
+        'videos.video1.title': 'تحدي 24 ساعة',
+        'videos.video1.description': 'فيديو حقق انتشاراً واسعاً خلال 48 ساعة',
+        'videos.video2.title': 'مراجعة منتج',
+        'videos.video2.description': 'تعاون مع علامة تجارية عالمية',
+        'videos.video3.title': 'روتين الصباح',
+        'videos.video3.description': 'محتوى يومي حقق تفاعلاً كبيراً',
+        'videos.video4.title': 'كامبين إعلاني',
+        'videos.video4.description': 'حملة إعلانية لشركة ناشئة',
+        'videos.video5.title': 'نصائح للمحتوى',
+        'videos.video5.description': 'فيديو تعليمي شاركته مع المتابعين',
+        'videos.video6.title': 'فيديوهات قصيرة',
+        'videos.video6.description': 'سلسلة فيديوهات قصيرة يومية',
+        'videos.result1': '+120K مشاهدة خلال 48 ساعة',
+        'videos.result2': '+40% زيادة في المبيعات',
+        'videos.result3': '+15K متابع جديد',
+        'videos.result4': 'CTR 8.5% أعلى من المتوسط',
+        'videos.result5': '+5K مشاركة',
+        'videos.result6': 'ڤايرال على 3 منصات',
+        
+        // قسم الريلز
+        'reels.title': 'ريلز قصيرة',
+        'reels.subtitle': 'شاهد أفضل الريلز المتحركة',
+        'reels.reel1': 'تريند اليوم',
+        'reels.reel2': 'مونتاج سريع',
+        'reels.reel3': 'تأثيرات خاصة',
+        'reels.reel4': 'صوتيات جذابة',
+        
+        // قسم الخدمات
+        'services.title': 'خدماتي كصانع محتوى',
+        'services.subtitle': 'حلول محتوى متكاملة لعلامتك',
+        'services.service1.title': 'صناعة المحتوى القصير',
+        'services.service1.description': 'ريلز، تيك توك، فيديوهات قصيرة مؤثرة',
+        'services.service1.feature1': 'تصوير احترافي',
+        'services.service1.feature2': 'مونتاج سريع',
+        'services.service1.feature3': 'تأثيرات حديثة',
+        'services.service1.feature4': 'موسيقى مختارة',
+        'services.service2.title': 'صور منتجات للريلز',
+        'services.service2.description': 'تصوير منتجات بطريقة جذابة لوسائل التواصل',
+        'services.service2.feature1': 'إضاءة احترافية',
+        'services.service2.feature2': 'زوايا إبداعية',
+        'services.service2.feature3': 'حركة سينمائية',
+        'services.service2.feature4': 'تسليم سريع',
+        'services.service3.title': 'تعاون مع العلامات',
+        'services.service3.description': 'شراكات مع العلامات التجارية المناسبة',
+        'services.service3.feature1': 'استراتيجية محتوى',
+        'services.service3.feature2': 'تفاوض احترافي',
+        'services.service3.feature3': 'تنفيذ سلس',
+        'services.service3.feature4': 'تقارير أداء',
+        'services.service4.title': 'مونتاج وتكييف التريند',
+        'services.service4.description': 'مونتاج محترف وتكييف التريندات العالمية',
+        'services.service4.feature1': 'مونتاج سريع',
+        'services.service4.feature2': 'تتبع التريندات',
+        'services.service4.feature3': 'تأثيرات خاصة',
+        'services.service4.feature4': 'تسليم فوري',
+        'services.service5.title': 'فيديوهات UGC',
+        'services.service5.description': 'محتوى من مستخدم حقيقي يروّج لمنتجك',
+        'services.service5.feature1': 'محتوى طبيعي',
+        'services.service5.feature2': 'تأثير حقيقي',
+        'services.service5.feature3': 'تكلفة فعالة',
+        'services.service5.feature4': 'نتائج ملموسة',
+        'services.service6.title': 'سيناريو وتصوير',
+        'services.service6.description': 'كتابة سيناريو احترافي وتصوير عالي الجودة',
+        'services.service6.feature1': 'سيناريو مبدع',
+        'services.service6.feature2': 'تخطيط كامل',
+        'services.service6.feature3': 'تصوير احترافي',
+        'services.service6.feature4': 'مراجعة وتعديل',
+        'services.popular': 'الأكثر طلباً',
+        
+        // قسم الجدول الزمني
+        'timeline.title': 'لماذا تختارني؟',
+        'timeline.subtitle': 'أبرز المميزات التي تجعلني الخيار الأمثل',
+        'timeline.item1.title': 'جمالية ثابتة',
+        'timeline.item1.description': 'حفاظ على هوية بصرية موحدة في كل المحتوى',
+        'timeline.item2.title': 'تنبؤ بالتريندات',
+        'timeline.item2.description': 'توقع التريندات قبل انتشارها الواسع',
+        'timeline.item3.title': 'مونتاج سريع',
+        'timeline.item3.description': 'تسليم المحتوى في أسرع وقت ممكن',
+        'timeline.item4.title': 'تفاعل عالي',
+        'timeline.item4.description': 'محتويات تحقق أعلى معدلات التفاعل',
+        'timeline.item5.title': 'أسلوب سرد القصص',
+        'timeline.item5.description': 'تحويل المنتجات إلى قصص مؤثرة',
+        'timeline.item6.title': 'معدات احترافية',
+        'timeline.item6.description': 'كاميرات وإضاءة عالية الجودة',
+        
+        // قسم العلامات التجارية
+        'brands.title': 'تعاملت معهم',
+        'brands.subtitle': 'علامات تجارية وثق بي في محتواهم',
+        
+        // قسم آراء العملاء
+        'testimonials.title': 'آراء العملاء',
+        'testimonials.subtitle': 'ماذا يقولون عن تعاملهم معي',
+        'testimonials.testimonial1': '"المحتوى اللي سواه كريم لفيديو الإطلاق حقنا صار viral خلال 24 ساعة! التفاعل كان جنوني والمبيعات زادت 60%."',
+        'testimonials.testimonial2': '"أسرع صانع محتوى شفته! الفيديو جاهز خلال ساعات والجودة تحفة. المتابعين ماخذين يطلبون المزيد."',
+        'testimonials.position1': 'مديرة تسويق، علامة أزياء',
+        'testimonials.position2': 'مالك مقهى ناشئ',
+        
+        // قسم الدعوة للعمل
+        'cta.title': 'جاهز لصناعة لحظة ڤايرال؟',
+        'cta.subtitle': 'لنصنع محتوى لا يُنسى معاً',
+        'cta.button': 'ابدأ مشروعك الآن',
+        
+        // قسم الاتصال
+        'contact.formTitle': 'لنبدأ مشروعك',
+        'contact.formSubtitle': 'أخبرني عن فكرتك وسأعود إليك خلال 24 ساعة',
+        'contact.form.name': 'الاسم الكامل',
+        'contact.form.email': 'البريد الإلكتروني',
+        'contact.form.select': 'اختر نوع المشروع',
+        'contact.form.reels': 'ريلز قصيرة',
+        'contact.form.branding': 'تعاون براندينج',
+        'contact.form.ugc': 'فيديوهات UGC',
+        'contact.form.editing': 'مونتاج محتوى',
+        'contact.form.other': 'مشروع آخر',
+        'contact.form.message': 'تفاصيل المشروع',
+        'contact.form.submit': 'أرسل طلب التعاون',
+        
+        // الفوتر
+        'footer.logo': 'كريم',
+        'footer.tagline': 'صانع محتوى محترف',
+        'footer.home': 'الرئيسية',
+        'footer.videos': 'فيديوهاتي',
+        'footer.services': 'خدماتي',
+        'footer.process': 'لماذا تختارني',
+        'footer.contact': 'تعاون معي',
+        'footer.name': 'كريم',
+        'footer.rights': 'جميع الحقوق محفوظة',
+        
+        // نافذة الفيديو
+        'modal.video': 'عرض فيديو'
+    }
+};
+
+// ===========================================
+// تأثير الآلة الكاتبة
+// ===========================================
+
+function initTypewriter() {
+    const typewriterElement = document.getElementById('typewriter');
+    if (!typewriterElement) return;
+    
+    const phrases = [
+        "I Create Content People Remember.",
+        "I Make Videos That Go Viral.",
+        "I Build Brands Through Stories.",
+        "I Capture Moments That Matter.",
+        "I Design Visuals That Convert."
+    ];
+    
+    const phrasesAr = [
+        "أصنع محتوى لا يُنسى.",
+        "أصنع فيديوهات تنتشر بسرعة.",
+        "أبني علامات تجارية عبر القصص.",
+        "ألتقط اللحظات المهمة.",
+        "أصمم مرئيات تحقق النتائج."
+    ];
+    
+    let currentLang = document.documentElement.getAttribute('lang') || 'ar';
+    let currentPhrases = currentLang === 'ar' ? phrasesAr : phrases;
+    
+    let currentPhraseIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+    
+    function typeWriter() {
+        if (isPaused) return;
+        
+        const currentPhrase = currentPhrases[currentPhraseIndex];
+        
+        if (!isDeleting && currentCharIndex <= currentPhrase.length) {
+            // الكتابة
+            typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex);
+            currentCharIndex++;
+            setTimeout(typeWriter, 50);
+        } else if (isDeleting && currentCharIndex >= 0) {
+            // المسح
+            typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex);
+            currentCharIndex--;
+            setTimeout(typeWriter, 30);
+        } else {
+            // التبديل بين الجمل
+            isDeleting = !isDeleting;
+            if (!isDeleting) {
+                currentPhraseIndex = (currentPhraseIndex + 1) % currentPhrases.length;
+            }
+            // استراحة قبل البدء بالكتابة أو المسح
+            isPaused = true;
+            setTimeout(() => {
+                isPaused = false;
+                typeWriter();
+            }, isDeleting ? 1000 : 2000);
+        }
+    }
+    
+    // بدء الكتابة بعد تأخير قصير
+    setTimeout(typeWriter, 1000);
+    
+    // تحديث الجمل عند تغيير اللغة
+    document.addEventListener('languageChange', function() {
+        currentLang = document.documentElement.getAttribute('lang');
+        currentPhrases = currentLang === 'ar' ? phrasesAr : phrases;
+        currentPhraseIndex = 0;
+        currentCharIndex = 0;
+        isDeleting = false;
+        isPaused = false;
+        typewriterElement.textContent = '';
+        
+        setTimeout(typeWriter, 500);
+    });
+}
+
+// ===========================================
+عدادات المتحركة
+// ===========================================
+
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-count]');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const suffix = counter.textContent.includes('+') ? '+' : 
+                      counter.textContent.includes('M') ? 'M+' : '';
+        
+        const updateCounter = () => {
+            const current = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
             
-            // الصفحة الرئيسية
-            heroBadge: "مهندس برمجيات",
-            heroTitle: "أبني المستقبل الرقمي",
-            heroDescription: "أصمم وأطور حلولًا تقنية مبتكرة تلبي احتياجات العصر الرقمي. أجمع بين الخبرة التقنية والإبداع لبناء أنظمة ذكية ومتطورة.",
-            viewPortfolio: "شاهد مشاريعي",
-            contactMe: "لنعمل معًا",
-            statProjects: "مشروع",
-            statClients: "عميل",
-            statYears: "سنوات خبرة",
-            whyChooseTitle: "لماذا تختارني؟",
-            feature1Title: "تصميم مبتكر",
-            feature1Desc: "أصمم حلولًا تقنية مبتكرة تلبي أحدث معايير الجودة والأداء",
-            feature2Title: "تطوير متكامل",
-            feature2Desc: "أطور أنظمة متكاملة من الفكرة إلى التنفيذ مع ضمان أعلى معايير الأمان",
-            feature3Title: "تحسين الأداء",
-            feature3Desc: "أحلل وأحسن أداء الأنظمة لضمان كفاءتها واستقرارها على المدى الطويل",
-            feature4Title: "دعم مستمر",
-            feature4Desc: "أقدم دعمًا فنيًا مستمرًا ومراجعات دورية لضمان استمرارية العمل",
-            
-            // قسم ملخص الصفحات
-            summaryTitle: "استكشف محفظتي",
-            summaryProfileTitle: "حول المهندس",
-            summaryProfileDesc: "تعرف على خبراتي وفلسفتي في هندسة البرمجيات",
-            summaryServicesTitle: "خدماتي",
-            summaryServicesDesc: "اكتشف الخدمات الهندسية المتكاملة التي أقدمها",
-            summaryPortfolioTitle: "مشاريعي",
-            summaryPortfolioDesc: "شاهد مجموعة من أعمالي الهندسية المتميزة",
-            summarySkillsTitle: "مهاراتي",
-            summarySkillsDesc: "تعرف على المهارات التقنية والشخصية التي أتمتع بها",
-            
-            // صفحة حول
-            profileTitle: "حول المهندس أحمد",
-            profileDescription: "مهندس برمجيات متخصص في تطوير الحلول التقنية المتكاملة والأنظمة الذكية",
-            aboutTitle: "شغفي هو بناء حلول تقنية مبتكرة",
-            aboutDescription: "مع أكثر من 5 سنوات من الخبرة في هندسة البرمجيات، أساعد الشركات والأفراد على تحويل أفكارهم إلى حلول رقمية متكاملة. أؤمن أن التكنولوجيا يجب أن تكون في خدمة الإنسان لتحسين جودة الحياة.",
-            specialtiesTitle: "تخصصاتي",
-            connectTitle: "تواصل معي",
-            philosophyTitle: "فلسفتي في هندسة البرمجيات",
-            philosophy1Title: "الجودة أولاً",
-            philosophy1Desc: "ألتزم بأعلى معايير الجودة في كل سطر أكتبه وكل نظام أصممه",
-            philosophy2Title: "الأداء الأمثل",
-            philosophy2Desc: "أركز على بناء أنظمة سريعة وموثوقة تلبي احتياجات المستخدمين",
-            philosophy3Title: "التطوير المستمر",
-            philosophy3Desc: "أتطور باستمرار لأواكب أحدث التقنيات وأفضل الممارسات في المجال",
-            
-            // صفحة الخدمات
-            servicesTitle: "خدماتي",
-            servicesDescription: "أقدم مجموعة متكاملة من الخدمات الهندسية لتلبية جميع احتياجاتك التقنية",
-            service1Title: "تطوير الويب",
-            service1Desc: "تصميم وتطوير مواقع وتطبيقات ويب متكاملة باستخدام أحدث التقنيات",
-            service1Feature1: "تطوير Frontend",
-            service1Feature2: "تطوير Backend",
-            service1Feature3: "تطوير متكامل",
-            service2Title: "تطوير التطبيقات",
-            service2Desc: "بناء تطبيقات الهواتف الذكية لأنظمة iOS و Android بتجربة استخدام ممتازة",
-            service2Feature1: "تطبيقات iOS",
-            service2Feature2: "تطبيقات Android",
-            service2Feature3: "تطبيقات متعددة المنصات",
-            service3Title: "أنظمة قواعد البيانات",
-            service3Desc: "تصميم وإدارة قواعد البيانات العلائقية وغير العلائقية بمعايير أمنية عالية",
-            service3Feature1: "تصميم قواعد البيانات",
-            service3Feature2: "تحسين الاستعلامات",
-            service3Feature3: "تأمين البيانات",
-            service4Title: "استشارات تقنية",
-            service4Desc: "تقديم استشارات متخصصة لتحسين البنية التحتية التقنية للشركات",
-            service4Feature1: "تحليل النظم",
-            service4Feature2: "تخطيط البنية التحتية",
-            service4Feature3: "مراجعة الأمان",
-            
-            // عملية العمل
-            processTitle: "كيف أعمل؟",
-            step1Title: "التحليل",
-            step1Desc: "أحلل متطلبات المشروع وأدرس احتياجات العميل بدقة",
-            step2Title: "التصميم",
-            step2Desc: "أصمم هندسة النظام وخوارزميات الحل مع وضع قابلية التوسع في الاعتبار",
-            step3Title: "التنفيذ",
-            step3Desc: "أبدأ في كتابة الكود وبناء النظام مع تحديثات مستمرة",
-            step4Title: "الاختبار والتسليم",
-            step4Desc: "أختبر النظام بدقة وأسلّمه مع وثائق فنية كاملة",
-            
-            // صفحة أعمالي
-            portfolioTitle: "معرض مشاريعي",
-            portfolioDescription: "مجموعة مختارة من المشاريع الهندسية التي نفذتها لشركات ومؤسسات مختلفة",
-            project1Title: "منصة تعليمية ذكية",
-            project1Desc: "تطوير منصة تعليمية متكاملة بميزات التعلم الذكي والتقارير التحليلية",
-            project2Title: "نظام إدارة المستشفيات",
-            project2Desc: "بناء نظام متكامل لإدارة عمليات المستشفى وتتبع الحالات المرضية",
-            project3Title: "تطبيق توصيل طعام",
-            project3Desc: "تطوير تطبيق ذكي لتوصيل الطعام مع نظام تتبع حي للطلبات",
-            project4Title: "منصة تجارة إلكترونية",
-            project4Desc: "تصميم وتطوير منصة تسوق إلكتروني بميزات متقدمة للدفع والتوصيل",
-            project5Title: "نظام إدارة المشاريع",
-            project5Desc: "بناء نظام لإدارة المشاريع والتواصل بين فرق العمل",
-            project6Title: "تطبيق لياقة بدنية",
-            project6Desc: "تطوير تطبيق متكامل لمتابعة اللياقة البدنية والتمارين الرياضية",
-            
-            // صفحة المهارات
-            skillsTitle: "مهاراتي",
-            skillsDescription: "مجموعة من المهارات التقنية والإبداعية التي أتمتع بها في مجال هندسة البرمجيات",
-            creativeSkills: "المهارات التقنية",
-            skillVideo: "تطوير الويب",
-            skillWriting: "تطوير التطبيقات",
-            skillPhoto: "قواعد البيانات",
-            skillDesign: "هندسة البرمجيات",
-            technicalSkills: "لغات البرمجة",
-            skillPremiere: "JavaScript",
-            skillAfter: "Python",
-            skillPhotoshop: "Java",
-            skillAnalytics: "C++",
-            softSkills: "المهارات الشخصية",
-            skillCommunication: "التواصل الفعال",
-            skillTime: "إدارة الوقت",
-            skillProblem: "حل المشكلات",
-            skillTeam: "العمل الجماعي",
-            toolsTitle: "الأدوات والتقنيات",
-            
-            // صفحة الاتصال
-            contactTitle: "لنعمل معًا",
-            contactDescription: "أهلاً بك! دعنا نناقش مشروعك القادم ونحول أفكارك إلى حلول رقمية مبتكرة",
-            emailTitle: "البريد الإلكتروني",
-            phoneTitle: "الهاتف",
-            locationTitle: "الموقع",
-            locationText: "الرياض، المملكة العربية السعودية",
-            hoursTitle: "ساعات العمل",
-            hoursText: "الأحد - الخميس: 9 ص - 6 م",
-            formName: "الاسم *",
-            formEmail: "البريد الإلكتروني *",
-            formSubject: "نوع المشروع *",
-            formMessage: "تفاصيل المشروع *",
-            formMessagePlaceholder: "أخبرني عن مشروعك وأهدافك...",
-            formSubmit: "أرسل الرسالة",
-            
-            // التذييل
-            footerText: "مهندس برمجيات متخصص في تطوير الحلول التقنية المتكاملة والأنظمة الذكية"
+            if (current < target) {
+                const increment = Math.ceil((target - current) / 50);
+                counter.textContent = Math.min(current + increment, target) + suffix;
+                setTimeout(updateCounter, 30);
+            }
+        };
+        
+        // بدء العد عند ظهور العنصر
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(counter);
+    });
+}
+
+// ===========================================
+// مبدل الوضع (ريلز/ستوريز)
+// ===========================================
+
+function initModeSwitcher() {
+    const modeToggle = document.getElementById('modeToggle');
+    const modeText = modeToggle.querySelector('.mode-text');
+    const modeIcon = modeToggle.querySelector('i');
+    
+    let currentMode = 'reels';
+    
+    modeToggle.addEventListener('click', function() {
+        currentMode = currentMode === 'reels' ? 'stories' : 'reels';
+        
+        // تحديث النص والأيقونة
+        modeText.textContent = translations[document.documentElement.getAttribute('lang') || 'ar'][`mode.${currentMode}`];
+        modeIcon.className = currentMode === 'reels' ? 'fas fa-film' : 'fas fa-camera';
+        
+        // تأثير تحويل
+        this.style.transform = 'rotate(180deg) scale(1.1)';
+        setTimeout(() => {
+            this.style.transform = 'rotate(0deg) scale(1)';
+        }, 300);
+        
+        // تغيير لون الخلفية المتحركة
+        changeBackgroundMode(currentMode);
+    });
+    
+    function changeBackgroundMode(mode) {
+        const animatedBg = document.querySelector('.animated-bg');
+        if (!animatedBg) return;
+        
+        if (mode === 'reels') {
+            animatedBg.style.background = 'linear-gradient(-45deg, #0A0A0A, #1A1A2E, #16213E, #0F3460)';
+        } else {
+            animatedBg.style.background = 'linear-gradient(-45deg, #1A1A1A, #2D2424, #3A2C2C, #4A3535)';
+        }
+    }
+}
+
+// ===========================================
+// خلفية متحركة متغيرة
+// ===========================================
+
+function initAnimatedBackground() {
+    const colors = [
+        ['#0A0A0A', '#1A1A2E', '#16213E', '#0F3460'], // أزرق داكن
+        ['#1A1A1A', '#2D2424', '#3A2C2C', '#4A3535'], // بني داكن
+        ['#0A0A0A', '#1E1E2E', '#2D2D44', '#3B3B5D'], // بنفسجي داكن
+        ['#1A1A1A', '#24242D', '#2C2C3A', '#35354A']  // رمادي داكن
+    ];
+    
+    let currentColorIndex = 0;
+    const animatedBg = document.querySelector('.animated-bg');
+    
+    if (!animatedBg) return;
+    
+    function changeBackgroundColor() {
+        currentColorIndex = (currentColorIndex + 1) % colors.length;
+        const [color1, color2, color3, color4] = colors[currentColorIndex];
+        
+        animatedBg.style.background = `linear-gradient(-45deg, ${color1}, ${color2}, ${color3}, ${color4})`;
+    }
+    
+    // تغيير اللون كل 20 ثانية
+    setInterval(changeBackgroundColor, 20000);
+}
+
+// ===========================================
+// نافذة الفيديو
+// ===========================================
+
+function initVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const modalClose = document.getElementById('modalClose');
+    const playBtns = document.querySelectorAll('.play-btn, .reel-preview');
+    
+    // بيانات الفيديوهات
+    const videos = {
+        1: {
+            title: 'تحدي 24 ساعة',
+            views: '250K',
+            likes: '15K',
+            comments: '2.5K',
+            description: 'فيديو حقق انتشاراً واسعاً خلال 48 ساعة'
         },
-        en: {
-            // Navigation
-            logo: "Ahmed",
-            navHome: "Home",
-            navProfile: "About",
-            navServices: "Services",
-            navPortfolio: "Portfolio",
-            navSkills: "Skills",
-            navContact: "Contact",
-            language: "AR",
-            
-            // Home Page
-            heroBadge: "Software Engineer",
-            heroTitle: "Building the Digital Future",
-            heroDescription: "I design and develop innovative technological solutions that meet the needs of the digital age. I combine technical expertise and creativity to build smart and advanced systems.",
-            viewPortfolio: "View My Projects",
-            contactMe: "Let's Work Together",
-            statProjects: "Projects",
-            statClients: "Clients",
-            statYears: "Years Experience",
-            whyChooseTitle: "Why Choose Me?",
-            feature1Title: "Innovative Design",
-            feature1Desc: "I design innovative technical solutions that meet the latest quality and performance standards",
-            feature2Title: "Integrated Development",
-            feature2Desc: "I develop integrated systems from idea to implementation while ensuring the highest security standards",
-            feature3Title: "Performance Optimization",
-            feature3Desc: "I analyze and improve system performance to ensure efficiency and long-term stability",
-            feature4Title: "Continuous Support",
-            feature4Desc: "I provide continuous technical support and periodic reviews to ensure business continuity",
-            
-            // Pages Summary Section
-            summaryTitle: "Explore My Portfolio",
-            summaryProfileTitle: "About the Engineer",
-            summaryProfileDesc: "Learn about my experience and philosophy in software engineering",
-            summaryServicesTitle: "My Services",
-            summaryServicesDesc: "Discover the comprehensive engineering services I offer",
-            summaryPortfolioTitle: "My Projects",
-            summaryPortfolioDesc: "View a collection of my outstanding engineering works",
-            summarySkillsTitle: "My Skills",
-            summarySkillsDesc: "Learn about the technical and personal skills I possess",
-            
-            // About Page
-            profileTitle: "About Engineer Ahmed",
-            profileDescription: "Software engineer specializing in developing integrated technical solutions and smart systems",
-            aboutTitle: "My Passion is Building Innovative Technical Solutions",
-            aboutDescription: "With over 5 years of experience in software engineering, I help companies and individuals transform their ideas into integrated digital solutions. I believe technology should serve humanity to improve quality of life.",
-            specialtiesTitle: "My Specialties",
-            connectTitle: "Connect With Me",
-            philosophyTitle: "My Software Engineering Philosophy",
-            philosophy1Title: "Quality First",
-            philosophy1Desc: "I commit to the highest quality standards in every line I write and every system I design",
-            philosophy2Title: "Optimal Performance",
-            philosophy2Desc: "I focus on building fast and reliable systems that meet user needs",
-            philosophy3Title: "Continuous Development",
-            philosophy3Desc: "I continuously evolve to keep up with the latest technologies and best practices in the field",
-            
-            // Services Page
-            servicesTitle: "My Services",
-            servicesDescription: "I offer a comprehensive set of engineering services to meet all your technical needs",
-            service1Title: "Web Development",
-            service1Desc: "Design and development of integrated websites and web applications using the latest technologies",
-            service1Feature1: "Frontend Development",
-            service1Feature2: "Backend Development",
-            service1Feature3: "Full Stack Development",
-            service2Title: "App Development",
-            service2Desc: "Building smartphone applications for iOS and Android with excellent user experience",
-            service2Feature1: "iOS Applications",
-            service2Feature2: "Android Applications",
-            service2Feature3: "Cross-Platform Applications",
-            service3Title: "Database Systems",
-            service3Desc: "Design and management of relational and non-relational databases with high security standards",
-            service3Feature1: "Database Design",
-            service3Feature2: "Query Optimization",
-            service3Feature3: "Data Security",
-            service4Title: "Technical Consulting",
-            service4Desc: "Providing specialized consultations to improve companies' technical infrastructure",
-            service4Feature1: "Systems Analysis",
-            service4Feature2: "Infrastructure Planning",
-            service4Feature3: "Security Review",
-            
-            // Work Process
-            processTitle: "How I Work?",
-            step1Title: "Analysis",
-            step1Desc: "I analyze project requirements and study client needs accurately",
-            step2Title: "Design",
-            step2Desc: "I design system architecture and solution algorithms with scalability in mind",
-            step3Title: "Implementation",
-            step3Desc: "I start writing code and building the system with continuous updates",
-            step4Title: "Testing & Delivery",
-            step4Desc: "I thoroughly test the system and deliver it with complete technical documentation",
-            
-            // Portfolio Page
-            portfolioTitle: "My Projects Portfolio",
-            portfolioDescription: "A curated selection of engineering projects I've executed for various companies and institutions",
-            project1Title: "Smart Learning Platform",
-            project1Desc: "Development of an integrated educational platform with smart learning features and analytical reports",
-            project2Title: "Hospital Management System",
-            project2Desc: "Building an integrated system for managing hospital operations and tracking medical cases",
-            project3Title: "Food Delivery App",
-            project4Desc: "Development of a smart food delivery app with live order tracking system",
-            project4Title: "E-commerce Platform",
-            project4Desc: "Design and development of an e-commerce platform with advanced payment and delivery features",
-            project5Title: "Project Management System",
-            project5Desc: "Building a system for project management and team communication",
-            project6Title: "Fitness Application",
-            project6Desc: "Development of an integrated application for fitness tracking and exercises",
-            
-            // Skills Page
-            skillsTitle: "My Skills",
-            skillsDescription: "A set of technical and creative skills I possess in software engineering",
-            creativeSkills: "Technical Skills",
-            skillVideo: "Web Development",
-            skillWriting: "App Development",
-            skillPhoto: "Database Systems",
-            skillDesign: "Software Engineering",
-            technicalSkills: "Programming Languages",
-            skillPremiere: "JavaScript",
-            skillAfter: "Python",
-            skillPhotoshop: "Java",
-            skillAnalytics: "C++",
-            softSkills: "Soft Skills",
-            skillCommunication: "Effective Communication",
-            skillTime: "Time Management",
-            skillProblem: "Problem Solving",
-            skillTeam: "Teamwork",
-            toolsTitle: "Tools & Technologies",
-            
-            // Contact Page
-            contactTitle: "Let's Work Together",
-            contactDescription: "Welcome! Let's discuss your upcoming project and transform your ideas into innovative digital solutions",
-            emailTitle: "Email",
-            phoneTitle: "Phone",
-            locationTitle: "Location",
-            locationText: "Riyadh, Saudi Arabia",
-            hoursTitle: "Working Hours",
-            hoursText: "Sunday - Thursday: 9 AM - 6 PM",
-            formName: "Name *",
-            formEmail: "Email *",
-            formSubject: "Project Type *",
-            formMessage: "Project Details *",
-            formMessagePlaceholder: "Tell me about your project and goals...",
-            formSubmit: "Send Message",
-            
-            // Footer
-            footerText: "Software engineer specializing in developing integrated technical solutions and smart systems"
+        2: {
+            title: 'مراجعة منتج',
+            views: '180K',
+            likes: '12K',
+            comments: '1.8K',
+            description: 'فيديو تعاون مع علامة تجارية عالمية'
+        },
+        3: {
+            title: 'روتين الصباح',
+            views: '320K',
+            likes: '25K',
+            comments: '3.2K',
+            description: 'محتوى يومي حقق تفاعلاً كبيراً'
         }
     };
-
-    // تهيئة تأثير الجزيئات المتحركة
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 100, density: { enable: true, value_area: 800 } },
-                color: { value: "#2563eb" },
-                shape: { type: "circle" },
-                opacity: { value: 0.2, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#2563eb",
-                    opacity: 0.1,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 1.5,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "repulse" },
-                    onclick: { enable: true, mode: "push" }
-                }
-            }
-        });
-    }
-
-    // تهيئة المتغيرات
-    let currentLang = 'ar';
-    let currentPage = 'home';
-    const backHomeBtn = document.getElementById('backHomeBtn');
-    const navbarToggle = document.getElementById('navbarToggle');
-    const navbarMenu = document.getElementById('navbarMenu');
-    const languageBtn = document.getElementById('languageBtn');
-    const languageDropdown = document.getElementById('languageDropdown');
-
-    // وظيفة تغيير اللغة
-    function changeLanguage(lang) {
-        currentLang = lang;
-        
-        // تحديث اتجاه الصفحة
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        document.documentElement.lang = lang;
-        
-        // تغيير الخط حسب اللغة
-        document.body.style.fontFamily = lang === 'ar' ? "'Tajawal', sans-serif" : "'Inter', sans-serif";
-        
-        // تحديث جميع النصوص
-        updateAllTexts();
-        
-        // تحديث زر اللغة
-        const languageText = languageBtn.querySelector('.language-text');
-        if (languageText) {
-            languageText.textContent = translations[lang].language;
-        }
-        
-        // تحديث القائمة المنسدلة للغة
-        document.querySelectorAll('.language-option').forEach(option => {
-            option.classList.remove('active');
-            if (option.getAttribute('data-lang') === lang) {
-                option.classList.add('active');
-            }
-        });
-        
-        // تحديث زر الرجوع
-        const backHomeSpan = backHomeBtn.querySelector('span');
-        if (backHomeSpan) {
-            backHomeSpan.textContent = translations[lang].navHome;
-        }
-    }
-
-    // وظيفة تحديث جميع النصوص
-    function updateAllTexts() {
-        const elements = document.querySelectorAll('[data-key]');
-        elements.forEach(element => {
-            const key = element.getAttribute('data-key');
-            if (translations[currentLang][key]) {
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    if (element.hasAttribute('placeholder')) {
-                        element.setAttribute('placeholder', translations[currentLang][key]);
-                    }
-                } else if (element.tagName === 'BUTTON' && element.type === 'submit') {
-                    element.innerHTML = `<i class="fas fa-paper-plane"></i> ${translations[currentLang][key]}`;
-                } else {
-                    const text = translations[currentLang][key];
-                    if (text.includes('<br>')) {
-                        element.innerHTML = text;
-                    } else {
-                        element.textContent = text;
-                    }
-                }
-            }
-        });
-    }
-
-    // وظيفة تغيير الصفحة
-    function changePage(pageId) {
-        if (pageId === currentPage) return;
-        
-        // إخفاء جميع الصفحات
-        document.querySelectorAll('.page').forEach(page => {
-            page.classList.remove('active');
-        });
-        
-        // إزالة النشاط من جميع روابط التنقل
-        document.querySelectorAll('.navbar-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        // إظهار الصفحة المحددة
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-            targetPage.classList.add('active');
-            
-            // إضافة النشاط للرابط المحدد
-            const targetLink = document.querySelector(`.navbar-link[data-page="${pageId}"]`);
-            if (targetLink) {
-                targetLink.classList.add('active');
-            }
-            
-            // تحديث المتغير الحالي
-            currentPage = pageId;
-            
-            // إظهار أو إخفاء زر الرجوع
-            if (pageId === 'home') {
-                backHomeBtn.style.display = 'none';
-            } else {
-                backHomeBtn.style.display = 'flex';
-            }
-            
-            // إغلاق القائمة على الأجهزة المحمولة
-            if (window.innerWidth <= 768) {
-                navbarMenu.classList.remove('active');
-                navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-            
-            // تفعيل تأثير شريط المهارات إذا كانت الصفحة هي المهارات
-            if (pageId === 'skills') {
-                setTimeout(animateSkills, 300);
-            }
-            
-            // تفعيل عداد الإحصائيات إذا كانت الصفحة الرئيسية
-            if (pageId === 'home') {
-                setTimeout(animateStats, 300);
-            }
-            
-            // تفعيل تأثيرات البطاقات
-            setTimeout(checkCards, 300);
-            
-            // التمرير إلى أعلى الصفحة
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }
-
-    // إضافة حدث النقر لبطاقات الملخص
-    document.querySelectorAll('.summary-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const pageId = this.getAttribute('data-page');
-            changePage(pageId);
-        });
-    });
-
-    // زر الرجوع للرئيسية
-    backHomeBtn.addEventListener('click', function() {
-        changePage('home');
-    });
-
-    // تبديل القائمة على الأجهزة المحمولة
-    navbarToggle.addEventListener('click', function() {
-        navbarMenu.classList.toggle('active');
-        this.innerHTML = navbarMenu.classList.contains('active') ? 
-            '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
-
-    // التنقل عبر روابط القائمة
-    document.querySelectorAll('.navbar-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const pageId = this.getAttribute('data-page');
-            changePage(pageId);
-        });
-    });
-
-    // التنقل عبر الأزرار
-    document.querySelectorAll('.btn[data-page]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const pageId = this.getAttribute('data-page');
-            changePage(pageId);
-        });
-    });
-
-    // تبديل اللغة
-    languageBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        languageDropdown.classList.toggle('show');
-    });
-
-    // اختيار لغة من القائمة
-    document.querySelectorAll('.language-option').forEach(option => {
-        option.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            changeLanguage(lang);
-            languageDropdown.classList.remove('show');
-        });
-    });
-
-    // إغلاق القائمة عند النقر خارجها
-    document.addEventListener('click', function(e) {
-        if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
-            languageDropdown.classList.remove('show');
-        }
-    });
-
-    // تأثير شريط المهارات
-    function animateSkills() {
-        const skillProgressElements = document.querySelectorAll('.skill-progress');
-        const skillsPage = document.getElementById('skills');
-        
-        if (!skillsPage) return;
-        
-        const rect = skillsPage.getBoundingClientRect();
-        
-        if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-            skillProgressElements.forEach(skill => {
-                const width = skill.getAttribute('data-width');
-                skill.style.width = width + '%';
-            });
-        }
-    }
-
-    // تأثير عداد الإحصائيات
-    function animateStats() {
-        const statNumbers = document.querySelectorAll('.stat-number[data-count]');
-        const statsSection = document.querySelector('.hero-stats');
-        
-        if (!statsSection) return;
-        
-        const rect = statsSection.getBoundingClientRect();
-        
-        if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-            statNumbers.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-count'));
-                const duration = 2000;
-                const step = target / (duration / 16);
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    stat.textContent = Math.floor(current);
-                }, 16);
-            });
-        }
-    }
-
-    // تصفية أعمال المعرض
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
     
-    filterBtns.forEach(btn => {
+    // فتح النافذة عند النقر على فيديو
+    playBtns.forEach((btn, index) => {
         btn.addEventListener('click', function() {
-            // إزالة النشاط من جميع الأزرار
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // إضافة النشاط للزر المحدد
-            this.classList.add('active');
-            
-            const filter = this.getAttribute('data-filter');
-            
-            portfolioItems.forEach(item => {
-                if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, 10);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
+            const videoId = (index % 3) + 1;
+            openVideoModal(videoId);
+        });
+    });
+    
+    // إغلاق النافذة
+    modalClose.addEventListener('click', closeModal);
+    modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
+    
+    // إغلاق بمفتاح Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    
+    function openVideoModal(videoId) {
+        const video = videos[videoId];
+        if (!video) return;
+        
+        // تحديث محتوى النافذة
+        document.getElementById('videoTitle').textContent = video.title;
+        document.getElementById('videoViews').textContent = video.views;
+        document.getElementById('videoLikes').textContent = video.likes;
+        document.getElementById('videoComments').textContent = video.comments;
+        document.getElementById('videoDescription').textContent = video.description;
+        
+        // إظهار النافذة
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        const modal = document.getElementById('videoModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// ===========================================
+// بقية الدوال (نفس script.js السابق مع تعديلات بسيطة)
+// ===========================================
+
+function initNavigation() {
+    const nav = document.getElementById('nav');
+    const navMenu = document.getElementById('navMenu');
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    // تبديل قائمة الجوال
+    navToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        
+        // تحويل الهامبرغر إلى X
+        const spans = this.querySelectorAll('span');
+        if (this.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+
+    // إغلاق قائمة الجوال عند النقر على رابط
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (navMenu.classList.contains('active')) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // إعادة تعيين تحويل الهامبرغر
+                const spans = navToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
     });
 
-    // إرسال نموذج الاتصال
-    const contactForm = document.getElementById('contactForm');
+    // تأثير التمرير على الهيدر
+    window.addEventListener('scroll', function() {
+        const scrolled = window.scrollY > 50;
+        nav.classList.toggle('scrolled', scrolled);
+        
+        // تحديث رابط التنقل النشط بناءً على موضع التمرير
+        updateActiveNavLink(sections, navLinks);
+    });
+
+    function updateActiveNavLink(sections, links) {
+        let current = '';
+        const scrollPos = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                current = sectionId;
+            }
+        });
+
+        links.forEach(link => {
+            link.classList.remove('active');
+            const section = link.getAttribute('data-section');
+            if (section === current || (current === '' && section === 'hero')) {
+                link.classList.add('active');
+            }
+        });
+    }
+}
+
+function initThemeSwitcher() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    const savedTheme = localStorage.getItem('creator-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('creator-theme', newTheme);
+        updateThemeIcon(newTheme);
+        
+        this.style.transform = 'rotate(180deg) scale(1.1)';
+        setTimeout(() => {
+            this.style.transform = 'rotate(0deg) scale(1)';
+        }, 300);
+    });
+    
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+    }
+}
+
+function initLanguageSwitcher() {
+    const langToggle = document.getElementById('languageToggle');
+    const langText = langToggle.querySelector('.lang-text');
+    
+    const savedLang = localStorage.getItem('creator-lang') || 'ar';
+    setLanguage(savedLang);
+    updateLangText(savedLang);
+    
+    langToggle.addEventListener('click', function() {
+        const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+        const newLang = currentLang === 'ar' ? 'en' : 'ar';
+        
+        this.style.transform = 'rotate(180deg) scale(1.1)';
+        setTimeout(() => {
+            setLanguage(newLang);
+            updateLangText(newLang);
+            localStorage.setItem('creator-lang', newLang);
+            this.style.transform = 'rotate(0deg) scale(1)';
+        }, 300);
+    });
+    
+    function setLanguage(lang) {
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        updateTexts(lang);
+        updatePageTitle(lang);
+        
+        // إطلاق حدث لتحديث الآلة الكاتبة
+        document.dispatchEvent(new CustomEvent('languageChange'));
+        
+        document.body.style.opacity = '0.8';
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+            document.body.style.transition = 'opacity 0.3s ease';
+        }, 100);
+    }
+    
+    function updateLangText(lang) {
+        langText.textContent = translations[lang]['lang.ar'];
+    }
+    
+    function updatePageTitle(lang) {
+        document.title = translations[lang]['site.title'];
+    }
+}
+
+function updateTexts(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+}
+
+function initCurrentYear() {
+    const yearElement = document.getElementById('currentYear');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+}
+
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.scroll-animate');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+function initContactForm() {
+    const contactForm = document.getElementById('collabForm');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // رسالة نجاح
-            const message = currentLang === 'ar' 
-                ? 'شكراً لك على رسالتك! سأعود إليك في أقرب وقت ممكن.' 
-                : 'Thank you for your message! I will get back to you as soon as possible.';
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
             
-            // إنشاء إشعار
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 30px;
-                background: linear-gradient(135deg, #2563eb, #06b6d4);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 10px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-                z-index: 9999;
-                font-weight: 500;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                transform: translateX(150%);
-                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            `;
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.querySelector('span').textContent;
+            const originalIcon = submitBtn.innerHTML;
             
-            notification.innerHTML = `
-                <i class="fas fa-check-circle" style="font-size: 20px;"></i>
-                <span>${message}</span>
-            `;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.disabled = true;
             
-            document.body.appendChild(notification);
-            
-            // عرض الإشعار
             setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 10);
-            
-            // إخفاء الإشعار بعد 4 ثواني
-            setTimeout(() => {
-                notification.style.transform = 'translateX(150%)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 400);
-            }, 4000);
-            
-            // إعادة تعيين النموذج
-            contactForm.reset();
+                const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                const successMsg = currentLang === 'ar' 
+                    ? 'تم إرسال طلب التعاون بنجاح! سأتواصل معك خلال 24 ساعة.' 
+                    : 'Collaboration request sent successfully! I will contact you within 24 hours.';
+                showNotification(successMsg, 'success');
+                
+                this.reset();
+                submitBtn.innerHTML = originalIcon;
+                submitBtn.querySelector('span').textContent = originalText;
+                submitBtn.disabled = false;
+                resetFormLabels();
+            }, 1500);
         });
     }
-
-    // إضافة تأثيرات للبطاقات عند التمرير
-    const cards = document.querySelectorAll('.feature-card, .service-card, .philosophy-card, .portfolio-item, .skill-category, .contact-card, .tool-item, .summary-card');
     
-    function checkCards() {
-        cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
+    const formGroups = document.querySelectorAll('.form-group');
+    formGroups.forEach(group => {
+        const input = group.querySelector('input, textarea, select');
+        const label = group.querySelector('label');
+        
+        if (input && label) {
+            if (input.value) {
+                label.style.top = '-1.5rem';
+                label.style.fontSize = '0.85rem';
+                label.style.color = 'var(--primary-color)';
+                label.style.fontWeight = '700';
+            }
+            
+            input.addEventListener('focus', function() {
+                label.style.top = '-1.5rem';
+                label.style.fontSize = '0.85rem';
+                label.style.color = 'var(--primary-color)';
+                label.style.fontWeight = '700';
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    label.style.top = '1rem';
+                    label.style.fontSize = '1rem';
+                    label.style.color = 'var(--text-tertiary)';
+                    label.style.fontWeight = '500';
+                }
+            });
+            
+            if (input.tagName === 'SELECT') {
+                input.addEventListener('change', function() {
+                    if (this.value) {
+                        label.style.top = '-1.5rem';
+                        label.style.fontSize = '0.85rem';
+                        label.style.color = 'var(--primary-color)';
+                        label.style.fontWeight = '700';
+                    } else {
+                        label.style.top = '1rem';
+                        label.style.fontSize = '1rem';
+                        label.style.color = 'var(--text-tertiary)';
+                        label.style.fontWeight = '500';
+                    }
+                });
+            }
+        }
+    });
+    
+    function resetFormLabels() {
+        const labels = document.querySelectorAll('.form-group label');
+        labels.forEach(label => {
+            label.style.top = '1rem';
+            label.style.fontSize = '1rem';
+            label.style.color = 'var(--text-tertiary)';
+            label.style.fontWeight = '500';
+        });
+    }
+}
+
+function initScrollProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    progressBar.style.cssText = `
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 0%;
+        height: 3px;
+        background: var(--gradient-1);
+        z-index: 9998;
+        transition: width 0.1s ease;
+        pointer-events: none;
+    `;
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', function() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+}
+
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (href === '#') return;
+            
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerHeight = document.querySelector('.creator-nav').offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
             }
         });
+    });
+}
+
+function initPageAnimations() {
+    const animatedElements = [
+        '.hero-title',
+        '.hero-subtitle',
+        '.hero-stats',
+        '.hero-actions',
+        '.video-card',
+        '.reel-item',
+        '.service-card',
+        '.timeline-item',
+        '.brand-logo',
+        '.testimonial-bubble',
+        '.big-cta',
+        '.form-group'
+    ];
+    
+    animatedElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.1}s`;
+            element.classList.add('scroll-animate');
+        });
+    });
+    
+    initScrollAnimations();
+}
+
+function showNotification(message, type = 'info') {
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    
+    const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle';
+    notification.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+    `;
+    
+    Object.assign(notification.style, {
+        position: 'fixed',
+        top: '100px',
+        right: '20px',
+        background: 'var(--bg-card)',
+        border: '2px solid var(--border-color)',
+        borderRadius: 'var(--element-radius)',
+        padding: '1.25rem 1.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        zIndex: '9999',
+        animation: 'slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        boxShadow: 'var(--shadow-lg)',
+        maxWidth: '350px',
+        fontWeight: '600'
+    });
+    
+    if (type === 'success') {
+        notification.style.borderLeft = '4px solid var(--primary-color)';
+        notification.querySelector('i').style.color = 'var(--primary-color)';
+    } else if (type === 'error') {
+        notification.style.borderLeft = '4px solid #ff4d4d';
+        notification.querySelector('i').style.color = '#ff4d4d';
+    } else {
+        notification.style.borderLeft = '4px solid var(--accent-color)';
+        notification.querySelector('i').style.color = 'var(--accent-color)';
     }
     
-    // إعداد البطاقات الأولية
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    });
+    document.body.appendChild(notification);
     
-    // تفعيل تأثيرات البطاقات عند التحميل
-    setTimeout(checkCards, 300);
-    
-    // تفعيل تأثيرات البطاقات عند التمرير
-    window.addEventListener('scroll', checkCards);
-    
-    // تفعيل تأثيرات عند التمرير
-    window.addEventListener('scroll', function() {
-        animateSkills();
-        animateStats();
-    });
-    
-    // تهيئة اللغة الافتراضية
-    changeLanguage('ar');
-    
-    // إخفاء زر الرجوع في الصفحة الرئيسية
-    backHomeBtn.style.display = 'none';
-    
-    // تفعيل تأثيرات عند التحميل
     setTimeout(() => {
-        animateStats();
-        animateSkills();
-    }, 500);
+        notification.style.animation = 'slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+    
+    addNotificationAnimations();
+    
+    notification.addEventListener('click', () => {
+        notification.style.animation = 'slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+        setTimeout(() => notification.remove(), 300);
+    });
+}
+
+function addNotificationAnimations() {
+    if (!document.getElementById('notification-styles')) {
+        const style = document.createElement('style');
+        style.id = 'notification-styles';
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%) translateY(-20px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0) translateY(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0) translateY(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%) translateY(-20px);
+                    opacity: 0;
+                }
+            }
+            
+            .notification {
+                cursor: pointer;
+                transition: transform 0.2s ease;
+            }
+            
+            .notification:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-xl);
+            }
+            
+            @media (max-width: 768px) {
+                .notification {
+                    right: 10px;
+                    left: 10px;
+                    top: 80px;
+                    max-width: calc(100% - 20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// تأثيرات إضافية
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.neon-btn, .btn-primary, .btn-secondary, .cta-button');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = this.style.transform + ' scale(1.05)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = this.style.transform.replace(' scale(1.05)', '');
+        });
+    });
+});
+
+window.addEventListener('load', function() {
+    document.body.style.animation = 'fadeIn 1s ease-out';
 });
