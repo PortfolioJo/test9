@@ -1,783 +1,758 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أحمد | مهندس برمجيات</title>
+    <title data-i18n="site.title">كريم | صانع محتوى محترف</title>
+    <meta name="description" content="صانع محتوى متخصص في الفيديو القصير، ريلز، وتيك توك. أصنع محتوى لا يُنسى">
+    
+    <!-- الخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23FF007F%22>K</text></svg>">
+    
+    <!-- الأنماط -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- تأثير الجزيئات المتحركة -->
-    <div id="particles-js"></div>
-    
-    <!-- تأثير الخلفية الديناميكي -->
-    <div class="dynamic-background"></div>
+    <!-- خلفية متحركة -->
+    <div class="animated-bg"></div>
     
     <!-- شريط التنقل -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <!-- الشعار -->
-            <a href="#" class="navbar-logo">
-                <i class="fas fa-code"></i>
-                <span class="logo-text" data-key="logo">أحمد</span>
-            </a>
+    <nav class="creator-nav" id="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-logo" data-i18n="nav.logo">كريم</span>
+                <span class="nav-subtitle" data-i18n="nav.creator">صانع محتوى</span>
+            </div>
             
-            <!-- قائمة التنقل -->
-            <ul class="navbar-menu" id="navbarMenu">
-                <li class="navbar-item">
-                    <a href="#" class="navbar-link active" data-page="home" data-key="navHome">
-                        <i class="fas fa-home"></i>
-                        <span>الرئيسية</span>
+            <div class="nav-menu" id="navMenu">
+                <div class="nav-links">
+                    <a href="#hero" class="nav-link active" data-section="hero">
+                        <span data-i18n="nav.home">الرئيسية</span>
                     </a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="navbar-link" data-page="profile" data-key="navProfile">
-                        <i class="fas fa-user"></i>
-                        <span>حول</span>
+                    <a href="#videos" class="nav-link" data-section="videos">
+                        <span data-i18n="nav.videos">فيديوهاتي</span>
                     </a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="navbar-link" data-page="services" data-key="navServices">
-                        <i class="fas fa-cogs"></i>
-                        <span>الخدمات</span>
+                    <a href="#services" class="nav-link" data-section="services">
+                        <span data-i18n="nav.services">خدماتي</span>
                     </a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="navbar-link" data-page="portfolio" data-key="navPortfolio">
-                        <i class="fas fa-laptop-code"></i>
-                        <span>مشاريعي</span>
+                    <a href="#process" class="nav-link" data-section="process">
+                        <span data-i18n="nav.process">لماذا تختارني</span>
                     </a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="navbar-link" data-page="skills" data-key="navSkills">
-                        <i class="fas fa-tools"></i>
-                        <span>المهارات</span>
+                    <a href="#contact" class="nav-link" data-section="contact">
+                        <span data-i18n="nav.contact">تعاون معي</span>
                     </a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="navbar-link" data-page="contact" data-key="navContact">
-                        <i class="fas fa-envelope"></i>
-                        <span>اتصل</span>
-                    </a>
-                </li>
-            </ul>
+                </div>
+            </div>
             
-            <!-- عناصر الجانب الأيمن -->
-            <div class="navbar-right">
-                <!-- زر اللغة -->
-                <div class="language-switcher">
-                    <button class="language-btn" id="languageBtn">
-                        <span class="language-text" data-key="language">EN</span>
-                        <i class="fas fa-globe"></i>
+            <div class="nav-actions">
+                <div class="theme-switch">
+                    <button class="theme-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i>
                     </button>
-                    <div class="language-dropdown" id="languageDropdown">
-                        <button class="language-option active" data-lang="ar">
-                            <i class="fas fa-check"></i>
-                            <span>العربية</span>
-                        </button>
-                        <button class="language-option" data-lang="en">
-                            <i class="fas fa-check"></i>
-                            <span>English</span>
-                        </button>
-                    </div>
                 </div>
                 
-                <!-- زر القائمة للموبايل -->
-                <button class="navbar-toggle" id="navbarToggle">
-                    <i class="fas fa-bars"></i>
+                <div class="language-switch">
+                    <button class="lang-btn" id="languageToggle">
+                        <span class="lang-text" data-i18n="lang.ar">عربي</span>
+                        <i class="fas fa-globe"></i>
+                    </button>
+                </div>
+                
+                <div class="mode-switch">
+                    <button class="mode-btn" id="modeToggle">
+                        <span class="mode-text" data-i18n="mode.reels">ريلز</span>
+                        <i class="fas fa-film"></i>
+                    </button>
+                </div>
+                
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </div>
     </nav>
-    
-    <!-- زر الرجوع للصفحة الرئيسية -->
-    <button class="back-home-btn" id="backHomeBtn">
-        <i class="fas fa-home"></i>
-        <span>الرئيسية</span>
-    </button>
-    
-    <!-- الصفحة الرئيسية -->
-    <div class="page active" id="home">
-        <div class="hero">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span data-key="heroBadge">مهندس برمجيات</span>
-                </div>
-                <h1 class="hero-title" data-key="heroTitle">
-                    <span class="hero-title-line">أبني مستقبلك</span>
-                    <span class="hero-title-line">الرقمي</span>
+
+    <!-- قسم البطل -->
+    <section class="hero-section" id="hero">
+        <div class="hero-content">
+            <div class="typewriter-container">
+                <h1 class="hero-title">
+                    <span class="typewriter-text" id="typewriter"></span>
+                    <span class="cursor">|</span>
                 </h1>
-                <p class="hero-description" data-key="heroDescription">
-                    أصمم وأطور حلولًا تقنية مبتكرة تلبي احتياجات العصر الرقمي. أجمع بين الخبرة التقنية والإبداع لبناء أنظمة ذكية ومتطورة.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" data-count="50">0</span>
-                        <span class="stat-label" data-key="statProjects">مشروع</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-count="30">0</span>
-                        <span class="stat-label" data-key="statClients">عميل</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-count="5">0</span>
-                        <span class="stat-label" data-key="statYears">سنوات خبرة</span>
-                    </div>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary" data-page="portfolio" data-key="viewPortfolio">
-                        <i class="fas fa-laptop-code"></i> شاهد مشاريعي
-                    </a>
-                    <a href="#" class="btn btn-secondary" data-page="contact" data-key="contactMe">
-                        <i class="fas fa-comment-dots"></i> لنعمل معًا
-                    </a>
-                </div>
             </div>
-            <div class="hero-image">
-                <div class="video-frame">
-                    <div class="play-button">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="video-wave"></div>
+            
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
+                Short-form, trending visuals, brand-ready content
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="150">150+</span>
+                    <span class="stat-label" data-i18n="hero.videos">فيديو</span>
                 </div>
-            </div>
-        </div>
-        
-        <!-- لماذا تختارني -->
-        <div class="why-choose">
-            <h2 class="section-title" data-key="whyChooseTitle">لماذا تختارني؟</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3 data-key="feature1Title">تصميم مبتكر</h3>
-                    <p data-key="feature1Desc">أصمم حلولًا تقنية مبتكرة تلبي أحدث معايير الجودة والأداء</p>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="40">40+</span>
+                    <span class="stat-label" data-i18n="hero.clients">عميل</span>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3 data-key="feature2Title">تطوير متكامل</h3>
-                    <p data-key="feature2Desc">أطور أنظمة متكاملة من الفكرة إلى التنفيذ مع ضمان أعلى معايير الأمان</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 data-key="feature3Title">تحسين الأداء</h3>
-                    <p data-key="feature3Desc">أحلل وأحسن أداء الأنظمة لضمان كفاءتها واستقرارها على المدى الطويل</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 data-key="feature4Title">دعم مستمر</h3>
-                    <p data-key="feature4Desc">أقدم دعمًا فنيًا مستمرًا ومراجعات دورية لضمان استمرارية العمل</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- قسم ملخص الصفحات -->
-        <div class="pages-summary">
-            <h2 class="section-title" data-key="summaryTitle">استكشف محفظتي</h2>
-            <div class="summary-grid">
-                <div class="summary-card" data-page="profile">
-                    <div class="summary-icon">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <h3 data-key="summaryProfileTitle">حول المهندس</h3>
-                    <p data-key="summaryProfileDesc">تعرف على خبراتي وفلسفتي في هندسة البرمجيات</p>
-                    <div class="summary-arrow">
-                        <i class="fas fa-arrow-left"></i>
-                    </div>
-                </div>
-                
-                <div class="summary-card" data-page="services">
-                    <div class="summary-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 data-key="summaryServicesTitle">خدماتي</h3>
-                    <p data-key="summaryServicesDesc">اكتشف الخدمات الهندسية المتكاملة التي أقدمها</p>
-                    <div class="summary-arrow">
-                        <i class="fas fa-arrow-left"></i>
-                    </div>
-                </div>
-                
-                <div class="summary-card" data-page="portfolio">
-                    <div class="summary-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 data-key="summaryPortfolioTitle">مشاريعي</h3>
-                    <p data-key="summaryPortfolioDesc">شاهد مجموعة من أعمالي الهندسية المتميزة</p>
-                    <div class="summary-arrow">
-                        <i class="fas fa-arrow-left"></i>
-                    </div>
-                </div>
-                
-                <div class="summary-card" data-page="skills">
-                    <div class="summary-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3 data-key="summarySkillsTitle">مهاراتي</h3>
-                    <p data-key="summarySkillsDesc">تعرف على المهارات التقنية والشخصية التي أتمتع بها</p>
-                    <div class="summary-arrow">
-                        <i class="fas fa-arrow-left"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- صفحة حول -->
-    <div class="page" id="profile">
-        <div class="page-header">
-            <h1 class="page-title" data-key="profileTitle">حول المهندس أحمد</h1>
-            <p class="page-description" data-key="profileDescription">مهندس برمجيات متخصص في تطوير الحلول التقنية المتكاملة والأنظمة الذكية</p>
-        </div>
-        
-        <div class="profile-content">
-            <div class="about-grid">
-                <div class="about-image">
-                    <div class="image-container">
-                        <div class="image-frame"></div>
-                        <div class="image-overlay">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-info">
-                    <h2 data-key="aboutTitle">شغفي هو بناء حلول تقنية مبتكرة</h2>
-                    <p data-key="aboutDescription">
-                        مع أكثر من 5 سنوات من الخبرة في هندسة البرمجيات، أساعد الشركات والأفراد على تحويل أفكارهم إلى حلول رقمية متكاملة. أؤمن أن التكنولوجيا يجب أن تكون في خدمة الإنسان لتحسين جودة الحياة.
-                    </p>
-                    
-                    <div class="specialties">
-                        <h3 data-key="specialtiesTitle">تخصصاتي</h3>
-                        <div class="tags">
-                            <span class="tag">تطوير الويب</span>
-                            <span class="tag">تطوير التطبيقات</span>
-                            <span class="tag">قواعد البيانات</span>
-                            <span class="tag">هندسة البرمجيات</span>
-                            <span class="tag">التطوير المتكامل</span>
-                            <span class="tag">استشارات تقنية</span>
-                        </div>
-                    </div>
-                    
-                    <div class="social-connect">
-                        <h3 data-key="connectTitle">تواصل معي</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link">
-                                <i class="fab fa-github"></i>
-                                <span>GitHub</span>
-                            </a>
-                            <a href="#" class="social-link">
-                                <i class="fab fa-linkedin"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="#" class="social-link">
-                                <i class="fab fa-twitter"></i>
-                                <span>Twitter</span>
-                            </a>
-                            <a href="#" class="social-link">
-                                <i class="fab fa-stack-overflow"></i>
-                                <span>Stack Overflow</span>
-                            </a>
-                        </div>
-                    </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2000">2M+</span>
+                    <span class="stat-label" data-i18n="hero.views">مشاهدة</span>
                 </div>
             </div>
             
-            <!-- فلسفة العمل -->
-            <div class="philosophy">
-                <h2 data-key="philosophyTitle">فلسفتي في هندسة البرمجيات</h2>
-                <div class="philosophy-grid">
-                    <div class="philosophy-card">
-                        <div class="philosophy-number">01</div>
-                        <h3 data-key="philosophy1Title">الجودة أولاً</h3>
-                        <p data-key="philosophy1Desc">ألتزم بأعلى معايير الجودة في كل سطر أكتبه وكل نظام أصممه</p>
+            <div class="hero-actions">
+                <a href="#videos" class="btn-primary neon-btn">
+                    <i class="fas fa-play-circle"></i>
+                    <span data-i18n="hero.viewVideos">شاهد الفيديوهات</span>
+                </a>
+                <a href="#contact" class="btn-secondary">
+                    <i class="fas fa-handshake"></i>
+                    <span data-i18n="hero.collaborate">تعاون معي</span>
+                </a>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-btn tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-btn youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll">
+            <span data-i18n="hero.explore">استكشف</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- قسم الفيديوهات البارزة -->
+    <section class="section videos-section" id="videos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title" data-i18n="videos.title">فيديوهاتي البارزة</h2>
+                <p class="section-subtitle" data-i18n="videos.subtitle">أفضل المحتوى الذي حقق انتشاراً واسعاً</p>
+            </div>
+            
+            <div class="videos-grid">
+                <!-- فيديو 1 -->
+                <div class="video-card" data-category="trend">
+                    <div class="video-preview">
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-tag" data-i18n="videos.trend">تريند</div>
+                        </div>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 250K</span>
+                            <span><i class="fas fa-heart"></i> 15K</span>
+                        </div>
                     </div>
-                    <div class="philosophy-card">
-                        <div class="philosophy-number">02</div>
-                        <h3 data-key="philosophy2Title">الأداء الأمثل</h3>
-                        <p data-key="philosophy2Desc">أركز على بناء أنظمة سريعة وموثوقة تلبي احتياجات المستخدمين</p>
+                    <div class="video-info">
+                        <h3 class="video-title" data-i18n="videos.video1.title">تحدي 24 ساعة</h3>
+                        <p class="video-description" data-i18n="videos.video1.description">
+                            فيديو حقق انتشاراً واسعاً خلال 48 ساعة
+                        </p>
+                        <div class="video-result">
+                            <i class="fas fa-chart-line"></i>
+                            <span data-i18n="videos.result1">+120K مشاهدة خلال 48 ساعة</span>
+                        </div>
                     </div>
-                    <div class="philosophy-card">
-                        <div class="philosophy-number">03</div>
-                        <h3 data-key="philosophy3Title">التطوير المستمر</h3>
-                        <p data-key="philosophy3Desc">أتطور باستمرار لأواكب أحدث التقنيات وأفضل الممارسات في المجال</p>
+                </div>
+                
+                <!-- فيديو 2 -->
+                <div class="video-card" data-category="branding">
+                    <div class="video-preview">
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-tag" data-i18n="videos.branding">براندينج</div>
+                        </div>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 180K</span>
+                            <span><i class="fas fa-heart"></i> 12K</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title" data-i18n="videos.video2.title">مراجعة منتج</h3>
+                        <p class="video-description" data-i18n="videos.video2.description">
+                            فيديو تعاون مع علامة تجارية عالمية
+                        </p>
+                        <div class="video-result">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span data-i18n="videos.result2">+40% زيادة في المبيعات</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- فيديو 3 -->
+                <div class="video-card" data-category="lifestyle">
+                    <div class="video-preview">
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-tag" data-i18n="videos.lifestyle">أسلوب حياة</div>
+                        </div>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 320K</span>
+                            <span><i class="fas fa-heart"></i> 25K</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title" data-i18n="videos.video3.title">روتين الصباح</h3>
+                        <p class="video-description" data-i18n="videos.video3.description">
+                            محتوى يومي حقق تفاعلاً كبيراً
+                        </p>
+                        <div class="video-result">
+                            <i class="fas fa-users"></i>
+                            <span data-i18n="videos.result3">+15K متابع جديد</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- فيديو 4 -->
+                <div class="video-card" data-category="ads">
+                    <div class="video-preview">
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-tag" data-i18n="videos.ads">إعلان</div>
+                        </div>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 450K</span>
+                            <span><i class="fas fa-heart"></i> 30K</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title" data-i18n="videos.video4.title">كامبين إعلاني</h3>
+                        <p class="video-description" data-i18n="videos.video4.description">
+                            حملة إعلانية لشركة ناشئة
+                        </p>
+                        <div class="video-result">
+                            <i class="fas fa-bullseye"></i>
+                            <span data-i18n="videos.result4">CTR 8.5% أعلى من المتوسط</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- فيديو 5 -->
+                <div class="video-card" data-category="educational">
+                    <div class="video-preview">
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-tag" data-i18n="videos.educational">تعليمي</div>
+                        </div>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 280K</span>
+                            <span><i class="fas fa-heart"></i> 18K</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title" data-i18n="videos.video5.title">نصائح للمحتوى</h3>
+                        <p class="video-description" data-i18n="videos.video5.description">
+                            فيديو تعليمي شاركته مع المتابعين
+                        </p>
+                        <div class="video-result">
+                            <i class="fas fa-share-alt"></i>
+                            <span data-i18n="videos.result5">+5K مشاركة</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- فيديو 6 -->
+                <div class="video-card" data-category="challenge">
+                    <div class="video-preview">
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-tag" data-i18n="videos.challenge">تحدي</div>
+                        </div>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 500K</span>
+                            <span><i class="fas fa-heart"></i> 35K</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title" data-i18n="videos.video6.title">فيديوهات قصيرة</h3>
+                        <p class="video-description" data-i18n="videos.video6.description">
+                            سلسلة فيديوهات قصيرة يومية
+                        </p>
+                        <div class="video-result">
+                            <i class="fas fa-fire"></i>
+                            <span data-i18n="videos.result6">ڤايرال على 3 منصات</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- صفحة الخدمات -->
-    <div class="page" id="services">
-        <div class="page-header">
-            <h1 class="page-title" data-key="servicesTitle">خدماتي</h1>
-            <p class="page-description" data-key="servicesDescription">أقدم مجموعة متكاملة من الخدمات الهندسية لتلبية جميع احتياجاتك التقنية</p>
+    </section>
+
+    <!-- قسم الريلز المتحركة -->
+    <section class="section reels-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title" data-i18n="reels.title">ريلز قصيرة</h2>
+                <p class="section-subtitle" data-i18n="reels.subtitle">شاهد أفضل الريلز المتحركة</p>
+            </div>
+            
+            <div class="reels-container">
+                <div class="reel-item">
+                    <div class="reel-preview reel-1">
+                        <div class="reel-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <span data-i18n="reels.reel1">تريند اليوم</span>
+                    </div>
+                </div>
+                
+                <div class="reel-item">
+                    <div class="reel-preview reel-2">
+                        <div class="reel-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <span data-i18n="reels.reel2">مونتاج سريع</span>
+                    </div>
+                </div>
+                
+                <div class="reel-item">
+                    <div class="reel-preview reel-3">
+                        <div class="reel-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <span data-i18n="reels.reel3">تأثيرات خاصة</span>
+                    </div>
+                </div>
+                
+                <div class="reel-item">
+                    <div class="reel-preview reel-4">
+                        <div class="reel-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="reel-info">
+                        <span data-i18n="reels.reel4">صوتيات جذابة</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="services-container">
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section class="section services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title" data-i18n="services.title">خدماتي كصانع محتوى</h2>
+                <p class="section-subtitle" data-i18n="services.subtitle">حلول محتوى متكاملة لعلامتك</p>
+            </div>
+            
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
+                        <i class="fas fa-video"></i>
                     </div>
-                    <h3 data-key="service1Title">تطوير الويب</h3>
-                    <p data-key="service1Desc">تصميم وتطوير مواقع وتطبيقات ويب متكاملة باستخدام أحدث التقنيات</p>
+                    <h3 class="service-title" data-i18n="services.service1.title">صناعة المحتوى القصير</h3>
+                    <p class="service-description" data-i18n="services.service1.description">
+                        ريلز، تيك توك، فيديوهات قصيرة مؤثرة
+                    </p>
                     <ul class="service-features">
-                        <li data-key="service1Feature1">تطوير Frontend</li>
-                        <li data-key="service1Feature2">تطوير Backend</li>
-                        <li data-key="service1Feature3">تطوير متكامل</li>
+                        <li data-i18n="services.service1.feature1">تصوير احترافي</li>
+                        <li data-i18n="services.service1.feature2">مونتاج سريع</li>
+                        <li data-i18n="services.service1.feature3">تأثيرات حديثة</li>
+                        <li data-i18n="services.service1.feature4">موسيقى مختارة</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card featured">
+                    <div class="service-badge" data-i18n="services.popular">الأكثر طلباً</div>
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3 class="service-title" data-i18n="services.service2.title">صور منتجات للريلز</h3>
+                    <p class="service-description" data-i18n="services.service2.description">
+                        تصوير منتجات بطريقة جذابة لوسائل التواصل
+                    </p>
+                    <ul class="service-features">
+                        <li data-i18n="services.service2.feature1">إضاءة احترافية</li>
+                        <li data-i18n="services.service2.feature2">زوايا إبداعية</li>
+                        <li data-i18n="services.service2.feature3">حركة سينمائية</li>
+                        <li data-i18n="services.service2.feature4">تسليم سريع</li>
                     </ul>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fas fa-handshake"></i>
                     </div>
-                    <h3 data-key="service2Title">تطوير التطبيقات</h3>
-                    <p data-key="service2Desc">بناء تطبيقات الهواتف الذكية لأنظمة iOS و Android بتجربة استخدام ممتازة</p>
+                    <h3 class="service-title" data-i18n="services.service3.title">تعاون مع العلامات</h3>
+                    <p class="service-description" data-i18n="services.service3.description">
+                        شراكات مع العلامات التجارية المناسبة
+                    </p>
                     <ul class="service-features">
-                        <li data-key="service2Feature1">تطبيقات iOS</li>
-                        <li data-key="service2Feature2">تطبيقات Android</li>
-                        <li data-key="service2Feature3">تطبيقات متعددة المنصات</li>
+                        <li data-i18n="services.service3.feature1">استراتيجية محتوى</li>
+                        <li data-i18n="services.service3.feature2">تفاوض احترافي</li>
+                        <li data-i18n="services.service3.feature3">تنفيذ سلس</li>
+                        <li data-i18n="services.service3.feature4">تقارير أداء</li>
                     </ul>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-database"></i>
+                        <i class="fas fa-edit"></i>
                     </div>
-                    <h3 data-key="service3Title">أنظمة قواعد البيانات</h3>
-                    <p data-key="service3Desc">تصميم وإدارة قواعد البيانات العلائقية وغير العلائقية بمعايير أمنية عالية</p>
+                    <h3 class="service-title" data-i18n="services.service4.title">مونتاج وتكييف التريند</h3>
+                    <p class="service-description" data-i18n="services.service4.description">
+                        مونتاج محترف وتكييف التريندات العالمية
+                    </p>
                     <ul class="service-features">
-                        <li data-key="service3Feature1">تصميم قواعد البيانات</li>
-                        <li data-key="service3Feature2">تحسين الاستعلامات</li>
-                        <li data-key="service3Feature3">تأمين البيانات</li>
+                        <li data-i18n="services.service4.feature1">مونتاج سريع</li>
+                        <li data-i18n="services.service4.feature2">تتبع التريندات</li>
+                        <li data-i18n="services.service4.feature3">تأثيرات خاصة</li>
+                        <li data-i18n="services.service4.feature4">تسليم فوري</li>
                     </ul>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
+                        <i class="fas fa-user-circle"></i>
                     </div>
-                    <h3 data-key="service4Title">استشارات تقنية</h3>
-                    <p data-key="service4Desc">تقديم استشارات متخصصة لتحسين البنية التحتية التقنية للشركات</p>
+                    <h3 class="service-title" data-i18n="services.service5.title">فيديوهات UGC</h3>
+                    <p class="service-description" data-i18n="services.service5.description">
+                        محتوى من مستخدم حقيقي يروّج لمنتجك
+                    </p>
                     <ul class="service-features">
-                        <li data-key="service4Feature1">تحليل النظم</li>
-                        <li data-key="service4Feature2">تخطيط البنية التحتية</li>
-                        <li data-key="service4Feature3">مراجعة الأمان</li>
+                        <li data-i18n="services.service5.feature1">محتوى طبيعي</li>
+                        <li data-i18n="services.service5.feature2">تأثير حقيقي</li>
+                        <li data-i18n="services.service5.feature3">تكلفة فعالة</li>
+                        <li data-i18n="services.service5.feature4">نتائج ملموسة</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <h3 class="service-title" data-i18n="services.service6.title">سيناريو وتصوير</h3>
+                    <p class="service-description" data-i18n="services.service6.description">
+                        كتابة سيناريو احترافي وتصوير عالي الجودة
+                    </p>
+                    <ul class="service-features">
+                        <li data-i18n="services.service6.feature1">سيناريو مبدع</li>
+                        <li data-i18n="services.service6.feature2">تخطيط كامل</li>
+                        <li data-i18n="services.service6.feature3">تصوير احترافي</li>
+                        <li data-i18n="services.service6.feature4">مراجعة وتعديل</li>
                     </ul>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- قسم الجدول الزمني للتريندات -->
+    <section class="section timeline-section" id="process">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title" data-i18n="timeline.title">لماذا تختارني؟</h2>
+                <p class="section-subtitle" data-i18n="timeline.subtitle">أبرز المميزات التي تجعلني الخيار الأمثل</p>
+            </div>
             
-            <!-- عملية العمل -->
-            <div class="work-process">
-                <h2 data-key="processTitle">كيف أعمل؟</h2>
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3 data-key="step1Title">التحليل</h3>
-                            <p data-key="step1Desc">أحلل متطلبات المشروع وأدرس احتياجات العميل بدقة</p>
-                        </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-palette"></i>
                     </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3 data-key="step2Title">التصميم</h3>
-                            <p data-key="step2Desc">أصمم هندسة النظام وخوارزميات الحل مع وضع قابلية التوسع في الاعتبار</p>
-                        </div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.item1.title">جمالية ثابتة</h3>
+                        <p data-i18n="timeline.item1.description">حفاظ على هوية بصرية موحدة في كل المحتوى</p>
                     </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3 data-key="step3Title">التنفيذ</h3>
-                            <p data-key="step3Desc">أبدأ في كتابة الكود وبناء النظام مع تحديثات مستمرة</p>
-                        </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h3 data-key="step4Title">الاختبار والتسليم</h3>
-                            <p data-key="step4Desc">أختبر النظام بدقة وأسلّمه مع وثائق فنية كاملة</p>
-                        </div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.item2.title">تنبؤ بالتريندات</h3>
+                        <p data-i18n="timeline.item2.description">توقع التريندات قبل انتشارها الواسع</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.item3.title">مونتاج سريع</h3>
+                        <p data-i18n="timeline.item3.description">تسليم المحتوى في أسرع وقت ممكن</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.item4.title">تفاعل عالي</h3>
+                        <p data-i18n="timeline.item4.description">محتويات تحقق أعلى معدلات التفاعل</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.item5.title">أسلوب سرد القصص</h3>
+                        <p data-i18n="timeline.item5.description">تحويل المنتجات إلى قصص مؤثرة</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="timeline.item6.title">معدات احترافية</h3>
+                        <p data-i18n="timeline.item6.description">كاميرات وإضاءة عالية الجودة</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- صفحة أعمالي -->
-    <div class="page" id="portfolio">
-        <div class="page-header">
-            <h1 class="page-title" data-key="portfolioTitle">معرض مشاريعي</h1>
-            <p class="page-description" data-key="portfolioDescription">مجموعة مختارة من المشاريع الهندسية التي نفذتها لشركات ومؤسسات مختلفة</p>
-        </div>
-        
-        <div class="portfolio-filter">
-            <button class="filter-btn active" data-filter="all">الكل</button>
-            <button class="filter-btn" data-filter="web">تطوير الويب</button>
-            <button class="filter-btn" data-filter="app">تطبيقات</button>
-            <button class="filter-btn" data-filter="system">أنظمة</button>
-        </div>
-        
-        <div class="portfolio-grid">
-            <div class="portfolio-item" data-category="web">
-                <div class="portfolio-image">
-                    <div class="play-overlay">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                </div>
-                <div class="portfolio-info">
-                    <h3 data-key="project1Title">منصة تعليمية ذكية</h3>
-                    <p data-key="project1Desc">تطوير منصة تعليمية متكاملة بميزات التعلم الذكي والتقارير التحليلية</p>
-                    <div class="portfolio-tags">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                    </div>
-                </div>
+    </section>
+
+    <!-- قسم العلامات التجارية -->
+    <section class="section brands-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title" data-i18n="brands.title">تعاملت معهم</h2>
+                <p class="section-subtitle" data-i18n="brands.subtitle">علامات تجارية وثق بي في محتواهم</p>
             </div>
             
-            <div class="portfolio-item" data-category="system">
-                <div class="portfolio-image">
-                    <div class="social-overlay">
-                        <i class="fas fa-database"></i>
-                    </div>
+            <div class="brands-grid">
+                <div class="brand-logo">
+                    <div class="logo-placeholder">Brand A</div>
                 </div>
-                <div class="portfolio-info">
-                    <h3 data-key="project2Title">نظام إدارة المستشفيات</h3>
-                    <p data-key="project2Desc">بناء نظام متكامل لإدارة عمليات المستشفى وتتبع الحالات المرضية</p>
-                    <div class="portfolio-tags">
-                        <span>Python</span>
-                        <span>Django</span>
-                        <span>PostgreSQL</span>
-                    </div>
+                <div class="brand-logo">
+                    <div class="logo-placeholder">Tech Co</div>
                 </div>
-            </div>
-            
-            <div class="portfolio-item" data-category="app">
-                <div class="portfolio-image">
-                    <div class="photo-overlay">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
+                <div class="brand-logo">
+                    <div class="logo-placeholder">Fashion X</div>
                 </div>
-                <div class="portfolio-info">
-                    <h3 data-key="project3Title">تطبيق توصيل طعام</h3>
-                    <p data-key="project3Desc">تطوير تطبيق ذكي لتوصيل الطعام مع نظام تتبع حي للطلبات</p>
-                    <div class="portfolio-tags">
-                        <span>React Native</span>
-                        <span>Firebase</span>
-                        <span>Google Maps</span>
-                    </div>
+                <div class="brand-logo">
+                    <div class="logo-placeholder">Beauty Z</div>
                 </div>
-            </div>
-            
-            <div class="portfolio-item" data-category="web">
-                <div class="portfolio-image">
-                    <div class="play-overlay">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
+                <div class="brand-logo">
+                    <div class="logo-placeholder">Startup Y</div>
                 </div>
-                <div class="portfolio-info">
-                    <h3 data-key="project4Title">منصة تجارة إلكترونية</h3>
-                    <p data-key="project4Desc">تصميم وتطوير منصة تسوق إلكتروني بميزات متقدمة للدفع والتوصيل</p>
-                    <div class="portfolio-tags">
-                        <span>Vue.js</span>
-                        <span>Laravel</span>
-                        <span>MySQL</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="portfolio-item" data-category="system">
-                <div class="portfolio-image">
-                    <div class="social-overlay">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                </div>
-                <div class="portfolio-info">
-                    <h3 data-key="project5Title">نظام إدارة المشاريع</h3>
-                    <p data-key="project5Desc">بناء نظام لإدارة المشاريع والتواصل بين فرق العمل</p>
-                    <div class="portfolio-tags">
-                        <span>Angular</span>
-                        <span>Spring Boot</span>
-                        <span>PostgreSQL</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="portfolio-item" data-category="app">
-                <div class="portfolio-image">
-                    <div class="photo-overlay">
-                        <i class="fas fa-dumbbell"></i>
-                    </div>
-                </div>
-                <div class="portfolio-info">
-                    <h3 data-key="project6Title">تطبيق لياقة بدنية</h3>
-                    <p data-key="project6Desc">تطوير تطبيق متكامل لمتابعة اللياقة البدنية والتمارين الرياضية</p>
-                    <div class="portfolio-tags">
-                        <span>Flutter</span>
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                    </div>
+                <div class="brand-logo">
+                    <div class="logo-placeholder">Lifestyle</div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- صفحة المهارات -->
-    <div class="page" id="skills">
-        <div class="page-header">
-            <h1 class="page-title" data-key="skillsTitle">مهاراتي</h1>
-            <p class="page-description" data-key="skillsDescription">مجموعة من المهارات التقنية والإبداعية التي أتمتع بها في مجال هندسة البرمجيات</p>
-        </div>
-        
-        <div class="skills-container">
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 data-key="creativeSkills">المهارات التقنية</h3>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillVideo">تطوير الويب</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95"></div>
-                        </div>
+    </section>
+
+    <!-- قسم آراء العملاء -->
+    <section class="section testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title" data-i18n="testimonials.title">آراء العملاء</h2>
+                <p class="section-subtitle" data-i18n="testimonials.subtitle">ماذا يقولون عن تعاملهم معي</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-bubble">
+                    <div class="bubble-content">
+                        <p data-i18n="testimonials.testimonial1">
+                            "المحتوى اللي سواه كريم لفيديو الإطلاق حقنا صار viral خلال 24 ساعة! التفاعل كان جنوني والمبيعات زادت 60%."
+                        </p>
                     </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillWriting">تطوير التطبيقات</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillPhoto">قواعد البيانات</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="88"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillDesign">هندسة البرمجيات</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="92"></div>
+                    <div class="client-info">
+                        <div class="client-avatar">س</div>
+                        <div>
+                            <h4>سارة العلي</h4>
+                            <p data-i18n="testimonials.position1">مديرة تسويق، علامة أزياء</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="skill-category">
-                    <h3 data-key="technicalSkills">لغات البرمجة</h3>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillPremiere">JavaScript</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95"></div>
+                <div class="testimonial-bubble">
+                    <div class="bubble-content">
+                        <p data-i18n="testimonials.testimonial2">
+                            "أسرع صانع محتوى شفته! الفيديو جاهز خلال ساعات والجودة تحفة. المتابعين ماخذين يطلبون المزيد."
+                        </p>
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">أ</div>
+                        <div>
+                            <h4>أحمد الحربي</h4>
+                            <p data-i18n="testimonials.position2">مالك مقهى ناشئ</p>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillAfter">Python</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillPhotoshop">Java</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillAnalytics">C++</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 data-key="softSkills">المهارات الشخصية</h3>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillCommunication">التواصل الفعال</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="92"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillTime">إدارة الوقت</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillProblem">حل المشكلات</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="94"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name" data-key="skillTeam">العمل الجماعي</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="88"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- الأدوات -->
-            <div class="tools-section">
-                <h3 data-key="toolsTitle">الأدوات والتقنيات</h3>
-                <div class="tools-grid">
-                    <div class="tool-item">
-                        <i class="fab fa-react"></i>
-                        <span>React</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fab fa-vuejs"></i>
-                        <span>Vue.js</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fab fa-node-js"></i>
-                        <span>Node.js</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-database"></i>
-                        <span>MongoDB</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-server"></i>
-                        <span>PostgreSQL</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fab fa-docker"></i>
-                        <span>Docker</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- صفحة الاتصال -->
-    <div class="page" id="contact">
-        <div class="page-header">
-            <h1 class="page-title" data-key="contactTitle">لنعمل معًا</h1>
-            <p class="page-description" data-key="contactDescription">أهلاً بك! دعنا نناقش مشروعك القادم ونحول أفكارك إلى حلول رقمية مبتكرة</p>
-        </div>
-        
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-content">
-                        <h3 data-key="emailTitle">البريد الإلكتروني</h3>
-                        <p>ahmed@engineer.com</p>
-                    </div>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div class="contact-content">
-                        <h3 data-key="phoneTitle">الهاتف</h3>
-                        <p>+966 55 123 4567</p>
-                    </div>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="contact-content">
-                        <h3 data-key="locationTitle">الموقع</h3>
-                        <p data-key="locationText">الرياض، المملكة العربية السعودية</p>
-                    </div>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="contact-content">
-                        <h3 data-key="hoursTitle">ساعات العمل</h3>
-                        <p data-key="hoursText">الأحد - الخميس: 9 ص - 6 م</p>
-                    </div>
-                </div>
+    </section>
+
+    <!-- قسم الدعوة للعمل -->
+    <section class="section cta-section" id="contact">
+        <div class="container">
+            <div class="big-cta">
+                <h2 class="cta-title" data-i18n="cta.title">جاهز لصناعة لحظة ڤايرال؟</h2>
+                <p class="cta-subtitle" data-i18n="cta.subtitle">لنصنع محتوى لا يُنسى معاً</p>
+                <a href="#contact-form" class="cta-button neon-pulse">
+                    <span data-i18n="cta.button">ابدأ مشروعك الآن</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
             </div>
             
-            <div class="contact-form">
-                <form id="contactForm">
+            <div class="contact-form" id="contact-form">
+                <div class="form-header">
+                    <h3 data-i18n="contact.formTitle">لنبدأ مشروعك</h3>
+                    <p data-i18n="contact.formSubtitle">أخبرني عن فكرتك وسأعود إليك خلال 24 ساعة</p>
+                </div>
+                
+                <form id="collabForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="name" data-key="formName">الاسم *</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="collabName" name="name" required>
+                            <label for="collabName" data-i18n="contact.form.name">الاسم الكامل</label>
+                            <div class="form-line"></div>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="email" data-key="formEmail">البريد الإلكتروني *</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="collabEmail" name="email" required>
+                            <label for="collabEmail" data-i18n="contact.form.email">البريد الإلكتروني</label>
+                            <div class="form-line"></div>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="subject" data-key="formSubject">نوع المشروع *</label>
-                        <select id="subject" class="form-control" required>
-                            <option value="">اختر نوع المشروع</option>
-                            <option value="web">تطوير ويب</option>
-                            <option value="app">تطوير تطبيقات</option>
-                            <option value="database">قواعد بيانات</option>
-                            <option value="consulting">استشارات تقنية</option>
-                            <option value="other">أخرى</option>
+                        <select id="collabService" name="service">
+                            <option value="" data-i18n="contact.form.select">اختر نوع المشروع</option>
+                            <option value="reels" data-i18n="contact.form.reels">ريلز قصيرة</option>
+                            <option value="branding" data-i18n="contact.form.branding">تعاون براندينج</option>
+                            <option value="ugc" data-i18n="contact.form.ugc">فيديوهات UGC</option>
+                            <option value="editing" data-i18n="contact.form.editing">مونتاج محتوى</option>
+                            <option value="other" data-i18n="contact.form.other">مشروع آخر</option>
                         </select>
+                        <div class="form-line"></div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="message" data-key="formMessage">تفاصيل المشروع *</label>
-                        <textarea id="message" class="form-control" required placeholder="أخبرني عن مشروعك وأهدافك..." data-key="formMessagePlaceholder"></textarea>
+                        <textarea id="collabMessage" name="message" rows="4" required></textarea>
+                        <label for="collabMessage" data-i18n="contact.form.message">تفاصيل المشروع</label>
+                        <div class="form-line"></div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary" data-key="formSubmit">
-                        <i class="fas fa-paper-plane"></i> أرسل الرسالة
-                    </button>
+                    <div class="form-footer">
+                        <button type="submit" class="submit-btn neon-btn">
+                            <span data-i18n="contact.form.submit">أرسل طلب التعاون</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
-    </div>
-    
-    <!-- التذييل -->
+    </section>
+
+    <!-- الفوتر -->
     <footer class="footer">
-        <div class="footer-container">
+        <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <i class="fas fa-code"></i>
-                    <span>أحمد</span>
+                <div class="footer-brand">
+                    <span class="footer-logo" data-i18n="footer.logo">كريم</span>
+                    <p class="footer-description" data-i18n="footer.tagline">صانع محتوى محترف</p>
                 </div>
-                <p class="footer-text" data-key="footerText">مهندس برمجيات متخصص في تطوير الحلول التقنية المتكاملة والأنظمة الذكية</p>
+                
+                <div class="footer-links">
+                    <a href="#hero" data-i18n="footer.home">الرئيسية</a>
+                    <a href="#videos" data-i18n="footer.videos">فيديوهاتي</a>
+                    <a href="#services" data-i18n="footer.services">خدماتي</a>
+                    <a href="#process" data-i18n="footer.process">لماذا تختارني</a>
+                    <a href="#contact" data-i18n="footer.contact">تعاون معي</a>
+                </div>
                 
                 <div class="footer-social">
-                    <a href="#" class="footer-social-link">
-                        <i class="fab fa-github"></i>
+                    <a href="#" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="footer-social-link">
-                        <i class="fab fa-linkedin"></i>
+                    <a href="#" class="social-btn tiktok">
+                        <i class="fab fa-tiktok"></i>
                     </a>
-                    <a href="#" class="footer-social-link">
+                    <a href="#" class="social-btn youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-btn twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="footer-social-link">
-                        <i class="fab fa-stack-overflow"></i>
-                    </a>
                 </div>
-                
-                <p class="copyright">© 2024 أحمد. جميع الحقوق محفوظة.</p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="currentYear"></span> <span data-i18n="footer.name">كريم</span>. <span data-i18n="footer.rights">جميع الحقوق محفوظة</span>.</p>
             </div>
         </div>
     </footer>
-    
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- نافذة الفيديو -->
+    <div class="modal" id="videoModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="video-player">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                    <p data-i18n="modal.video">عرض فيديو</p>
+                </div>
+            </div>
+            
+            <div class="video-info">
+                <h3 id="videoTitle">عنوان الفيديو</h3>
+                <div class="video-stats-modal">
+                    <span><i class="fas fa-eye"></i> <span id="videoViews">0</span></span>
+                    <span><i class="fas fa-heart"></i> <span id="videoLikes">0</span></span>
+                    <span><i class="fas fa-comment"></i> <span id="videoComments">0</span></span>
+                </div>
+                <p id="videoDescription">وصف الفيديو</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- السكريبتات -->
     <script src="script.js"></script>
 </body>
 </html>
