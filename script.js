@@ -1,32 +1,151 @@
-// ملف JavaScript المعرفي لـ Cognitive Folio
+// ملف JavaScript المعرفي متعدد اللغات
 document.addEventListener('DOMContentLoaded', function() {
+    // ========== إدارة اللغة ==========
+    let currentLang = 'ar'; // اللغة الافتراضية
+    
+    // عناصر تبديل اللغة
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const allLangElements = document.querySelectorAll('[data-lang]');
+    
+    // تهيئة اللغة
+    function initializeLanguage() {
+        // تعيين اللغة النشطة
+        langButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-lang') === currentLang) {
+                btn.classList.add('active');
+            }
+            
+            btn.addEventListener('click', function() {
+                const newLang = this.getAttribute('data-lang');
+                if (newLang !== currentLang) {
+                    switchLanguage(newLang);
+                }
+            });
+        });
+        
+        // تطبيق اللغة الافتراضية
+        updateLanguageDisplay();
+    }
+    
+    // تبديل اللغة
+    function switchLanguage(newLang) {
+        currentLang = newLang;
+        
+        // تحديث الأزرار النشطة
+        langButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-lang') === currentLang) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // تحديث النصوص
+        updateLanguageDisplay();
+        
+        // تحديث اتجاه الصفحة
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLang;
+        
+        // تأثير صوتي
+        playCognitiveSound('switch');
+        
+        // إشعار
+        showCognitiveNotification(
+            currentLang === 'ar' ? 'تم تغيير اللغة إلى العربية' : 'Language switched to English',
+            'success'
+        );
+    }
+    
+    // تحديث عرض النصوص
+    function updateLanguageDisplay() {
+        // إخفاء جميع عناصر اللغة
+        allLangElements.forEach(el => {
+            el.style.display = 'none';
+        });
+        
+        // إظهار عناصر اللغة الحالية
+        const currentLangElements = document.querySelectorAll(`[data-lang="${currentLang}"]`);
+        currentLangElements.forEach(el => {
+            el.style.display = '';
+            
+            // تحديث النصوص البديلة
+            if (el.hasAttribute('data-text')) {
+                el.textContent = el.getAttribute('data-text');
+            }
+            
+            // تحديث العنوائين البديلة
+            if (el.hasAttribute('data-lang-alt') && el.hasAttribute('data-text-alt')) {
+                if (el.getAttribute('data-lang-alt') === currentLang) {
+                    el.textContent = el.getAttribute('data-text-alt');
+                }
+            }
+            
+            // تحديث العناصر النائبة
+            if (el.placeholder && el.hasAttribute('data-lang-alt') && el.hasAttribute('placeholder-alt')) {
+                if (el.getAttribute('data-lang-alt') === currentLang) {
+                    el.placeholder = el.getAttribute('placeholder-alt');
+                }
+            }
+            
+            // تحديث العناوين
+            if (el.title && el.hasAttribute('data-lang-alt') && el.hasAttribute('title-alt')) {
+                if (el.getAttribute('data-lang-alt') === currentLang) {
+                    el.title = el.getAttribute('title-alt');
+                }
+            }
+        });
+        
+        // تحديث عناصر select
+        document.querySelectorAll('select option').forEach(option => {
+            if (option.hasAttribute('data-lang') && option.hasAttribute('data-text')) {
+                if (option.getAttribute('data-lang') === currentLang) {
+                    option.textContent = option.getAttribute('data-text');
+                }
+            }
+        });
+    }
     
     // ========== شاشة التحميل المعرفية ==========
     const loader = document.querySelector('.cognitive-loader');
     
     setTimeout(() => {
-        loader.classList.add('fade-out');
-        
-        setTimeout(() => {
-            loader.style.display = 'none';
-            initializeCognitiveExperience();
-        }, 500);
+        if (loader) {
+            loader.classList.add('fade-out');
+            
+            setTimeout(() => {
+                loader.style.display = 'none';
+                initializeCognitiveExperience();
+            }, 500);
+        }
     }, 2000);
     
     // ========== تهيئة التجربة المعرفية ==========
     function initializeCognitiveExperience() {
-        console.log('%c🧠 Cognitive Folio — تجربة معرفية غامضة 🧠', 'background: linear-gradient(45deg, #0F0F0F, #1A1A1A, #FF5C5C); color: #F0F0F0; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold;');
-        console.log('%c⚠️  Warning: This experience challenges conventional design thinking', 'color: #FF8C00; font-size: 11px; padding: 8px; background: #1A1A1A; border-radius: 4px;');
+        console.log('%c🧠 Cognitive Design — تجربة معرفية متعددة اللغات 🧠', 'background: linear-gradient(45deg, #0F0F0F, #1A1A1A, #FF5C5C); color: #F0F0F0; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold;');
+        console.log('%c🌐 متاح باللغتين العربية والإنجليزية', 'color: #FF8C00; font-size: 11px; padding: 8px; background: #1A1A1A; border-radius: 4px;');
         console.log('%c📞 Contact: aseeljalal45@gmail.com | WhatsApp: +962785094075', 'color: #FF5C5C; font-size: 11px; margin-top: 5px;');
-        console.log('%c🌐 Live Projects: test1, test4, test7', 'color: #5C5CFF; font-size: 12px; padding: 8px; background: #1A1A1A; border-radius: 4px;');
         
+        // تهيئة اللغة
+        initializeLanguage();
+        
+        // إنشاء العناصر العائمة
         createFloatingElements();
+        
+        // تهيئة التنقل
         initializeNavigation();
-        initializeProjects();
-        initializePuzzle();
+        
+        // تهيئة التفاعل الصوتي
         initializeVoiceInteraction();
+        
+        // تهيئة تتبع الماوس
         initializeMouseTracker();
+        
+        // تهيئة تأثيرات التمرير
         initializeScrollEffects();
+        
+        // تهيئة النماذج
+        initializeForms();
     }
     
     // ========== إنشاء العناصر العائمة ==========
@@ -68,7 +187,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (menuToggle) {
             menuToggle.addEventListener('click', function() {
                 this.classList.toggle('active');
-                navLinks.classList.toggle('active');
+                if (navLinks) {
+                    navLinks.classList.toggle('active');
+                }
                 
                 const bars = this.querySelectorAll('.cognitive-bar');
                 if (this.classList.contains('active')) {
@@ -134,6 +255,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     backToTop.classList.remove('visible');
                 }
             }
+            
+            // تأثيرات الظهور عند التمرير
+            animateOnScroll();
         });
         
         // زر العودة للأعلى
@@ -166,96 +290,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ========== تهيئة المشاريع المعرفية ==========
-    function initializeProjects() {
-        // تحسين iframes
-        const iframes = document.querySelectorAll('.cognitive-frame iframe');
-        iframes.forEach(iframe => {
-            iframe.addEventListener('load', function() {
-                this.style.opacity = '1';
-            });
+    // ========== تأثيرات الظهور عند التمرير ==========
+    function animateOnScroll() {
+        const cards = document.querySelectorAll('.philosophy-card, .cognitive-service-card, .cognitive-process-step');
+        
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
             
-            iframe.style.opacity = '0';
-            iframe.style.transition = 'opacity 0.5s ease';
-        });
-        
-        // تأثيرات الظهور عند التمرير
-        const projectCards = document.querySelectorAll('.cognitive-project');
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-        
-        projectCards.forEach(card => {
-            observer.observe(card);
-        });
-    }
-    
-    // ========== الألغاز المعرفية ==========
-    function initializePuzzle() {
-        const puzzlePieces = document.querySelectorAll('.cognitive-piece');
-        const puzzleMessage = document.getElementById('puzzleMessage');
-        let selectedPieces = [];
-        
-        if (!puzzlePieces.length) return;
-        
-        puzzlePieces.forEach(piece => {
-            piece.addEventListener('click', function() {
-                const pieceId = this.getAttribute('data-piece');
-                
-                if (selectedPieces.includes(pieceId)) {
-                    // إزالة إذا كانت مختارة بالفعل
-                    selectedPieces = selectedPieces.filter(id => id !== pieceId);
-                    this.classList.remove('active');
-                    this.style.borderColor = 'rgba(255, 140, 0, 0.3)';
-                    this.style.backgroundColor = 'var(--cognitive-light)';
-                    this.style.color = 'var(--text-cognitive-primary)';
-                } else {
-                    // إضافة إذا لم تكن مختارة
-                    selectedPieces.push(pieceId);
-                    this.classList.add('active');
-                    this.style.borderColor = 'var(--cognitive-accent-orange)';
-                    this.style.backgroundColor = 'rgba(255, 140, 0, 0.2)';
-                    this.style.color = 'var(--cognitive-accent-orange)';
-                }
-                
-                // عرض رسالة معرفية بناء على التحديد
-                if (selectedPieces.length === 0) {
-                    puzzleMessage.textContent = '';
-                    puzzleMessage.style.color = 'var(--text-cognitive-secondary)';
-                } else if (selectedPieces.length === 1) {
-                    puzzleMessage.textContent = 'Piece selected. The pattern begins.';
-                } else if (selectedPieces.length === 2) {
-                    puzzleMessage.textContent = 'Two fragments connected. Meaning emerges.';
-                } else if (selectedPieces.length === 3) {
-                    puzzleMessage.textContent = 'Pattern taking shape. Understanding dawns.';
-                } else if (selectedPieces.length === 4) {
-                    puzzleMessage.textContent = 'Almost complete. The truth approaches.';
-                } else if (selectedPieces.length === 5) {
-                    puzzleMessage.textContent = 'Cognitive pattern complete. The maze accepts you.';
-                    puzzleMessage.style.color = 'var(--cognitive-accent-orange)';
-                    
-                    // تأثير خاص عند اكتمال اللغز
-                    puzzleMessage.style.transform = 'scale(1.1)';
-                    setTimeout(() => {
-                        puzzleMessage.style.transform = 'scale(1)';
-                    }, 300);
-                    
-                    // تأثير صوتي بسيط
-                    playCognitiveSound('complete');
-                }
-                
-                // تأثير صوتي
-                playCognitiveSound('click');
-            });
+            if (cardTop < windowHeight * 0.85) {
+                card.classList.add('visible');
+            }
         });
     }
     
@@ -266,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let isListening = false;
         let recognition;
         
+        // التحقق من دعم API
         if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
             if (voiceIndicator) voiceIndicator.style.display = 'none';
             if (voiceToggle) voiceToggle.style.display = 'none';
@@ -274,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         recognition = new SpeechRecognition();
-        recognition.lang = 'en-US';
+        recognition.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
         recognition.continuous = false;
         recognition.interimResults = false;
         
@@ -284,7 +330,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 voiceIndicator.classList.add('listening');
                 voiceIndicator.innerHTML = '<i class="fas fa-circle"></i>';
             }
-            showCognitiveNotification('Listening... Speak your command.', 'voice');
+            showCognitiveNotification(
+                currentLang === 'ar' ? 'جاري الاستماع... تحدث الآن' : 'Listening... Speak now',
+                'voice'
+            );
         };
         
         recognition.onresult = function(event) {
@@ -306,7 +355,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 voiceIndicator.classList.remove('listening');
                 voiceIndicator.innerHTML = '<i class="fas fa-microphone"></i>';
             }
-            showCognitiveNotification('Voice recognition failed. Try again.', 'error');
+            showCognitiveNotification(
+                currentLang === 'ar' ? 'فشل التعرف على الصوت. حاول مرة أخرى.' : 'Voice recognition failed. Try again.',
+                'error'
+            );
         };
         
         if (voiceIndicator) {
@@ -324,10 +376,15 @@ document.addEventListener('DOMContentLoaded', function() {
         function toggleVoiceRecognition() {
             if (!isListening) {
                 try {
+                    // تحديث لغة التعرف بناءً على اللغة الحالية
+                    recognition.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
                     recognition.start();
                 } catch (e) {
                     console.log("Speech recognition error:", e);
-                    showCognitiveNotification('Cannot access microphone. Check permissions.', 'error');
+                    showCognitiveNotification(
+                        currentLang === 'ar' ? 'لا يمكن الوصول إلى الميكروفون. تحقق من الصلاحيات.' : 'Cannot access microphone. Check permissions.',
+                        'error'
+                    );
                 }
             } else {
                 recognition.stop();
@@ -337,26 +394,77 @@ document.addEventListener('DOMContentLoaded', function() {
         function processVoiceCommand(transcript) {
             console.log('Voice command:', transcript);
             
-            if (transcript.includes('enter') || transcript.includes('unknown') || transcript.includes('door')) {
-                document.getElementById('enterUnknown').click();
-            } else if (transcript.includes('scroll') || transcript.includes('down')) {
-                window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
-            } else if (transcript.includes('up')) {
-                window.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
-            } else if (transcript.includes('home') || transcript.includes('top')) {
+            if (currentLang === 'ar') {
+                processArabicCommand(transcript);
+            } else {
+                processEnglishCommand(transcript);
+            }
+        }
+        
+        function processArabicCommand(transcript) {
+            if (transcript.includes('خدمات') || transcript.includes('عرض')) {
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (transcript.includes('طريقة') || transcript.includes('خطوات')) {
+                const processSection = document.getElementById('process');
+                if (processSection) {
+                    processSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (transcript.includes('تواصل') || transcript.includes('اتصال')) {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (transcript.includes('لغة') || transcript.includes('انجليزي')) {
+                switchLanguage('en');
+            } else if (transcript.includes('عربي') || transcript.includes('عربية')) {
+                switchLanguage('ar');
+            } else if (transcript.includes('أعلى') || transcript.includes('بداية')) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (transcript.includes('projects') || transcript.includes('work')) {
-                const projectsSection = document.getElementById('projects');
-                if (projectsSection) {
-                    projectsSection.scrollIntoView({ behavior: 'smooth' });
+            } else if (transcript.includes('أسفل') || transcript.includes('نهاية')) {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            } else {
+                // ردود معرفية عشوائية بالعربية
+                const responses = [
+                    "تم التعرف على الصوت. جارٍ معالجة المدخل المعرفي.",
+                    "كلماتك مسجلة، لكن المعنى ذاتي.",
+                    "النظام يسمعك. جارٍ التفسير.",
+                    "تم استقبال المدخل السمعي. جارٍ تحليل الأنماط.",
+                    "موجات الصوت معالجة. لم يتم تحديد أمر واضح."
+                ];
+                
+                showCognitiveNotification(responses[Math.floor(Math.random() * responses.length)], 'info');
+            }
+        }
+        
+        function processEnglishCommand(transcript) {
+            if (transcript.includes('services') || transcript.includes('offer')) {
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (transcript.includes('process') || transcript.includes('steps')) {
+                const processSection = document.getElementById('process');
+                if (processSection) {
+                    processSection.scrollIntoView({ behavior: 'smooth' });
                 }
             } else if (transcript.includes('contact') || transcript.includes('connect')) {
                 const contactSection = document.getElementById('contact');
                 if (contactSection) {
                     contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
+            } else if (transcript.includes('language') || transcript.includes('english')) {
+                switchLanguage('en');
+            } else if (transcript.includes('arabic') || transcript.includes('arab')) {
+                switchLanguage('ar');
+            } else if (transcript.includes('top') || transcript.includes('beginning')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (transcript.includes('bottom') || transcript.includes('end')) {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             } else {
-                // ردود معرفية عشوائية
+                // ردود معرفية عشوائية بالإنجليزية
                 const responses = [
                     "Voice recognized. Processing cognitive input.",
                     "Your words are noted, but meaning is subjective.",
@@ -381,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mouseTracker.style.top = `${e.clientY - 10}px`;
             
             // تأثير الجاذبية للعناصر
-            const interactiveElements = document.querySelectorAll('.cognitive-piece, .cognitive-chip, .cognitive-project');
+            const interactiveElements = document.querySelectorAll('.cognitive-service-card, .philosophy-card');
             interactiveElements.forEach(element => {
                 const rect = element.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
@@ -397,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const moveY = Math.sin(angle) * force * 3;
                     
                     element.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                } else {
+                } else if (!element.classList.contains('visible')) {
                     element.style.transform = 'translate(0, 0)';
                 }
             });
@@ -435,256 +543,56 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
-    // ========== تفاصيل المشروع المعرفي ==========
-    const projectDetails = {
-        project1: {
-            title: "Photographer's Paradox",
-            status: "Active Paradox",
-            type: "Photography Portfolio",
-            date: "January 2025",
-            client: "Professional Photographer",
-            description: "A photography portfolio designed to confuse conventional expectations, yet achieved a 300% increase in conversion rates. The design intentionally breaks traditional rules to create a memorable experience.",
-            features: [
-                "Interactive gallery with unconventional navigation",
-                "Dynamic filtering by emotional categories",
-                "Detailed view with cognitive associations",
-                "Fully responsive across all devices",
-                "High-speed loading with optimized assets",
-                "Intuitive yet unconventional user interface"
-            ],
-            technologies: ["HTML5", "CSS3", "JavaScript", "Cognitive Design", "Paradox Theory"],
-            link: "https://portfoliojo.github.io/test1/"
-        },
-        project2: {
-            title: "Personal Maze",
-            status: "Live Contradiction",
-            type: "Personal Portfolio",
-            date: "December 2024",
-            client: "Creative Professional",
-            description: "A personal portfolio designed as a cognitive maze that should lose visitors, yet increased engagement by 240%. The navigation challenges users to explore rather than follow.",
-            features: [
-                "Non-linear navigation system",
-                "Interactive career timeline",
-                "Client testimonials with emotional mapping",
-                "Mini-blog with thought fragments",
-                "Direct communication channels",
-                "Three-dimensional design elements"
-            ],
-            technologies: ["HTML5", "CSS3", "JavaScript", "GSAP", "Swiper.js", "Maze Design"],
-            link: "https://portfoliojo.github.io/test7/"
-        },
-        project3: {
-            title: "Developer's Silence",
-            status: "Silent Interface",
-            type: "Developer Portfolio",
-            date: "November 2024",
-            client: "Web Developer",
-            description: "A developer portfolio that removes conventional elements to speak through absence. By reducing visual noise, the design communicates technical skills more effectively.",
-            features: [
-                "Minimalist project showcase",
-                "Interactive technical skills display",
-                "Experience history with depth",
-                "Certifications and courses",
-                "Fast communication form",
-                "Search engine optimized structure"
-            ],
-            technologies: ["HTML5", "CSS3", "JavaScript", "Chart.js", "Font Awesome", "Silent Design"],
-            link: "https://portfoliojo.github.io/test4/"
-        }
-    };
-    
-    window.showProjectDetails = function(projectId) {
-        const project = projectDetails[projectId];
-        const modalBody = document.getElementById('modalBody');
+    // ========== تهيئة النماذج ==========
+    function initializeForms() {
+        const cognitiveForm = document.getElementById('cognitiveForm');
+        const newsletterForm = document.querySelector('.cognitive-newsletter');
         
-        if (!project || !modalBody) return;
-        
-        const detailsHTML = `
-            <div class="project-details">
-                <h3>${project.title}</h3>
+        if (cognitiveForm) {
+            cognitiveForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                <div class="project-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-circle"></i>
-                        <span>Status: ${project.status}</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-tag"></i>
-                        <span>Type: ${project.type}</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-calendar"></i>
-                        <span>Date: ${project.date}</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-user"></i>
-                        <span>Client: ${project.client}</span>
-                    </div>
-                </div>
+                // جمع بيانات النموذج
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    service: document.getElementById('service').value,
+                    message: document.getElementById('message').value,
+                    language: currentLang
+                };
                 
-                <div class="project-description">
-                    <p>${project.description}</p>
-                </div>
+                // هنا يمكنك إضافة كود لإرسال البيانات إلى الخادم
                 
-                <div class="project-features">
-                    <h4>Cognitive Features</h4>
-                    <ul>
-                        ${project.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
-                    </ul>
-                </div>
+                // عرض رسالة نجاح
+                showCognitiveNotification(
+                    currentLang === 'ar' 
+                        ? 'تم إرسال أفكارك بنجاح! سنتواصل معك خلال ٢٤ ساعة معرفية.' 
+                        : 'Thought transmission successful! We will connect within 24 cognitive hours.',
+                    'success'
+                );
                 
-                <div class="project-tech">
-                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                </div>
+                // إعادة تعيين النموذج
+                this.reset();
+            });
+        }
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
                 
-                <a href="${project.link}" target="_blank" class="cognitive-project-btn">
-                    <i class="fas fa-external-link-alt"></i>
-                    Experience Live Paradox
-                </a>
-            </div>
-        `;
-        
-        modalBody.innerHTML = detailsHTML;
-        document.getElementById('projectModal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        
-        playCognitiveSound('modal');
-    };
-    
-    window.closeProjectModal = function() {
-        document.getElementById('projectModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-        playCognitiveSound('close');
-    };
-    
-    // إغلاق النافذة عند النقر خارج المحتوى
-    document.getElementById('projectModal')?.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeProjectModal();
+                if (email) {
+                    showCognitiveNotification(
+                        currentLang === 'ar'
+                            ? 'شكراً لك! ستصلك الاضطرابات المعرفية قريباً.'
+                            : 'Thank you! Cognitive disturbances coming your way soon.',
+                        'success'
+                    );
+                    this.reset();
+                }
+            });
         }
-    });
-    
-    // ========== الدخول إلى المجهول ==========
-    const enterUnknownBtn = document.getElementById('enterUnknown');
-    if (enterUnknownBtn) {
-        enterUnknownBtn.addEventListener('click', function() {
-            openUnknownModal();
-        });
-    }
-    
-    function openUnknownModal() {
-        const unknownModal = document.getElementById('unknownModal');
-        if (unknownModal) {
-            unknownModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            playCognitiveSound('unknown');
-            
-            // تأثيرات بصرية إضافية
-            document.body.style.backgroundColor = '#080808';
-            document.documentElement.style.cursor = 'wait';
-            
-            // إعادة الحالة بعد الإغلاق
-            setTimeout(() => {
-                document.documentElement.style.cursor = '';
-            }, 100);
-        }
-    }
-    
-    window.closeUnknownModal = function() {
-        const unknownModal = document.getElementById('unknownModal');
-        if (unknownModal) {
-            unknownModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            document.body.style.backgroundColor = '';
-            playCognitiveSound('return');
-        }
-    };
-    
-    // إغلاق نافذة المجهول عند النقر خارج المحتوى
-    document.getElementById('unknownModal')?.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeUnknownModal();
-        }
-    });
-    
-    // ========== نافذة العرض الكامل ==========
-    window.openFullscreen = function(url, title) {
-        const fullscreenModal = document.getElementById('fullscreenModal');
-        const fullscreenFrame = document.getElementById('fullscreenFrame');
-        const fullscreenTitle = document.getElementById('fullscreenTitle');
-        
-        if (!fullscreenModal || !fullscreenFrame) return;
-        
-        fullscreenFrame.src = url;
-        fullscreenTitle.textContent = title || 'Cognitive Experience';
-        fullscreenModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        playCognitiveSound('expand');
-    };
-    
-    window.closeFullscreen = function() {
-        const fullscreenModal = document.getElementById('fullscreenModal');
-        const fullscreenFrame = document.getElementById('fullscreenFrame');
-        
-        if (fullscreenModal && fullscreenFrame) {
-            fullscreenModal.classList.remove('active');
-            fullscreenFrame.src = '';
-            document.body.style.overflow = 'auto';
-            playCognitiveSound('close');
-        }
-    };
-    
-    // إغلاق نافذة العرض الكامل عند النقر خارجها
-    document.getElementById('fullscreenModal')?.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeFullscreen();
-        }
-    });
-    
-    // إغلاق النوافذ بمفتاح ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const fullscreenModal = document.getElementById('fullscreenModal');
-            if (fullscreenModal && fullscreenModal.classList.contains('active')) {
-                closeFullscreen();
-            }
-            
-            const projectModal = document.getElementById('projectModal');
-            if (projectModal && projectModal.style.display === 'flex') {
-                closeProjectModal();
-            }
-            
-            const unknownModal = document.getElementById('unknownModal');
-            if (unknownModal && unknownModal.classList.contains('active')) {
-                closeUnknownModal();
-            }
-        }
-    });
-    
-    // ========== نموذج الاتصال المعرفي ==========
-    const cognitiveForm = document.getElementById('cognitiveForm');
-    
-    if (cognitiveForm) {
-        cognitiveForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // جمع بيانات النموذج
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value
-            };
-            
-            // هنا يمكنك إضافة كود لإرسال البيانات إلى الخادم
-            // مثال: استخدام Fetch API
-            
-            // عرض رسالة نجاح معرفية
-            showCognitiveNotification('Thought transmission successful. We will connect within 24 cognitive hours.', 'success');
-            
-            // إعادة تعيين النموذج
-            this.reset();
-        });
     }
     
     // ========== الإشعارات المعرفية ==========
@@ -750,7 +658,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             
-            if (type === 'click') {
+            if (type === 'click' || type === 'switch') {
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
                 
@@ -765,109 +673,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 oscillator.start();
                 oscillator.stop(audioContext.currentTime + 0.1);
-            } else if (type === 'complete') {
-                // نغمة إكمال
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        const oscillator = audioContext.createOscillator();
-                        const gainNode = audioContext.createGain();
-                        
-                        oscillator.connect(gainNode);
-                        gainNode.connect(audioContext.destination);
-                        
-                        oscillator.frequency.setValueAtTime(523.25 + i * 100, audioContext.currentTime);
-                        oscillator.frequency.exponentialRampToValueAtTime(261.63 + i * 50, audioContext.currentTime + 0.3);
-                        
-                        gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
-                        
-                        oscillator.start();
-                        oscillator.stop(audioContext.currentTime + 0.3);
-                    }, i * 100);
-                }
-            } else if (type === 'unknown') {
-                // صوت دخول المجهول
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        const oscillator = audioContext.createOscillator();
-                        const gainNode = audioContext.createGain();
-                        
-                        oscillator.connect(gainNode);
-                        gainNode.connect(audioContext.destination);
-                        
-                        oscillator.frequency.setValueAtTime(200 + i * 50, audioContext.currentTime);
-                        oscillator.frequency.exponentialRampToValueAtTime(50 + i * 20, audioContext.currentTime + 0.5);
-                        
-                        gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
-                        
-                        oscillator.start();
-                        oscillator.stop(audioContext.currentTime + 0.5);
-                    }, i * 150);
-                }
-            } else if (type === 'expand') {
-                // صوت التكبير
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.2);
-                
-                gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-                
-                oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.2);
             }
         } catch (e) {
             console.log("Audio not supported or error:", e);
         }
     }
     
-    // ========== تفعيل شرائح الفلترة ==========
-    const filterChips = document.querySelectorAll('.cognitive-chip');
-    filterChips.forEach(chip => {
-        chip.addEventListener('click', function() {
-            // تبديل الحالة النشطة
-            this.classList.toggle('active');
-            
-            // تأثير صوتي
-            playCognitiveSound('click');
-            
-            // تأثير بصري
-            if (this.classList.contains('active')) {
-                this.style.animation = 'cognitive-shake 0.5s ease';
-                setTimeout(() => {
-                    this.style.animation = '';
-                }, 500);
-            }
-        });
-    });
-    
-    // ========== تحميل الصور (إذا كانت موجودة) ==========
-    function loadImages() {
-        const images = document.querySelectorAll('img[data-src]');
-        
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.getAttribute('data-src');
-                    img.classList.add('loaded');
-                    observer.unobserve(img);
-                }
-            });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-    }
-    
-    // تهيئة تحميل الصور
+    // ========== تهيئة تأثيرات أولية ==========
     window.addEventListener('load', function() {
-        setTimeout(initializeProjects, 1000);
-        loadImages();
+        // تفعيل تأثيرات الظهور الأولية
+        setTimeout(animateOnScroll, 100);
     });
 });
