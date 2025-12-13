@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cognitive Design Experience v2.0</title>
+    <title>Cognitive Design Experience</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Mirza:wght@400;600&display=swap" rel="stylesheet">
@@ -14,14 +14,10 @@
             --dark-secondary: #1A1A1A;
             --accent-color: #FF5C5C;
             --accent-secondary: #FF8C00;
-            --accent-tertiary: #5C5CFF;
             --text-primary: #F0F0F0;
             --text-secondary: #AAAAAA;
             --font-serif: 'Mirza', serif;
             --font-sans: 'Cairo', sans-serif;
-            --transition-slow: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-medium: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-fast: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         * {
@@ -41,13 +37,12 @@
             line-height: 1.6;
             overflow-x: hidden;
             font-weight: 300;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="%23FF5C5C" stroke-width="1.5" opacity="0.7"/></svg>'), auto;
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 20px;
         }
         
         section {
@@ -55,16 +50,15 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 100px 0;
+            padding: 80px 0;
             position: relative;
             overflow: hidden;
         }
         
-        /* تصميم جديد للصفحة الأولى - Hero */
+        /* الصفحة الأولى - Hero */
         .hero-section {
             text-align: center;
             position: relative;
-            perspective: 1000px;
         }
         
         .cognitive-grid {
@@ -79,11 +73,9 @@
                 linear-gradient(rgba(255, 92, 92, 0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 92, 92, 0.1) 1px, transparent 1px);
             background-size: 50px 50px;
-            transform: rotateX(60deg) rotateZ(45deg);
-            transform-origin: center center;
         }
         
-        .floating-neurons {
+        .floating-elements {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -91,65 +83,26 @@
             pointer-events: none;
         }
         
-        .neuron {
+        .floating-element {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 92, 92, 0.1);
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 92, 92, 0.15), transparent 70%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             animation: float 8s infinite ease-in-out;
-        }
-        
-        .neuron::before, .neuron::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 92, 92, 0.2);
-            animation: pulse 4s infinite ease-in-out;
-        }
-        
-        .neuron::after {
-            width: 140%;
-            height: 140%;
-            animation-delay: -2s;
-        }
-        
-        .neuron-connection {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(255, 92, 92, 0.2), transparent);
-            transform-origin: left center;
-            z-index: -1;
         }
         
         .signature-line {
             font-family: var(--font-serif);
-            font-size: 3.2rem;
-            margin-bottom: 80px;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
             font-weight: 400;
             opacity: 0;
-            animation: fadeIn 3.5s forwards 0.7s;
-            max-width: 900px;
+            animation: fadeIn 3s forwards 0.5s;
+            max-width: 800px;
             margin-right: auto;
             margin-left: auto;
-            line-height: 1.3;
-            position: relative;
-        }
-        
-        .signature-line::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            animation: expandLine 2s forwards 2s;
+            line-height: 1.4;
         }
         
         .cta-button {
@@ -159,29 +112,27 @@
             background-color: transparent;
             color: var(--accent-color);
             border: 1px solid var(--accent-color);
-            padding: 18px 50px;
+            padding: 16px 45px;
             font-family: var(--font-sans);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 300;
             text-decoration: none;
             cursor: pointer;
-            transition: all var(--transition-medium);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
             opacity: 0;
-            animation: fadeIn 3s forwards 1.5s;
-            gap: 12px;
+            animation: fadeIn 3s forwards 1s;
+            gap: 10px;
         }
         
         .cta-button i {
-            transition: transform var(--transition-fast);
+            transition: transform 0.3s ease;
         }
         
         .cta-button:hover {
-            background-color: rgba(255, 92, 92, 0.08);
-            box-shadow: 
-                0 0 25px rgba(255, 92, 92, 0.3),
-                inset 0 0 15px rgba(255, 92, 92, 0.1);
+            background-color: rgba(255, 92, 92, 0.1);
+            box-shadow: 0 0 20px rgba(255, 92, 92, 0.3);
             animation: shake 0.5s ease;
         }
         
@@ -189,56 +140,49 @@
             transform: translateX(5px);
         }
         
-        /* قسم القواعد / "الرفض" - مطور */
+        /* قسم القواعد */
         .filter-section {
             text-align: center;
-            position: relative;
-        }
-        
-        .gatekeeper {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
         }
         
         .gatekeeper-title {
             font-family: var(--font-serif);
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 30px;
             font-weight: 600;
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: all 1s ease;
         }
         
         .gatekeeper-text {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: var(--text-secondary);
-            margin-bottom: 60px;
+            max-width: 600px;
+            margin: 0 auto 50px;
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
+            transition: all 1s ease;
         }
         
         .gatekeeper-filters {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 50px;
+            gap: 15px;
+            margin-top: 40px;
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
+            transition: all 1s ease 0.2s;
         }
         
         .filter-chip {
-            padding: 12px 25px;
+            padding: 10px 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 30px;
             font-size: 0.9rem;
             color: var(--text-secondary);
-            transition: all var(--transition-fast);
+            transition: all 0.3s ease;
             cursor: pointer;
             user-select: none;
         }
@@ -250,35 +194,30 @@
             box-shadow: 0 5px 15px rgba(255, 92, 92, 0.2);
         }
         
-        .filter-chip.active {
-            background-color: rgba(255, 92, 92, 0.1);
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-        
-        /* قسم العمل أو المشروع - مطور */
+        /* قسم المشاريع */
         .portfolio-section {
             text-align: center;
-            position: relative;
         }
         
         .portfolio-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
         
         .portfolio-item {
             position: relative;
-            height: 400px;
+            width: 350px;
+            height: 300px;
             background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.9));
             border-radius: 5px;
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
-            transition: opacity var(--transition-medium), transform var(--transition-medium);
+            transition: all 1s ease;
             cursor: pointer;
         }
         
@@ -292,24 +231,24 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 30px;
-            transition: all var(--transition-medium);
+            padding: 25px;
+            transition: all 0.5s ease;
         }
         
         .portfolio-title {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 10px;
             transform: translateY(20px);
             opacity: 0;
-            transition: all var(--transition-medium);
+            transition: all 0.5s ease 0.2s;
         }
         
         .portfolio-desc {
             color: var(--text-secondary);
             transform: translateY(20px);
             opacity: 0;
-            transition: all var(--transition-medium);
+            transition: all 0.5s ease 0.3s;
         }
         
         .portfolio-item:hover .portfolio-overlay {
@@ -322,80 +261,7 @@
             opacity: 1;
         }
         
-        /* قسم CTA النهائي - مطور */
-        .cta-section {
-            text-align: center;
-            position: relative;
-        }
-        
-        .paradox-message {
-            max-width: 800px;
-            margin: 0 auto 70px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
-        }
-        
-        .paradox-title {
-            font-family: var(--font-serif);
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-        
-        .paradox-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-        
-        .final-cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            color: var(--accent-secondary);
-            border: 1px solid var(--accent-secondary);
-            padding: 20px 60px;
-            font-family: var(--font-sans);
-            font-size: 1.4rem;
-            font-weight: 300;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow), all var(--transition-medium);
-            gap: 15px;
-        }
-        
-        .final-cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.2), transparent);
-            transition: left 0.7s ease;
-        }
-        
-        .final-cta-button:hover::before {
-            left: 100%;
-        }
-        
-        .final-cta-button:hover {
-            background-color: rgba(255, 140, 0, 0.08);
-            box-shadow: 
-                0 0 30px rgba(255, 140, 0, 0.4),
-                inset 0 0 20px rgba(255, 140, 0, 0.1);
-            transform: translateY(-5px);
-        }
-        
-        /* قسم جديد: التجربة التفاعلية */
+        /* قسم التجربة التفاعلية */
         .interactive-section {
             min-height: 80vh;
             padding: 80px 0;
@@ -411,95 +277,136 @@
         
         .puzzle-title {
             font-family: var(--font-serif);
-            font-size: 2.5rem;
-            margin-bottom: 50px;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
+            transition: all 1s ease;
         }
         
         .puzzle-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 15px;
+            margin-bottom: 30px;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
+            transition: all 1s ease 0.2s;
         }
         
         .puzzle-piece {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: var(--dark-secondary);
             border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: all 0.3s ease;
             user-select: none;
         }
         
         .puzzle-piece:hover {
-            border-color: var(--accent-tertiary);
+            border-color: var(--accent-secondary);
             transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 5px 15px rgba(92, 92, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
         }
         
-        .puzzle-piece.active {
-            background-color: rgba(92, 92, 255, 0.1);
-            border-color: var(--accent-tertiary);
-            color: var(--accent-tertiary);
+        /* قسم CTA النهائي */
+        .cta-section {
+            text-align: center;
         }
         
-        /* Footer مطور */
+        .paradox-message {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+        
+        .paradox-title {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        .paradox-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .final-cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: var(--accent-secondary);
+            border: 1px solid var(--accent-secondary);
+            padding: 18px 50px;
+            font-family: var(--font-sans);
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease 0.3s;
+            gap: 12px;
+        }
+        
+        .final-cta-button:hover {
+            background-color: rgba(255, 140, 0, 0.1);
+            box-shadow: 0 0 25px rgba(255, 140, 0, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 60px 0;
+            padding: 50px 0;
             position: relative;
         }
         
         .signature {
             font-family: var(--font-serif);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--text-secondary);
             margin-bottom: 30px;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
+            transition: all 1s ease;
         }
         
         .cognitive-signature {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--accent-color);
             font-weight: 600;
             letter-spacing: 2px;
             position: relative;
             display: inline-block;
-        }
-        
-        .cognitive-signature::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            animation: expandLine 3s forwards 3s;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease 0.2s;
         }
         
         .subtle-nav {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 25px;
+            margin-top: 35px;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity var(--transition-slow), transform var(--transition-slow);
+            transition: all 1s ease 0.3s;
         }
         
         .nav-link {
@@ -507,30 +414,15 @@
             text-decoration: none;
             font-size: 0.9rem;
             letter-spacing: 1px;
-            transition: color var(--transition-fast);
+            transition: color 0.3s ease;
             position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent-color);
-            transition: width var(--transition-fast);
         }
         
         .nav-link:hover {
             color: var(--accent-color);
         }
         
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        /* Animations جديدة */
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -544,135 +436,15 @@
             100% { transform: translateX(0); }
         }
         
-        @keyframes expandLine {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-        }
-        
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-        
-        /* Responsive مطور */
-        @media (max-width: 1100px) {
-            .portfolio-showcase {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 25px;
-            }
-            
-            .signature-line {
-                font-size: 2.2rem;
-            }
-            
-            .gatekeeper-title {
-                font-size: 2.8rem;
-            }
-            
-            .gatekeeper-text {
-                font-size: 1.3rem;
-            }
-            
-            .paradox-title {
-                font-size: 2.2rem;
-            }
-            
-            .portfolio-item {
-                height: 350px;
-            }
-            
-            .filter-chip {
-                padding: 10px 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            section {
-                padding: 80px 0;
-            }
-            
-            .signature-line {
-                font-size: 1.8rem;
-            }
-            
-            .gatekeeper-title {
-                font-size: 2.2rem;
-            }
-            
-            .portfolio-showcase {
-                grid-template-columns: 1fr;
-            }
-            
-            .final-cta-button {
-                padding: 18px 40px;
-                font-size: 1.2rem;
-            }
-        }
-        
-        /* تأثيرات خاصة */
-        .glitch-text {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-        }
-        
-        .glitch-text::before {
-            left: 2px;
-            text-shadow: -1px 0 var(--accent-color);
-            animation: glitch-1 2s infinite linear alternate-reverse;
-            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-        }
-        
-        .glitch-text::after {
-            left: -2px;
-            text-shadow: 1px 0 var(--accent-tertiary);
-            animation: glitch-2 3s infinite linear alternate-reverse;
-            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-        }
-        
-        @keyframes glitch-1 {
-            0% { clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%); }
-            100% { clip-path: polygon(0 15%, 100% 15%, 100% 50%, 0 50%); }
-        }
-        
-        @keyframes glitch-2 {
-            0% { clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); }
-            100% { clip-path: polygon(0 80%, 100% 80%, 100% 100%, 0 100%); }
-        }
-        
-        /* Scroll Indicator متطور */
+        /* Scroll Indicator */
         .scroll-indicator {
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             right: 50%;
             transform: translateX(50%);
             color: var(--text-secondary);
@@ -686,9 +458,15 @@
             animation: pulse 2s infinite;
         }
         
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+        
         .scroll-line {
             width: 1px;
-            height: 50px;
+            height: 40px;
             background: linear-gradient(to bottom, var(--accent-color), transparent);
             margin-top: 10px;
         }
@@ -699,73 +477,50 @@
             transform: translateY(0) !important;
         }
         
-        /* تأثيرات الماوس */
-        .mouse-tracker {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 92, 92, 0.2), transparent 70%);
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: screen;
-            transition: transform 0.1s;
-        }
-        
-        .mouse-trail {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255, 92, 92, 0.3);
-            pointer-events: none;
-            z-index: 9998;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        
-        /* Voice Interaction */
-        .voice-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            z-index: 1000;
-        }
-        
-        .voice-indicator:hover {
-            background: rgba(255, 92, 92, 0.1);
-            color: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .voice-indicator.listening {
-            animation: pulse 1s infinite;
-            color: var(--accent-color);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .signature-line {
+                font-size: 2rem;
+                padding: 0 15px;
+            }
+            
+            .gatekeeper-title {
+                font-size: 2.5rem;
+            }
+            
+            .gatekeeper-text {
+                font-size: 1.2rem;
+                padding: 0 15px;
+            }
+            
+            .portfolio-item {
+                width: 100%;
+                max-width: 400px;
+                height: 250px;
+            }
+            
+            .paradox-title {
+                font-size: 1.8rem;
+                padding: 0 15px;
+            }
+            
+            .paradox-subtitle {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            .puzzle-title {
+                font-size: 1.8rem;
+                padding: 0 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- مؤشر الماوس -->
-    <div class="mouse-tracker" id="mouseTracker"></div>
-    
-    <!-- Voice Interaction -->
-    <div class="voice-indicator" id="voiceIndicator" title="تفعيل التفاعل الصوتي">
-        <i class="fas fa-microphone"></i>
-    </div>
-    
-    <!-- الصفحة الأولى (Hero) المطورة -->
+    <!-- الصفحة الأولى (Hero) -->
     <section class="hero-section">
         <div class="cognitive-grid"></div>
-        <div class="floating-neurons" id="neuronsContainer"></div>
+        <div class="floating-elements" id="floatingElements"></div>
         
         <div class="container">
             <h1 class="signature-line">Not everything here is meant to be understood. Some things are meant to be felt.</h1>
@@ -781,11 +536,11 @@
         </div>
     </section>
     
-    <!-- قسم القواعد / "الرفض" المطور -->
+    <!-- قسم القواعد / "الرفض" -->
     <section id="gatekeeper" class="filter-section">
         <div class="container">
             <div class="gatekeeper">
-                <h2 class="gatekeeper-title glitch-text" data-text="I don't design pages for everyone.">I don't design pages for everyone.</h2>
+                <h2 class="gatekeeper-title">I don't design pages for everyone.</h2>
                 <p class="gatekeeper-text">If clarity is what you want, this isn't it. The following are excluded from this experience:</p>
                 
                 <div class="gatekeeper-filters">
@@ -793,13 +548,12 @@
                     <div class="filter-chip">The easily distracted</div>
                     <div class="filter-chip">Conventional thinkers</div>
                     <div class="filter-chip">The impatient</div>
-                    <div class="filter-chip">Color enthusiasts</div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- قسم العمل أو المشروع المطور -->
+    <!-- قسم المشاريع -->
     <section class="portfolio-section">
         <div class="container">
             <div class="portfolio-showcase">
@@ -827,26 +581,25 @@
         </div>
     </section>
     
-    <!-- قسم جديد: التجربة التفاعلية -->
+    <!-- قسم التجربة التفاعلية -->
     <section class="interactive-section">
         <div class="container">
             <div class="cognitive-puzzle">
-                <h3 class="puzzle-title">Rearrange the <span class="glitch-text" data-text="cognitive">cognitive</span> pieces</h3>
+                <h3 class="puzzle-title">Rearrange the cognitive pieces</h3>
                 
                 <div class="puzzle-container">
                     <div class="puzzle-piece" data-piece="1">?</div>
                     <div class="puzzle-piece" data-piece="2">!</div>
                     <div class="puzzle-piece" data-piece="3">&</div>
                     <div class="puzzle-piece" data-piece="4">%</div>
-                    <div class="puzzle-piece" data-piece="5">#</div>
                 </div>
                 
-                <p id="puzzleMessage" style="color: var(--text-secondary); min-height: 30px; transition: all 0.5s;"></p>
+                <p id="puzzleMessage" style="color: var(--text-secondary); min-height: 30px; transition: all 0.5s; font-size: 1.1rem;"></p>
             </div>
         </div>
     </section>
     
-    <!-- قسم CTA النهائي المطور -->
+    <!-- قسم CTA النهائي -->
     <section class="cta-section">
         <div class="container">
             <div class="paradox-message">
@@ -861,177 +614,94 @@
         </div>
     </section>
     
-    <!-- Footer المطور -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p class="signature">Designed in silence, felt in action.</p>
             <div class="cognitive-signature">COGNITIVE DESIGN</div>
             
             <div class="subtle-nav">
-                <a href="#gatekeeper" class="nav-link">الرفض</a>
-                <a href="#" class="nav-link">المشاريع</a>
-                <a href="#" class="nav-link">التجربة</a>
-                <a href="#" class="nav-link">المجهول</a>
+                <a href="#gatekeeper" class="nav-link">Gatekeeper</a>
+                <a href="#" class="nav-link">Projects</a>
+                <a href="#" class="nav-link">Puzzle</a>
+                <a href="#" class="nav-link">Unknown</a>
             </div>
         </div>
     </footer>
     
     <script>
-        // إنشاء شبكة الخلايا العصبية العائمة
-        const neuronsContainer = document.getElementById('neuronsContainer');
-        const neuronCount = 8;
+        // تبسيط كود JavaScript لجعله يعمل بدون مشاكل
         
-        for (let i = 0; i < neuronCount; i++) {
-            const neuron = document.createElement('div');
-            neuron.classList.add('neuron');
+        // 1. إنشاء عناصر عائمة بسيطة
+        const floatingContainer = document.getElementById('floatingElements');
+        for (let i = 0; i < 15; i++) {
+            const element = document.createElement('div');
+            element.classList.add('floating-element');
             
             // وضع عشوائي
-            const left = Math.random() * 90 + 5;
-            const top = Math.random() * 90 + 5;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const size = Math.random() * 15 + 5;
+            const delay = Math.random() * 5;
+            const duration = Math.random() * 10 + 8;
             
-            neuron.style.left = `${left}%`;
-            neuron.style.top = `${top}%`;
+            element.style.left = `${left}%`;
+            element.style.top = `${top}%`;
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            element.style.background = `rgba(255, 92, 92, ${Math.random() * 0.2 + 0.05})`;
+            element.style.animationDelay = `${delay}s`;
+            element.style.animationDuration = `${duration}s`;
             
-            // تأخيرات مختلفة للحركة
-            neuron.style.animationDelay = `${Math.random() * 5}s`;
-            
-            neuronsContainer.appendChild(neuron);
-            
-            // إنشاء اتصالات بين الخلايا
-            if (i > 0) {
-                const prevNeuron = neuronsContainer.children[i-1];
-                const connection = document.createElement('div');
-                connection.classList.add('neuron-connection');
-                
-                // حساب المسافة والزاوية بين الخليتين
-                const x1 = parseFloat(prevNeuron.style.left);
-                const y1 = parseFloat(prevNeuron.style.top);
-                const x2 = left;
-                const y2 = top;
-                
-                const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
-                
-                connection.style.width = `${distance}%`;
-                connection.style.left = `${x1}%`;
-                connection.style.top = `${y1}%`;
-                connection.style.transform = `rotate(${angle}deg)`;
-                
-                neuronsContainer.appendChild(connection);
-            }
+            floatingContainer.appendChild(element);
         }
         
-        // تتبع الماوس مع تأثيرات
-        const mouseTracker = document.getElementById('mouseTracker');
-        const trails = [];
-        const trailCount = 15;
-        
-        // إنشاء آثار الماوس
-        for (let i = 0; i < trailCount; i++) {
-            const trail = document.createElement('div');
-            trail.classList.add('mouse-trail');
-            trail.style.opacity = '0';
-            document.body.appendChild(trail);
-            trails.push(trail);
+        // 2. تبسيط وظيفة اكتشاف التمرير
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                rect.bottom >= 0
+            );
         }
         
-        let trailIndex = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            // تحديث موقع المؤشر
-            mouseTracker.style.left = `${e.clientX - 10}px`;
-            mouseTracker.style.top = `${e.clientY - 10}px`;
+        // 3. وظيفة للتحقق من العناصر عند التمرير
+        function checkVisibility() {
+            const elements = document.querySelectorAll(
+                '.gatekeeper-title, .gatekeeper-text, .gatekeeper-filters, ' +
+                '.portfolio-item, .paradox-message, .final-cta-button, ' +
+                '.puzzle-title, .puzzle-container, .signature, .cognitive-signature, .subtle-nav'
+            );
             
-            // تحديث آثار الماوس
-            const trail = trails[trailIndex];
-            trail.style.left = `${e.clientX - 3}px`;
-            trail.style.top = `${e.clientY - 3}px`;
-            trail.style.opacity = '0.7';
-            trail.style.transform = 'scale(1)';
-            
-            setTimeout(() => {
-                trail.style.opacity = '0';
-                trail.style.transform = 'scale(0)';
-            }, 300);
-            
-            trailIndex = (trailIndex + 1) % trailCount;
-            
-            // تأثير الجاذبية للمؤشر على العناصر
-            const elements = document.querySelectorAll('.portfolio-item, .puzzle-piece, .filter-chip');
             elements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                const distance = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
-                
-                if (distance < 150) {
-                    const force = (150 - distance) / 150;
-                    const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-                    
-                    const moveX = Math.cos(angle) * force * 5;
-                    const moveY = Math.sin(angle) * force * 5;
-                    
-                    element.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                } else {
-                    element.style.transform = 'translate(0, 0)';
+                if (isElementInViewport(element)) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // 4. تفعيل عند التمرير وعند التحميل
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+        
+        // 5. تفعيل checkVisibility مباشرة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            // تفعيل العناصر المرئية مباشرة
+            setTimeout(checkVisibility, 100);
+            
+            // تفعيل checkVisibility كل 300ms أثناء التمرير
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (!scrollTimeout) {
+                    scrollTimeout = setTimeout(function() {
+                        checkVisibility();
+                        scrollTimeout = null;
+                    }, 100);
                 }
             });
         });
         
-        // Reveal on scroll محسن
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // تأثيرات إضافية لعناصر محددة
-                    if (entry.target.classList.contains('gatekeeper-title')) {
-                        setTimeout(() => {
-                            const filters = document.querySelectorAll('.gatekeeper-filters, .filter-chip');
-                            filters.forEach((filter, index) => {
-                                setTimeout(() => {
-                                    filter.classList.add('visible');
-                                }, index * 150);
-                            });
-                        }, 300);
-                    }
-                    
-                    if (entry.target.classList.contains('portfolio-item')) {
-                        entry.target.style.transitionDelay = `${Math.random() * 0.5}s`;
-                    }
-                }
-            });
-        }, observerOptions);
-        
-        // مراقبة جميع العناصر التي يجب أن تظهر عند التمرير
-        const elementsToReveal = document.querySelectorAll(
-            '.gatekeeper-title, .gatekeeper-text, .gatekeeper-filters, ' +
-            '.portfolio-item, .paradox-message, .final-cta-button, ' +
-            '.puzzle-title, .puzzle-container, .signature, .subtle-nav'
-        );
-        
-        elementsToReveal.forEach(element => {
-            observer.observe(element);
-        });
-        
-        // تفعيل filter chips
-        const filterChips = document.querySelectorAll('.filter-chip');
-        filterChips.forEach(chip => {
-            chip.addEventListener('click', function() {
-                this.classList.toggle('active');
-                
-                // تأثير صوتي بسيط
-                playSound('click');
-            });
-        });
-        
-        // الألغاز التفاعلية
+        // 6. تفاعل الألغاز
         const puzzlePieces = document.querySelectorAll('.puzzle-piece');
         const puzzleMessage = document.getElementById('puzzleMessage');
         let selectedPieces = [];
@@ -1043,16 +713,21 @@
                 if (selectedPieces.includes(pieceId)) {
                     // إزالة إذا كانت مختارة بالفعل
                     selectedPieces = selectedPieces.filter(id => id !== pieceId);
-                    this.classList.remove('active');
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.backgroundColor = 'var(--dark-secondary)';
+                    this.style.color = 'var(--text-primary)';
                 } else {
                     // إضافة إذا لم تكن مختارة
                     selectedPieces.push(pieceId);
-                    this.classList.add('active');
+                    this.style.borderColor = 'var(--accent-secondary)';
+                    this.style.backgroundColor = 'rgba(255, 140, 0, 0.1)';
+                    this.style.color = 'var(--accent-secondary)';
                 }
                 
                 // عرض رسالة بناء على التحديد
                 if (selectedPieces.length === 0) {
                     puzzleMessage.textContent = '';
+                    puzzleMessage.style.color = 'var(--text-secondary)';
                 } else if (selectedPieces.length === 1) {
                     puzzleMessage.textContent = 'Piece selected. Continue.';
                 } else if (selectedPieces.length === 2) {
@@ -1060,267 +735,122 @@
                 } else if (selectedPieces.length === 3) {
                     puzzleMessage.textContent = 'Pattern emerging.';
                 } else if (selectedPieces.length === 4) {
-                    puzzleMessage.textContent = 'Almost there.';
-                } else if (selectedPieces.length === 5) {
                     puzzleMessage.textContent = 'Cognitive pattern complete. The maze accepts you.';
-                    puzzleMessage.style.color = var('--accent-tertiary');
+                    puzzleMessage.style.color = 'var(--accent-secondary)';
                     
                     // تأثير خاص عند اكتمال اللغز
+                    puzzleMessage.style.transform = 'scale(1.05)';
                     setTimeout(() => {
-                        puzzleMessage.style.transform = 'scale(1.1)';
-                        setTimeout(() => {
-                            puzzleMessage.style.transform = 'scale(1)';
-                        }, 300);
-                    }, 100);
+                        puzzleMessage.style.transform = 'scale(1)';
+                    }, 300);
                 }
-                
-                // تأثير صوتي
-                playSound('puzzle');
             });
         });
         
-        // تأثير زر Enter the Unknown محسن
+        // 7. تأثير زر Enter the Unknown
         document.getElementById('enterUnknown').addEventListener('click', function(e) {
             e.preventDefault();
             
-            // تأثيرات متعددة
-            document.body.style.animation = 'glitch 0.3s';
+            // تأثيرات بصرية بسيطة
             document.body.style.backgroundColor = '#080808';
-            
-            // تغيير مؤشر الماوس
-            document.body.style.cursor = 'wait';
             
             // رسالة غامضة تظهر ثم تختفي
             const message = document.createElement('div');
             message.innerHTML = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8, 8, 8, 0.95); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-                    <h2 style="font-family: var(--font-serif); font-size: 3rem; color: var(--accent-color); margin-bottom: 30px; opacity: 0; transform: translateY(30px);">You've entered the unknown.</h2>
-                    <p style="font-size: 1.5rem; color: var(--text-secondary); max-width: 600px; opacity: 0; transform: translateY(30px);">This space is intentionally left blank. What you imagine here is more important than what could be shown.</p>
-                    <button id="closeUnknown" style="margin-top: 50px; padding: 15px 40px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-family: var(--font-sans); font-size: 1.2rem; cursor: pointer; opacity: 0; transform: translateY(30px); transition: all 0.3s;">Return</button>
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8, 8, 8, 0.95); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
+                    <h2 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--accent-color); margin-bottom: 30px;">You've entered the unknown.</h2>
+                    <p style="font-size: 1.3rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 40px;">This space is intentionally left blank. What you imagine here is more important than what could be shown.</p>
+                    <button id="closeUnknown" style="padding: 12px 35px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-family: var(--font-sans); font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">Return</button>
                 </div>
             `;
             
             document.body.appendChild(message);
             
-            // ظهور متدرج للعناصر
-            setTimeout(() => {
-                const h2 = message.querySelector('h2');
-                const p = message.querySelector('p');
-                const button = message.querySelector('button');
-                
-                h2.style.transition = 'opacity 1.5s, transform 1.5s';
-                p.style.transition = 'opacity 1.5s, transform 1.5s';
-                button.style.transition = 'opacity 1.5s, transform 1.5s, all 0.3s';
-                
-                h2.style.opacity = '1';
-                h2.style.transform = 'translateY(0)';
-                
-                setTimeout(() => {
-                    p.style.opacity = '1';
-                    p.style.transform = 'translateY(0)';
-                    
-                    setTimeout(() => {
-                        button.style.opacity = '1';
-                        button.style.transform = 'translateY(0)';
-                    }, 500);
-                }, 500);
-            }, 100);
-            
-            // تأثيرات صوتية
-            playSound('enter');
-            
             // زر العودة
-            setTimeout(() => {
-                document.getElementById('closeUnknown').addEventListener('click', function() {
-                    document.body.style.animation = '';
+            document.getElementById('closeUnknown').addEventListener('click', function() {
+                document.body.style.backgroundColor = '';
+                document.body.removeChild(message);
+            });
+            
+            // إغلاق بالنقر خارج الصندوق
+            message.addEventListener('click', function(e) {
+                if (e.target === this || e.target === message.querySelector('div')) {
                     document.body.style.backgroundColor = '';
-                    document.body.style.cursor = '';
                     document.body.removeChild(message);
-                    playSound('exit');
-                });
-            }, 1500);
+                }
+            });
         });
         
-        // التفاعل الصوتي
-        const voiceIndicator = document.getElementById('voiceIndicator');
-        let isListening = false;
-        let recognition;
-        
-        // دعم API التعرف على الصوت
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            recognition = new SpeechRecognition();
-            recognition.lang = 'en-US';
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            
-            recognition.onstart = function() {
-                isListening = true;
-                voiceIndicator.classList.add('listening');
-                voiceIndicator.innerHTML = '<i class="fas fa-circle"></i>';
-            };
-            
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript.toLowerCase();
+        // 8. تفعيل filter chips
+        const filterChips = document.querySelectorAll('.filter-chip');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                // تبديل الحالة النشطة
+                this.classList.toggle('active');
                 
-                // معالجة الأوامر الصوتية
-                if (transcript.includes('enter') || transcript.includes('unknown')) {
-                    document.getElementById('enterUnknown').click();
-                } else if (transcript.includes('scroll') || transcript.includes('down')) {
-                    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
-                } else if (transcript.includes('up')) {
-                    window.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
-                } else if (transcript.includes('home')) {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                // تغيير الأنماط
+                if (this.classList.contains('active')) {
+                    this.style.borderColor = 'var(--accent-color)';
+                    this.style.color = 'var(--accent-color)';
+                    this.style.backgroundColor = 'rgba(255, 92, 92, 0.1)';
                 } else {
-                    // رسالة عشوائية للتفاعل
-                    const responses = [
-                        "Voice recognized. But meaning is unclear.",
-                        "Your words are noted, but not understood.",
-                        "The system hears you, but doesn't comprehend.",
-                        "Auditory input received. Processing incomplete."
-                    ];
-                    
-                    showVoiceResponse(responses[Math.floor(Math.random() * responses.length)]);
-                }
-            };
-            
-            recognition.onend = function() {
-                isListening = false;
-                voiceIndicator.classList.remove('listening');
-                voiceIndicator.innerHTML = '<i class="fas fa-microphone"></i>';
-            };
-            
-            recognition.onerror = function() {
-                isListening = false;
-                voiceIndicator.classList.remove('listening');
-                voiceIndicator.innerHTML = '<i class="fas fa-microphone"></i>';
-            };
-            
-            voiceIndicator.addEventListener('click', function() {
-                if (!isListening) {
-                    try {
-                        recognition.start();
-                    } catch (e) {
-                        console.log("Speech recognition error:", e);
-                    }
-                } else {
-                    recognition.stop();
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.color = 'var(--text-secondary)';
+                    this.style.backgroundColor = 'transparent';
                 }
             });
-        } else {
-            voiceIndicator.style.display = 'none';
-        }
+        });
         
-        // وظائف مساعدة
-        function playSound(type) {
-            // محاكاة تأثيرات صوتية باستخدام Web Audio API
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        // 9. تأثير hover للمشاريع
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const title = this.querySelector('.portfolio-title');
+                const desc = this.querySelector('.portfolio-desc');
                 
-                if (type === 'click') {
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
-                    
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                    
-                    oscillator.start();
-                    oscillator.stop(audioContext.currentTime + 0.1);
-                } else if (type === 'puzzle') {
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-                    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.05); // E5
-                    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.1); // G5
-                    
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
-                    
-                    oscillator.start();
-                    oscillator.stop(audioContext.currentTime + 0.15);
-                } else if (type === 'enter') {
-                    // صوت دخول أكثر تعقيدًا
-                    for (let i = 0; i < 3; i++) {
-                        setTimeout(() => {
-                            const oscillator = audioContext.createOscillator();
-                            const gainNode = audioContext.createGain();
-                            
-                            oscillator.connect(gainNode);
-                            gainNode.connect(audioContext.destination);
-                            
-                            oscillator.frequency.setValueAtTime(200 + i * 100, audioContext.currentTime);
-                            oscillator.frequency.exponentialRampToValueAtTime(50 + i * 50, audioContext.currentTime + 0.5);
-                            
-                            gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-                            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
-                            
-                            oscillator.start();
-                            oscillator.stop(audioContext.currentTime + 0.5);
-                        }, i * 100);
-                    }
+                if (title && desc) {
+                    title.style.transform = 'translateY(0)';
+                    title.style.opacity = '1';
+                    desc.style.transform = 'translateY(0)';
+                    desc.style.opacity = '1';
                 }
-            } catch (e) {
-                console.log("Audio not supported or error:", e);
-            }
-        }
-        
-        function showVoiceResponse(message) {
-            const response = document.createElement('div');
-            response.innerHTML = `<div style="position: fixed; bottom: 100px; left: 30px; background: rgba(15, 15, 15, 0.9); border: 1px solid var(--accent-color); padding: 15px 25px; border-radius: 5px; max-width: 300px; z-index: 1000; color: var(--text-primary); font-size: 0.9rem; opacity: 0; transform: translateY(20px);">${message}</div>`;
+            });
             
-            document.body.appendChild(response);
-            
-            setTimeout(() => {
-                response.style.transition = 'opacity 0.5s, transform 0.5s';
-                response.style.opacity = '1';
-                response.style.transform = 'translateY(0)';
+            item.addEventListener('mouseleave', function() {
+                const title = this.querySelector('.portfolio-title');
+                const desc = this.querySelector('.portfolio-desc');
                 
-                setTimeout(() => {
-                    response.style.opacity = '0';
-                    response.style.transform = 'translateY(20px)';
-                    
-                    setTimeout(() => {
-                        document.body.removeChild(response);
-                    }, 500);
-                }, 3000);
-            }, 100);
-        }
+                if (title && desc) {
+                    title.style.transform = 'translateY(20px)';
+                    title.style.opacity = '0';
+                    desc.style.transform = 'translateY(20px)';
+                    desc.style.opacity = '0';
+                }
+            });
+        });
         
-        // تأثير عشوائي للشبكة المعرفية
+        // 10. إخفاء مؤشر التمرير عند الوصول للأسفل
+        window.addEventListener('scroll', function() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.transition = 'opacity 0.5s';
+            } else {
+                scrollIndicator.style.opacity = '0.5';
+            }
+        });
+        
+        // 11. تأثير عشوائي للعناصر العائمة كل 5 ثواني
         setInterval(() => {
-            const neurons = document.querySelectorAll('.neuron');
-            neurons.forEach(neuron => {
+            const floaters = document.querySelectorAll('.floating-element');
+            floaters.forEach(floater => {
                 if (Math.random() > 0.7) {
-                    neuron.style.animation = 'none';
+                    floater.style.animation = 'none';
                     setTimeout(() => {
-                        neuron.style.animation = `float 8s infinite ease-in-out`;
-                    }, 100);
+                        floater.style.animation = `float ${Math.random() * 10 + 8}s infinite ease-in-out`;
+                    }, 50);
                 }
             });
-        }, 3000);
-        
-        // تأثيرات عشوائية إضافية
-        setInterval(() => {
-            if (Math.random() > 0.8) {
-                const randomElement = document.querySelector('.glitch-text');
-                if (randomElement) {
-                    randomElement.style.animation = 'none';
-                    setTimeout(() => {
-                        randomElement.style.animation = 'glitch 0.3s';
-                    }, 10);
-                }
-            }
         }, 5000);
     </script>
 </body>
