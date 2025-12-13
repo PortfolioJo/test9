@@ -3,855 +3,592 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cognitive Design Experience</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Mirza:wght@400;600&display=swap" rel="stylesheet">
+    <title>Cognitive Folio — بورتفوليو معرفي غامض</title>
+    <meta name="description" content="تجربة بورتفوليو معرفية غامضة - ليس مجرد موقع، بل هوية رقمية تتحدى التوقعات">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --dark-bg: #0F0F0F;
-            --dark-secondary: #1A1A1A;
-            --accent-color: #FF5C5C;
-            --accent-secondary: #FF8C00;
-            --text-primary: #F0F0F0;
-            --text-secondary: #AAAAAA;
-            --font-serif: 'Mirza', serif;
-            --font-sans: 'Cairo', sans-serif;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-weight: 300;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* الصفحة الأولى - Hero */
-        .hero-section {
-            text-align: center;
-            position: relative;
-        }
-        
-        .cognitive-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            opacity: 0.1;
-            background-image: 
-                linear-gradient(rgba(255, 92, 92, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 92, 92, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-        
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        .floating-element {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 92, 92, 0.1);
-            border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
-        }
-        
-        .signature-line {
-            font-family: var(--font-serif);
-            font-size: 2.8rem;
-            margin-bottom: 60px;
-            font-weight: 400;
-            opacity: 0;
-            animation: fadeIn 3s forwards 0.5s;
-            max-width: 800px;
-            margin-right: auto;
-            margin-left: auto;
-            line-height: 1.4;
-        }
-        
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            padding: 16px 45px;
-            font-family: var(--font-sans);
-            font-size: 1.2rem;
-            font-weight: 300;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeIn 3s forwards 1s;
-            gap: 10px;
-        }
-        
-        .cta-button i {
-            transition: transform 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            background-color: rgba(255, 92, 92, 0.1);
-            box-shadow: 0 0 20px rgba(255, 92, 92, 0.3);
-            animation: shake 0.5s ease;
-        }
-        
-        .cta-button:hover i {
-            transform: translateX(5px);
-        }
-        
-        /* قسم القواعد */
-        .filter-section {
-            text-align: center;
-        }
-        
-        .gatekeeper-title {
-            font-family: var(--font-serif);
-            font-size: 3.5rem;
-            margin-bottom: 30px;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease;
-        }
-        
-        .gatekeeper-text {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 50px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease;
-        }
-        
-        .gatekeeper-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 40px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease 0.2s;
-        }
-        
-        .filter-chip {
-            padding: 10px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        .filter-chip:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 92, 92, 0.2);
-        }
-        
-        /* قسم المشاريع */
-        .portfolio-section {
-            text-align: center;
-        }
-        
-        .portfolio-showcase {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .portfolio-item {
-            position: relative;
-            width: 350px;
-            height: 300px;
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.9));
-            border-radius: 5px;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-            cursor: pointer;
-        }
-        
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 25px;
-            transition: all 0.5s ease;
-        }
-        
-        .portfolio-title {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.5s ease 0.2s;
-        }
-        
-        .portfolio-desc {
-            color: var(--text-secondary);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.5s ease 0.3s;
-        }
-        
-        .portfolio-item:hover .portfolio-overlay {
-            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.9));
-        }
-        
-        .portfolio-item:hover .portfolio-title,
-        .portfolio-item:hover .portfolio-desc {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        /* قسم التجربة التفاعلية */
-        .interactive-section {
-            min-height: 80vh;
-            padding: 80px 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .cognitive-puzzle {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .puzzle-title {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease;
-        }
-        
-        .puzzle-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease 0.2s;
-        }
-        
-        .puzzle-piece {
-            width: 80px;
-            height: 80px;
-            background: var(--dark-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-        
-        .puzzle-piece:hover {
-            border-color: var(--accent-secondary);
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
-        }
-        
-        /* قسم CTA النهائي */
-        .cta-section {
-            text-align: center;
-        }
-        
-        .paradox-message {
-            max-width: 800px;
-            margin: 0 auto 60px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease;
-        }
-        
-        .paradox-title {
-            font-family: var(--font-serif);
-            font-size: 2.4rem;
-            margin-bottom: 20px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-        
-        .paradox-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-        
-        .final-cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            color: var(--accent-secondary);
-            border: 1px solid var(--accent-secondary);
-            padding: 18px 50px;
-            font-family: var(--font-sans);
-            font-size: 1.3rem;
-            font-weight: 300;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease 0.3s;
-            gap: 12px;
-        }
-        
-        .final-cta-button:hover {
-            background-color: rgba(255, 140, 0, 0.1);
-            box-shadow: 0 0 25px rgba(255, 140, 0, 0.4);
-            transform: translateY(-3px);
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 50px 0;
-            position: relative;
-        }
-        
-        .signature {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease;
-        }
-        
-        .cognitive-signature {
-            font-size: 2rem;
-            color: var(--accent-color);
-            font-weight: 600;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease 0.2s;
-        }
-        
-        .subtle-nav {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 35px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease 0.3s;
-        }
-        
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-link:hover {
-            color: var(--accent-color);
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            right: 50%;
-            transform: translateX(50%);
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            z-index: 100;
-            opacity: 0.5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-            100% { opacity: 0.3; }
-        }
-        
-        .scroll-line {
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, var(--accent-color), transparent);
-            margin-top: 10px;
-        }
-        
-        /* JS-triggered classes */
-        .visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .signature-line {
-                font-size: 2rem;
-                padding: 0 15px;
-            }
-            
-            .gatekeeper-title {
-                font-size: 2.5rem;
-            }
-            
-            .gatekeeper-text {
-                font-size: 1.2rem;
-                padding: 0 15px;
-            }
-            
-            .portfolio-item {
-                width: 100%;
-                max-width: 400px;
-                height: 250px;
-            }
-            
-            .paradox-title {
-                font-size: 1.8rem;
-                padding: 0 15px;
-            }
-            
-            .paradox-subtitle {
-                font-size: 1.1rem;
-                padding: 0 15px;
-            }
-            
-            .puzzle-title {
-                font-size: 1.8rem;
-                padding: 0 15px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Almarai:wght@300;400;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- الصفحة الأولى (Hero) -->
-    <section class="hero-section">
-        <div class="cognitive-grid"></div>
-        <div class="floating-elements" id="floatingElements"></div>
-        
-        <div class="container">
-            <h1 class="signature-line">Not everything here is meant to be understood. Some things are meant to be felt.</h1>
-            <a href="#gatekeeper" class="cta-button">
-                <span>Proceed with Caution</span>
-                <i class="fas fa-arrow-down"></i>
-            </a>
+    <!-- شاشة التحميل المعرفية -->
+    <div class="cognitive-loader">
+        <div class="cognitive-grid-loader"></div>
+        <div class="loader-text cognitive-text">
+            <span class="cognitive-glow">Cognitive</span>
+            <span class="cognitive-fade">Folio</span>
         </div>
-        
-        <div class="scroll-indicator">
-            <span>EXPLORE</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
-    
-    <!-- قسم القواعد / "الرفض" -->
-    <section id="gatekeeper" class="filter-section">
-        <div class="container">
-            <div class="gatekeeper">
-                <h2 class="gatekeeper-title">I don't design pages for everyone.</h2>
-                <p class="gatekeeper-text">If clarity is what you want, this isn't it. The following are excluded from this experience:</p>
-                
-                <div class="gatekeeper-filters">
-                    <div class="filter-chip">Those seeking simplicity</div>
-                    <div class="filter-chip">The easily distracted</div>
-                    <div class="filter-chip">Conventional thinkers</div>
-                    <div class="filter-chip">The impatient</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- قسم المشاريع -->
-    <section class="portfolio-section">
-        <div class="container">
-            <div class="portfolio-showcase">
-                <div class="portfolio-item">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Project Paradox</h3>
-                        <p class="portfolio-desc">A page that shouldn't convert — but did</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Cognitive Maze</h3>
-                        <p class="portfolio-desc">Navigation designed to lose, yet found</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Silent Interface</h3>
-                        <p class="portfolio-desc">A UI that speaks through absence</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- قسم التجربة التفاعلية -->
-    <section class="interactive-section">
-        <div class="container">
-            <div class="cognitive-puzzle">
-                <h3 class="puzzle-title">Rearrange the cognitive pieces</h3>
-                
-                <div class="puzzle-container">
-                    <div class="puzzle-piece" data-piece="1">?</div>
-                    <div class="puzzle-piece" data-piece="2">!</div>
-                    <div class="puzzle-piece" data-piece="3">&</div>
-                    <div class="puzzle-piece" data-piece="4">%</div>
-                </div>
-                
-                <p id="puzzleMessage" style="color: var(--text-secondary); min-height: 30px; transition: all 0.5s; font-size: 1.1rem;"></p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- قسم CTA النهائي -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="paradox-message">
-                <h3 class="paradox-title">Some doors are meant to be opened carefully. Others should remain closed forever.</h3>
-                <p class="paradox-subtitle">What lies beyond is not for everyone. It's for those who understand that true clarity often begins with confusion.</p>
+        <div class="loader-subtext">Loading cognitive experience...</div>
+    </div>
+
+    <!-- شريط التنقل المعرفي -->
+    <nav class="cognitive-nav">
+        <div class="nav-container">
+            <div class="nav-logo cognitive-logo">
+                <span class="logo-part-1">Cognitive</span>
+                <span class="logo-part-2">Folio</span>
             </div>
             
-            <a href="#" class="final-cta-button" id="enterUnknown">
-                <span>Enter the Unknown</span>
-                <i class="fas fa-door-open"></i>
-            </a>
+            <div class="nav-links">
+                <a href="#entry" class="nav-link cognitive-link" data-text="الدخول">الدخول</a>
+                <a href="#rejection" class="nav-link cognitive-link" data-text="الرفض">الرفض</a>
+                <a href="#projects" class="nav-link cognitive-link" data-text="المشاريع">المشاريع</a>
+                <a href="#interactive" class="nav-link cognitive-link" data-text="التفاعل">التفاعل</a>
+                <a href="#unknown" class="nav-link cognitive-link" data-text="المجهول">المجهول</a>
+                <a href="#contact" class="nav-link cognitive-link" data-text="التواصل">التواصل</a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="tel:+962785094075" class="nav-phone cognitive-phone">
+                    <i class="fas fa-phone-alt"></i>
+                    <span class="phone-text">+962 785094075</span>
+                </a>
+            </div>
+            
+            <button class="menu-toggle cognitive-toggle">
+                <span class="cognitive-bar bar-1"></span>
+                <span class="cognitive-bar bar-2"></span>
+                <span class="cognitive-bar bar-3"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- قسم الدخول المعرفي -->
+    <section class="cognitive-entry" id="entry">
+        <div class="cognitive-grid-bg"></div>
+        <div class="cognitive-floaters" id="floatersContainer"></div>
+        
+        <div class="container">
+            <div class="entry-content">
+                <div class="entry-text">
+                    <div class="cognitive-badge">تجربة معرفية 2025</div>
+                    <h1 class="cognitive-title">
+                        <span class="cognitive-line-1">Not everything here</span>
+                        <span class="cognitive-line-2">is meant to be understood.</span>
+                        <span class="cognitive-line-3">Some things are meant to be felt.</span>
+                    </h1>
+                    
+                    <div class="cognitive-features">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <span>تجربة معرفية عميقة</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-eye-slash"></i>
+                            <span>غموض مقصود</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-code-branch"></i>
+                            <span>مسارات غير تقليدية</span>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-buttons">
+                        <a href="#rejection" class="cognitive-btn primary-btn">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Proceed with Caution</span>
+                        </a>
+                        <button class="cognitive-btn secondary-btn" id="voiceToggle">
+                            <i class="fas fa-microphone"></i>
+                            <span>Voice Navigation</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="entry-visual">
+                    <div class="cognitive-showcase">
+                        <div class="showcase-card cognitive-card">
+                            <div class="card-header cognitive-header">
+                                <div class="card-avatar cognitive-avatar"></div>
+                                <div class="card-info">
+                                    <h4>Unfinished Thoughts</h4>
+                                    <p>Design that questions itself</p>
+                                </div>
+                            </div>
+                            <div class="card-content cognitive-content">
+                                <div class="cognitive-pattern">
+                                    <div class="pattern-line line-1"></div>
+                                    <div class="pattern-line line-2"></div>
+                                    <div class="pattern-line line-3"></div>
+                                    <div class="pattern-dot dot-1"></div>
+                                    <div class="pattern-dot dot-2"></div>
+                                    <div class="pattern-dot dot-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator cognitive-scroll">
+            <span>SCROLL</span>
+            <div class="scroll-line cognitive-line"></div>
         </div>
     </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
+
+    <!-- قسم الرفض المعرفي -->
+    <section class="cognitive-section rejection-section" id="rejection">
+        <div class="cognitive-rejection-grid"></div>
         <div class="container">
-            <p class="signature">Designed in silence, felt in action.</p>
-            <div class="cognitive-signature">COGNITIVE DESIGN</div>
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-reject">Rejection</div>
+                <h2 class="section-title cognitive-title-reject">
+                    I don't design pages for <span class="cognitive-highlight">everyone.</span>
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    If clarity is what you want, this isn't it. The following are excluded:
+                </p>
+            </div>
             
-            <div class="subtle-nav">
-                <a href="#gatekeeper" class="nav-link">Gatekeeper</a>
-                <a href="#" class="nav-link">Projects</a>
-                <a href="#" class="nav-link">Puzzle</a>
-                <a href="#" class="nav-link">Unknown</a>
+            <div class="rejection-filters">
+                <div class="filter-chip cognitive-chip" data-filter="clarity">Those seeking simplicity</div>
+                <div class="filter-chip cognitive-chip" data-filter="conventional">Conventional thinkers</div>
+                <div class="filter-chip cognitive-chip" data-filter="impatient">The impatient</div>
+                <div class="filter-chip cognitive-chip" data-filter="predictable">Predictable minds</div>
+            </div>
+            
+            <div class="cognitive-note">
+                <div class="note-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="note-content">
+                    <h3>Why rejection matters</h3>
+                    <p>By rejecting the obvious, we create space for the exceptional. Not every mind is ready for cognitive design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المشاريع المعرفية -->
+    <section class="cognitive-section projects-section" id="projects">
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-project">Paradox Projects</div>
+                <h2 class="section-title cognitive-title-project">
+                    Things that <span class="cognitive-contradiction">shouldn't work</span> — but do
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    Projects designed to fail, that found their way to success
+                </p>
+            </div>
+            
+            <div class="cognitive-projects-grid">
+                <!-- مشروع 1 -->
+                <div class="project-card cognitive-project">
+                    <div class="project-header cognitive-project-header">
+                        <div class="project-badge cognitive-project-badge active">Active Paradox</div>
+                        <div class="project-type cognitive-project-type">Photographer's Paradox</div>
+                    </div>
+                    <div class="project-preview cognitive-preview">
+                        <div class="preview-frame cognitive-frame">
+                            <iframe src="https://portfoliojo.github.io/test1/" 
+                                    loading="lazy" 
+                                    title="Photographer's Paradox"
+                                    sandbox="allow-scripts allow-same-origin">
+                            </iframe>
+                            <div class="preview-overlay cognitive-overlay">
+                                <button class="preview-fullscreen cognitive-fullscreen" onclick="openFullscreen('https://portfoliojo.github.io/test1/', 'Photographer\'s Paradox')">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info cognitive-project-info">
+                        <h3>A page that shouldn't convert — but did</h3>
+                        <p>Photography portfolio designed to confuse, that achieved 3x industry conversion rate.</p>
+                        <div class="project-tags cognitive-tags">
+                            <span class="tag cognitive-tag">Cognitive Design</span>
+                            <span class="tag cognitive-tag">Photography</span>
+                            <span class="tag cognitive-tag">Paradox</span>
+                        </div>
+                        <div class="project-actions cognitive-actions">
+                            <a href="https://portfoliojo.github.io/test1/" target="_blank" class="project-btn cognitive-project-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Experience Paradox
+                            </a>
+                            <button class="project-btn cognitive-project-btn outline" onclick="showProjectDetails('project1')">
+                                <i class="fas fa-brain"></i>
+                                Cognitive Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- مشروع 2 -->
+                <div class="project-card cognitive-project">
+                    <div class="project-header cognitive-project-header">
+                        <div class="project-badge cognitive-project-badge active">Live Contradiction</div>
+                        <div class="project-type cognitive-project-type">Personal Paradox</div>
+                    </div>
+                    <div class="project-preview cognitive-preview">
+                        <div class="preview-frame cognitive-frame">
+                            <iframe src="https://portfoliojo.github.io/test7/" 
+                                    loading="lazy" 
+                                    title="Personal Paradox"
+                                    sandbox="allow-scripts allow-same-origin">
+                            </iframe>
+                            <div class="preview-overlay cognitive-overlay">
+                                <button class="preview-fullscreen cognitive-fullscreen" onclick="openFullscreen('https://portfoliojo.github.io/test7/', 'Personal Paradox')">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info cognitive-project-info">
+                        <h3>The maze that shouldn't be navigable — but was</h3>
+                        <p>Personal portfolio designed to lose visitors, that increased engagement by 240%.</p>
+                        <div class="project-tags cognitive-tags">
+                            <span class="tag cognitive-tag">Maze Design</span>
+                            <span class="tag cognitive-tag">Personal Brand</span>
+                            <span class="tag cognitive-tag">Contradiction</span>
+                        </div>
+                        <div class="project-actions cognitive-actions">
+                            <a href="https://portfoliojo.github.io/test7/" target="_blank" class="project-btn cognitive-project-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Enter Maze
+                            </a>
+                            <button class="project-btn cognitive-project-btn outline" onclick="showProjectDetails('project2')">
+                                <i class="fas fa-brain"></i>
+                                Cognitive Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- مشروع 3 -->
+                <div class="project-card cognitive-project">
+                    <div class="project-header cognitive-project-header">
+                        <div class="project-badge cognitive-project-badge active">Silent Interface</div>
+                        <div class="project-type cognitive-project-type">Developer's Silence</div>
+                    </div>
+                    <div class="project-preview cognitive-preview">
+                        <div class="preview-frame cognitive-frame">
+                            <iframe src="https://portfoliojo.github.io/test4/" 
+                                    loading="lazy" 
+                                    title="Developer's Silence"
+                                    sandbox="allow-scripts allow-same-origin">
+                            </iframe>
+                            <div class="preview-overlay cognitive-overlay">
+                                <button class="preview-fullscreen cognitive-fullscreen" onclick="openFullscreen('https://portfoliojo.github.io/test4/', 'Developer\'s Silence')">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info cognitive-project-info">
+                        <h3>An interface that speaks through absence</h3>
+                        <p>Developer portfolio that removes conventional elements, yet communicates more effectively.</p>
+                        <div class="project-tags cognitive-tags">
+                            <span class="tag cognitive-tag">Silent UI</span>
+                            <span class="tag cognitive-tag">Developer</span>
+                            <span class="tag cognitive-tag">Absence Design</span>
+                        </div>
+                        <div class="project-actions cognitive-actions">
+                            <a href="https://portfoliojo.github.io/test4/" target="_blank" class="project-btn cognitive-project-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Experience Silence
+                            </a>
+                            <button class="project-btn cognitive-project-btn outline" onclick="showProjectDetails('project3')">
+                                <i class="fas fa-brain"></i>
+                                Cognitive Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-note cognitive-note-project">
+                <div class="note-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="note-content">
+                    <h3>Cognitive Design Principle</h3>
+                    <p>Sometimes, removing clarity adds meaning. What is not said can be louder than what is.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التفاعل المعرفي -->
+    <section class="cognitive-section interactive-section" id="interactive">
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-interactive">Cognitive Puzzle</div>
+                <h2 class="section-title cognitive-title-interactive">
+                    Rearrange the <span class="cognitive-glitch">cognitive</span> pieces
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    Some puzzles aren't meant to be solved, but understood
+                </p>
+            </div>
+            
+            <div class="cognitive-puzzle-container">
+                <div class="puzzle-grid" id="puzzleGrid">
+                    <div class="puzzle-piece cognitive-piece" data-piece="1">?</div>
+                    <div class="puzzle-piece cognitive-piece" data-piece="2">!</div>
+                    <div class="puzzle-piece cognitive-piece" data-piece="3">&</div>
+                    <div class="puzzle-piece cognitive-piece" data-piece="4">%</div>
+                    <div class="puzzle-piece cognitive-piece" data-piece="5">#</div>
+                </div>
+                
+                <div class="puzzle-message" id="puzzleMessage"></div>
+                
+                <div class="puzzle-hint">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Select pieces in an order that feels right, not logical.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الدخول إلى المجهول -->
+    <section class="cognitive-section unknown-section" id="unknown">
+        <div class="cognitive-unknown-grid"></div>
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-unknown">The Unknown</div>
+                <h2 class="section-title cognitive-title-unknown">
+                    Some doors are meant to be opened <span class="cognitive-warning">carefully.</span>
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    Others should remain closed forever. The choice is yours.
+                </p>
+            </div>
+            
+            <div class="unknown-content">
+                <div class="unknown-text">
+                    <p>What lies beyond is not for everyone. It's for those who understand that true clarity often begins with confusion, and that meaning can be found in ambiguity.</p>
+                    <p>This is not a traditional portfolio service. This is a cognitive experience that challenges how we perceive digital identity.</p>
+                </div>
+                
+                <button class="cognitive-btn unknown-btn" id="enterUnknown">
+                    <i class="fas fa-door-open"></i>
+                    <span>Enter the Unknown</span>
+                </button>
+                
+                <div class="unknown-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Warning: This experience may alter your perception of digital design permanently.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التواصل المعرفي -->
+    <section class="cognitive-section contact-section" id="contact">
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-contact">Cognitive Contact</div>
+                <h2 class="section-title cognitive-title-contact">
+                    If you've made it this far, <span class="cognitive-connection">let's connect.</span>
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    Traditional contact methods for non-traditional minds
+                </p>
+            </div>
+            
+            <div class="contact-grid cognitive-contact-grid">
+                <div class="contact-info cognitive-contact-info">
+                    <h3>Silent Communication</h3>
+                    <div class="contact-details cognitive-contact-details">
+                        <div class="contact-item cognitive-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Encrypted Thoughts</h4>
+                                <p>aseeljalal45@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item cognitive-contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <h4>Direct Neural Link</h4>
+                                <p>+962 785094075</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item cognitive-contact-item">
+                            <i class="fab fa-instagram"></i>
+                            <div>
+                                <h4>Visual Stream</h4>
+                                <p>@web.profiles.jo</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-note cognitive-contact-note">
+                        <i class="fas fa-clock"></i>
+                        <p>Response time: 24-48 cognitive hours</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form cognitive-contact-form">
+                    <form id="cognitiveForm">
+                        <div class="form-row cognitive-form-row">
+                            <div class="form-group cognitive-form-group">
+                                <label for="name">Cognitive Signature</label>
+                                <input type="text" id="name" placeholder="Your identity" required>
+                            </div>
+                            <div class="form-group cognitive-form-group">
+                                <label for="email">Thought Transmission</label>
+                                <input type="email" id="email" placeholder="Your consciousness" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group cognitive-form-group">
+                            <label for="service">Desired Experience</label>
+                            <select id="service" required>
+                                <option value="">Select cognitive path</option>
+                                <option value="paradox">Paradox Project</option>
+                                <option value="maze">Cognitive Maze</option>
+                                <option value="silence">Silent Interface</option>
+                                <option value="custom">Custom Experience</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group cognitive-form-group">
+                            <label for="message">Your Cognitive State</label>
+                            <textarea id="message" rows="5" placeholder="Describe your current mental state regarding this experience..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn cognitive-submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Transmit Thoughts
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر المعرفي -->
+    <footer class="cognitive-footer">
+        <div class="container">
+            <div class="footer-grid cognitive-footer-grid">
+                <div class="footer-col cognitive-footer-col">
+                    <div class="footer-logo cognitive-footer-logo">
+                        <span class="logo-part-1">Cognitive</span>
+                        <span class="logo-part-2">Folio</span>
+                    </div>
+                    <p class="cognitive-footer-text">
+                        Designed in silence, felt in action. Not everything needs explanation.
+                    </p>
+                    <div class="social-links cognitive-social-links">
+                        <a href="https://www.instagram.com/web.profiles.jo" target="_blank" class="social-link cognitive-social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/962785094075" target="_blank" class="social-link cognitive-social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:aseeljalal45@gmail.com" class="social-link cognitive-social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col cognitive-footer-col">
+                    <h4>Cognitive Paths</h4>
+                    <ul class="cognitive-footer-links">
+                        <li><a href="#entry" class="cognitive-footer-link">Entry Point</a></li>
+                        <li><a href="#rejection" class="cognitive-footer-link">Rejection Filter</a></li>
+                        <li><a href="#projects" class="cognitive-footer-link">Paradox Projects</a></li>
+                        <li><a href="#interactive" class="cognitive-footer-link">Cognitive Puzzle</a></li>
+                        <li><a href="#unknown" class="cognitive-footer-link">The Unknown</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col cognitive-footer-col">
+                    <h4>Experience Types</h4>
+                    <ul class="cognitive-footer-links">
+                        <li><a href="#projects" class="cognitive-footer-link">Paradox Design</a></li>
+                        <li><a href="#projects" class="cognitive-footer-link">Maze Navigation</a></li>
+                        <li><a href="#projects" class="cognitive-footer-link">Silent Interfaces</a></li>
+                        <li><a href="#contact" class="cognitive-footer-link">Custom Experiences</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col cognitive-footer-col">
+                    <h4>Mental Updates</h4>
+                    <p>Subscribe to cognitive disturbances</p>
+                    <form class="newsletter-form cognitive-newsletter">
+                        <input type="email" placeholder="Your consciousness" required>
+                        <button type="submit"><i class="fas fa-brain"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom cognitive-footer-bottom">
+                <p class="cognitive-signature">
+                    <i class="fas fa-quote-left"></i>
+                    Some things are meant to be felt, not understood.
+                    <i class="fas fa-quote-right"></i>
+                </p>
+                <div class="footer-links cognitive-footer-links-bottom">
+                    <a href="#" class="cognitive-footer-link">Cognitive Privacy</a>
+                    <a href="#" class="cognitive-footer-link">Mental Terms</a>
+                </div>
             </div>
         </div>
     </footer>
-    
-    <script>
-        // تبسيط كود JavaScript لجعله يعمل بدون مشاكل
-        
-        // 1. إنشاء عناصر عائمة بسيطة
-        const floatingContainer = document.getElementById('floatingElements');
-        for (let i = 0; i < 15; i++) {
-            const element = document.createElement('div');
-            element.classList.add('floating-element');
-            
-            // وضع عشوائي
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const size = Math.random() * 15 + 5;
-            const delay = Math.random() * 5;
-            const duration = Math.random() * 10 + 8;
-            
-            element.style.left = `${left}%`;
-            element.style.top = `${top}%`;
-            element.style.width = `${size}px`;
-            element.style.height = `${size}px`;
-            element.style.background = `rgba(255, 92, 92, ${Math.random() * 0.2 + 0.05})`;
-            element.style.animationDelay = `${delay}s`;
-            element.style.animationDuration = `${duration}s`;
-            
-            floatingContainer.appendChild(element);
-        }
-        
-        // 2. تبسيط وظيفة اكتشاف التمرير
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
-                rect.bottom >= 0
-            );
-        }
-        
-        // 3. وظيفة للتحقق من العناصر عند التمرير
-        function checkVisibility() {
-            const elements = document.querySelectorAll(
-                '.gatekeeper-title, .gatekeeper-text, .gatekeeper-filters, ' +
-                '.portfolio-item, .paradox-message, .final-cta-button, ' +
-                '.puzzle-title, .puzzle-container, .signature, .cognitive-signature, .subtle-nav'
-            );
-            
-            elements.forEach(element => {
-                if (isElementInViewport(element)) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        // 4. تفعيل عند التمرير وعند التحميل
-        window.addEventListener('scroll', checkVisibility);
-        window.addEventListener('load', checkVisibility);
-        
-        // 5. تفعيل checkVisibility مباشرة عند التحميل
-        document.addEventListener('DOMContentLoaded', function() {
-            // تفعيل العناصر المرئية مباشرة
-            setTimeout(checkVisibility, 100);
-            
-            // تفعيل checkVisibility كل 300ms أثناء التمرير
-            let scrollTimeout;
-            window.addEventListener('scroll', function() {
-                if (!scrollTimeout) {
-                    scrollTimeout = setTimeout(function() {
-                        checkVisibility();
-                        scrollTimeout = null;
-                    }, 100);
-                }
-            });
-        });
-        
-        // 6. تفاعل الألغاز
-        const puzzlePieces = document.querySelectorAll('.puzzle-piece');
-        const puzzleMessage = document.getElementById('puzzleMessage');
-        let selectedPieces = [];
-        
-        puzzlePieces.forEach(piece => {
-            piece.addEventListener('click', function() {
-                const pieceId = this.getAttribute('data-piece');
-                
-                if (selectedPieces.includes(pieceId)) {
-                    // إزالة إذا كانت مختارة بالفعل
-                    selectedPieces = selectedPieces.filter(id => id !== pieceId);
-                    this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                    this.style.backgroundColor = 'var(--dark-secondary)';
-                    this.style.color = 'var(--text-primary)';
-                } else {
-                    // إضافة إذا لم تكن مختارة
-                    selectedPieces.push(pieceId);
-                    this.style.borderColor = 'var(--accent-secondary)';
-                    this.style.backgroundColor = 'rgba(255, 140, 0, 0.1)';
-                    this.style.color = 'var(--accent-secondary)';
-                }
-                
-                // عرض رسالة بناء على التحديد
-                if (selectedPieces.length === 0) {
-                    puzzleMessage.textContent = '';
-                    puzzleMessage.style.color = 'var(--text-secondary)';
-                } else if (selectedPieces.length === 1) {
-                    puzzleMessage.textContent = 'Piece selected. Continue.';
-                } else if (selectedPieces.length === 2) {
-                    puzzleMessage.textContent = 'Two fragments connected.';
-                } else if (selectedPieces.length === 3) {
-                    puzzleMessage.textContent = 'Pattern emerging.';
-                } else if (selectedPieces.length === 4) {
-                    puzzleMessage.textContent = 'Cognitive pattern complete. The maze accepts you.';
-                    puzzleMessage.style.color = 'var(--accent-secondary)';
-                    
-                    // تأثير خاص عند اكتمال اللغز
-                    puzzleMessage.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        puzzleMessage.style.transform = 'scale(1)';
-                    }, 300);
-                }
-            });
-        });
-        
-        // 7. تأثير زر Enter the Unknown
-        document.getElementById('enterUnknown').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // تأثيرات بصرية بسيطة
-            document.body.style.backgroundColor = '#080808';
-            
-            // رسالة غامضة تظهر ثم تختفي
-            const message = document.createElement('div');
-            message.innerHTML = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8, 8, 8, 0.95); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-                    <h2 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--accent-color); margin-bottom: 30px;">You've entered the unknown.</h2>
-                    <p style="font-size: 1.3rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 40px;">This space is intentionally left blank. What you imagine here is more important than what could be shown.</p>
-                    <button id="closeUnknown" style="padding: 12px 35px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-family: var(--font-sans); font-size: 1.1rem; cursor: pointer; transition: all 0.3s;">Return</button>
+
+    <!-- زر العودة المعرفي -->
+    <button class="back-to-top cognitive-back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- نافذة المشروع المعرفي -->
+    <div class="project-modal cognitive-modal" id="projectModal">
+        <div class="modal-content cognitive-modal-content">
+            <button class="modal-close cognitive-modal-close" onclick="closeProjectModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body cognitive-modal-body" id="modalBody">
+                <!-- Cognitive details will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة المجهول -->
+    <div class="unknown-modal" id="unknownModal">
+        <div class="unknown-modal-content">
+            <div class="unknown-modal-header">
+                <h3>You've entered the unknown</h3>
+                <button class="unknown-modal-close" onclick="closeUnknownModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="unknown-modal-body">
+                <p>This space is intentionally left blank.</p>
+                <p>What you imagine here is more important than what could be shown.</p>
+                <p>The true test of cognitive design is not what is presented, but what is perceived.</p>
+                <div class="unknown-modal-actions">
+                    <button class="cognitive-btn" onclick="closeUnknownModal()">
+                        Return to Known
+                    </button>
                 </div>
-            `;
-            
-            document.body.appendChild(message);
-            
-            // زر العودة
-            document.getElementById('closeUnknown').addEventListener('click', function() {
-                document.body.style.backgroundColor = '';
-                document.body.removeChild(message);
-            });
-            
-            // إغلاق بالنقر خارج الصندوق
-            message.addEventListener('click', function(e) {
-                if (e.target === this || e.target === message.querySelector('div')) {
-                    document.body.style.backgroundColor = '';
-                    document.body.removeChild(message);
-                }
-            });
-        });
-        
-        // 8. تفعيل filter chips
-        const filterChips = document.querySelectorAll('.filter-chip');
-        filterChips.forEach(chip => {
-            chip.addEventListener('click', function() {
-                // تبديل الحالة النشطة
-                this.classList.toggle('active');
-                
-                // تغيير الأنماط
-                if (this.classList.contains('active')) {
-                    this.style.borderColor = 'var(--accent-color)';
-                    this.style.color = 'var(--accent-color)';
-                    this.style.backgroundColor = 'rgba(255, 92, 92, 0.1)';
-                } else {
-                    this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                    this.style.color = 'var(--text-secondary)';
-                    this.style.backgroundColor = 'transparent';
-                }
-            });
-        });
-        
-        // 9. تأثير hover للمشاريع
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-        portfolioItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                const title = this.querySelector('.portfolio-title');
-                const desc = this.querySelector('.portfolio-desc');
-                
-                if (title && desc) {
-                    title.style.transform = 'translateY(0)';
-                    title.style.opacity = '1';
-                    desc.style.transform = 'translateY(0)';
-                    desc.style.opacity = '1';
-                }
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                const title = this.querySelector('.portfolio-title');
-                const desc = this.querySelector('.portfolio-desc');
-                
-                if (title && desc) {
-                    title.style.transform = 'translateY(20px)';
-                    title.style.opacity = '0';
-                    desc.style.transform = 'translateY(20px)';
-                    desc.style.opacity = '0';
-                }
-            });
-        });
-        
-        // 10. إخفاء مؤشر التمرير عند الوصول للأسفل
-        window.addEventListener('scroll', function() {
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-                scrollIndicator.style.opacity = '0';
-                scrollIndicator.style.transition = 'opacity 0.5s';
-            } else {
-                scrollIndicator.style.opacity = '0.5';
-            }
-        });
-        
-        // 11. تأثير عشوائي للعناصر العائمة كل 5 ثواني
-        setInterval(() => {
-            const floaters = document.querySelectorAll('.floating-element');
-            floaters.forEach(floater => {
-                if (Math.random() > 0.7) {
-                    floater.style.animation = 'none';
-                    setTimeout(() => {
-                        floater.style.animation = `float ${Math.random() * 10 + 8}s infinite ease-in-out`;
-                    }, 50);
-                }
-            });
-        }, 5000);
-    </script>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة العرض الكامل المعرفي -->
+    <div class="fullscreen-modal cognitive-fullscreen-modal" id="fullscreenModal">
+        <div class="fullscreen-header cognitive-fullscreen-header">
+            <button class="fullscreen-close cognitive-fullscreen-close" onclick="closeFullscreen()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 id="fullscreenTitle">Cognitive Experience</h3>
+        </div>
+        <iframe class="fullscreen-frame cognitive-fullscreen-frame" id="fullscreenFrame" allowfullscreen></iframe>
+    </div>
+
+    <!-- مؤشر الصوت المعرفي -->
+    <div class="voice-indicator cognitive-voice-indicator" id="voiceIndicator" title="تفعيل التفاعل الصوتي المعرفي">
+        <i class="fas fa-microphone"></i>
+    </div>
+
+    <!-- مؤشر الماوس المعرفي -->
+    <div class="mouse-tracker cognitive-mouse-tracker" id="mouseTracker"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
