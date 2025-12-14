@@ -3,599 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cognitive Design — تصميم معرفي | تجربة تصميم فريدة</title>
-    <meta name="description" content="تجربة تصميم معرفية غامضة تقدم حلول تصميم استثنائية - ليست مجرد خدمات، بل هويات رقمية تتحدى التوقعات">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Almarai:wght@300;400;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>روح القطعة | The Piece's Essence</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400;500;600&family=El+Messiri:wght@400;500;600&family=Dancing+Script:wght@400;500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- تبديل اللغة -->
-    <div class="language-switcher">
-        <button class="lang-btn active" data-lang="ar">العربية</button>
-        <button class="lang-btn" data-lang="en">English</button>
+    <!-- زر تبديل اللغة -->
+    <div class="language-switch">
+        <button id="langToggle" class="lang-btn">
+            <span class="lang-ar">EN</span>
+            <span class="lang-en" style="display:none;">AR</span>
+        </button>
     </div>
 
-    <!-- شاشة التحميل المعرفية -->
-    <div class="cognitive-loader">
-        <div class="cognitive-grid-loader"></div>
-        <div class="loader-text cognitive-text">
-            <span class="cognitive-glow" data-lang="ar" data-text="تصميم">تصميم</span>
-            <span class="cognitive-fade" data-lang="ar" data-text="معرفي">معرفي</span>
-            <span class="cognitive-glow" data-lang="en" data-text="Cognitive">Cognitive</span>
-            <span class="cognitive-fade" data-lang="en" data-text="Design">Design</span>
-        </div>
-        <div class="loader-subtext">
-            <span data-lang="ar">تحميل التجربة المعرفية...</span>
-            <span data-lang="en">Loading cognitive experience...</span>
-        </div>
-    </div>
-
-    <!-- شريط التنقل المعرفي -->
-    <nav class="cognitive-nav">
-        <div class="nav-container">
-            <div class="nav-logo cognitive-logo">
-                <span class="logo-part-1" data-lang="ar" data-text="تصميم">تصميم</span>
-                <span class="logo-part-2" data-lang="ar" data-text="معرفي">معرفي</span>
-                <span class="logo-part-1" data-lang="en" data-text="Cognitive">Cognitive</span>
-                <span class="logo-part-2" data-lang="en" data-text="Design">Design</span>
-            </div>
-            
-            <div class="nav-links">
-                <a href="#entry" class="nav-link cognitive-link" 
-                   data-lang="ar" data-text="البداية"
-                   data-lang-alt="en" data-text-alt="Entry">البداية</a>
-                <a href="#philosophy" class="nav-link cognitive-link"
-                   data-lang="ar" data-text="الفلسفة"
-                   data-lang-alt="en" data-text-alt="Philosophy">الفلسفة</a>
-                <a href="#services" class="nav-link cognitive-link"
-                   data-lang="ar" data-text="الخدمات"
-                   data-lang-alt="en" data-text-alt="Services">الخدمات</a>
-                <a href="#process" class="nav-link cognitive-link"
-                   data-lang="ar" data-text="الطريقة"
-                   data-lang-alt="en" data-text-alt="Process">الطريقة</a>
-                <a href="#contact" class="nav-link cognitive-link"
-                   data-lang="ar" data-text="التواصل"
-                   data-lang-alt="en" data-text-alt="Contact">التواصل</a>
-            </div>
-            
-            <div class="nav-actions">
-                <a href="tel:+962785094075" class="nav-phone cognitive-phone">
-                    <i class="fas fa-phone-alt"></i>
-                    <span class="phone-text">+962 785094075</span>
-                </a>
-            </div>
-            
-            <button class="menu-toggle cognitive-toggle">
-                <span class="cognitive-bar bar-1"></span>
-                <span class="cognitive-bar bar-2"></span>
-                <span class="cognitive-bar bar-3"></span>
-            </button>
-        </div>
+    <!-- القائمة الجانبية -->
+    <nav class="side-nav">
+        <ul>
+            <li><a href="#home" class="nav-item" data-section="home">
+                <i class="fas fa-compass"></i>
+                <span class="lang-ar">البداية</span>
+                <span class="lang-en" style="display:none;">Start</span>
+            </a></li>
+            <li><a href="#products" class="nav-item" data-section="products">
+                <i class="fas fa-gem"></i>
+                <span class="lang-ar">المنتجات</span>
+                <span class="lang-en" style="display:none;">Products</span>
+            </a></li>
+            <li><a href="#stories" class="nav-item" data-section="stories">
+                <i class="fas fa-book-open"></i>
+                <span class="lang-ar">القصص</span>
+                <span class="lang-en" style="display:none;">Stories</span>
+            </a></li>
+            <li><a href="#testimonials" class="nav-item" data-section="testimonials">
+                <i class="fas fa-comments"></i>
+                <span class="lang-ar">آراء العملاء</span>
+                <span class="lang-en" style="display:none;">Testimonials</span>
+            </a></li>
+        </ul>
     </nav>
 
-    <!-- قسم البداية المعرفية -->
-    <section class="cognitive-entry" id="entry">
-        <div class="cognitive-grid-bg"></div>
-        <div class="cognitive-floaters" id="floatersContainer"></div>
-        
-        <div class="container">
-            <div class="entry-content">
-                <div class="entry-text">
-                    <div class="cognitive-badge">
-                        <span data-lang="ar">تجربة تصميم 2025</span>
-                        <span data-lang="en">Design Experience 2025</span>
-                    </div>
-                    <h1 class="cognitive-title">
-                        <span class="cognitive-line-1" data-lang="ar" data-text="ليست كل الأمور هنا">ليست كل الأمور هنا</span>
-                        <span class="cognitive-line-1" data-lang="en" data-text="Not everything here">Not everything here</span>
-                        
-                        <span class="cognitive-line-2" data-lang="ar" data-text="مصممة لتُفهم.">مصممة لتُفهم.</span>
-                        <span class="cognitive-line-2" data-lang="en" data-text="is meant to be understood.">is meant to be understood.</span>
-                        
-                        <span class="cognitive-line-3" data-lang="ar" data-text="بعضها مصمم ليُحس.">بعضها مصمم ليُحس.</span>
-                        <span class="cognitive-line-3" data-lang="en" data-text="Some things are meant to be felt.">Some things are meant to be felt.</span>
-                    </h1>
-                    
-                    <div class="cognitive-features">
-                        <div class="feature-item">
-                            <i class="fas fa-brain"></i>
-                            <span data-lang="ar">تجربة معرفية عميقة</span>
-                            <span data-lang="en">Deep cognitive experience</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-eye-slash"></i>
-                            <span data-lang="ar">غموض مقصود</span>
-                            <span data-lang="en">Intentional ambiguity</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-code-branch"></i>
-                            <span data-lang="ar">مسارات غير تقليدية</span>
-                            <span data-lang="en">Unconventional paths</span>
-                        </div>
-                    </div>
-                    
-                    <div class="entry-buttons">
-                        <a href="#philosophy" class="cognitive-btn primary-btn">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span data-lang="ar">تابع بحذر</span>
-                            <span data-lang="en">Proceed with Caution</span>
-                        </a>
-                        <button class="cognitive-btn secondary-btn" id="voiceToggle">
-                            <i class="fas fa-microphone"></i>
-                            <span data-lang="ar">التنقل الصوتي</span>
-                            <span data-lang="en">Voice Navigation</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="entry-visual">
-                    <div class="cognitive-showcase">
-                        <div class="showcase-card cognitive-card">
-                            <div class="card-header cognitive-header">
-                                <div class="card-avatar cognitive-avatar"></div>
-                                <div class="card-info">
-                                    <h4 data-lang="ar">أفكار غير مكتملة</h4>
-                                    <h4 data-lang="en">Unfinished Thoughts</h4>
-                                    <p data-lang="ar">تصميم يتساءل عن نفسه</p>
-                                    <p data-lang="en">Design that questions itself</p>
-                                </div>
-                            </div>
-                            <div class="card-content cognitive-content">
-                                <div class="cognitive-pattern">
-                                    <div class="pattern-line line-1"></div>
-                                    <div class="pattern-line line-2"></div>
-                                    <div class="pattern-line line-3"></div>
-                                    <div class="pattern-dot dot-1"></div>
-                                    <div class="pattern-dot dot-2"></div>
-                                    <div class="pattern-dot dot-3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- زر التواصل الدائم -->
+    <div class="floating-contact">
+        <button class="contact-btn">
+            <i class="fas fa-comment-dots"></i>
+            <span class="lang-ar">تواصل معنا</span>
+            <span class="lang-en" style="display:none;">Contact Us</span>
+        </button>
+        <div class="contact-options">
+            <a href="https://wa.me/1234567890" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="mailto:info@example.com" class="email">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
-        
-        <div class="scroll-indicator cognitive-scroll">
-            <span data-lang="ar">مرر</span>
-            <span data-lang="en">SCROLL</span>
-            <div class="scroll-line cognitive-line"></div>
-        </div>
-    </section>
-
-    <!-- قسم الفلسفة -->
-    <section class="cognitive-section philosophy-section" id="philosophy">
-        <div class="cognitive-philosophy-grid"></div>
-        <div class="container">
-            <div class="section-header cognitive-header">
-                <div class="section-badge cognitive-badge-philosophy">
-                    <span data-lang="ar">الفلسفة</span>
-                    <span data-lang="en">Philosophy</span>
-                </div>
-                <h2 class="section-title cognitive-title-philosophy">
-                    <span data-lang="ar">لا أصمم للجميع.</span>
-                    <span data-lang="en">I don't design for everyone.</span>
-                </h2>
-                <p class="section-subtitle cognitive-subtitle">
-                    <span data-lang="ar">إذا كنت تبحث عن الوضوح، فهذا ليس المكان المناسب.</span>
-                    <span data-lang="en">If clarity is what you want, this isn't it.</span>
-                </p>
-            </div>
-            
-            <div class="philosophy-content">
-                <div class="philosophy-card">
-                    <div class="philosophy-icon">
-                        <i class="fas fa-question-circle"></i>
-                    </div>
-                    <h3 data-lang="ar">لماذا الرفض؟</h3>
-                    <h3 data-lang="en">Why Rejection?</h3>
-                    <p data-lang="ar">برفض الواضح، نخلق مساحة للاستثنائي. ليس كل عقل مستعد للتصميم المعرفي.</p>
-                    <p data-lang="en">By rejecting the obvious, we create space for the exceptional. Not every mind is ready for cognitive design.</p>
-                </div>
-                
-                <div class="philosophy-card">
-                    <div class="philosophy-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3 data-lang="ar">التناقض الخلاق</h3>
-                    <h3 data-lang="en">Creative Contradiction</h3>
-                    <p data-lang="ar">أحياناً، إزالة الوضوح يضيف معنى. ما لا يُقال قد يكون أعلى صوتاً مما يُقال.</p>
-                    <p data-lang="en">Sometimes, removing clarity adds meaning. What is not said can be louder than what is.</p>
-                </div>
-                
-                <div class="philosophy-card">
-                    <div class="philosophy-icon">
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <h3 data-lang="ar">رحلتك المعرفية</h3>
-                    <h3 data-lang="en">Your Cognitive Journey</h3>
-                    <p data-lang="ar">كل تصميم هو رحلة استكشاف. ليس الهدف الوصول، بل الرحلة نفسها.</p>
-                    <p data-lang="en">Every design is an exploration journey. The goal is not arrival, but the journey itself.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الخدمات -->
-    <section class="cognitive-section services-section" id="services">
-        <div class="container">
-            <div class="section-header cognitive-header">
-                <div class="section-badge cognitive-badge-service">
-                    <span data-lang="ar">الخدمات</span>
-                    <span data-lang="en">Services</span>
-                </div>
-                <h2 class="section-title cognitive-title-service">
-                    <span data-lang="ar">ما نقدمه هو أكثر من مجرد</span>
-                    <span data-lang="en">What we offer is more than just</span>
-                    <span class="cognitive-highlight" data-lang="ar" data-text="تصميم">تصميم</span>
-                    <span class="cognitive-highlight" data-lang="en" data-text="design">design</span>
-                </h2>
-                <p class="section-subtitle cognitive-subtitle">
-                    <span data-lang="ar">حلول معرفية تتحدى التوقعات التقليدية</span>
-                    <span data-lang="en">Cognitive solutions that challenge traditional expectations</span>
-                </p>
-            </div>
-            
-            <div class="services-grid cognitive-services-grid">
-                <div class="service-card cognitive-service-card">
-                    <div class="service-icon cognitive-service-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 data-lang="ar">الاستشارة المعرفية</h3>
-                    <h3 data-lang="en">Cognitive Consultation</h3>
-                    <p data-lang="ar">جلسات تفكير عميقة لفهم احتياجاتك المعرفية الفريدة وتحليل مسارك الرقمي.</p>
-                    <p data-lang="en">Deep thinking sessions to understand your unique cognitive needs and analyze your digital path.</p>
-                    <div class="service-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">تحليل شخصي عميق</span>
-                            <span data-lang="en">Deep personal analysis</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">خارطة طريق معرفية</span>
-                            <span data-lang="en">Cognitive roadmap</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">توصيات استراتيجية</span>
-                            <span data-lang="en">Strategic recommendations</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card cognitive-service-card featured">
-                    <div class="service-badge cognitive-service-badge">
-                        <span data-lang="ar">الأكثر طلباً</span>
-                        <span data-lang="en">Most Requested</span>
-                    </div>
-                    <div class="service-icon cognitive-service-icon">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                    <h3 data-lang="ar">تصميم الهوية المعرفية</h3>
-                    <h3 data-lang="en">Cognitive Identity Design</h3>
-                    <p data-lang="ar">خلق هوية رقمية تعكس عمق تفكيرك وتتحدى التوقعات التقليدية للعلامة التجارية.</p>
-                    <p data-lang="en">Creating a digital identity that reflects your thinking depth and challenges traditional branding expectations.</p>
-                    <div class="service-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">هوية بصرية فريدة</span>
-                            <span data-lang="en">Unique visual identity</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">نظام تصميم معرفي</span>
-                            <span data-lang="en">Cognitive design system</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">دليل استخدام متقدم</span>
-                            <span data-lang="en">Advanced usage guide</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card cognitive-service-card">
-                    <div class="service-icon cognitive-service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 data-lang="ar">تطوير التجربة المعرفية</h3>
-                    <h3 data-lang="en">Cognitive Experience Development</h3>
-                    <p data-lang="ar">بناء تجارب رقمية تفاعلية تتحدى المستخدم وتوسع حدود التفاعل التقليدي.</p>
-                    <p data-lang="en">Building interactive digital experiences that challenge users and expand traditional interaction boundaries.</p>
-                    <div class="service-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">واجهات تفاعلية غامضة</span>
-                            <span data-lang="en">Ambiguous interactive interfaces</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">مسارات غير خطية</span>
-                            <span data-lang="en">Non-linear pathways</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check"></i>
-                            <span data-lang="ar">تأثيرات معرفية متقدمة</span>
-                            <span data-lang="en">Advanced cognitive effects</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الطريقة -->
-    <section class="cognitive-section process-section" id="process">
-        <div class="container">
-            <div class="section-header cognitive-header">
-                <div class="section-badge cognitive-badge-process">
-                    <span data-lang="ar">الطريقة</span>
-                    <span data-lang="en">Process</span>
-                </div>
-                <h2 class="section-title cognitive-title-process">
-                    <span data-lang="ar">رحلة تصميم</span>
-                    <span data-lang="en">A design journey</span>
-                    <span class="cognitive-process-highlight" data-lang="ar" data-text="معرفية">معرفية</span>
-                    <span class="cognitive-process-highlight" data-lang="en" data-text="cognitive">cognitive</span>
-                </h2>
-                <p class="section-subtitle cognitive-subtitle">
-                    <span data-lang="ar">خطوات واضحة نحو تجربة تصميم استثنائية</span>
-                    <span data-lang="en">Clear steps toward an exceptional design experience</span>
-                </p>
-            </div>
-            
-            <div class="process-timeline cognitive-process-timeline">
-                <div class="process-step cognitive-process-step">
-                    <div class="step-number cognitive-step-number">01</div>
-                    <div class="step-content cognitive-step-content">
-                        <h3 data-lang="ar">اكتشاف متاهة الفكر</h3>
-                        <h3 data-lang="en">Thought Maze Discovery</h3>
-                        <p data-lang="ar">نستكشف معاً تعقيدات تفكيرك ونحدد المسارات المعرفية المناسبة.</p>
-                        <p data-lang="en">Together we explore the complexities of your thinking and identify suitable cognitive paths.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step cognitive-process-step">
-                    <div class="step-number cognitive-step-number">02</div>
-                    <div class="step-content cognitive-step-content">
-                        <h3 data-lang="ar">تصميم التناقض الخلاق</h3>
-                        <h3 data-lang="en">Creative Contradiction Design</h3>
-                        <p data-lang="ar">نخلق تصاميم تتحدى المنطق التقليدي وتفتح آفاقاً جديدة للإدراك.</p>
-                        <p data-lang="en">We create designs that challenge traditional logic and open new horizons of perception.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step cognitive-process-step">
-                    <div class="step-number cognitive-step-number">03</div>
-                    <div class="step-content cognitive-step-content">
-                        <h3 data-lang="ar">بناء التجربة الغامضة</h3>
-                        <h3 data-lang="en">Ambiguous Experience Building</h3>
-                        <p data-lang="ar">نطور تجربة تترك مساحة للتأويل الشخصي والاكتشاف الذاتي.</p>
-                        <p data-lang="en">We develop an experience that leaves room for personal interpretation and self-discovery.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step cognitive-process-step">
-                    <div class="step-number cognitive-step-number">04</div>
-                    <div class="step-content cognitive-step-content">
-                        <h3 data-lang="ar">إطلاق الرحلة المعرفية</h3>
-                        <h3 data-lang="en">Cognitive Journey Launch</h3>
-                        <p data-lang="ar">نسلمك مفاتيح التجربة مع دليل للاستكشاف المستمر.</p>
-                        <p data-lang="en">We hand you the keys to the experience with a guide for continuous exploration.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم التواصل -->
-    <section class="cognitive-section contact-section" id="contact">
-        <div class="container">
-            <div class="section-header cognitive-header">
-                <div class="section-badge cognitive-badge-contact">
-                    <span data-lang="ar">التواصل</span>
-                    <span data-lang="en">Contact</span>
-                </div>
-                <h2 class="section-title cognitive-title-contact">
-                    <span data-lang="ar">إذا وصلت إلى هنا، فلنتحدث.</span>
-                    <span data-lang="en">If you've come this far, let's talk.</span>
-                </h2>
-                <p class="section-subtitle cognitive-subtitle">
-                    <span data-lang="ar">طرق تواصل تقليدية لعقول غير تقليدية</span>
-                    <span data-lang="en">Traditional contact methods for non-traditional minds</span>
-                </p>
-            </div>
-            
-            <div class="contact-grid cognitive-contact-grid">
-                <div class="contact-info cognitive-contact-info">
-                    <h3 data-lang="ar">تواصل صامت</h3>
-                    <h3 data-lang="en">Silent Communication</h3>
-                    <div class="contact-details cognitive-contact-details">
-                        <div class="contact-item cognitive-contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4 data-lang="ar">أفكار مشفرة</h4>
-                                <h4 data-lang="en">Encrypted Thoughts</h4>
-                                <p>aseeljalal45@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item cognitive-contact-item">
-                            <i class="fab fa-whatsapp"></i>
-                            <div>
-                                <h4 data-lang="ar">اتصال عصبي مباشر</h4>
-                                <h4 data-lang="en">Direct Neural Link</h4>
-                                <p>+962 785094075</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item cognitive-contact-item">
-                            <i class="fab fa-instagram"></i>
-                            <div>
-                                <h4 data-lang="ar">تيار بصري</h4>
-                                <h4 data-lang="en">Visual Stream</h4>
-                                <p>@web.profiles.jo</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-note cognitive-contact-note">
-                        <i class="fas fa-clock"></i>
-                        <p data-lang="ar">وقت الرد: ٢٤-٤٨ ساعة معرفية</p>
-                        <p data-lang="en">Response time: 24-48 cognitive hours</p>
-                    </div>
-                </div>
-                
-                <div class="contact-form cognitive-contact-form">
-                    <form id="cognitiveForm">
-                        <div class="form-row cognitive-form-row">
-                            <div class="form-group cognitive-form-group">
-                                <label for="name" data-lang="ar">التوقيع المعرفي</label>
-                                <label for="name" data-lang="en">Cognitive Signature</label>
-                                <input type="text" id="name" data-lang="ar" placeholder="هويتك" data-lang-alt="en" placeholder-alt="Your identity" required>
-                            </div>
-                            <div class="form-group cognitive-form-group">
-                                <label for="email" data-lang="ar">نقل الأفكار</label>
-                                <label for="email" data-lang="en">Thought Transmission</label>
-                                <input type="email" id="email" data-lang="ar" placeholder="وعيك" data-lang-alt="en" placeholder-alt="Your consciousness" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group cognitive-form-group">
-                            <label for="service" data-lang="ar">التجربة المطلوبة</label>
-                            <label for="service" data-lang="en">Desired Experience</label>
-                            <select id="service" required>
-                                <option value="" data-lang="ar" data-text="اختر المسار المعرفي">اختر المسار المعرفي</option>
-                                <option value="" data-lang="en" data-text="Select cognitive path">Select cognitive path</option>
-                                <option value="consultation" data-lang="ar" data-text="استشارة معرفية">استشارة معرفية</option>
-                                <option value="consultation" data-lang="en" data-text="Cognitive Consultation">Cognitive Consultation</option>
-                                <option value="identity" data-lang="ar" data-text="تصميم هوية معرفية">تصميم هوية معرفية</option>
-                                <option value="identity" data-lang="en" data-text="Cognitive Identity Design">Cognitive Identity Design</option>
-                                <option value="experience" data-lang="ar" data-text="تطوير تجربة معرفية">تطوير تجربة معرفية</option>
-                                <option value="experience" data-lang="en" data-text="Cognitive Experience Development">Cognitive Experience Development</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group cognitive-form-group">
-                            <label for="message" data-lang="ar">حالتك المعرفية</label>
-                            <label for="message" data-lang="en">Your Cognitive State</label>
-                            <textarea id="message" rows="5" data-lang="ar" placeholder="صف حالتك العقلية الحالية تجاه هذه التجربة..." data-lang-alt="en" placeholder-alt="Describe your current mental state regarding this experience..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn cognitive-submit-btn">
-                            <i class="fas fa-paper-plane"></i>
-                            <span data-lang="ar">أرسل الأفكار</span>
-                            <span data-lang="en">Transmit Thoughts</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- الفوتر المعرفي -->
-    <footer class="cognitive-footer">
-        <div class="container">
-            <div class="footer-grid cognitive-footer-grid">
-                <div class="footer-col cognitive-footer-col">
-                    <div class="footer-logo cognitive-footer-logo">
-                        <span class="logo-part-1" data-lang="ar" data-text="تصميم">تصميم</span>
-                        <span class="logo-part-2" data-lang="ar" data-text="معرفي">معرفي</span>
-                        <span class="logo-part-1" data-lang="en" data-text="Cognitive">Cognitive</span>
-                        <span class="logo-part-2" data-lang="en" data-text="Design">Design</span>
-                    </div>
-                    <p class="cognitive-footer-text">
-                        <span data-lang="ar">مصمم في صمت، محسوس في الفعل. ليس كل شيء يحتاج تفسيراً.</span>
-                        <span data-lang="en">Designed in silence, felt in action. Not everything needs explanation.</span>
-                    </p>
-                    <div class="social-links cognitive-social-links">
-                        <a href="https://www.instagram.com/web.profiles.jo" target="_blank" class="social-link cognitive-social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/962785094075" target="_blank" class="social-link cognitive-social-link">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="mailto:aseeljalal45@gmail.com" class="social-link cognitive-social-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-col cognitive-footer-col">
-                    <h4 data-lang="ar">المسارات المعرفية</h4>
-                    <h4 data-lang="en">Cognitive Paths</h4>
-                    <ul class="cognitive-footer-links">
-                        <li><a href="#entry" class="cognitive-footer-link" data-lang="ar" data-text="نقطة البداية">نقطة البداية</a></li>
-                        <li><a href="#entry" class="cognitive-footer-link" data-lang="en" data-text="Entry Point">Entry Point</a></li>
-                        <li><a href="#philosophy" class="cognitive-footer-link" data-lang="ar" data-text="فلسفة الرفض">فلسفة الرفض</a></li>
-                        <li><a href="#philosophy" class="cognitive-footer-link" data-lang="en" data-text="Rejection Philosophy">Rejection Philosophy</a></li>
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="الخدمات المعرفية">الخدمات المعرفية</a></li>
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Cognitive Services">Cognitive Services</a></li>
-                        <li><a href="#process" class="cognitive-footer-link" data-lang="ar" data-text="الطريقة المعرفية">الطريقة المعرفية</a></li>
-                        <li><a href="#process" class="cognitive-footer-link" data-lang="en" data-text="Cognitive Process">Cognitive Process</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col cognitive-footer-col">
-                    <h4 data-lang="ar">أنواع التجارب</h4>
-                    <h4 data-lang="en">Experience Types</h4>
-                    <ul class="cognitive-footer-links">
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="تصميم تناقض">تصميم تناقض</a></li>
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Contradiction Design">Contradiction Design</a></li>
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="ملاحة المتاهة">ملاحة المتاهة</a></li>
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Maze Navigation">Maze Navigation</a></li>
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="واجهات صامتة">واجهات صامتة</a></li>
-                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Silent Interfaces">Silent Interfaces</a></li>
-                        <li><a href="#contact" class="cognitive-footer-link" data-lang="ar" data-text="تجارب مخصصة">تجارب مخصصة</a></li>
-                        <li><a href="#contact" class="cognitive-footer-link" data-lang="en" data-text="Custom Experiences">Custom Experiences</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col cognitive-footer-col">
-                    <h4 data-lang="ar">التحديثات العقلية</h4>
-                    <h4 data-lang="en">Mental Updates</h4>
-                    <p data-lang="ar">اشترك في الاضطرابات المعرفية</p>
-                    <p data-lang="en">Subscribe to cognitive disturbances</p>
-                    <form class="newsletter-form cognitive-newsletter">
-                        <input type="email" data-lang="ar" placeholder="وعيك" data-lang-alt="en" placeholder-alt="Your consciousness" required>
-                        <button type="submit"><i class="fas fa-brain"></i></button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="footer-bottom cognitive-footer-bottom">
-                <p class="cognitive-signature">
-                    <i class="fas fa-quote-left"></i>
-                    <span data-lang="ar">بعض الأشياء مصممة ليُحس بها، لا لفهمها.</span>
-                    <span data-lang="en">Some things are meant to be felt, not understood.</span>
-                    <i class="fas fa-quote-right"></i>
-                </p>
-                <div class="footer-links cognitive-footer-links-bottom">
-                    <a href="#" class="cognitive-footer-link" data-lang="ar" data-text="خصوصية معرفية">خصوصية معرفية</a>
-                    <a href="#" class="cognitive-footer-link" data-lang="en" data-text="Cognitive Privacy">Cognitive Privacy</a>
-                    <a href="#" class="cognitive-footer-link" data-lang="ar" data-text="شروط عقلية">شروط عقلية</a>
-                    <a href="#" class="cognitive-footer-link" data-lang="en" data-text="Mental Terms">Mental Terms</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- زر العودة المعرفي -->
-    <button class="back-to-top cognitive-back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- مؤشر الصوت المعرفي -->
-    <div class="voice-indicator cognitive-voice-indicator" id="voiceIndicator" 
-         data-lang="ar" title="تفعيل التفاعل الصوتي المعرفي"
-         data-lang-alt="en" title-alt="Activate cognitive voice interaction">
-        <i class="fas fa-microphone"></i>
     </div>
 
-    <!-- مؤشر الماوس المعرفي -->
-    <div class="mouse-tracker cognitive-mouse-tracker" id="mouseTracker"></div>
+    <!-- القسم الرئيسي -->
+    <main class="main-content">
+        <!-- الهيرو -->
+        <section id="home" class="hero-section full-screen">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hand-drawn-line"></div>
+                <h1 class="hero-title">
+                    <span class="lang-ar">اكتشف قصص كل قطعة</span>
+                    <span class="lang-en" style="display:none;">Discover Every Piece's Story</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="lang-ar">منتجات يدوية فريدة صنعت بحب واهتمام</span>
+                    <span class="lang-en" style="display:none">Unique handcrafted products made with love and care</span>
+                </p>
+                <button class="cta-button hand-drawn-btn">
+                    <span class="lang-ar">ابدأ الرحلة</span>
+                    <span class="lang-en" style="display:none">Start the Journey</span>
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <p class="lang-ar">مرر لاكتشاف المزيد</p>
+                <p class="lang-en" style="display:none">Scroll to discover more</p>
+            </div>
+        </section>
+
+        <!-- رحلة المنتجات -->
+        <section id="products" class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="lang-ar">رحلة المنتجات</span>
+                    <span class="lang-en" style="display:none">Product Journey</span>
+                </h2>
+                <div class="hand-drawn-line small"></div>
+            </div>
+
+            <div class="products-container">
+                <!-- المنتج 1 -->
+                <div class="product-card floating-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="فخار يدوي">
+                        <div class="product-overlay">
+                            <button class="buy-button">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="lang-ar">اشتري الآن</span>
+                                <span class="lang-en" style="display:none">Buy Now</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">
+                            <span class="lang-ar">مجموعة الفخار اليدوي</span>
+                            <span class="lang-en" style="display:none">Handmade Pottery Set</span>
+                        </h3>
+                        <p class="product-desc">
+                            <span class="lang-ar">صنعت بواسطة حرفي متمرس بأكثر من 30 سنة خبرة</span>
+                            <span class="lang-en" style="display:none">Crafted by an artisan with over 30 years of experience</span>
+                        </p>
+                        <div class="product-price">
+                            <span class="price">149 <span class="currency lang-ar">ر.س</span><span class="currency lang-en" style="display:none">SAR</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 2 -->
+                <div class="product-card floating-card delayed">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1479&q=80" alt="سجاد يدوي">
+                        <div class="product-overlay">
+                            <button class="buy-button">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="lang-ar">اشتري الآن</span>
+                                <span class="lang-en" style="display:none">Buy Now</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">
+                            <span class="lang-ar">سجاد يدوي طبيعي</span>
+                            <span class="lang-en" style="display:none">Natural Handwoven Rug</span>
+                        </h3>
+                        <p class="product-desc">
+                            <span class="lang-ar">منسوج بخيوط طبيعية 100% بتصميم فريد</span>
+                            <span class="lang-en" style="display:none">Woven with 100% natural threads in a unique design</span>
+                        </p>
+                        <div class="product-price">
+                            <span class="price">899 <span class="currency lang-ar">ر.س</span><span class="currency lang-en" style="display:none">SAR</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 3 -->
+                <div class="product-card floating-card more-delayed">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="شمعدان نحاسي">
+                        <div class="product-overlay">
+                            <button class="buy-button">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="lang-ar">اشتري الآن</span>
+                                <span class="lang-en" style="display:none">Buy Now</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">
+                            <span class="lang-ar">شمعدان نحاسي منقوش</span>
+                            <span class="lang-en" style="display:none">Engraved Copper Candelabra</span>
+                        </h3>
+                        <p class="product-desc">
+                            <span class="lang-ar">نقش يدوي دقيق يعكس إرث الحرفية العربية</span>
+                            <span class="lang-en" style="display:none">Precise hand engraving reflecting Arab craftsmanship heritage</span>
+                        </p>
+                        <div class="product-price">
+                            <span class="price">325 <span class="currency lang-ar">ر.س</span><span class="currency lang-en" style="display:none">SAR</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- معرض القصص -->
+        <section id="stories" class="stories-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="lang-ar">قصص الحرفيين</span>
+                    <span class="lang-en" style="display:none">Artisan Stories</span>
+                </h2>
+                <div class="hand-drawn-line small"></div>
+            </div>
+
+            <div class="story-gallery">
+                <div class="story-book">
+                    <div class="page left-page">
+                        <div class="page-content">
+                            <h3 class="story-title">
+                                <span class="lang-ar">أمينة والحياكة</span>
+                                <span class="lang-en" style="display:none">Amina and Weaving</span>
+                            </h3>
+                            <p class="story-text">
+                                <span class="lang-ar">تعلمت أمينة (٦٢ سنة) الحياكة من جدتها. كل قطعة تحكي قصة من قريتها في عسير.</span>
+                                <span class="lang-en" style="display:none">Amina (62 years old) learned weaving from her grandmother. Each piece tells a story from her village in Asir.</span>
+                            </p>
+                            <div class="story-image">
+                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="حرفية">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page right-page">
+                        <div class="page-content">
+                            <h3 class="story-title">
+                                <span class="lang-ar">محمد والفخار</span>
+                                <span class="lang-en" style="display:none">Mohammed and Pottery</span>
+                            </h3>
+                            <p class="story-text">
+                                <span class="lang-ar">أمضى محمد ٤٠ سنة في صناعة الفخار. يقول: "الطين مثل الإنسان، يحتاج للصبر والرعاية".</span>
+                                <span class="lang-en" style="display:none">Mohammed spent 40 years making pottery. He says: "Clay is like a human, it needs patience and care."</span>
+                            </p>
+                            <div class="story-image">
+                                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="فخار">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-controls">
+                    <button class="page-btn prev-page">
+                        <i class="fas fa-chevron-right"></i>
+                        <span class="lang-ar">الصفحة السابقة</span>
+                        <span class="lang-en" style="display:none">Previous Page</span>
+                    </button>
+                    <button class="page-btn next-page">
+                        <span class="lang-ar">الصفحة التالية</span>
+                        <span class="lang-en" style="display:none">Next Page</span>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- آراء العملاء -->
+        <section id="testimonials" class="testimonials-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="lang-ar">كلمات من قلوبهم</span>
+                    <span class="lang-en" style="display:none">Words From Their Hearts</span>
+                </h2>
+                <div class="hand-drawn-line small"></div>
+            </div>
+
+            <div class="testimonials-container">
+                <div class="testimonial-note">
+                    <div class="note-pin"></div>
+                    <p class="testimonial-text">
+                        <span class="lang-ar">"أشعر أن كل قطعة تحمل روح صانعها. تجربة شراء مختلفة تمامًا!"</span>
+                        <span class="lang-en" style="display:none">"I feel like each piece carries the soul of its maker. A completely different shopping experience!"</span>
+                    </p>
+                    <p class="testimonial-author">- سارة</p>
+                </div>
+
+                <div class="testimonial-note delayed">
+                    <div class="note-pin"></div>
+                    <p class="testimonial-text">
+                        <span class="lang-ar">"لم أتوقع أن أتعلق عاطفيًا بمنتج! القصة وراءه جعلته مميزًا."</span>
+                        <span class="lang-en" style="display:none">"I didn't expect to get emotionally attached to a product! The story behind it made it special."</span>
+                    </p>
+                    <p class="testimonial-author">- خالد</p>
+                </div>
+
+                <div class="testimonial-note more-delayed">
+                    <div class="note-pin"></div>
+                    <p class="testimonial-text">
+                        <span class="lang-ar">"جودة رائعة وتفاصيل لا تراها في المنتجات العادية. أنصح الجميع."</span>
+                        <span class="lang-en" style="display:none">"Excellent quality and details you don't see in ordinary products. I recommend it to everyone."</span>
+                    </p>
+                    <p class="testimonial-author">- نور</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2 class="logo-text">
+                        <span class="lang-ar">روح القطعة</span>
+                        <span class="lang-en" style="display:none">The Piece's Essence</span>
+                    </h2>
+                    <p class="footer-tagline">
+                        <span class="lang-ar">كل قطعة تحكي قصة</span>
+                        <span class="lang-en" style="display:none">Every piece tells a story</span>
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home" class="footer-link">
+                        <span class="lang-ar">البداية</span>
+                        <span class="lang-en" style="display:none">Home</span>
+                    </a>
+                    <a href="#products" class="footer-link">
+                        <span class="lang-ar">المنتجات</span>
+                        <span class="lang-en" style="display:none">Products</span>
+                    </a>
+                    <a href="#stories" class="footer-link">
+                        <span class="lang-ar">القصص</span>
+                        <span class="lang-en" style="display:none">Stories</span>
+                    </a>
+                    <a href="#testimonials" class="footer-link">
+                        <span class="lang-ar">آراء العملاء</span>
+                        <span class="lang-en" style="display:none">Testimonials</span>
+                    </a>
+                </div>
+                <div class="footer-contact">
+                    <p class="contact-info">
+                        <i class="fas fa-envelope"></i> info@roohalqeta.com
+                    </p>
+                    <p class="contact-info">
+                        <i class="fas fa-phone"></i> +966 50 123 4567
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">
+                    <span class="lang-ar">© ٢٠٢٣ روح القطعة. كل الحقوق محفوظة.</span>
+                    <span class="lang-en" style="display:none">© 2023 The Piece's Essence. All rights reserved.</span>
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- نافذة التواصل -->
+    <div class="contact-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h3 class="modal-title">
+                <span class="lang-ar">تواصل معنا</span>
+                <span class="lang-en" style="display:none">Contact Us</span>
+            </h3>
+            <form class="contact-form">
+                <input type="text" placeholder="الاسم" class="lang-ar" required>
+                <input type="text" placeholder="Name" class="lang-en" style="display:none" required>
+                <input type="email" placeholder="البريد الإلكتروني" class="lang-ar" required>
+                <input type="email" placeholder="Email" class="lang-en" style="display:none" required>
+                <textarea rows="4" placeholder="رسالتك" class="lang-ar" required></textarea>
+                <textarea rows="4" placeholder="Your Message" class="lang-en" style="display:none" required></textarea>
+                <button type="submit" class="submit-btn">
+                    <span class="lang-ar">إرسال الرسالة</span>
+                    <span class="lang-en" style="display:none">Send Message</span>
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
