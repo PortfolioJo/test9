@@ -76,103 +76,114 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // التحكم في كتاب القصص
-    const prevBtn = document.querySelector('.prev-page');
-    const nextBtn = document.querySelector('.next-page');
-    const storyBook = document.querySelector('.story-book');
-    let currentPage = 0;
-    
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', function() {
-            currentPage = Math.max(0, currentPage - 1);
-            updateStoryBook();
-        });
-        
-        nextBtn.addEventListener('click', function() {
-            currentPage = Math.min(2, currentPage + 1);
-            updateStoryBook();
-        });
-    }
-    
-    function updateStoryBook() {
-        // تغيير محتوى الصفحات بناءً على currentPage
-        const pages = document.querySelectorAll('.page');
-        
-        // هذه دالة تجريبية - يمكنك توسيعها لإضافة المزيد من الصفحات
-        if (currentPage === 0) {
-            pages[0].querySelector('.story-title .lang-ar').textContent = 'أمينة والحياكة';
-            pages[0].querySelector('.story-title .lang-en').textContent = 'Amina and Weaving';
-            pages[0].querySelector('.story-text .lang-ar').textContent = 'تعلمت أمينة (٦٢ سنة) الحياكة من جدتها. كل قطعة تحكي قصة من قريتها في عسير.';
-            pages[0].querySelector('.story-text .lang-en').textContent = 'Amina (62 years old) learned weaving from her grandmother. Each piece tells a story from her village in Asir.';
-            
-            pages[1].querySelector('.story-title .lang-ar').textContent = 'محمد والفخار';
-            pages[1].querySelector('.story-title .lang-en').textContent = 'Mohammed and Pottery';
-            pages[1].querySelector('.story-text .lang-ar').textContent = 'أمضى محمد ٤٠ سنة في صناعة الفخار. يقول: "الطين مثل الإنسان، يحتاج للصبر والرعاية".';
-            pages[1].querySelector('.story-text .lang-en').textContent = 'Mohammed spent 40 years making pottery. He says: "Clay is like a human, it needs patience and care."';
-        } else if (currentPage === 1) {
-            pages[0].querySelector('.story-title .lang-ar').textContent = 'فاطمة والتطريز';
-            pages[0].querySelector('.story-title .lang-en').textContent = 'Fatima and Embroidery';
-            pages[0].querySelector('.story-text .lang-ar').textContent = 'تطريز فاطمة مستوحى من طبيعة جبال الحجاز. تستخدم خيوطًا مصنوعة يدويًا من ألوان طبيعية.';
-            pages[0].querySelector('.story-text .lang-en').textContent = "Fatima's embroidery is inspired by the nature of the Hijaz mountains. She uses handcrafted threads from natural colors.";
-            
-            pages[1].querySelector('.story-title .lang-ar').textContent = 'خالد والنحاس';
-            pages[1].querySelector('.story-title .lang-en').textContent = 'Khalid and Copper';
-            pages[1].querySelector('.story-text .lang-ar').textContent = 'يصنع خالد تحفًا نحاسية باستخدام تقنيات قديمة. كل قطعة تأخذ ٣ أيام من العمل الدقيق.';
-            pages[1].querySelector('.story-text .lang-en').textContent = 'Khalid makes copper artifacts using ancient techniques. Each piece takes 3 days of meticulous work.';
-        } else {
-            pages[0].querySelector('.story-title .lang-ar').textContent = 'علي والخشب';
-            pages[0].querySelector('.story-title .lang-en').textContent = 'Ali and Wood';
-            pages[0].querySelector('.story-text .lang-ar').textContent = 'ينحت علي الخشب بمنهجية صوفية. يقول: "الخشب كائن حي، أنا فقط أساعده ليظهر جماله".';
-            pages[0].querySelector('.story-text .lang-en').textContent = 'Ali carves wood with a Sufi methodology. He says: "Wood is a living being, I just help it reveal its beauty."';
-            
-            pages[1].querySelector('.story-title .lang-ar').textContent = 'نورة والنسيج';
-            pages[1].querySelector('.story-title .lang-en').textContent = 'Noura and Weaving';
-            pages[1].querySelector('.story-text .lang-ar').textContent = 'نورة تحافظ على تقنية نسج نادرة كانت على وشك الانقراض. تعلمتها من والدتها التي تعلمتها من والدتها.';
-            pages[1].querySelector('.story-text .lang-en').textContent = 'Noura preserves a rare weaving technique that was on the verge of extinction. She learned it from her mother, who learned it from her mother.';
-        }
-        
-        // تأثير تقليب الصفحة
-        storyBook.style.transform = `rotateY(${currentPage * 5}deg)`;
-        
-        // تحديث حالة الأزرار
-        prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === 2;
-    }
-    
-    // نافذة التواصل
+    // نافذة الاستشارة
     const contactBtn = document.querySelector('.contact-btn');
-    const contactModal = document.querySelector('.contact-modal');
+    const consultationModal = document.querySelector('.consultation-modal');
     const closeModal = document.querySelector('.close-modal');
     
-    if (contactBtn && contactModal) {
+    if (contactBtn && consultationModal) {
         contactBtn.addEventListener('click', function() {
-            contactModal.classList.add('active');
+            consultationModal.classList.add('active');
         });
         
         closeModal.addEventListener('click', function() {
-            contactModal.classList.remove('active');
+            consultationModal.classList.remove('active');
         });
         
-        contactModal.addEventListener('click', function(e) {
-            if (e.target === contactModal) {
-                contactModal.classList.remove('active');
+        consultationModal.addEventListener('click', function(e) {
+            if (e.target === consultationModal) {
+                consultationModal.classList.remove('active');
             }
         });
     }
     
-    // نموذج التواصل
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+    // نموذج الاستشارة
+    const consultationForm = document.querySelector('.consultation-form');
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // هنا يمكنك إضافة كود إرسال النموذج
-            alert(body.classList.contains('english') ? 
-                  'Thank you! Your message has been sent.' : 
-                  'شكرًا لك! تم إرسال رسالتك.');
+            // جمع البيانات من النموذج
+            const skinType = document.querySelector('input[name="skinType"]:checked');
+            const concerns = Array.from(document.querySelectorAll('input[name="concerns"]:checked'))
+                                .map(cb => cb.value);
+            const email = document.getElementById('email').value;
             
-            contactModal.classList.remove('active');
-            contactForm.reset();
+            if (!skinType) {
+                alert(body.classList.contains('english') ? 
+                      'Please select your skin type' : 
+                      'الرجاء اختيار نوع بشرتك');
+                return;
+            }
+            
+            if (concerns.length === 0) {
+                alert(body.classList.contains('english') ? 
+                      'Please select at least one skin concern' : 
+                      'الرجاء اختيار مخاوف بشرتك على الأقل');
+                return;
+            }
+            
+            // محاكاة إرسال الاستشارة
+            setTimeout(() => {
+                const skinTypeNames = {
+                    'dry': body.classList.contains('english') ? 'Dry' : 'الجافة',
+                    'oily': body.classList.contains('english') ? 'Oily' : 'الدهنية',
+                    'combination': body.classList.contains('english') ? 'Combination' : 'المختلطة',
+                    'normal': body.classList.contains('english') ? 'Normal' : 'العادية',
+                    'sensitive': body.classList.contains('english') ? 'Sensitive' : 'الحساسة'
+                };
+                
+                const concernNames = {
+                    'acne': body.classList.contains('english') ? 'Acne' : 'حب الشباب',
+                    'darkSpots': body.classList.contains('english') ? 'Dark Spots' : 'البقع الداكنة',
+                    'wrinkles': body.classList.contains('english') ? 'Wrinkles' : 'التجاعيد',
+                    'dryness': body.classList.contains('english') ? 'Dryness' : 'الجفاف',
+                    'redness': body.classList.contains('english') ? 'Redness' : 'الاحمرار'
+                };
+                
+                const recommendations = {
+                    'dry': body.classList.contains('english') ? 
+                           'We recommend our Hyaluronic Day Moisturizer and overnight hydration mask.' : 
+                           'نوصي بمرطب الهيالورونيك اليومي وقناع الترطيب الليلي.',
+                    'oily': body.classList.contains('english') ? 
+                           'We recommend our oil-free serum and mattifying moisturizer.' : 
+                           'نوصي بمصل خالٍ من الزيوت ومرطب مطفئ للبريق.',
+                    'combination': body.classList.contains('english') ? 
+                                 'We recommend our balancing toner and lightweight moisturizer.' : 
+                                 'نوصي بتونر الموازنة ومرطب خفيف الوزن.',
+                    'normal': body.classList.contains('english') ? 
+                             'We recommend our Vitamin C serum for maintenance and glow.' : 
+                             'نوصي بمصل فيتامين سي للعناية والإشراق.',
+                    'sensitive': body.classList.contains('english') ? 
+                               'We recommend our fragrance-free, calming serum and moisturizer.' : 
+                               'نوصي بمصل مهدئ خالٍ من العطور ومرطب لطيف.'
+                };
+                
+                const message = body.classList.contains('english') ?
+                    `Thank you! Based on your ${skinTypeNames[skinType.value]} skin type and concerns (${concerns.map(c => concernNames[c]).join(', ')}), ${recommendations[skinType.value]} We've sent the full routine to ${email}.` :
+                    `شكراً لك! بناءً على بشرتك ${skinTypeNames[skinType.value]} ومخاوفك (${concerns.map(c => concernNames[c]).join('، ')}). ${recommendations[skinType.value]} لقد أرسلنا الروتين الكامل إلى ${email}.`;
+                
+                alert(message);
+                
+                consultationModal.classList.remove('active');
+                consultationForm.reset();
+            }, 1000);
+        });
+    }
+    
+    // نموذج النشرة البريدية
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            
+            if (emailInput.value) {
+                alert(body.classList.contains('english') ? 
+                      'Thank you for subscribing! You will receive our skincare tips soon.' : 
+                      'شكراً للاشتراك! ستصلك نصائحنا للعناية بالبشرة قريباً.');
+                emailInput.value = '';
+            }
         });
     }
     
@@ -183,14 +194,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const fromTop = window.scrollY + 100;
         
         navItems.forEach(item => {
-            const section = document.querySelector(item.getAttribute('href'));
-            if (
-                section.offsetTop <= fromTop &&
-                section.offsetTop + section.offsetHeight > fromTop
-            ) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
+            const href = item.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const section = document.querySelector(href);
+                if (section) {
+                    if (
+                        section.offsetTop <= fromTop &&
+                        section.offsetTop + section.offsetHeight > fromTop
+                    ) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                }
             }
         });
     });
@@ -215,20 +231,76 @@ document.addEventListener('DOMContentLoaded', function() {
             const productCard = this.closest('.product-card');
             const productTitle = productCard.querySelector('.product-title .lang-ar').textContent;
             
-            if (body.classList.contains('english')) {
-                alert(`Added "${productCard.querySelector('.product-title .lang-en').textContent}" to cart!`);
-            } else {
-                alert(`تمت إضافة "${productTitle}" إلى السلة!`);
-            }
-            
             // تأثير اهتزاز
             productCard.style.animation = 'none';
+            productCard.style.transform = 'scale(0.95)';
+            
             setTimeout(() => {
                 productCard.style.animation = 'float 6s ease-in-out infinite';
-            }, 10);
+                productCard.style.transform = 'scale(1)';
+                
+                if (body.classList.contains('english')) {
+                    alert(`Added "${productCard.querySelector('.product-title .lang-en').textContent}" to cart!`);
+                } else {
+                    alert(`تمت إضافة "${productTitle}" إلى السلة!`);
+                }
+            }, 300);
         });
     });
     
-    // تهيئة أولية
-    updateStoryBook();
+    // تحميل الصور بسلاسة
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+            this.style.transform = 'scale(1)';
+        });
+        
+        img.style.opacity = '0';
+        img.style.transform = 'scale(0.95)';
+        img.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    // تأثيرات الدخول للمكونات والخطوات
+    const ingredientCards = document.querySelectorAll('.ingredient-card');
+    const steps = document.querySelectorAll('.step');
+    
+    const ingredientObserver = new IntersectionObserver(function(entries) {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 200);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    ingredientCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        ingredientObserver.observe(card);
+    });
+    
+    steps.forEach(step => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateY(30px)';
+        step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        ingredientObserver.observe(step);
+    });
+    
+    // تأثيرات النقر على الروابط
+    document.querySelectorAll('a, button').forEach(element => {
+        element.addEventListener('click', function(e) {
+            // تأثير ردة فعل بسيط
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+    
+    // تهيئة العناصر المرئية
+    window.dispatchEvent(new Event('scroll'));
 });
