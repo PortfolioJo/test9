@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Design — تصميم معرفي | تجربة تصميم فريدة</title>
+    <meta name="description" content="تجربة تصميم معرفية غامضة تقدم حلول تصميم استثنائية - ليست مجرد خدمات، بل هويات رقمية تتحدى التوقعات">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Almarai:wght@300;400;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- تبديل اللغة -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="ar">العربية</button>
+        <button class="lang-btn" data-lang="en">English</button>
+    </div>
+
+    <!-- شاشة التحميل المعرفية -->
+    <div class="cognitive-loader">
+        <div class="cognitive-grid-loader"></div>
+        <div class="loader-text cognitive-text">
+            <span class="cognitive-glow" data-lang="ar" data-text="تصميم">تصميم</span>
+            <span class="cognitive-fade" data-lang="ar" data-text="معرفي">معرفي</span>
+            <span class="cognitive-glow" data-lang="en" data-text="Cognitive">Cognitive</span>
+            <span class="cognitive-fade" data-lang="en" data-text="Design">Design</span>
+        </div>
+        <div class="loader-subtext">
+            <span data-lang="ar">تحميل التجربة المعرفية...</span>
+            <span data-lang="en">Loading cognitive experience...</span>
+        </div>
+    </div>
+
+    <!-- شريط التنقل المعرفي -->
+    <nav class="cognitive-nav">
+        <div class="nav-container">
+            <div class="nav-logo cognitive-logo">
+                <span class="logo-part-1" data-lang="ar" data-text="تصميم">تصميم</span>
+                <span class="logo-part-2" data-lang="ar" data-text="معرفي">معرفي</span>
+                <span class="logo-part-1" data-lang="en" data-text="Cognitive">Cognitive</span>
+                <span class="logo-part-2" data-lang="en" data-text="Design">Design</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#entry" class="nav-link cognitive-link" 
+                   data-lang="ar" data-text="البداية"
+                   data-lang-alt="en" data-text-alt="Entry">البداية</a>
+                <a href="#philosophy" class="nav-link cognitive-link"
+                   data-lang="ar" data-text="الفلسفة"
+                   data-lang-alt="en" data-text-alt="Philosophy">الفلسفة</a>
+                <a href="#services" class="nav-link cognitive-link"
+                   data-lang="ar" data-text="الخدمات"
+                   data-lang-alt="en" data-text-alt="Services">الخدمات</a>
+                <a href="#process" class="nav-link cognitive-link"
+                   data-lang="ar" data-text="الطريقة"
+                   data-lang-alt="en" data-text-alt="Process">الطريقة</a>
+                <a href="#contact" class="nav-link cognitive-link"
+                   data-lang="ar" data-text="التواصل"
+                   data-lang-alt="en" data-text-alt="Contact">التواصل</a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="tel:+962785094075" class="nav-phone cognitive-phone">
+                    <i class="fas fa-phone-alt"></i>
+                    <span class="phone-text">+962 785094075</span>
+                </a>
+            </div>
+            
+            <button class="menu-toggle cognitive-toggle">
+                <span class="cognitive-bar bar-1"></span>
+                <span class="cognitive-bar bar-2"></span>
+                <span class="cognitive-bar bar-3"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- قسم البداية المعرفية -->
+    <section class="cognitive-entry" id="entry">
+        <div class="cognitive-grid-bg"></div>
+        <div class="cognitive-floaters" id="floatersContainer"></div>
+        
+        <div class="container">
+            <div class="entry-content">
+                <div class="entry-text">
+                    <div class="cognitive-badge">
+                        <span data-lang="ar">تجربة تصميم 2025</span>
+                        <span data-lang="en">Design Experience 2025</span>
+                    </div>
+                    <h1 class="cognitive-title">
+                        <span class="cognitive-line-1" data-lang="ar" data-text="ليست كل الأمور هنا">ليست كل الأمور هنا</span>
+                        <span class="cognitive-line-1" data-lang="en" data-text="Not everything here">Not everything here</span>
+                        
+                        <span class="cognitive-line-2" data-lang="ar" data-text="مصممة لتُفهم.">مصممة لتُفهم.</span>
+                        <span class="cognitive-line-2" data-lang="en" data-text="is meant to be understood.">is meant to be understood.</span>
+                        
+                        <span class="cognitive-line-3" data-lang="ar" data-text="بعضها مصمم ليُحس.">بعضها مصمم ليُحس.</span>
+                        <span class="cognitive-line-3" data-lang="en" data-text="Some things are meant to be felt.">Some things are meant to be felt.</span>
+                    </h1>
+                    
+                    <div class="cognitive-features">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <span data-lang="ar">تجربة معرفية عميقة</span>
+                            <span data-lang="en">Deep cognitive experience</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-eye-slash"></i>
+                            <span data-lang="ar">غموض مقصود</span>
+                            <span data-lang="en">Intentional ambiguity</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-code-branch"></i>
+                            <span data-lang="ar">مسارات غير تقليدية</span>
+                            <span data-lang="en">Unconventional paths</span>
+                        </div>
+                    </div>
+                    
+                    <div class="entry-buttons">
+                        <a href="#philosophy" class="cognitive-btn primary-btn">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span data-lang="ar">تابع بحذر</span>
+                            <span data-lang="en">Proceed with Caution</span>
+                        </a>
+                        <button class="cognitive-btn secondary-btn" id="voiceToggle">
+                            <i class="fas fa-microphone"></i>
+                            <span data-lang="ar">التنقل الصوتي</span>
+                            <span data-lang="en">Voice Navigation</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="entry-visual">
+                    <div class="cognitive-showcase">
+                        <div class="showcase-card cognitive-card">
+                            <div class="card-header cognitive-header">
+                                <div class="card-avatar cognitive-avatar"></div>
+                                <div class="card-info">
+                                    <h4 data-lang="ar">أفكار غير مكتملة</h4>
+                                    <h4 data-lang="en">Unfinished Thoughts</h4>
+                                    <p data-lang="ar">تصميم يتساءل عن نفسه</p>
+                                    <p data-lang="en">Design that questions itself</p>
+                                </div>
+                            </div>
+                            <div class="card-content cognitive-content">
+                                <div class="cognitive-pattern">
+                                    <div class="pattern-line line-1"></div>
+                                    <div class="pattern-line line-2"></div>
+                                    <div class="pattern-line line-3"></div>
+                                    <div class="pattern-dot dot-1"></div>
+                                    <div class="pattern-dot dot-2"></div>
+                                    <div class="pattern-dot dot-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator cognitive-scroll">
+            <span data-lang="ar">مرر</span>
+            <span data-lang="en">SCROLL</span>
+            <div class="scroll-line cognitive-line"></div>
+        </div>
+    </section>
+
+    <!-- قسم الفلسفة -->
+    <section class="cognitive-section philosophy-section" id="philosophy">
+        <div class="cognitive-philosophy-grid"></div>
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-philosophy">
+                    <span data-lang="ar">الفلسفة</span>
+                    <span data-lang="en">Philosophy</span>
+                </div>
+                <h2 class="section-title cognitive-title-philosophy">
+                    <span data-lang="ar">لا أصمم للجميع.</span>
+                    <span data-lang="en">I don't design for everyone.</span>
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    <span data-lang="ar">إذا كنت تبحث عن الوضوح، فهذا ليس المكان المناسب.</span>
+                    <span data-lang="en">If clarity is what you want, this isn't it.</span>
+                </p>
+            </div>
+            
+            <div class="philosophy-content">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 data-lang="ar">لماذا الرفض؟</h3>
+                    <h3 data-lang="en">Why Rejection?</h3>
+                    <p data-lang="ar">برفض الواضح، نخلق مساحة للاستثنائي. ليس كل عقل مستعد للتصميم المعرفي.</p>
+                    <p data-lang="en">By rejecting the obvious, we create space for the exceptional. Not every mind is ready for cognitive design.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 data-lang="ar">التناقض الخلاق</h3>
+                    <h3 data-lang="en">Creative Contradiction</h3>
+                    <p data-lang="ar">أحياناً، إزالة الوضوح يضيف معنى. ما لا يُقال قد يكون أعلى صوتاً مما يُقال.</p>
+                    <p data-lang="en">Sometimes, removing clarity adds meaning. What is not said can be louder than what is.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3 data-lang="ar">رحلتك المعرفية</h3>
+                    <h3 data-lang="en">Your Cognitive Journey</h3>
+                    <p data-lang="ar">كل تصميم هو رحلة استكشاف. ليس الهدف الوصول، بل الرحلة نفسها.</p>
+                    <p data-lang="en">Every design is an exploration journey. The goal is not arrival, but the journey itself.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section class="cognitive-section services-section" id="services">
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-service">
+                    <span data-lang="ar">الخدمات</span>
+                    <span data-lang="en">Services</span>
+                </div>
+                <h2 class="section-title cognitive-title-service">
+                    <span data-lang="ar">ما نقدمه هو أكثر من مجرد</span>
+                    <span data-lang="en">What we offer is more than just</span>
+                    <span class="cognitive-highlight" data-lang="ar" data-text="تصميم">تصميم</span>
+                    <span class="cognitive-highlight" data-lang="en" data-text="design">design</span>
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    <span data-lang="ar">حلول معرفية تتحدى التوقعات التقليدية</span>
+                    <span data-lang="en">Cognitive solutions that challenge traditional expectations</span>
+                </p>
+            </div>
+            
+            <div class="services-grid cognitive-services-grid">
+                <div class="service-card cognitive-service-card">
+                    <div class="service-icon cognitive-service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 data-lang="ar">الاستشارة المعرفية</h3>
+                    <h3 data-lang="en">Cognitive Consultation</h3>
+                    <p data-lang="ar">جلسات تفكير عميقة لفهم احتياجاتك المعرفية الفريدة وتحليل مسارك الرقمي.</p>
+                    <p data-lang="en">Deep thinking sessions to understand your unique cognitive needs and analyze your digital path.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">تحليل شخصي عميق</span>
+                            <span data-lang="en">Deep personal analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">خارطة طريق معرفية</span>
+                            <span data-lang="en">Cognitive roadmap</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">توصيات استراتيجية</span>
+                            <span data-lang="en">Strategic recommendations</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card cognitive-service-card featured">
+                    <div class="service-badge cognitive-service-badge">
+                        <span data-lang="ar">الأكثر طلباً</span>
+                        <span data-lang="en">Most Requested</span>
+                    </div>
+                    <div class="service-icon cognitive-service-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3 data-lang="ar">تصميم الهوية المعرفية</h3>
+                    <h3 data-lang="en">Cognitive Identity Design</h3>
+                    <p data-lang="ar">خلق هوية رقمية تعكس عمق تفكيرك وتتحدى التوقعات التقليدية للعلامة التجارية.</p>
+                    <p data-lang="en">Creating a digital identity that reflects your thinking depth and challenges traditional branding expectations.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">هوية بصرية فريدة</span>
+                            <span data-lang="en">Unique visual identity</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">نظام تصميم معرفي</span>
+                            <span data-lang="en">Cognitive design system</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">دليل استخدام متقدم</span>
+                            <span data-lang="en">Advanced usage guide</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card cognitive-service-card">
+                    <div class="service-icon cognitive-service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 data-lang="ar">تطوير التجربة المعرفية</h3>
+                    <h3 data-lang="en">Cognitive Experience Development</h3>
+                    <p data-lang="ar">بناء تجارب رقمية تفاعلية تتحدى المستخدم وتوسع حدود التفاعل التقليدي.</p>
+                    <p data-lang="en">Building interactive digital experiences that challenge users and expand traditional interaction boundaries.</p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">واجهات تفاعلية غامضة</span>
+                            <span data-lang="en">Ambiguous interactive interfaces</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">مسارات غير خطية</span>
+                            <span data-lang="en">Non-linear pathways</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span data-lang="ar">تأثيرات معرفية متقدمة</span>
+                            <span data-lang="en">Advanced cognitive effects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الطريقة -->
+    <section class="cognitive-section process-section" id="process">
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-process">
+                    <span data-lang="ar">الطريقة</span>
+                    <span data-lang="en">Process</span>
+                </div>
+                <h2 class="section-title cognitive-title-process">
+                    <span data-lang="ar">رحلة تصميم</span>
+                    <span data-lang="en">A design journey</span>
+                    <span class="cognitive-process-highlight" data-lang="ar" data-text="معرفية">معرفية</span>
+                    <span class="cognitive-process-highlight" data-lang="en" data-text="cognitive">cognitive</span>
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    <span data-lang="ar">خطوات واضحة نحو تجربة تصميم استثنائية</span>
+                    <span data-lang="en">Clear steps toward an exceptional design experience</span>
+                </p>
+            </div>
+            
+            <div class="process-timeline cognitive-process-timeline">
+                <div class="process-step cognitive-process-step">
+                    <div class="step-number cognitive-step-number">01</div>
+                    <div class="step-content cognitive-step-content">
+                        <h3 data-lang="ar">اكتشاف متاهة الفكر</h3>
+                        <h3 data-lang="en">Thought Maze Discovery</h3>
+                        <p data-lang="ar">نستكشف معاً تعقيدات تفكيرك ونحدد المسارات المعرفية المناسبة.</p>
+                        <p data-lang="en">Together we explore the complexities of your thinking and identify suitable cognitive paths.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step cognitive-process-step">
+                    <div class="step-number cognitive-step-number">02</div>
+                    <div class="step-content cognitive-step-content">
+                        <h3 data-lang="ar">تصميم التناقض الخلاق</h3>
+                        <h3 data-lang="en">Creative Contradiction Design</h3>
+                        <p data-lang="ar">نخلق تصاميم تتحدى المنطق التقليدي وتفتح آفاقاً جديدة للإدراك.</p>
+                        <p data-lang="en">We create designs that challenge traditional logic and open new horizons of perception.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step cognitive-process-step">
+                    <div class="step-number cognitive-step-number">03</div>
+                    <div class="step-content cognitive-step-content">
+                        <h3 data-lang="ar">بناء التجربة الغامضة</h3>
+                        <h3 data-lang="en">Ambiguous Experience Building</h3>
+                        <p data-lang="ar">نطور تجربة تترك مساحة للتأويل الشخصي والاكتشاف الذاتي.</p>
+                        <p data-lang="en">We develop an experience that leaves room for personal interpretation and self-discovery.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step cognitive-process-step">
+                    <div class="step-number cognitive-step-number">04</div>
+                    <div class="step-content cognitive-step-content">
+                        <h3 data-lang="ar">إطلاق الرحلة المعرفية</h3>
+                        <h3 data-lang="en">Cognitive Journey Launch</h3>
+                        <p data-lang="ar">نسلمك مفاتيح التجربة مع دليل للاستكشاف المستمر.</p>
+                        <p data-lang="en">We hand you the keys to the experience with a guide for continuous exploration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل -->
+    <section class="cognitive-section contact-section" id="contact">
+        <div class="container">
+            <div class="section-header cognitive-header">
+                <div class="section-badge cognitive-badge-contact">
+                    <span data-lang="ar">التواصل</span>
+                    <span data-lang="en">Contact</span>
+                </div>
+                <h2 class="section-title cognitive-title-contact">
+                    <span data-lang="ar">إذا وصلت إلى هنا، فلنتحدث.</span>
+                    <span data-lang="en">If you've come this far, let's talk.</span>
+                </h2>
+                <p class="section-subtitle cognitive-subtitle">
+                    <span data-lang="ar">طرق تواصل تقليدية لعقول غير تقليدية</span>
+                    <span data-lang="en">Traditional contact methods for non-traditional minds</span>
+                </p>
+            </div>
+            
+            <div class="contact-grid cognitive-contact-grid">
+                <div class="contact-info cognitive-contact-info">
+                    <h3 data-lang="ar">تواصل صامت</h3>
+                    <h3 data-lang="en">Silent Communication</h3>
+                    <div class="contact-details cognitive-contact-details">
+                        <div class="contact-item cognitive-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4 data-lang="ar">أفكار مشفرة</h4>
+                                <h4 data-lang="en">Encrypted Thoughts</h4>
+                                <p>aseeljalal45@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item cognitive-contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <h4 data-lang="ar">اتصال عصبي مباشر</h4>
+                                <h4 data-lang="en">Direct Neural Link</h4>
+                                <p>+962 785094075</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item cognitive-contact-item">
+                            <i class="fab fa-instagram"></i>
+                            <div>
+                                <h4 data-lang="ar">تيار بصري</h4>
+                                <h4 data-lang="en">Visual Stream</h4>
+                                <p>@web.profiles.jo</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-note cognitive-contact-note">
+                        <i class="fas fa-clock"></i>
+                        <p data-lang="ar">وقت الرد: ٢٤-٤٨ ساعة معرفية</p>
+                        <p data-lang="en">Response time: 24-48 cognitive hours</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form cognitive-contact-form">
+                    <form id="cognitiveForm">
+                        <div class="form-row cognitive-form-row">
+                            <div class="form-group cognitive-form-group">
+                                <label for="name" data-lang="ar">التوقيع المعرفي</label>
+                                <label for="name" data-lang="en">Cognitive Signature</label>
+                                <input type="text" id="name" data-lang="ar" placeholder="هويتك" data-lang-alt="en" placeholder-alt="Your identity" required>
+                            </div>
+                            <div class="form-group cognitive-form-group">
+                                <label for="email" data-lang="ar">نقل الأفكار</label>
+                                <label for="email" data-lang="en">Thought Transmission</label>
+                                <input type="email" id="email" data-lang="ar" placeholder="وعيك" data-lang-alt="en" placeholder-alt="Your consciousness" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group cognitive-form-group">
+                            <label for="service" data-lang="ar">التجربة المطلوبة</label>
+                            <label for="service" data-lang="en">Desired Experience</label>
+                            <select id="service" required>
+                                <option value="" data-lang="ar" data-text="اختر المسار المعرفي">اختر المسار المعرفي</option>
+                                <option value="" data-lang="en" data-text="Select cognitive path">Select cognitive path</option>
+                                <option value="consultation" data-lang="ar" data-text="استشارة معرفية">استشارة معرفية</option>
+                                <option value="consultation" data-lang="en" data-text="Cognitive Consultation">Cognitive Consultation</option>
+                                <option value="identity" data-lang="ar" data-text="تصميم هوية معرفية">تصميم هوية معرفية</option>
+                                <option value="identity" data-lang="en" data-text="Cognitive Identity Design">Cognitive Identity Design</option>
+                                <option value="experience" data-lang="ar" data-text="تطوير تجربة معرفية">تطوير تجربة معرفية</option>
+                                <option value="experience" data-lang="en" data-text="Cognitive Experience Development">Cognitive Experience Development</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group cognitive-form-group">
+                            <label for="message" data-lang="ar">حالتك المعرفية</label>
+                            <label for="message" data-lang="en">Your Cognitive State</label>
+                            <textarea id="message" rows="5" data-lang="ar" placeholder="صف حالتك العقلية الحالية تجاه هذه التجربة..." data-lang-alt="en" placeholder-alt="Describe your current mental state regarding this experience..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn cognitive-submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-lang="ar">أرسل الأفكار</span>
+                            <span data-lang="en">Transmit Thoughts</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر المعرفي -->
+    <footer class="cognitive-footer">
+        <div class="container">
+            <div class="footer-grid cognitive-footer-grid">
+                <div class="footer-col cognitive-footer-col">
+                    <div class="footer-logo cognitive-footer-logo">
+                        <span class="logo-part-1" data-lang="ar" data-text="تصميم">تصميم</span>
+                        <span class="logo-part-2" data-lang="ar" data-text="معرفي">معرفي</span>
+                        <span class="logo-part-1" data-lang="en" data-text="Cognitive">Cognitive</span>
+                        <span class="logo-part-2" data-lang="en" data-text="Design">Design</span>
+                    </div>
+                    <p class="cognitive-footer-text">
+                        <span data-lang="ar">مصمم في صمت، محسوس في الفعل. ليس كل شيء يحتاج تفسيراً.</span>
+                        <span data-lang="en">Designed in silence, felt in action. Not everything needs explanation.</span>
+                    </p>
+                    <div class="social-links cognitive-social-links">
+                        <a href="https://www.instagram.com/web.profiles.jo" target="_blank" class="social-link cognitive-social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/962785094075" target="_blank" class="social-link cognitive-social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:aseeljalal45@gmail.com" class="social-link cognitive-social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col cognitive-footer-col">
+                    <h4 data-lang="ar">المسارات المعرفية</h4>
+                    <h4 data-lang="en">Cognitive Paths</h4>
+                    <ul class="cognitive-footer-links">
+                        <li><a href="#entry" class="cognitive-footer-link" data-lang="ar" data-text="نقطة البداية">نقطة البداية</a></li>
+                        <li><a href="#entry" class="cognitive-footer-link" data-lang="en" data-text="Entry Point">Entry Point</a></li>
+                        <li><a href="#philosophy" class="cognitive-footer-link" data-lang="ar" data-text="فلسفة الرفض">فلسفة الرفض</a></li>
+                        <li><a href="#philosophy" class="cognitive-footer-link" data-lang="en" data-text="Rejection Philosophy">Rejection Philosophy</a></li>
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="الخدمات المعرفية">الخدمات المعرفية</a></li>
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Cognitive Services">Cognitive Services</a></li>
+                        <li><a href="#process" class="cognitive-footer-link" data-lang="ar" data-text="الطريقة المعرفية">الطريقة المعرفية</a></li>
+                        <li><a href="#process" class="cognitive-footer-link" data-lang="en" data-text="Cognitive Process">Cognitive Process</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col cognitive-footer-col">
+                    <h4 data-lang="ar">أنواع التجارب</h4>
+                    <h4 data-lang="en">Experience Types</h4>
+                    <ul class="cognitive-footer-links">
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="تصميم تناقض">تصميم تناقض</a></li>
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Contradiction Design">Contradiction Design</a></li>
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="ملاحة المتاهة">ملاحة المتاهة</a></li>
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Maze Navigation">Maze Navigation</a></li>
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="ar" data-text="واجهات صامتة">واجهات صامتة</a></li>
+                        <li><a href="#services" class="cognitive-footer-link" data-lang="en" data-text="Silent Interfaces">Silent Interfaces</a></li>
+                        <li><a href="#contact" class="cognitive-footer-link" data-lang="ar" data-text="تجارب مخصصة">تجارب مخصصة</a></li>
+                        <li><a href="#contact" class="cognitive-footer-link" data-lang="en" data-text="Custom Experiences">Custom Experiences</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col cognitive-footer-col">
+                    <h4 data-lang="ar">التحديثات العقلية</h4>
+                    <h4 data-lang="en">Mental Updates</h4>
+                    <p data-lang="ar">اشترك في الاضطرابات المعرفية</p>
+                    <p data-lang="en">Subscribe to cognitive disturbances</p>
+                    <form class="newsletter-form cognitive-newsletter">
+                        <input type="email" data-lang="ar" placeholder="وعيك" data-lang-alt="en" placeholder-alt="Your consciousness" required>
+                        <button type="submit"><i class="fas fa-brain"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom cognitive-footer-bottom">
+                <p class="cognitive-signature">
+                    <i class="fas fa-quote-left"></i>
+                    <span data-lang="ar">بعض الأشياء مصممة ليُحس بها، لا لفهمها.</span>
+                    <span data-lang="en">Some things are meant to be felt, not understood.</span>
+                    <i class="fas fa-quote-right"></i>
+                </p>
+                <div class="footer-links cognitive-footer-links-bottom">
+                    <a href="#" class="cognitive-footer-link" data-lang="ar" data-text="خصوصية معرفية">خصوصية معرفية</a>
+                    <a href="#" class="cognitive-footer-link" data-lang="en" data-text="Cognitive Privacy">Cognitive Privacy</a>
+                    <a href="#" class="cognitive-footer-link" data-lang="ar" data-text="شروط عقلية">شروط عقلية</a>
+                    <a href="#" class="cognitive-footer-link" data-lang="en" data-text="Mental Terms">Mental Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة المعرفي -->
+    <button class="back-to-top cognitive-back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- مؤشر الصوت المعرفي -->
+    <div class="voice-indicator cognitive-voice-indicator" id="voiceIndicator" 
+         data-lang="ar" title="تفعيل التفاعل الصوتي المعرفي"
+         data-lang-alt="en" title-alt="Activate cognitive voice interaction">
+        <i class="fas fa-microphone"></i>
+    </div>
+
+    <!-- مؤشر الماوس المعرفي -->
+    <div class="mouse-tracker cognitive-mouse-tracker" id="mouseTracker"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
