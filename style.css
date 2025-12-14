@@ -8,6 +8,10 @@
     --color-orange: #d4a574;
     --color-light-brown: #a39081;
     --color-white: #ffffff;
+    --color-rose: #f8c8c8;
+    --color-mint: #c8e6c9;
+    --color-lavender: #e1bee7;
+    --color-blue: #bbdefb;
     --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
     --shadow-medium: 0 15px 35px rgba(0, 0, 0, 0.1);
     --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
@@ -104,7 +108,7 @@ body.english .side-nav {
 }
 
 .nav-item:hover {
-    background: var(--color-beige);
+    background: var(--color-mint);
     color: var(--color-green);
 }
 
@@ -129,8 +133,8 @@ body.english .floating-contact {
 }
 
 .contact-btn {
-    background: linear-gradient(135deg, var(--color-green), var(--color-orange));
-    color: white;
+    background: linear-gradient(135deg, var(--color-mint), var(--color-lavender));
+    color: var(--color-brown);
     border: none;
     border-radius: 50px;
     padding: 15px 25px;
@@ -148,7 +152,7 @@ body.english .floating-contact {
 
 .contact-btn:hover {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(138, 155, 110, 0.3);
+    box-shadow: 0 20px 40px rgba(200, 230, 201, 0.3);
 }
 
 .contact-options {
@@ -209,7 +213,7 @@ body.english .floating-contact {
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(254, 250, 246, 0.9), rgba(245, 235, 224, 0.8)),
-                url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+                url('https://images.unsplash.com/photo-1556228578-9c360e1d8d34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -226,7 +230,7 @@ body.english .floating-contact {
 .hand-drawn-line {
     width: 200px;
     height: 4px;
-    background: var(--color-orange);
+    background: var(--color-lavender);
     margin: 0 auto 30px;
     border-radius: 2px;
     position: relative;
@@ -238,7 +242,7 @@ body.english .floating-contact {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: var(--color-green);
+    background: var(--color-mint);
     border-radius: 50%;
     top: -3px;
 }
@@ -272,8 +276,8 @@ body.english .floating-contact {
 }
 
 .cta-button {
-    background: linear-gradient(135deg, var(--color-green), #9cb37e);
-    color: white;
+    background: linear-gradient(135deg, var(--color-mint), var(--color-lavender));
+    color: var(--color-brown);
     border: none;
     border-radius: 50px;
     padding: 18px 40px;
@@ -304,7 +308,7 @@ body.english .floating-contact {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, var(--color-orange), var(--color-green), var(--color-brown));
+    background: linear-gradient(45deg, var(--color-rose), var(--color-mint), var(--color-lavender));
     z-index: -1;
     border-radius: 52px;
     animation: rotateBorder 3s linear infinite;
@@ -317,7 +321,7 @@ body.english .floating-contact {
 
 .cta-button:hover {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(138, 155, 110, 0.4);
+    box-shadow: 0 20px 40px rgba(200, 230, 201, 0.4);
 }
 
 .scroll-indicator {
@@ -379,6 +383,14 @@ body.english .floating-contact {
     margin-bottom: 15px;
 }
 
+.section-description {
+    font-size: 1.2rem;
+    color: var(--color-light-brown);
+    max-width: 700px;
+    margin: 20px auto 0;
+    line-height: 1.6;
+}
+
 .hand-drawn-line.small {
     width: 100px;
     height: 3px;
@@ -407,6 +419,7 @@ section {
     transition: var(--transition);
     opacity: 0;
     transform: translateY(50px);
+    position: relative;
 }
 
 .floating-card {
@@ -448,6 +461,23 @@ section {
     transform: scale(1.1);
 }
 
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--color-rose);
+    color: var(--color-brown);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.product-badge.new {
+    background: var(--color-mint);
+}
+
 .product-overlay {
     position: absolute;
     top: 0;
@@ -467,8 +497,8 @@ section {
 }
 
 .buy-button {
-    background: var(--color-orange);
-    color: white;
+    background: var(--color-lavender);
+    color: var(--color-brown);
     border: none;
     border-radius: 50px;
     padding: 12px 30px;
@@ -482,12 +512,22 @@ section {
 }
 
 .buy-button:hover {
-    background: var(--color-green);
+    background: var(--color-mint);
     transform: scale(1.1);
 }
 
 .product-info {
     padding: 25px;
+}
+
+.skin-type {
+    display: inline-block;
+    background: var(--color-blue);
+    color: var(--color-brown);
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
 }
 
 .product-title {
@@ -500,6 +540,26 @@ section {
     color: var(--color-light-brown);
     line-height: 1.6;
     margin-bottom: 20px;
+    min-height: 80px;
+}
+
+.product-details {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: var(--color-light-brown);
+}
+
+.detail i {
+    color: var(--color-green);
 }
 
 .product-price {
@@ -515,95 +575,139 @@ section {
     color: var(--color-green);
 }
 
+.original-price {
+    font-size: 1.2rem;
+    color: var(--color-light-brown);
+    text-decoration: line-through;
+}
+
 .currency {
     font-size: 1.2rem;
     margin-right: 5px;
 }
 
-/* قصص */
-.story-gallery {
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
+/* سر المكونات */
+.ingredients-section {
+    background: linear-gradient(135deg, rgba(200, 230, 201, 0.1), rgba(225, 190, 231, 0.1));
+    border-radius: 30px;
+    margin: 50px 5%;
 }
 
-.story-book {
-    display: flex;
-    background: var(--color-beige);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow-medium);
-    min-height: 500px;
-}
-
-.page {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.left-page {
-    border-left: 1px dashed var(--color-light-brown);
-}
-
-.page-content {
-    text-align: center;
-}
-
-.story-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
-    color: var(--color-brown);
-    margin-bottom: 20px;
-}
-
-.story-text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: var(--color-light-brown);
-    margin-bottom: 30px;
-}
-
-.story-image {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.story-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.page-controls {
-    display: flex;
-    justify-content: center;
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-.page-btn {
-    background: var(--color-brown);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 25px;
-    font-family: 'Reem Kufi Fun', sans-serif;
-    font-size: 1.1rem;
-    cursor: pointer;
+.ingredient-card {
+    background: var(--color-white);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
     transition: var(--transition);
+    box-shadow: var(--shadow-soft);
+}
+
+.ingredient-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-medium);
+}
+
+.ingredient-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--color-mint);
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+    color: var(--color-brown);
+    transition: var(--transition);
 }
 
-.page-btn:hover {
-    background: var(--color-green);
-    transform: translateY(-3px);
+.ingredient-card:hover .ingredient-icon {
+    background: var(--color-lavender);
+    transform: rotate(15deg) scale(1.1);
+}
+
+.ingredient-title {
+    font-size: 1.5rem;
+    color: var(--color-brown);
+    margin-bottom: 15px;
+}
+
+.ingredient-desc {
+    color: var(--color-light-brown);
+    line-height: 1.6;
+}
+
+/* روتين العناية */
+.routine-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.step {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--color-white);
+    border-radius: 20px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.step:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-rose), var(--color-mint), var(--color-lavender));
+}
+
+.step:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-medium);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--color-mint);
+    color: var(--color-brown);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 20px;
+    transition: var(--transition);
+}
+
+.step:hover .step-number {
+    background: var(--color-lavender);
+    transform: scale(1.1);
+}
+
+.step-title {
+    font-size: 1.5rem;
+    color: var(--color-brown);
+    margin-bottom: 15px;
+}
+
+.step-desc {
+    color: var(--color-light-brown);
+    line-height: 1.6;
 }
 
 /* آراء العملاء */
@@ -659,8 +763,14 @@ section {
     transform: translateX(-50%);
     width: 20px;
     height: 20px;
-    background: var(--color-orange);
+    background: var(--color-lavender);
     border-radius: 50%;
+}
+
+.testimonial-rating {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
 .testimonial-text {
@@ -675,7 +785,13 @@ section {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     color: var(--color-green);
-    text-align: left;
+    margin-bottom: 5px;
+}
+
+.testimonial-skin {
+    font-size: 0.9rem;
+    color: var(--color-light-brown);
+    font-style: italic;
 }
 
 body.english .testimonial-author {
@@ -706,7 +822,13 @@ body.english .testimonial-author {
 
 .footer-tagline {
     font-size: 1.2rem;
-    color: var(--color-orange);
+    color: var(--color-lavender);
+}
+
+.footer-heading {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--color-mint);
 }
 
 .footer-links {
@@ -743,7 +865,7 @@ body.english .footer-link:before {
 }
 
 .footer-link:hover {
-    color: var(--color-orange);
+    color: var(--color-lavender);
     padding-right: 30px;
 }
 
@@ -753,7 +875,7 @@ body.english .footer-link:hover {
 }
 
 .footer-link:hover:before {
-    color: var(--color-green);
+    color: var(--color-mint);
 }
 
 .contact-info {
@@ -764,22 +886,88 @@ body.english .footer-link:hover {
     font-size: 1.1rem;
 }
 
+.contact-info i {
+    color: var(--color-mint);
+}
+
+.newsletter-text {
+    margin-bottom: 20px;
+    color: var(--color-beige);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'El Messiri', sans-serif;
+    font-size: 1rem;
+}
+
+.newsletter-btn {
+    background: var(--color-mint);
+    color: var(--color-brown);
+    border: none;
+    border-radius: 10px;
+    width: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.2rem;
+}
+
+.newsletter-btn:hover {
+    background: var(--color-lavender);
+    transform: scale(1.1);
+}
+
 .footer-bottom {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 50px;
     padding-top: 30px;
     border-top: 1px solid rgba(245, 235, 224, 0.2);
     color: var(--color-light-brown);
+    flex-wrap: wrap;
 }
 
-/* نافذة التواصل */
-.contact-modal {
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-beige);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    background: var(--color-mint);
+    color: var(--color-brown);
+    transform: translateY(-5px);
+}
+
+/* نافذة الاستشارة */
+.consultation-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(44, 41, 37, 0.8);
+    background: rgba(44, 41, 37, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -790,23 +978,25 @@ body.english .footer-link:hover {
     backdrop-filter: blur(5px);
 }
 
-.contact-modal.active {
+.consultation-modal.active {
     opacity: 1;
     visibility: visible;
 }
 
-.modal-content {
+.consultation-modal .modal-content {
     background: var(--color-cream);
     border-radius: 20px;
     padding: 40px;
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     transform: translateY(50px);
     transition: var(--transition);
 }
 
-.contact-modal.active .modal-content {
+.consultation-modal.active .modal-content {
     transform: translateY(0);
 }
 
@@ -837,36 +1027,87 @@ body.english .close-modal {
     font-size: 2.5rem;
     color: var(--color-brown);
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
-.contact-form {
+.modal-subtitle {
+    text-align: center;
+    color: var(--color-light-brown);
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.consultation-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
-.contact-form input,
-.contact-form textarea {
-    padding: 15px;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--color-brown);
+    font-size: 1.1rem;
+}
+
+.skin-options, .concern-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.skin-option, .concern-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.skin-option input[type="radio"], .concern-option input[type="checkbox"] {
+    display: none;
+}
+
+.skin-option span, .concern-option span {
+    padding: 8px 15px;
+    background: var(--color-beige);
+    border-radius: 20px;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.skin-option input[type="radio"]:checked + span {
+    background: var(--color-mint);
+    border-color: var(--color-green);
+}
+
+.concern-option input[type="checkbox"]:checked + span {
+    background: var(--color-lavender);
+    border-color: var(--color-green);
+}
+
+.consultation-form input[type="email"] {
+    padding: 12px 15px;
     border: 2px solid var(--color-beige);
     border-radius: 10px;
     font-family: 'El Messiri', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: var(--transition);
-    background: var(--color-white);
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
+.consultation-form input[type="email"]:focus {
     outline: none;
-    border-color: var(--color-green);
-    box-shadow: 0 0 0 3px rgba(138, 155, 110, 0.2);
+    border-color: var(--color-mint);
 }
 
-.submit-btn {
-    background: linear-gradient(135deg, var(--color-green), var(--color-orange));
-    color: white;
+.submit-consultation {
+    background: linear-gradient(135deg, var(--color-mint), var(--color-lavender));
+    color: var(--color-brown);
     border: none;
     border-radius: 50px;
     padding: 15px;
@@ -875,11 +1116,12 @@ body.english .close-modal {
     cursor: pointer;
     transition: var(--transition);
     margin-top: 10px;
+    font-weight: 600;
 }
 
-.submit-btn:hover {
+.submit-consultation:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(138, 155, 110, 0.3);
+    box-shadow: 0 10px 20px rgba(200, 230, 201, 0.3);
 }
 
 /* تجاوبية */
@@ -892,13 +1134,8 @@ body.english .close-modal {
         font-size: 2.8rem;
     }
     
-    .story-book {
-        flex-direction: column;
-    }
-    
-    .left-page {
-        border-left: none;
-        border-bottom: 1px dashed var(--color-light-brown);
+    .routine-steps {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -946,6 +1183,10 @@ body.english .close-modal {
     .section-title {
         font-size: 2.3rem;
     }
+    
+    .routine-steps {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 576px) {
@@ -961,6 +1202,10 @@ body.english .close-modal {
         grid-template-columns: 1fr;
     }
     
+    .ingredients-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .testimonials-container {
         grid-template-columns: 1fr;
     }
@@ -972,5 +1217,10 @@ body.english .close-modal {
     
     .contact-info {
         justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
     }
 }
