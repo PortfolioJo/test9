@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جمال طبيعي | Natural Beauty</title>
+    <title>جمال طبيعي | Natural Beauty - الأردن</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,47 +19,47 @@
         </button>
     </div>
 
+    <!-- زر السلة -->
+    <div class="cart-icon-container">
+        <button class="cart-btn" id="cartBtn">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </div>
+
     <!-- القائمة الجانبية -->
     <nav class="side-nav">
         <ul>
             <li><a href="#home" class="nav-item" data-section="home">
-                <i class="fas fa-compass"></i>
-                <span class="lang-ar">البداية</span>
-                <span class="lang-en" style="display:none;">Start</span>
+                <i class="fas fa-home"></i>
+                <span class="lang-ar">الرئيسية</span>
+                <span class="lang-en" style="display:none;">Home</span>
             </a></li>
             <li><a href="#products" class="nav-item" data-section="products">
                 <i class="fas fa-spa"></i>
                 <span class="lang-ar">المنتجات</span>
                 <span class="lang-en" style="display:none;">Products</span>
             </a></li>
-            <li><a href="#ingredients" class="nav-item" data-section="ingredients">
-                <i class="fas fa-leaf"></i>
-                <span class="lang-ar">المكونات</span>
-                <span class="lang-en" style="display:none;">Ingredients</span>
+            <li><a href="#skin-test" class="nav-item" data-section="skin-test">
+                <i class="fas fa-stethoscope"></i>
+                <span class="lang-ar">فحص البشرة</span>
+                <span class="lang-en" style="display:none;">Skin Test</span>
             </a></li>
             <li><a href="#testimonials" class="nav-item" data-section="testimonials">
                 <i class="fas fa-comments"></i>
-                <span class="lang-ar">تجارب العملاء</span>
+                <span class="lang-ar">تجارب</span>
                 <span class="lang-en" style="display:none;">Testimonials</span>
             </a></li>
         </ul>
     </nav>
 
-    <!-- زر التواصل الدائم -->
-    <div class="floating-contact">
-        <button class="contact-btn">
-            <i class="fas fa-comment-dots"></i>
-            <span class="lang-ar">استشارة بشرة</span>
-            <span class="lang-en" style="display:none;">Skin Consultation</span>
+    <!-- زر الاستشارة -->
+    <div class="consultation-btn-container">
+        <button class="consultation-btn" id="consultationBtn">
+            <i class="fas fa-comment-medical"></i>
+            <span class="lang-ar">استشارة مجانية</span>
+            <span class="lang-en" style="display:none;">Free Consultation</span>
         </button>
-        <div class="contact-options">
-            <a href="https://wa.me/1234567890" target="_blank" class="whatsapp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="mailto:skin@naturalbeauty.com" class="email">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
     </div>
 
     <!-- القسم الرئيسي -->
@@ -68,31 +68,48 @@
         <section id="home" class="hero-section full-screen">
             <div class="hero-background"></div>
             <div class="hero-content">
+                <div class="logo-container">
+                    <h1 class="site-logo">
+                        <span class="lang-ar">جمال طبيعي</span>
+                        <span class="lang-en" style="display:none;">Natural Beauty</span>
+                    </h1>
+                    <p class="site-tagline">
+                        <span class="lang-ar">عناية طبيعية 100% من قلب الأردن</span>
+                        <span class="lang-en" style="display:none">100% Natural Care from the Heart of Jordan</span>
+                    </p>
+                </div>
                 <div class="hand-drawn-line"></div>
-                <h1 class="hero-title">
-                    <span class="lang-ar">بشرتك تستحق الأفضل</span>
-                    <span class="lang-en" style="display:none;">Your Skin Deserves the Best</span>
-                </h1>
+                <h2 class="hero-title">
+                    <span class="lang-ar">بشرتك تستحق الأفضل من الطبيعة</span>
+                    <span class="lang-en" style="display:none">Your Skin Deserves the Best from Nature</span>
+                </h2>
                 <p class="hero-subtitle">
-                    <span class="lang-ar">منتجات عناية طبيعية 100%، صُنعت بعناية لتجعل بشرتك تتألق</span>
-                    <span class="lang-en" style="display:none">100% natural care products, crafted to make your skin glow</span>
+                    <span class="lang-ar">منتجاتنا مصنوعة يدوياً في الأردن بمكونات طبيعية 100%</span>
+                    <span class="lang-en" style="display:none">Our products are handcrafted in Jordan with 100% natural ingredients</span>
                 </p>
-                <button class="cta-button hand-drawn-btn">
-                    <span class="lang-ar">ابدأ رحلة العناية</span>
-                    <span class="lang-en" style="display:none">Start Your Care Journey</span>
-                    <i class="fas fa-arrow-left"></i>
-                </button>
+                <div class="hero-actions">
+                    <button class="cta-button primary-btn" id="shopNowBtn">
+                        <span class="lang-ar">تسوق الآن</span>
+                        <span class="lang-en" style="display:none">Shop Now</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="cta-button secondary-btn" id="skinTestBtn">
+                        <span class="lang-ar">فحص بشرة مجاني</span>
+                        <span class="lang-en" style="display:none">Free Skin Test</span>
+                        <i class="fas fa-stethoscope"></i>
+                    </button>
+                </div>
             </div>
             <div class="scroll-indicator">
                 <div class="mouse">
                     <div class="wheel"></div>
                 </div>
-                <p class="lang-ar">مرر لاكتشاف الجمال</p>
-                <p class="lang-en" style="display:none">Scroll to Discover Beauty</p>
+                <p class="lang-ar">مرر للأسفل</p>
+                <p class="lang-en" style="display:none">Scroll Down</p>
             </div>
         </section>
 
-        <!-- رحلة المنتجات -->
+        <!-- قسم المنتجات -->
         <section id="products" class="products-section">
             <div class="section-header">
                 <h2 class="section-title">
@@ -101,359 +118,321 @@
                 </h2>
                 <div class="hand-drawn-line small"></div>
                 <p class="section-description">
-                    <span class="lang-ar">كل منتج هو نتاج بحث وتطوير لتحقيق التوازن المثالي للبشرة</span>
-                    <span class="lang-en" style="display:none">Each product is the result of research to achieve perfect skin balance</span>
+                    <span class="lang-ar">اختر من بين أفضل منتجات العناية بالبشرة المصنوعة في الأردن</span>
+                    <span class="lang-en" style="display:none">Choose from the best skin care products made in Jordan</span>
                 </p>
             </div>
 
-            <div class="products-container">
-                <!-- المنتج 1 -->
-                <div class="product-card floating-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1556228578-9c360e1d8d34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="سيروم فيتامين سي">
-                        <div class="product-badge">
-                            <span class="lang-ar">الأكثر مبيعاً</span>
-                            <span class="lang-en" style="display:none">Best Seller</span>
-                        </div>
-                        <div class="product-overlay">
-                            <button class="buy-button">
-                                <i class="fas fa-shopping-bag"></i>
-                                <span class="lang-ar">أضف إلى السلة</span>
-                                <span class="lang-en" style="display:none">Add to Cart</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="skin-type">
-                            <span class="lang-ar">لجميع أنواع البشرة</span>
-                            <span class="lang-en" style="display:none">For All Skin Types</span>
-                        </div>
-                        <h3 class="product-title">
-                            <span class="lang-ar">سيروم فيتامين سي النقي</span>
-                            <span class="lang-en" style="display:none">Pure Vitamin C Serum</span>
-                        </h3>
-                        <p class="product-desc">
-                            <span class="lang-ar">يضيء البشرة ويقلل من علامات الشيخوخة مع مضادات الأكسدة القوية</span>
-                            <span class="lang-en" style="display:none">Brightens skin and reduces signs of aging with powerful antioxidants</span>
-                        </p>
-                        <div class="product-details">
-                            <div class="detail">
-                                <i class="fas fa-clock"></i>
-                                <span class="lang-ar">نتائج في 4 أسابيع</span>
-                                <span class="lang-en" style="display:none">Results in 4 weeks</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-leaf"></i>
-                                <span class="lang-ar">98% طبيعي</span>
-                                <span class="lang-en" style="display:none">98% Natural</span>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <span class="price">189 <span class="currency lang-ar">ر.س</span><span class="currency lang-en" style="display:none">SAR</span></span>
-                            <span class="original-price">249 <span class="currency lang-ar">ر.س</span></span>
-                        </div>
-                    </div>
-                </div>
+            <div class="products-filter">
+                <button class="filter-btn active" data-filter="all">
+                    <span class="lang-ar">الكل</span>
+                    <span class="lang-en" style="display:none">All</span>
+                </button>
+                <button class="filter-btn" data-filter="serum">
+                    <span class="lang-ar">السيروم</span>
+                    <span class="lang-en" style="display:none">Serums</span>
+                </button>
+                <button class="filter-btn" data-filter="moisturizer">
+                    <span class="lang-ar">المرطبات</span>
+                    <span class="lang-en" style="display:none">Moisturizers</span>
+                </button>
+                <button class="filter-btn" data-filter="cleanser">
+                    <span class="lang-ar">المنظفات</span>
+                    <span class="lang-en" style="display:none">Cleansers</span>
+                </button>
+                <button class="filter-btn" data-filter="mask">
+                    <span class="lang-ar">الأقنعة</span>
+                    <span class="lang-en" style="display:none">Masks</span>
+                </button>
+            </div>
 
-                <!-- المنتج 2 -->
-                <div class="product-card floating-card delayed">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="مرطب النهار">
-                        <div class="product-overlay">
-                            <button class="buy-button">
-                                <i class="fas fa-shopping-bag"></i>
-                                <span class="lang-ar">أضف إلى السلة</span>
-                                <span class="lang-en" style="display:none">Add to Cart</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="skin-type">
-                            <span class="lang-ar">للبشرة الجافة والحساسة</span>
-                            <span class="lang-en" style="display:none">For Dry & Sensitive Skin</span>
-                        </div>
-                        <h3 class="product-title">
-                            <span class="lang-ar">مرطب النهار بالهيالورونيك</span>
-                            <span class="lang-en" style="display:none">Hyaluronic Day Moisturizer</span>
-                        </h3>
-                        <p class="product-desc">
-                            <span class="lang-ar">يرطب بعمق مع حماية SPF 30، مثالي للاستخدام اليومي</span>
-                            <span class="lang-en" style="display:none">Deep hydration with SPF 30 protection, perfect for daily use</span>
-                        </p>
-                        <div class="product-details">
-                            <div class="detail">
-                                <i class="fas fa-sun"></i>
-                                <span class="lang-ar">حماية من الشمس</span>
-                                <span class="lang-en" style="display:none">Sun Protection</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-tint"></i>
-                                <span class="lang-ar">ترطيب 72 ساعة</span>
-                                <span class="lang-en" style="display:none">72h Hydration</span>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <span class="price">149 <span class="currency lang-ar">ر.س</span><span class="currency lang-en" style="display:none">SAR</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- المنتج 3 -->
-                <div class="product-card floating-card more-delayed">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="قناع الليل">
-                        <div class="product-badge new">
-                            <span class="lang-ar">جديد</span>
-                            <span class="lang-en" style="display:none">New</span>
-                        </div>
-                        <div class="product-overlay">
-                            <button class="buy-button">
-                                <i class="fas fa-shopping-bag"></i>
-                                <span class="lang-ar">أضف إلى السلة</span>
-                                <span class="lang-en" style="display:none">Add to Cart</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="skin-type">
-                            <span class="lang-ar">للبشرة المختلطة والدهنية</span>
-                            <span class="lang-en" style="display:none">For Oily & Combination Skin</span>
-                        </div>
-                        <h3 class="product-title">
-                            <span class="lang-ar">قناع الليل بالتريتينول</span>
-                            <span class="lang-en" style="display:none">Retinol Overnight Mask</span>
-                        </h3>
-                        <p class="product-desc">
-                            <span class="lang-ar">تجديد خلوي أثناء النوم، يحسن نسيج البشرة ويقلل التجاعيد</span>
-                            <span class="lang-en" style="display:none">Cellular renewal during sleep, improves skin texture and reduces wrinkles</span>
-                        </p>
-                        <div class="product-details">
-                            <div class="detail">
-                                <i class="fas fa-moon"></i>
-                                <span class="lang-ar">علاج ليلي</span>
-                                <span class="lang-en" style="display:none">Overnight Treatment</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-seedling"></i>
-                                <span class="lang-ar">نباتي</span>
-                                <span class="lang-en" style="display:none">Vegan</span>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <span class="price">229 <span class="currency lang-ar">ر.س</span><span class="currency lang-en" style="display:none">SAR</span></span>
-                        </div>
-                    </div>
-                </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- سيتم إضافة المنتجات ديناميكياً عبر JavaScript -->
             </div>
         </section>
 
-        <!-- سر المكونات -->
-        <section id="ingredients" class="ingredients-section">
+        <!-- قسم فحص البشرة -->
+        <section id="skin-test" class="skin-test-section">
             <div class="section-header">
                 <h2 class="section-title">
-                    <span class="lang-ar">سر مكوناتنا</span>
-                    <span class="lang-en" style="display:none">The Secret of Our Ingredients</span>
+                    <span class="lang-ar">ما نوع بشرتك؟</span>
+                    <span class="lang-en" style="display:none">What's Your Skin Type?</span>
                 </h2>
                 <div class="hand-drawn-line small"></div>
                 <p class="section-description">
-                    <span class="lang-ar">نختار كل مكون بعناية لنقدم لكِ فعالية لا تضاهى مع أقصى درجات الأمان</span>
-                    <span class="lang-en" style="display:none">We carefully select each ingredient to provide unparalleled efficacy with maximum safety</span>
+                    <span class="lang-ar">اختبار سريع يساعدك في تحديد نوع بشرتك واختيار المنتجات المناسبة</span>
+                    <span class="lang-en" style="display:none">Quick test to help determine your skin type and choose suitable products</span>
                 </p>
             </div>
 
-            <div class="ingredients-grid">
-                <div class="ingredient-card">
-                    <div class="ingredient-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <h3 class="ingredient-title">
-                        <span class="lang-ar">مكونات نباتية</span>
-                        <span class="lang-en" style="display:none">Botanical Ingredients</span>
+            <div class="skin-test-container">
+                <div class="test-step active" id="step1">
+                    <h3 class="step-question">
+                        <span class="lang-ar">كيف تبدو بشرتك في منتصف النهار؟</span>
+                        <span class="lang-en" style="display:none">How does your skin look midday?</span>
                     </h3>
-                    <p class="ingredient-desc">
-                        <span class="lang-ar">مستخلصات نباتية طبيعية 100% من مصادر مستدامة</span>
-                        <span class="lang-en" style="display:none">100% natural plant extracts from sustainable sources</span>
-                    </p>
+                    <div class="test-options">
+                        <button class="test-option" data-value="oily">
+                            <i class="fas fa-tint"></i>
+                            <span class="lang-ar">دهنية ولامعة</span>
+                            <span class="lang-en" style="display:none">Oily and shiny</span>
+                        </button>
+                        <button class="test-option" data-value="dry">
+                            <i class="fas fa-wind"></i>
+                            <span class="lang-ar">جافة ومتقشرة</span>
+                            <span class="lang-en" style="display:none">Dry and flaky</span>
+                        </button>
+                        <button class="test-option" data-value="combination">
+                            <i class="fas fa-balance-scale"></i>
+                            <span class="lang-ar">دهنية في T-zone فقط</span>
+                            <span class="lang-en" style="display:none">Oily in T-zone only</span>
+                        </button>
+                        <button class="test-option" data-value="normal">
+                            <i class="fas fa-smile"></i>
+                            <span class="lang-ar">متوازنة وناعمة</span>
+                            <span class="lang-en" style="display:none">Balanced and smooth</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="ingredient-card">
-                    <div class="ingredient-icon">
-                        <i class="fas fa-ban"></i>
-                    </div>
-                    <h3 class="ingredient-title">
-                        <span class="lang-ar">خالي من المواد الضارة</span>
-                        <span class="lang-en" style="display:none">Free from Harmful Substances</span>
+                <div class="test-step" id="step2">
+                    <h3 class="step-question">
+                        <span class="lang-ar">كيف تتفاعل بشرتك مع المنتجات الجديدة؟</span>
+                        <span class="lang-en" style="display:none">How does your skin react to new products?</span>
                     </h3>
-                    <p class="ingredient-desc">
-                        <span class="lang-ar">لا يحتوي على بارابين، كبريتات، عطور صناعية أو مواد حافظة قاسية</span>
-                        <span class="lang-en" style="display:none">No parabens, sulfates, synthetic fragrances or harsh preservatives</span>
-                    </p>
+                    <div class="test-options">
+                        <button class="test-option" data-value="sensitive">
+                            <i class="fas fa-allergies"></i>
+                            <span class="lang-ar">تحمر أو تتهيج بسرعة</span>
+                            <span class="lang-en" style="display:none">Redness or irritation quickly</span>
+                        </button>
+                        <button class="test-option" data-value="resistant">
+                            <i class="fas fa-shield-alt"></i>
+                            <span class="lang-ar">تتأقلم بشكل جيد</span>
+                            <span class="lang-en" style="display:none">Adapts well</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="ingredient-card">
-                    <div class="ingredient-icon">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <h3 class="ingredient-title">
-                        <span class="lang-ar">مدعوم علمياً</span>
-                        <span class="lang-en" style="display:none">Scientifically Backed</span>
+                <div class="test-step" id="step3">
+                    <h3 class="step-question">
+                        <span class="lang-ar">ما هي أكبر مخاوفك؟</span>
+                        <span class="lang-en" style="display:none">What are your main concerns?</span>
                     </h3>
-                    <p class="ingredient-desc">
-                        <span class="lang-ar">كل منتج مدعوم بأبحاث علمية واختبارات سريرية</span>
-                        <span class="lang-en" style="display:none">Each product is backed by scientific research and clinical testing</span>
-                    </p>
+                    <div class="test-options">
+                        <button class="test-option" data-value="acne">
+                            <i class="fas fa-circle"></i>
+                            <span class="lang-ar">حب الشباب</span>
+                            <span class="lang-en" style="display:none">Acne</span>
+                        </button>
+                        <button class="test-option" data-value="aging">
+                            <i class="fas fa-clock"></i>
+                            <span class="lang-ar">علامات التقدم بالعمر</span>
+                            <span class="lang-en" style="display:none">Signs of aging</span>
+                        </button>
+                        <button class="test-option" data-value="darkSpots">
+                            <i class="fas fa-circle"></i>
+                            <span class="lang-ar">البقع الداكنة</span>
+                            <span class="lang-en" style="display:none">Dark spots</span>
+                        </button>
+                        <button class="test-option" data-value="hydration">
+                            <i class="fas fa-tint"></i>
+                            <span class="lang-ar">الترطيب</span>
+                            <span class="lang-en" style="display:none">Hydration</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="ingredient-card">
-                    <div class="ingredient-icon">
-                        <i class="fas fa-recycle"></i>
-                    </div>
-                    <h3 class="ingredient-title">
-                        <span class="lang-ar">تعبئة مستدامة</span>
-                        <span class="lang-en" style="display:none">Sustainable Packaging</span>
+                <div class="test-result" id="testResult" style="display: none;">
+                    <h3 class="result-title">
+                        <span class="lang-ar">نوع بشرتك هو:</span>
+                        <span class="lang-en" style="display:none">Your skin type is:</span>
                     </h3>
-                    <p class="ingredient-desc">
-                        <span class="lang-ar">عبوات قابلة لإعادة التعبئة وقابلة للتحلل</span>
-                        <span class="lang-en" style="display:none">Refillable and biodegradable packaging</span>
-                    </p>
+                    <div class="result-card" id="resultCard">
+                        <!-- سيتم ملؤها ديناميكياً -->
+                    </div>
+                    <div class="recommended-products" id="recommendedProducts">
+                        <!-- سيتم ملؤها ديناميكياً -->
+                    </div>
+                    <button class="restart-test-btn" id="restartTest">
+                        <span class="lang-ar">إعادة الاختبار</span>
+                        <span class="lang-en" style="display:none">Restart Test</span>
+                    </button>
+                </div>
+
+                <div class="test-controls">
+                    <button class="test-btn prev-btn" id="prevBtn" disabled>
+                        <i class="fas fa-arrow-right"></i>
+                        <span class="lang-ar">السابق</span>
+                        <span class="lang-en" style="display:none">Previous</span>
+                    </button>
+                    <button class="test-btn next-btn" id="nextBtn">
+                        <span class="lang-ar">التالي</span>
+                        <span class="lang-en" style="display:none">Next</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="test-btn finish-btn" id="finishBtn" style="display: none;">
+                        <span class="lang-ar">انهاء الاختبار</span>
+                        <span class="lang-en" style="display:none">Finish Test</span>
+                        <i class="fas fa-check"></i>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- روتين العناية -->
-        <section class="routine-section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="lang-ar">روتین العناية المثالي</span>
-                    <span class="lang-en" style="display:none">The Perfect Care Routine</span>
-                </h2>
-                <div class="hand-drawn-line small"></div>
-            </div>
-
-            <div class="routine-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">
-                        <span class="lang-ar">التنظيف</span>
-                        <span class="lang-en" style="display:none">Cleansing</span>
-                    </h3>
-                    <p class="step-desc">
-                        <span class="lang-ar">ابدأي بتنظيف بشرتك بلطف لإزالة الشوائب</span>
-                        <span class="lang-en" style="display:none">Start by gently cleansing your skin to remove impurities</span>
-                    </p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">
-                        <span class="lang-ar">التونر</span>
-                        <span class="lang-en" style="display:none">Toning</span>
-                    </h3>
-                    <p class="step-desc">
-                        <span class="lang-ar">استخدمي التونر لموازنة درجة حموضة البشرة</span>
-                        <span class="lang-en" style="display:none">Use toner to balance your skin's pH level</span>
-                    </p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">
-                        <span class="lang-ar">المصل</span>
-                        <span class="lang-en" style="display:none">Serum</span>
-                    </h3>
-                    <p class="step-desc">
-                        <span class="lang-ar">طبقى المصل لعلاج مخاوف بشرتك المحددة</span>
-                        <span class="lang-en" style="display:none">Apply serum to treat your specific skin concerns</span>
-                    </p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">
-                        <span class="lang-ar">الترطيب</span>
-                        <span class="lang-en" style="display:none">Moisturizing</span>
-                    </h3>
-                    <p class="step-desc">
-                        <span class="lang-ar">اختتمي روتينك بمرطب يحافظ على نعومة بشرتك</span>
-                        <span class="lang-en" style="display:none">Finish your routine with a moisturizer to keep your skin soft</span>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- آراء العملاء -->
+        <!-- قسم تجارب العملاء -->
         <section id="testimonials" class="testimonials-section">
             <div class="section-header">
                 <h2 class="section-title">
-                    <span class="lang-ar">تحولات حقيقية</span>
-                    <span class="lang-en" style="display:none">Real Transformations</span>
+                    <span class="lang-ar">ماذا قال عملاؤنا؟</span>
+                    <span class="lang-en" style="display:none">What Our Customers Say</span>
                 </h2>
                 <div class="hand-drawn-line small"></div>
-                <p class="section-description">
-                    <span class="lang-ar">قصص نجاح من عملائنا الذين اختبروا جودة منتجاتنا</span>
-                    <span class="lang-en" style="display:none">Success stories from our customers who experienced our product quality</span>
-                </p>
             </div>
 
-            <div class="testimonials-container">
-                <div class="testimonial-note">
-                    <div class="note-pin"></div>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <div class="testimonials-slider">
+                <div class="testimonial-slide active">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            <span class="lang-ar">"منذ أن بدأت باستخدام سيروم فيتامين سي، تغيرت بشرتي تماماً! أصبحت أكثر إشراقاً واختفت البقع الداكنة."</span>
+                            <span class="lang-en" style="display:none">"Since I started using the Vitamin C serum, my skin has completely changed! It became brighter and dark spots disappeared."</span>
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="سارة" class="author-img">
+                            <div class="author-info">
+                                <h4>سارة محمد</h4>
+                                <p class="author-location">عمان، الأردن</p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="testimonial-text">
-                        <span class="lang-ar">"بشرتي كانت تعاني من الجفاف والحساسية، وبعد استخدام منتجاتكم أصبحت ناعمة ومتوهجة!"</span>
-                        <span class="lang-en" style="display:none">"My skin was dry and sensitive, but after using your products it became soft and glowing!"</span>
-                    </p>
-                    <p class="testimonial-author">- نور، ٢٨ سنة</p>
-                    <p class="testimonial-skin">
-                        <span class="lang-ar">(بشرة جافة وحساسة)</span>
-                        <span class="lang-en" style="display:none">(Dry & Sensitive Skin)</span>
-                    </p>
                 </div>
 
-                <div class="testimonial-note delayed">
-                    <div class="note-pin"></div>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            <span class="lang-ar">"كنت أعاني من حب الشباب لسنوات، ومع استخدام منظف الشاي الأخضر تحسنت بشرتي بنسبة 90%. شكراً جزيلاً!"</span>
+                            <span class="lang-en" style="display:none">"I suffered from acne for years, and with the green tea cleanser, my skin improved by 90%. Thank you so much!"</span>
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="أحمد" class="author-img">
+                            <div class="author-info">
+                                <h4>أحمد خالد</h4>
+                                <p class="author-location">الزرقاء، الأردن</p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="testimonial-text">
-                        <span class="lang-ar">"سيروم فيتامين سي غير بشرتي! أصبحت أكثر إشراقاً واختفت البقع الداكنة."</span>
-                        <span class="lang-en" style="display:none">"The Vitamin C serum transformed my skin! It became brighter and dark spots disappeared."</span>
-                    </p>
-                    <p class="testimonial-author">- سارة، ٣٥ سنة</p>
-                    <p class="testimonial-skin">
-                        <span class="lang-ar">(بشرة مختلطة)</span>
-                        <span class="lang-en" style="display:none">(Combination Skin)</span>
-                    </p>
                 </div>
 
-                <div class="testimonial-note more-delayed">
-                    <div class="note-pin"></div>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            <span class="lang-ar">"المرطب الليلي بالتريتينول معجزة! استيقظت وبشرتي ناعمة ومتجددة. المنتجات الطبيعية هي الأفضل دائماً."</span>
+                            <span class="lang-en" style="display:none">"The retinol night moisturizer is a miracle! I woke up with soft, renewed skin. Natural products are always the best."</span>
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="نور" class="author-img">
+                            <div class="author-info">
+                                <h4>نور حسن</h4>
+                                <p class="author-location">إربد، الأردن</p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="testimonial-text">
-                        <span class="lang-ar">"أحب أن المنتجات طبيعية 100% ولا تحتوي على مواد كيميائية. بشرتي تتنفس أخيراً!"</span>
-                        <span class="lang-en" style="display:none">"I love that the products are 100% natural and chemical-free. My skin can finally breathe!"</span>
-                    </p>
-                    <p class="testimonial-author">- فاطمة، ٣٢ سنة</p>
-                    <p class="testimonial-skin">
-                        <span class="lang-ar">(بشرة دهنية)</span>
-                        <span class="lang-en" style="display:none">(Oily Skin)</span>
-                    </p>
+                </div>
+
+                <div class="slider-controls">
+                    <button class="slider-btn prev-slide">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="slider-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="slider-btn next-slide">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الأسئلة الشائعة -->
+        <section class="faq-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="lang-ar">أسئلة شائعة</span>
+                    <span class="lang-en" style="display:none">Frequently Asked Questions</span>
+                </h2>
+                <div class="hand-drawn-line small"></div>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="lang-ar">هل المنتجات مناسبة للبشرة الحساسة؟</span>
+                        <span class="lang-en" style="display:none">Are the products suitable for sensitive skin?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="lang-ar">نعم، جميع منتجاتنا خالية من العطور الصناعية والبارابين والكبريتات، ومصممة للبشرة الحساسة.</p>
+                        <p class="lang-en" style="display:none">Yes, all our products are free from synthetic fragrances, parabens, and sulfates, and are designed for sensitive skin.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="lang-ar">كم تستغرق مدة التوصيل داخل الأردن؟</span>
+                        <span class="lang-en" style="display:none">How long does delivery take within Jordan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="lang-ar">التوصيل يستغرق 2-3 أيام عمل داخل عمّان، و3-5 أيام لباقي المحافظات.</p>
+                        <p class="lang-en" style="display:none">Delivery takes 2-3 business days within Amman, and 3-5 days to other governorates.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="lang-ar">هل يمكنني استرجاع المنتج؟</span>
+                        <span class="lang-en" style="display:none">Can I return a product?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="lang-ar">نعم، يمكنك استرجاع المنتج خلال 14 يوماً من الاستلام إذا كان غير مفتوح وغير مستخدم.</p>
+                        <p class="lang-en" style="display:none">Yes, you can return the product within 14 days of receipt if it is unopened and unused.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="lang-ar">كيف أحصل على استشارة مجانية؟</span>
+                        <span class="lang-en" style="display:none">How do I get a free consultation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="lang-ar">يمكنك التواصل معنا على الواتساب <strong>+962785094075</strong> للحصول على استشارة مجانية مع أخصائية البشرة.</p>
+                        <p class="lang-en" style="display:none">You can contact us on WhatsApp <strong>+962785094075</strong> for a free consultation with a skin specialist.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -461,65 +440,73 @@
         <!-- الفوتر -->
         <footer class="footer">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <h2 class="logo-text">
+                <div class="footer-section">
+                    <h3 class="footer-logo">
                         <span class="lang-ar">جمال طبيعي</span>
                         <span class="lang-en" style="display:none">Natural Beauty</span>
-                    </h2>
-                    <p class="footer-tagline">
-                        <span class="lang-ar">جمال يبدأ من الطبيعة</span>
-                        <span class="lang-en" style="display:none">Beauty Begins with Nature</span>
+                    </h3>
+                    <p class="footer-description">
+                        <span class="lang-ar">منتجات عناية بالبشرة طبيعية 100% مصنوعة في الأردن</span>
+                        <span class="lang-en" style="display:none">100% natural skin care products made in Jordan</span>
                     </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/962785094075" class="social-link whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <h3 class="footer-heading">
+
+                <div class="footer-section">
+                    <h4 class="footer-title">
                         <span class="lang-ar">روابط سريعة</span>
                         <span class="lang-en" style="display:none">Quick Links</span>
-                    </h3>
-                    <a href="#home" class="footer-link">
-                        <span class="lang-ar">البداية</span>
-                        <span class="lang-en" style="display:none">Home</span>
-                    </a>
-                    <a href="#products" class="footer-link">
-                        <span class="lang-ar">المنتجات</span>
-                        <span class="lang-en" style="display:none">Products</span>
-                    </a>
-                    <a href="#ingredients" class="footer-link">
-                        <span class="lang-ar">المكونات</span>
-                        <span class="lang-en" style="display:none">Ingredients</span>
-                    </a>
-                    <a href="#testimonials" class="footer-link">
-                        <span class="lang-ar">تجارب العملاء</span>
-                        <span class="lang-en" style="display:none">Testimonials</span>
-                    </a>
+                    </h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">
+                            <span class="lang-ar">الرئيسية</span>
+                            <span class="lang-en" style="display:none">Home</span>
+                        </a></li>
+                        <li><a href="#products" class="footer-link">
+                            <span class="lang-ar">المنتجات</span>
+                            <span class="lang-en" style="display:none">Products</span>
+                        </a></li>
+                        <li><a href="#skin-test" class="footer-link">
+                            <span class="lang-ar">فحص البشرة</span>
+                            <span class="lang-en" style="display:none">Skin Test</span>
+                        </a></li>
+                        <li><a href="#testimonials" class="footer-link">
+                            <span class="lang-ar">تجارب العملاء</span>
+                            <span class="lang-en" style="display:none">Testimonials</span>
+                        </a></li>
+                    </ul>
                 </div>
-                <div class="footer-contact">
-                    <h3 class="footer-heading">
-                        <span class="lang-ar">تواصل معنا</span>
-                        <span class="lang-en" style="display:none">Contact Us</span>
-                    </h3>
-                    <p class="contact-info">
-                        <i class="fas fa-envelope"></i> care@naturalbeauty.com
-                    </p>
-                    <p class="contact-info">
-                        <i class="fas fa-phone"></i> +966 50 123 4567
-                    </p>
-                    <p class="contact-info">
-                        <i class="fas fa-map-marker-alt"></i> 
-                        <span class="lang-ar">الرياض، المملكة العربية السعودية</span>
-                        <span class="lang-en" style="display:none">Riyadh, Saudi Arabia</span>
-                    </p>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">
+                        <span class="lang-ar">معلومات التواصل</span>
+                        <span class="lang-en" style="display:none">Contact Info</span>
+                    </h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> +962 7 8509 4075</li>
+                        <li><i class="fas fa-envelope"></i> info@naturalbeauty.jo</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 
+                            <span class="lang-ar">عمان، الأردن</span>
+                            <span class="lang-en" style="display:none">Amman, Jordan</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="footer-newsletter">
-                    <h3 class="footer-heading">
-                        <span class="lang-ar">النشرة البريدية</span>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">
+                        <span class="lang-ar">النشرة الإخبارية</span>
                         <span class="lang-en" style="display:none">Newsletter</span>
-                    </h3>
+                    </h4>
                     <p class="newsletter-text">
-                        <span class="lang-ar">اشتركي لتصلك أحدث النصائح والعروض</span>
-                        <span class="lang-en" style="display:none">Subscribe for latest tips and offers</span>
+                        <span class="lang-ar">اشترك لتصلك أحدث العروض والنصائح</span>
+                        <span class="lang-en" style="display:none">Subscribe for latest offers and tips</span>
                     </p>
-                    <form class="newsletter-form">
+                    <form class="newsletter-form" id="newsletterForm">
                         <input type="email" placeholder="بريدك الإلكتروني" class="lang-ar" required>
                         <input type="email" placeholder="Your Email" class="lang-en" style="display:none" required>
                         <button type="submit" class="newsletter-btn">
@@ -528,114 +515,239 @@
                     </form>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p class="copyright">
-                    <span class="lang-ar">© ٢٠٢٣ جمال طبيعي. كل الحقوق محفوظة.</span>
-                    <span class="lang-en" style="display:none">© 2023 Natural Beauty. All rights reserved.</span>
+                    <span class="lang-ar">© 2023 جمال طبيعي - جميع الحقوق محفوظة | صنع في الأردن</span>
+                    <span class="lang-en" style="display:none">© 2023 Natural Beauty - All rights reserved | Made in Jordan</span>
                 </p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fas fa-money-bill-wave"></i>
                 </div>
             </div>
         </footer>
     </main>
 
-    <!-- نافذة الاستشارة -->
-    <div class="consultation-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h3 class="modal-title">
-                <span class="lang-ar">استشارة بشرة مجانية</span>
-                <span class="lang-en" style="display:none">Free Skin Consultation</span>
-            </h3>
-            <p class="modal-subtitle">
-                <span class="lang-ar">أخبرينا عن بشرتك لنساعدك في اختيار المنتجات المناسبة</span>
-                <span class="lang-en" style="display:none">Tell us about your skin to help you choose the right products</span>
-            </p>
-            <form class="consultation-form">
-                <div class="form-group">
-                    <label>
-                        <span class="lang-ar">نوع بشرتك:</span>
-                        <span class="lang-en" style="display:none">Your Skin Type:</span>
-                    </label>
-                    <div class="skin-options">
-                        <label class="skin-option">
-                            <input type="radio" name="skinType" value="dry">
-                            <span class="lang-ar">جافة</span>
-                            <span class="lang-en" style="display:none">Dry</span>
-                        </label>
-                        <label class="skin-option">
-                            <input type="radio" name="skinType" value="oily">
-                            <span class="lang-ar">دهنية</span>
-                            <span class="lang-en" style="display:none">Oily</span>
-                        </label>
-                        <label class="skin-option">
-                            <input type="radio" name="skinType" value="combination">
-                            <span class="lang-ar">مختلطة</span>
-                            <span class="lang-en" style="display:none">Combination</span>
-                        </label>
-                        <label class="skin-option">
-                            <input type="radio" name="skinType" value="normal">
-                            <span class="lang-ar">عادية</span>
-                            <span class="lang-en" style="display:none">Normal</span>
-                        </label>
-                        <label class="skin-option">
-                            <input type="radio" name="skinType" value="sensitive">
-                            <span class="lang-ar">حساسة</span>
-                            <span class="lang-en" style="display:none">Sensitive</span>
-                        </label>
-                    </div>
+    <!-- نافذة السلة -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3 class="cart-title">
+                    <span class="lang-ar">سلة التسوق</span>
+                    <span class="lang-en" style="display:none">Shopping Cart</span>
+                </h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+
+            <div class="cart-items" id="cartItems">
+                <!-- سيتم ملؤها ديناميكياً -->
+            </div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span class="lang-ar">المجموع الفرعي:</span>
+                    <span class="lang-en" style="display:none">Subtotal:</span>
+                    <span class="subtotal-amount" id="subtotalAmount">0.00 د.أ</span>
                 </div>
-                
-                <div class="form-group">
-                    <label>
-                        <span class="lang-ar">مخاوف بشرتك الرئيسية:</span>
-                        <span class="lang-en" style="display:none">Your Main Skin Concerns:</span>
-                    </label>
-                    <div class="concern-options">
-                        <label class="concern-option">
-                            <input type="checkbox" name="concerns" value="acne">
-                            <span class="lang-ar">حب الشباب</span>
-                            <span class="lang-en" style="display:none">Acne</span>
-                        </label>
-                        <label class="concern-option">
-                            <input type="checkbox" name="concerns" value="darkSpots">
-                            <span class="lang-ar">بقع داكنة</span>
-                            <span class="lang-en" style="display:none">Dark Spots</span>
-                        </label>
-                        <label class="concern-option">
-                            <input type="checkbox" name="concerns" value="wrinkles">
-                            <span class="lang-ar">تجاعيد</span>
-                            <span class="lang-en" style="display:none">Wrinkles</span>
-                        </label>
-                        <label class="concern-option">
-                            <input type="checkbox" name="concerns" value="dryness">
-                            <span class="lang-ar">جفاف</span>
-                            <span class="lang-en" style="display:none">Dryness</span>
-                        </label>
-                        <label class="concern-option">
-                            <input type="checkbox" name="concerns" value="redness">
-                            <span class="lang-ar">احمرار</span>
-                            <span class="lang-en" style="display:none">Redness</span>
-                        </label>
-                    </div>
+                <div class="summary-row">
+                    <span class="lang-ar">رسوم التوصيل:</span>
+                    <span class="lang-en" style="display:none">Delivery:</span>
+                    <span class="delivery-amount">3.00 د.أ</span>
                 </div>
-                
-                <div class="form-group">
-                    <label for="email">
-                        <span class="lang-ar">البريد الإلكتروني:</span>
-                        <span class="lang-en" style="display:none">Email:</span>
-                    </label>
-                    <input type="email" id="email" required>
+                <div class="summary-row total">
+                    <span class="lang-ar">المجموع الكلي:</span>
+                    <span class="lang-en" style="display:none">Total:</span>
+                    <span class="total-amount" id="totalAmount">3.00 د.أ</span>
                 </div>
-                
-                <button type="submit" class="submit-consultation">
-                    <span class="lang-ar">احصلي على توصيتك المجانية</span>
-                    <span class="lang-en" style="display:none">Get Your Free Recommendation</span>
+            </div>
+
+            <div class="cart-actions">
+                <button class="cart-btn continue-shopping" id="continueShopping">
+                    <span class="lang-ar">مواصلة التسوق</span>
+                    <span class="lang-en" style="display:none">Continue Shopping</span>
                 </button>
+                <button class="cart-btn checkout-btn" id="checkoutBtn">
+                    <span class="lang-ar">إتمام الطلب</span>
+                    <span class="lang-en" style="display:none">Checkout</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الطلب -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h3 class="checkout-title">
+                    <span class="lang-ar">إتمام الطلب</span>
+                    <span class="lang-en" style="display:none">Complete Order</span>
+                </h3>
+                <button class="close-checkout" id="closeCheckout">&times;</button>
+            </div>
+
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-section">
+                    <h4 class="form-section-title">
+                        <span class="lang-ar">معلومات العميل</span>
+                        <span class="lang-en" style="display:none">Customer Information</span>
+                    </h4>
+                    <div class="form-group">
+                        <input type="text" id="customerName" required class="lang-ar" placeholder="الاسم الكامل">
+                        <input type="text" id="customerNameEn" required class="lang-en" style="display:none" placeholder="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="customerPhone" required class="lang-ar" placeholder="رقم الهاتف (واتساب)">
+                        <input type="tel" id="customerPhoneEn" required class="lang-en" style="display:none" placeholder="Phone Number (WhatsApp)">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="customerEmail" required class="lang-ar" placeholder="البريد الإلكتروني">
+                        <input type="email" id="customerEmailEn" required class="lang-en" style="display:none" placeholder="Email Address">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section-title">
+                        <span class="lang-ar">عنوان التوصيل</span>
+                        <span class="lang-en" style="display:none">Delivery Address</span>
+                    </h4>
+                    <div class="form-group">
+                        <select id="deliveryCity" required>
+                            <option value="" disabled selected class="lang-ar">اختر المدينة</option>
+                            <option value="" disabled selected class="lang-en" style="display:none">Select City</option>
+                            <option value="amman" class="lang-ar">عمان</option>
+                            <option value="amman" class="lang-en" style="display:none">Amman</option>
+                            <option value="zarqa" class="lang-ar">الزرقاء</option>
+                            <option value="zarqa" class="lang-en" style="display:none">Zarqa</option>
+                            <option value="irbid" class="lang-ar">إربد</option>
+                            <option value="irbid" class="lang-en" style="display:none">Irbid</option>
+                            <option value="aqaba" class="lang-ar">العقبة</option>
+                            <option value="aqaba" class="lang-en" style="display:none">Aqaba</option>
+                            <option value="madaba" class="lang-ar">مادبا</option>
+                            <option value="madaba" class="lang-en" style="display:none">Madaba</option>
+                            <option value="other" class="lang-ar">مدينة أخرى</option>
+                            <option value="other" class="lang-en" style="display:none">Other City</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="deliveryAddress" rows="3" required class="lang-ar" placeholder="العنوان التفصيلي"></textarea>
+                        <textarea id="deliveryAddressEn" rows="3" required class="lang-en" style="display:none" placeholder="Detailed Address"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section-title">
+                        <span class="lang-ar">طريقة الدفع</span>
+                        <span class="lang-en" style="display:none">Payment Method</span>
+                    </h4>
+                    <div class="payment-methods">
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="cash" checked>
+                            <span class="payment-label">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span class="lang-ar">الدفع عند الاستلام</span>
+                                <span class="lang-en" style="display:none">Cash on Delivery</span>
+                            </span>
+                        </label>
+                        <label class="payment-method">
+                            <input type="radio" name="payment" value="bank">
+                            <span class="payment-label">
+                                <i class="fas fa-university"></i>
+                                <span class="lang-ar">تحويل بنكي</span>
+                                <span class="lang-en" style="display:none">Bank Transfer</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section-title">
+                        <span class="lang-ar">ملاحظات إضافية</span>
+                        <span class="lang-en" style="display:none">Additional Notes</span>
+                    </h4>
+                    <div class="form-group">
+                        <textarea id="orderNotes" rows="2" class="lang-ar" placeholder="ملاحظات خاصة بالطلب (اختياري)"></textarea>
+                        <textarea id="orderNotesEn" rows="2" class="lang-en" style="display:none" placeholder="Special order notes (optional)"></textarea>
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <h4 class="form-section-title">
+                        <span class="lang-ar">ملخص الطلب</span>
+                        <span class="lang-en" style="display:none">Order Summary</span>
+                    </h4>
+                    <div class="order-items" id="orderItems">
+                        <!-- سيتم ملؤها ديناميكياً -->
+                    </div>
+                    <div class="order-total">
+                        <span class="lang-ar">المجموع:</span>
+                        <span class="lang-en" style="display:none">Total:</span>
+                        <span class="order-total-amount" id="orderTotalAmount">0.00 د.أ</span>
+                    </div>
+                </div>
+
+                <div class="terms-agreement">
+                    <label class="terms-checkbox">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span class="lang-ar">أوافق على الشروط والأحكام وسياسة الخصوصية</span>
+                        <span class="lang-en" style="display:none">I agree to the Terms & Conditions and Privacy Policy</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-order-btn" id="submitOrderBtn">
+                    <span class="lang-ar">إرسال الطلب عبر الواتساب</span>
+                    <span class="lang-en" style="display:none">Send Order via WhatsApp</span>
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة الاستشارة -->
+    <div class="consultation-modal" id="consultationModal">
+        <div class="consultation-content">
+            <div class="consultation-header">
+                <h3 class="consultation-title">
+                    <span class="lang-ar">استشارة بشرة مجانية</span>
+                    <span class="lang-en" style="display:none">Free Skin Consultation</span>
+                </h3>
+                <button class="close-consultation" id="closeConsultation">&times;</button>
+            </div>
+
+            <form class="consultation-form" id="consultationForm">
+                <div class="form-group">
+                    <label class="lang-ar">ما هو أكبر تحدي تواجهه في بشرتك؟</label>
+                    <label class="lang-en" style="display:none">What is the biggest challenge you face with your skin?</label>
+                    <textarea rows="3" required class="lang-ar" placeholder="أخبرنا عن بشرتك..."></textarea>
+                    <textarea rows="3" required class="lang-en" style="display:none" placeholder="Tell us about your skin..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="lang-ar">ما هي المنتجات التي تستخدمها حالياً؟</label>
+                    <label class="lang-en" style="display:none">What products are you currently using?</label>
+                    <textarea rows="2" class="lang-ar" placeholder="(اختياري)"></textarea>
+                    <textarea rows="2" class="lang-en" style="display:none" placeholder="(optional)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="lang-ar">رقم هاتفك (للاستشارة عبر الواتساب)</label>
+                    <label class="lang-en" style="display:none">Your phone number (for WhatsApp consultation)</label>
+                    <input type="tel" required placeholder="+962XXXXXXXXX">
+                </div>
+
+                <button type="submit" class="submit-consultation-btn">
+                    <span class="lang-ar">إرسال طلب الاستشارة</span>
+                    <span class="lang-en" style="display:none">Send Consultation Request</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+
+                <p class="consultation-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="lang-ar">سيقوم أخصائي البشرة بالتواصل معك خلال 24 ساعة</span>
+                    <span class="lang-en" style="display:none">A skin specialist will contact you within 24 hours</span>
+                </p>
             </form>
         </div>
     </div>
