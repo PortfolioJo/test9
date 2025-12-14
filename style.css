@@ -1,0 +1,353 @@
+/* إضافة في بداية الملف بعد :root */
+
+/* تبديل اللغة */
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    display: flex;
+    gap: 5px;
+    background: rgba(15, 15, 15, 0.9);
+    border-radius: var(--radius-cognitive-full);
+    padding: 5px;
+    border: 1px solid rgba(255, 92, 92, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-cognitive-secondary);
+    font-family: var(--font-cognitive-body);
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: var(--radius-cognitive-full);
+    transition: var(--transition-cognitive-normal);
+}
+
+.lang-btn.active {
+    background: var(--cognitive-accent-red);
+    color: var(--text-cognitive-light);
+}
+
+.lang-btn:hover:not(.active) {
+    background: rgba(255, 92, 92, 0.1);
+    color: var(--cognitive-accent-red);
+}
+
+/* إخفاء النصوص حسب اللغة */
+[data-lang]:not([data-lang="ar"]),
+[data-lang]:not([data-lang="en"]) {
+    display: none;
+}
+
+/* قسم الفلسفة */
+.philosophy-section {
+    background-color: var(--cognitive-darker);
+    border-top: 1px solid rgba(255, 92, 92, 0.1);
+    border-bottom: 1px solid rgba(255, 92, 92, 0.1);
+}
+
+.cognitive-philosophy-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.05;
+    background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(255, 92, 92, 0.1) 1px, rgba(255, 92, 92, 0.1) 2px),
+        repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(92, 92, 255, 0.1) 1px, rgba(92, 92, 255, 0.1) 2px);
+}
+
+.philosophy-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.philosophy-card {
+    background: var(--cognitive-light);
+    border-radius: var(--radius-cognitive-lg);
+    padding: 2.5rem;
+    text-align: center;
+    transition: var(--transition-cognitive-normal);
+    border: 1px solid rgba(255, 92, 92, 0.1);
+    box-shadow: var(--shadow-cognitive-subtle);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.philosophy-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.philosophy-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-cognitive-elevated);
+    border-color: var(--cognitive-accent-red);
+}
+
+.philosophy-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(45deg, rgba(255, 92, 92, 0.2), rgba(255, 140, 0, 0.2));
+    border-radius: var(--radius-cognitive-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 1.5rem;
+    color: var(--cognitive-accent-red);
+}
+
+.philosophy-card h3 {
+    font-family: var(--font-cognitive-heading);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-cognitive-primary);
+}
+
+.philosophy-card p {
+    color: var(--text-cognitive-secondary);
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* قسم الخدمات */
+.services-section {
+    background-color: var(--cognitive-dark);
+}
+
+.cognitive-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.cognitive-service-card {
+    background: var(--cognitive-light);
+    border-radius: var(--radius-cognitive-lg);
+    padding: 2.5rem;
+    transition: var(--transition-cognitive-normal);
+    position: relative;
+    border: 1px solid rgba(255, 92, 92, 0.1);
+    box-shadow: var(--shadow-cognitive-subtle);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.cognitive-service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cognitive-service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-cognitive-elevated);
+    border-color: var(--cognitive-accent-red);
+}
+
+.cognitive-service-card.featured {
+    border-color: var(--cognitive-accent-orange);
+    box-shadow: 0 8px 30px rgba(255, 140, 0, 0.2);
+}
+
+.cognitive-service-badge {
+    position: absolute;
+    top: -12px;
+    right: 50%;
+    transform: translateX(50%);
+    background: var(--cognitive-accent-orange);
+    color: var(--text-cognitive-light);
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-cognitive-full);
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.cognitive-service-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(45deg, rgba(255, 92, 92, 0.2), rgba(255, 140, 0, 0.2));
+    border-radius: var(--radius-cognitive-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--text-cognitive-light);
+    margin-bottom: 1.5rem;
+}
+
+.cognitive-service-card h3 {
+    font-family: var(--font-cognitive-heading);
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: var(--text-cognitive-primary);
+}
+
+.cognitive-service-card p {
+    color: var(--text-cognitive-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.service-features {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.service-features .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-cognitive-secondary);
+}
+
+.service-features .feature-item i {
+    color: var(--cognitive-accent-red);
+    font-size: 0.9rem;
+}
+
+/* قسم الطريقة */
+.process-section {
+    background: linear-gradient(135deg, var(--cognitive-darker), #1a1a1a);
+    position: relative;
+    overflow: hidden;
+}
+
+.cognitive-process-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.cognitive-process-timeline::before {
+    content: '';
+    position: absolute;
+    right: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--cognitive-accent-red), transparent);
+    transform: translateX(50%);
+}
+
+.cognitive-process-step {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.cognitive-process-step.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.cognitive-process-step:nth-child(even) {
+    flex-direction: row-reverse;
+    transform: translateX(30px);
+}
+
+.cognitive-process-step:nth-child(even).visible {
+    transform: translateX(0);
+}
+
+.cognitive-step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--cognitive-accent-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-cognitive-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: var(--text-cognitive-light);
+    position: relative;
+    z-index: 2;
+}
+
+.cognitive-step-content {
+    flex: 1;
+    background: var(--cognitive-light);
+    padding: 2rem;
+    border-radius: var(--radius-cognitive-lg);
+    border: 1px solid rgba(255, 92, 92, 0.1);
+}
+
+.cognitive-step-content h3 {
+    font-family: var(--font-cognitive-heading);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-cognitive-primary);
+}
+
+.cognitive-step-content p {
+    color: var(--text-cognitive-secondary);
+    line-height: 1.6;
+}
+
+/* تحسين التجاوبية */
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .lang-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .cognitive-process-timeline::before {
+        right: 30px;
+        transform: none;
+    }
+    
+    .cognitive-process-step {
+        flex-direction: row !important;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .cognitive-step-content {
+        padding: 1.5rem;
+    }
+    
+    .philosophy-content,
+    .cognitive-services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .cognitive-process-timeline::before {
+        display: none;
+    }
+    
+    .cognitive-process-step {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    
+    .cognitive-step-number {
+        margin-bottom: 1rem;
+    }
+}
