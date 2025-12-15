@@ -17,6 +17,8 @@
             --accent-gold: #e9c46a;
             --accent-silver: #e0e0e0;
             --dark-green: #1d7873;
+            --deep-blue: #0f1a2a;
+            --light-blue: #1a365d;
         }
         
         * {
@@ -27,10 +29,25 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--primary-black) 100%);
             color: var(--primary-white);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(42, 157, 143, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(233, 196, 106, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 40% 40%, rgba(29, 120, 115, 0.05) 0%, transparent 30%);
+            z-index: -1;
         }
         
         .container {
@@ -39,47 +56,80 @@
             padding: 0 20px;
         }
         
-        /* Minimal Header */
+        /* Improved Header */
         .header {
-            padding: 40px 0 20px;
+            padding: 30px 0 15px;
             text-align: center;
             position: relative;
             z-index: 100;
         }
         
+        .name-wrapper {
+            display: inline-block;
+            position: relative;
+            padding: 0 40px;
+        }
+        
         .name {
             font-family: 'Playfair Display', serif;
-            font-size: 5.5rem;
+            font-size: 5rem;
             font-weight: 700;
             letter-spacing: 3px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--primary-white), var(--accent-silver));
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-silver), var(--accent-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(233, 196, 106, 0.3);
-            animation: nameGlow 4s ease-in-out infinite alternate;
+            margin: 0;
+            position: relative;
+            text-shadow: 0 0 40px rgba(233, 196, 106, 0.3);
+            animation: nameGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .name::before, .name::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold));
+            transform: translateY(-50%);
+        }
+        
+        .name::before {
+            left: -40px;
+            background: linear-gradient(90deg, var(--accent-gold), transparent);
+        }
+        
+        .name::after {
+            right: -40px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold));
         }
         
         .year-tagline {
-            font-size: 1.8rem;
-            font-weight: 300;
-            letter-spacing: 8px;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 6px;
             text-transform: uppercase;
             color: var(--accent-silver);
-            margin-top: 10px;
+            margin-top: 15px;
             position: relative;
             display: inline-block;
+            padding: 0 15px;
+        }
+        
+        .year-tagline span {
+            color: var(--accent-gold);
+            font-weight: 500;
         }
         
         .year-tagline::before, .year-tagline::after {
-            content: '✦';
+            content: '';
             position: absolute;
             top: 50%;
+            width: 30px;
+            height: 1px;
+            background: var(--accent-green);
             transform: translateY(-50%);
-            color: var(--accent-gold);
-            font-size: 1.2rem;
-            opacity: 0.7;
         }
         
         .year-tagline::before {
@@ -90,21 +140,28 @@
             right: -40px;
         }
         
-        /* Main Content */
+        /* Main Content Layout */
         .main-content {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 75vh;
+            min-height: 70vh;
             position: relative;
-            margin-top: 20px;
+            padding: 20px 0 100px;
         }
         
-        /* Tree Container with 3D effect */
+        /* Tree Container with improved positioning */
+        .tree-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        
         .tree-container {
             position: relative;
-            width: 700px;
-            height: 700px;
+            width: 600px;
+            height: 600px;
             margin: 0 auto;
         }
         
@@ -114,22 +171,31 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            border: 2px solid var(--accent-green);
+            border: 1px solid rgba(42, 157, 143, 0.3);
             box-shadow: 
-                0 0 40px rgba(42, 157, 143, 0.3),
+                0 10px 40px rgba(0, 0, 0, 0.5),
+                0 0 60px rgba(42, 157, 143, 0.2),
                 inset 0 0 40px rgba(42, 157, 143, 0.1);
+            transition: box-shadow 0.5s ease;
         }
         
-        /* Star overlay */
+        #tree-canvas:hover {
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.6),
+                0 0 80px rgba(42, 157, 143, 0.3),
+                inset 0 0 40px rgba(42, 157, 143, 0.15);
+        }
+        
+        /* Star overlay - centered */
         .star-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             z-index: 10;
             pointer-events: none;
         }
@@ -139,12 +205,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
-            opacity: 0.8;
+            opacity: 0.7;
             border-radius: 50%;
-            filter: blur(20px);
+            filter: blur(15px);
             animation: starPulse 3s ease-in-out infinite alternate;
         }
         
@@ -153,12 +219,40 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(0deg);
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             background: var(--accent-gold);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            animation: starRotate 20s linear infinite;
-            box-shadow: 0 0 40px var(--accent-gold);
+            animation: starRotate 25s linear infinite;
+            box-shadow: 0 0 30px var(--accent-gold);
+        }
+        
+        /* Info Panel */
+        .info-panel {
+            margin-top: 40px;
+            text-align: center;
+            max-width: 700px;
+            padding: 25px;
+            background: rgba(10, 10, 10, 0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(42, 157, 143, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .info-text {
+            color: var(--accent-silver);
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
         
         /* Snow effect */
@@ -172,26 +266,139 @@
             z-index: 1;
         }
         
+        /* Improved Controls */
+        .controls-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+            background: rgba(15, 26, 42, 0.85);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(42, 157, 143, 0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.2), rgba(233, 196, 106, 0.1));
+            border: 1px solid rgba(233, 196, 106, 0.3);
+            color: var(--accent-gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-green));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(233, 196, 106, 0.3);
+            color: var(--primary-black);
+            border-color: transparent;
+        }
+        
+        .control-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .control-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-green));
+            color: var(--primary-black);
+            box-shadow: 0 0 20px rgba(233, 196, 106, 0.5);
+        }
+        
         /* Footer */
         .footer {
             position: fixed;
-            bottom: 30px;
+            bottom: 0;
             width: 100%;
+            padding: 15px 0;
             text-align: center;
             z-index: 50;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
         }
         
         .signature {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
             color: var(--accent-silver);
-            opacity: 0.7;
-            transition: opacity 0.3s;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(233, 196, 106, 0.05);
+            border: 1px solid rgba(233, 196, 106, 0.1);
         }
         
         .signature:hover {
             opacity: 1;
+            background: rgba(233, 196, 106, 0.1);
+            border-color: rgba(233, 196, 106, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Instructions */
+        .instructions {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(15, 26, 42, 0.85);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: var(--accent-silver);
+            border: 1px solid rgba(233, 196, 106, 0.2);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            max-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .instructions-title {
+            color: var(--accent-gold);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .instructions i {
+            color: var(--accent-gold);
+            margin-right: 10px;
+            width: 16px;
+            text-align: center;
+        }
+        
+        .instructions p {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
         }
         
         /* Animations */
@@ -210,17 +417,17 @@
                 opacity: 0.5;
             }
             100% {
-                transform: translate(-50%, -50%) scale(1.2);
-                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.8;
             }
         }
         
         @keyframes nameGlow {
             0% {
-                text-shadow: 0 0 20px rgba(233, 196, 106, 0.3);
+                text-shadow: 0 0 20px rgba(233, 196, 106, 0.4);
             }
             100% {
-                text-shadow: 0 0 40px rgba(233, 196, 106, 0.6), 0 0 60px rgba(233, 196, 106, 0.4);
+                text-shadow: 0 0 40px rgba(233, 196, 106, 0.7), 0 0 60px rgba(233, 196, 106, 0.4);
             }
         }
         
@@ -229,110 +436,7 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-20px);
-            }
-        }
-        
-        /* Controls */
-        .controls {
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
-            background: rgba(42, 157, 143, 0.1);
-            padding: 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(42, 157, 143, 0.3);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .control-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(233, 196, 106, 0.3);
-            color: var(--accent-gold);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .control-btn:hover {
-            background: var(--accent-gold);
-            color: var(--primary-black);
-            transform: scale(1.1);
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .tree-container {
-                width: 550px;
-                height: 550px;
-            }
-            
-            .name {
-                font-size: 4rem;
-            }
-            
-            .year-tagline {
-                font-size: 1.4rem;
-                letter-spacing: 5px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .tree-container {
-                width: 400px;
-                height: 400px;
-            }
-            
-            .name {
-                font-size: 3rem;
-                letter-spacing: 2px;
-            }
-            
-            .year-tagline {
-                font-size: 1.1rem;
-                letter-spacing: 3px;
-            }
-            
-            .year-tagline::before, .year-tagline::after {
-                font-size: 1rem;
-            }
-            
-            .year-tagline::before {
-                left: -30px;
-            }
-            
-            .year-tagline::after {
-                right: -30px;
-            }
-            
-            .controls {
-                left: 10px;
-                bottom: 70px;
-                padding: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .tree-container {
-                width: 320px;
-                height: 320px;
-            }
-            
-            .name {
-                font-size: 2.5rem;
-            }
-            
-            .header {
-                padding: 30px 0 10px;
+                transform: translateY(-15px);
             }
         }
         
@@ -343,50 +447,196 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
+            background: var(--deep-blue);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
             transition: opacity 1s, visibility 1s;
         }
         
         .loader {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(233, 196, 106, 0.3);
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(233, 196, 106, 0.2);
             border-radius: 50%;
             border-top-color: var(--accent-gold);
-            animation: spin 1s ease-in-out infinite;
+            border-bottom-color: var(--accent-green);
+            animation: spin 1.5s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            color: var(--accent-silver);
+            letter-spacing: 2px;
+            font-size: 0.9rem;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        /* Instructions */
-        .instructions {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(26, 26, 26, 0.8);
-            padding: 15px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--accent-silver);
-            border: 1px solid rgba(233, 196, 106, 0.2);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            max-width: 250px;
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .tree-container {
+                width: 500px;
+                height: 500px;
+            }
         }
         
-        .instructions i {
-            color: var(--accent-gold);
-            margin-right: 8px;
+        @media (max-width: 992px) {
+            .name {
+                font-size: 4rem;
+            }
+            
+            .year-tagline {
+                font-size: 1.4rem;
+                letter-spacing: 4px;
+            }
+            
+            .tree-container {
+                width: 450px;
+                height: 450px;
+            }
+            
+            .info-panel {
+                max-width: 600px;
+            }
         }
         
-        .instructions p {
-            margin: 5px 0;
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 0 10px;
+            }
+            
+            .name {
+                font-size: 3.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .name::before, .name::after {
+                width: 20px;
+            }
+            
+            .name::before {
+                left: -30px;
+            }
+            
+            .name::after {
+                right: -30px;
+            }
+            
+            .year-tagline {
+                font-size: 1.1rem;
+                letter-spacing: 3px;
+            }
+            
+            .year-tagline::before, .year-tagline::after {
+                width: 20px;
+            }
+            
+            .year-tagline::before {
+                left: -30px;
+            }
+            
+            .year-tagline::after {
+                right: -30px;
+            }
+            
+            .tree-container {
+                width: 380px;
+                height: 380px;
+            }
+            
+            .info-panel {
+                margin-top: 30px;
+                padding: 20px;
+            }
+            
+            .controls-container {
+                padding: 12px 20px;
+                gap: 15px;
+                bottom: 20px;
+            }
+            
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .instructions {
+                top: 20px;
+                right: 20px;
+                padding: 15px;
+                max-width: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .name {
+                font-size: 2.5rem;
+            }
+            
+            .name::before, .name::after {
+                width: 15px;
+            }
+            
+            .name::before {
+                left: -25px;
+            }
+            
+            .name::after {
+                right: -25px;
+            }
+            
+            .year-tagline {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+            
+            .tree-container {
+                width: 320px;
+                height: 320px;
+            }
+            
+            .star-overlay {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .shining-star {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .star {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .controls-container {
+                padding: 10px 15px;
+                gap: 10px;
+                bottom: 15px;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .instructions {
+                position: static;
+                margin: 20px auto;
+                max-width: 300px;
+            }
+            
+            .info-panel {
+                margin: 20px 15px;
+            }
         }
     </style>
 </head>
@@ -394,47 +644,66 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader"></div>
+        <div class="loading-text">LOADING NEW BEGINNING</div>
     </div>
+    
+    <!-- Background Pattern -->
+    <div class="bg-pattern"></div>
     
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1 class="name">Aseel</h1>
-            <div class="year-tagline">New Beginning 2026</div>
+            <div class="name-wrapper">
+                <h1 class="name">Aseel</h1>
+            </div>
+            <div class="year-tagline">NEW BEGINNING <span>2026</span></div>
         </div>
     </header>
     
     <!-- Main Content -->
     <main class="main-content">
-        <div class="tree-container">
-            <canvas id="tree-canvas"></canvas>
-            
-            <!-- Star Overlay -->
-            <div class="star-overlay">
-                <div class="shining-star"></div>
-                <div class="star"></div>
+        <div class="tree-section">
+            <div class="tree-container">
+                <canvas id="tree-canvas"></canvas>
+                
+                <!-- Star Overlay -->
+                <div class="star-overlay">
+                    <div class="shining-star"></div>
+                    <div class="star"></div>
+                </div>
             </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3 class="info-title">A Symbol of New Beginnings</h3>
+            <p class="info-text">The tree represents growth, strength, and new opportunities. Each ornament symbolizes achievements and dreams for the coming year. Rotate and explore to discover the hidden details.</p>
         </div>
     </main>
     
     <!-- Controls -->
-    <div class="controls">
-        <button class="control-btn" id="playPauseBtn" title="Play/Pause Animations">
+    <div class="controls-container">
+        <button class="control-btn active" id="playPauseBtn" title="Play/Pause Animations">
             <i class="fas fa-pause"></i>
         </button>
-        <button class="control-btn" id="snowBtn" title="Toggle Snow">
+        <button class="control-btn active" id="snowBtn" title="Toggle Snow">
             <i class="fas fa-snowflake"></i>
         </button>
-        <button class="control-btn" id="lightsBtn" title="Toggle Lights">
+        <button class="control-btn active" id="lightsBtn" title="Toggle Lights">
             <i class="fas fa-lightbulb"></i>
         </button>
-        <button class="control-btn" id="autoRotateBtn" title="Auto Rotate">
+        <button class="control-btn active" id="autoRotateBtn" title="Auto Rotate">
             <i class="fas fa-sync-alt"></i>
+        </button>
+        <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
+            <i class="fas fa-expand"></i>
         </button>
     </div>
     
     <!-- Instructions -->
     <div class="instructions">
+        <div class="instructions-title">
+            <i class="fas fa-info-circle"></i> INTERACTION GUIDE
+        </div>
         <p><i class="fas fa-mouse-pointer"></i> Drag to rotate</p>
         <p><i class="fas fa-mouse"></i> Scroll to zoom</p>
         <p><i class="fas fa-expand"></i> Double-click for fullscreen</p>
@@ -443,7 +712,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="signature">EST. 2026</div>
+            <div class="signature">ESTABLISHED 2026</div>
         </div>
     </footer>
     
@@ -456,18 +725,20 @@
         let treeGroup, star, ornaments = [], lights = [];
         let isAnimating = true;
         let autoRotate = true;
+        let snowEnabled = true;
+        let lightsEnabled = true;
         
         // Initialize Three.js scene
         function init() {
             // Scene
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x0a0a0a);
-            scene.fog = new THREE.Fog(0x0a0a0a, 10, 50);
+            scene.fog = new THREE.Fog(0x0a0a0a, 10, 40);
             
             // Camera
             const canvas = document.getElementById('tree-canvas');
             camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-            camera.position.set(0, 8, 18);
+            camera.position.set(0, 5, 15);
             
             // Renderer
             renderer = new THREE.WebGLRenderer({ 
@@ -481,6 +752,8 @@
             renderer.shadowMap.enabled = true;
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             renderer.outputColorSpace = THREE.SRGBColorSpace;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
             
             // Controls
             controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -492,19 +765,23 @@
             controls.maxDistance = 25;
             controls.maxPolarAngle = Math.PI / 2.2;
             controls.autoRotate = autoRotate;
-            controls.autoRotateSpeed = 0.5;
+            controls.autoRotateSpeed = 0.3;
             
             // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
             
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
-            directionalLight.position.set(10, 20, 10);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 15, 5);
             directionalLight.castShadow = true;
+            directionalLight.shadow.camera.left = -10;
+            directionalLight.shadow.camera.right = 10;
+            directionalLight.shadow.camera.top = 10;
+            directionalLight.shadow.camera.bottom = -10;
             scene.add(directionalLight);
             
-            const treeLight = new THREE.PointLight(0xe9c46a, 2, 30);
-            treeLight.position.set(0, 15, 0);
+            const treeLight = new THREE.PointLight(0xe9c46a, 3, 25);
+            treeLight.position.set(0, 12, 0);
             scene.add(treeLight);
             
             // Create realistic tree
@@ -516,6 +793,9 @@
             // Create twinkling lights
             createTwinklingLights();
             
+            // Add floating particles
+            createFloatingParticles();
+            
             // Handle window resize
             window.addEventListener('resize', onWindowResize);
             
@@ -524,80 +804,76 @@
             
             // Hide loading screen
             setTimeout(() => {
-                document.getElementById('loadingScreen').style.opacity = '0';
-                document.getElementById('loadingScreen').style.visibility = 'hidden';
+                gsap.to('#loadingScreen', {
+                    opacity: 0,
+                    duration: 1,
+                    onComplete: () => {
+                        document.getElementById('loadingScreen').style.visibility = 'hidden';
+                    }
+                });
             }, 1500);
         }
         
         // Create realistic 3D Christmas tree
         function createRealisticTree() {
             treeGroup = new THREE.Group();
+            treeGroup.position.y = -2;
             
             // Tree trunk
-            const trunkGeometry = new THREE.CylinderGeometry(0.7, 0.9, 3.5, 10);
+            const trunkGeometry = new THREE.CylinderGeometry(0.5, 0.7, 3, 10);
             const trunkMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0x8B4513,
-                roughness: 0.8,
-                metalness: 0.2
+                color: 0x5d4037,
+                roughness: 0.9,
+                metalness: 0.1
             });
             const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
-            trunk.position.y = 1.75;
+            trunk.position.y = 1.5;
             trunk.castShadow = true;
+            trunk.receiveShadow = true;
             treeGroup.add(trunk);
             
             // Tree branches (layers) with color gradient
-            const branchColors = [0x1a5c36, 0x1d6b40, 0x207a4a, 0x238954];
-            const branchHeights = [5, 4, 3.2, 2.5];
-            const branchRadii = [4, 3.2, 2.5, 1.8];
+            const branchColors = [0x1b5e20, 0x2e7d32, 0x388e3c, 0x43a047];
+            const branchHeights = [4.5, 3.8, 3.0, 2.2];
+            const branchRadii = [3.5, 2.8, 2.2, 1.6];
             
             for (let i = 0; i < 4; i++) {
-                const branchGeometry = new THREE.ConeGeometry(branchRadii[i], branchHeights[i], 12);
+                const segments = 10 + i * 2;
+                const branchGeometry = new THREE.ConeGeometry(branchRadii[i], branchHeights[i], segments);
                 const branchMaterial = new THREE.MeshStandardMaterial({ 
                     color: branchColors[i],
-                    roughness: 0.7,
-                    metalness: 0.1,
+                    roughness: 0.8,
+                    metalness: 0.05,
                     side: THREE.DoubleSide
                 });
                 
                 const branch = new THREE.Mesh(branchGeometry, branchMaterial);
-                branch.position.y = 3.5 + i * 2.8;
+                branch.position.y = 3 + i * 2.5;
                 branch.castShadow = true;
                 branch.receiveShadow = true;
                 treeGroup.add(branch);
-                
-                // Add green borders around each layer
-                const wireGeometry = new THREE.ConeGeometry(branchRadii[i] + 0.15, branchHeights[i], 12);
-                const wireMaterial = new THREE.MeshBasicMaterial({
-                    color: 0x2a9d8f,
-                    wireframe: true,
-                    transparent: true,
-                    opacity: 0.2
-                });
-                const wireframe = new THREE.Mesh(wireGeometry, wireMaterial);
-                wireframe.position.y = 3.5 + i * 2.8;
-                treeGroup.add(wireframe);
             }
             
             // Star on top
-            const starGeometry = new THREE.ConeGeometry(0.6, 1.2, 5);
+            const starGeometry = new THREE.ConeGeometry(0.4, 1, 5);
             const starMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0xe9c46a,
-                emissive: 0xe9c46a,
-                emissiveIntensity: 0.7,
-                roughness: 0.2,
-                metalness: 0.9
+                color: 0xffd700,
+                emissive: 0xffd700,
+                emissiveIntensity: 0.8,
+                roughness: 0.1,
+                metalness: 1.0
             });
             
             star = new THREE.Mesh(starGeometry, starMaterial);
-            star.position.y = 14.5;
+            star.position.y = 13;
             star.castShadow = true;
             
             // Star glow effect
-            const starGlowGeometry = new THREE.SphereGeometry(1, 16, 16);
+            const starGlowGeometry = new THREE.SphereGeometry(0.8, 16, 16);
             const starGlowMaterial = new THREE.MeshBasicMaterial({
-                color: 0xe9c46a,
+                color: 0xffd700,
                 transparent: true,
-                opacity: 0.4
+                opacity: 0.3
             });
             const starGlow = new THREE.Mesh(starGlowGeometry, starGlowMaterial);
             star.add(starGlow);
@@ -609,36 +885,36 @@
         // Create ornaments with coordinated colors
         function createOrnaments() {
             const ornamentColors = [
-                0xe63946, // Red
-                0x2a9d8f, // Green
-                0xe9c46a, // Gold
-                0x4361ee, // Blue
-                0xf4a261, // Orange
-                0x9d4edd  // Purple
+                0xe53935, // Red
+                0x2a9d8f, // Teal
+                0xffb300, // Amber
+                0x1e88e5, // Blue
+                0x8e24aa, // Purple
+                0x43a047  // Green
             ];
             
             // Ornament positions on the tree
             const positions = [
-                {y: 5, radius: 1.8, angle: 0},
-                {y: 6.5, radius: 2.2, angle: Math.PI/2},
-                {y: 8, radius: 2.6, angle: Math.PI},
-                {y: 9.5, radius: 2.2, angle: Math.PI*1.5},
-                {y: 7, radius: 1.5, angle: Math.PI/4},
-                {y: 10, radius: 1.8, angle: Math.PI*0.75},
-                {y: 4.5, radius: 1.2, angle: Math.PI*0.3},
-                {y: 11, radius: 1.4, angle: Math.PI*1.2},
+                {y: 5, radius: 1.6, angle: 0},
+                {y: 6.5, radius: 2.0, angle: Math.PI/2},
+                {y: 8, radius: 2.4, angle: Math.PI},
+                {y: 9.5, radius: 2.0, angle: Math.PI*1.5},
+                {y: 7, radius: 1.3, angle: Math.PI/4},
+                {y: 10, radius: 1.6, angle: Math.PI*0.75},
+                {y: 4.5, radius: 1.0, angle: Math.PI*0.3},
+                {y: 11, radius: 1.2, angle: Math.PI*1.2},
             ];
             
             positions.forEach((pos, index) => {
                 const color = ornamentColors[index % ornamentColors.length];
                 
                 // Main ornament sphere
-                const ornamentGeometry = new THREE.SphereGeometry(0.35, 16, 16);
+                const ornamentGeometry = new THREE.SphereGeometry(0.3, 16, 16);
                 const ornamentMaterial = new THREE.MeshStandardMaterial({ 
                     color: color,
-                    roughness: 0.3,
-                    metalness: 0.7,
-                    clearcoat: 0.5,
+                    roughness: 0.2,
+                    metalness: 0.8,
+                    clearcoat: 0.8,
                     clearcoatRoughness: 0.1
                 });
                 
@@ -651,14 +927,14 @@
                 ornament.castShadow = true;
                 
                 // Metallic ring on top
-                const ringGeometry = new THREE.TorusGeometry(0.4, 0.05, 8, 16);
+                const ringGeometry = new THREE.TorusGeometry(0.35, 0.04, 8, 16);
                 const ringMaterial = new THREE.MeshStandardMaterial({ 
-                    color: 0xc0c0c0,
-                    roughness: 0.2,
-                    metalness: 0.9
+                    color: 0xd4af37,
+                    roughness: 0.1,
+                    metalness: 1.0
                 });
                 const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-                ring.position.y = 0.4;
+                ring.position.y = 0.35;
                 ornament.add(ring);
                 
                 treeGroup.add(ornament);
@@ -668,29 +944,29 @@
         
         // Create twinkling lights
         function createTwinklingLights() {
-            const lightColors = [0xff6b6b, 0x4ecdc4, 0xffd166, 0x9d4edd];
+            const lightColors = [0xff5252, 0x40c4ff, 0xffd740, 0x7c4dff];
             const lightPositions = [
-                {y: 5.5, radius: 2, angle: Math.PI/6},
-                {y: 7.2, radius: 2.4, angle: Math.PI/1.8},
-                {y: 8.8, radius: 2.8, angle: Math.PI/1.2},
-                {y: 10.5, radius: 2.3, angle: Math.PI/0.9},
-                {y: 4.8, radius: 1.5, angle: Math.PI/0.7},
-                {y: 6.3, radius: 1.8, angle: Math.PI/0.5}
+                {y: 5.5, radius: 1.8, angle: Math.PI/6},
+                {y: 7.2, radius: 2.2, angle: Math.PI/1.8},
+                {y: 8.8, radius: 2.6, angle: Math.PI/1.2},
+                {y: 10.5, radius: 2.1, angle: Math.PI/0.9},
+                {y: 4.8, radius: 1.3, angle: Math.PI/0.7},
+                {y: 6.3, radius: 1.6, angle: Math.PI/0.5}
             ];
             
             lightPositions.forEach((pos, index) => {
-                const light = new THREE.PointLight(lightColors[index % lightColors.length], 2, 8);
+                const light = new THREE.PointLight(lightColors[index % lightColors.length], 3, 6);
                 
                 const x = Math.cos(pos.angle) * pos.radius;
                 const z = Math.sin(pos.angle) * pos.radius;
                 light.position.set(x, pos.y, z);
                 
                 // Visual representation of the light
-                const lightSphere = new THREE.SphereGeometry(0.15, 8, 8);
+                const lightSphere = new THREE.SphereGeometry(0.12, 8, 8);
                 const lightMaterial = new THREE.MeshBasicMaterial({ 
                     color: lightColors[index % lightColors.length],
                     transparent: true,
-                    opacity: 0.8
+                    opacity: 0.9
                 });
                 const lightMesh = new THREE.Mesh(lightSphere, lightMaterial);
                 lightMesh.position.copy(light.position);
@@ -699,6 +975,64 @@
                 treeGroup.add(lightMesh);
                 lights.push({light: light, mesh: lightMesh});
             });
+        }
+        
+        // Create floating particles
+        function createFloatingParticles() {
+            const particleCount = 100;
+            const particles = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            const color = new THREE.Color();
+            
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                
+                // Random positions in a sphere around the tree
+                positions[i3] = (Math.random() - 0.5) * 20;
+                positions[i3 + 1] = Math.random() * 15;
+                positions[i3 + 2] = (Math.random() - 0.5) * 20;
+                
+                // Random colors
+                color.setHSL(Math.random() * 0.1 + 0.5, 0.8, 0.6);
+                colors[i3] = color.r;
+                colors[i3 + 1] = color.g;
+                colors[i3 + 2] = color.b;
+            }
+            
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particleSystem = new THREE.Points(particles, particleMaterial);
+            scene.add(particleSystem);
+            
+            // Animate particles
+            function animateParticles() {
+                const positions = particles.attributes.position.array;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const i3 = i * 3;
+                    positions[i3 + 1] += 0.01;
+                    
+                    if (positions[i3 + 1] > 15) {
+                        positions[i3 + 1] = 0;
+                    }
+                }
+                
+                particles.attributes.position.needsUpdate = true;
+            }
+            
+            // Store reference for animation
+            scene.userData.particleSystem = particleSystem;
+            scene.userData.animateParticles = animateParticles;
         }
         
         // Handle window resize
@@ -720,28 +1054,35 @@
             
             // Animate star
             if (star) {
-                star.rotation.y += 0.02;
-                const scale = 1 + Math.sin(Date.now() * 0.002) * 0.15;
+                star.rotation.y += 0.015;
+                const scale = 1 + Math.sin(Date.now() * 0.0015) * 0.1;
                 star.scale.setScalar(scale);
             }
             
             // Animate ornaments
             ornaments.forEach((ornament, index) => {
-                ornament.mesh.rotation.y += 0.005;
-                const floatY = Math.sin(Date.now() * 0.001 + index) * 0.1;
-                ornament.mesh.position.y += floatY * 0.01;
+                ornament.mesh.rotation.y += 0.01;
+                const floatY = Math.sin(Date.now() * 0.001 + index) * 0.08;
+                ornament.mesh.position.y += floatY * 0.008;
             });
             
             // Animate lights (twinkling effect)
-            lights.forEach((light, index) => {
-                const intensity = 1 + Math.sin(Date.now() * 0.003 + index) * 0.8;
-                light.light.intensity = intensity;
-                light.mesh.material.opacity = 0.4 + intensity * 0.3;
-            });
+            if (lightsEnabled) {
+                lights.forEach((light, index) => {
+                    const intensity = 1.5 + Math.sin(Date.now() * 0.002 + index) * 1.2;
+                    light.light.intensity = intensity;
+                    light.mesh.material.opacity = 0.5 + intensity * 0.2;
+                });
+            }
+            
+            // Animate particles
+            if (scene.userData.animateParticles) {
+                scene.userData.animateParticles();
+            }
             
             // Gentle tree movement
             if (treeGroup) {
-                treeGroup.rotation.y += 0.001;
+                treeGroup.rotation.y += 0.0005;
             }
             
             renderer.render(scene, camera);
@@ -750,27 +1091,30 @@
         // Create snow with GSAP
         function createSnowWithGSAP() {
             const snowContainer = document.getElementById('snowContainer');
-            const snowflakeCount = 60;
+            const snowflakeCount = 80;
             
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
                 snowflake.style.position = 'absolute';
-                snowflake.style.width = snowflake.style.height = `${Math.random() * 5 + 2}px`;
+                const size = Math.random() * 4 + 2;
+                snowflake.style.width = snowflake.style.height = `${size}px`;
                 snowflake.style.backgroundColor = 'white';
                 snowflake.style.borderRadius = '50%';
-                snowflake.style.opacity = `${Math.random() * 0.5 + 0.3}`;
+                snowflake.style.opacity = `${Math.random() * 0.6 + 0.2}`;
                 snowflake.style.left = `${Math.random() * 100}%`;
                 snowflake.style.top = '-10px';
+                snowflake.style.zIndex = '1';
                 
                 // Use GSAP for smooth snow animation
                 gsap.to(snowflake, {
                     y: window.innerHeight + 20,
                     x: `+=${Math.random() * 100 - 50}`,
                     rotation: Math.random() * 360,
-                    duration: Math.random() * 15 + 10,
+                    duration: Math.random() * 20 + 15,
                     ease: "none",
                     repeat: -1,
-                    delay: Math.random() * 5
+                    delay: Math.random() * 10
                 });
                 
                 snowContainer.appendChild(snowflake);
@@ -784,30 +1128,49 @@
             setupControls();
             
             // Add parallax effect on mouse move
+            let mouseX = 0, mouseY = 0;
+            
             document.addEventListener('mousemove', (e) => {
                 if (!treeGroup) return;
                 
-                const x = (e.clientX / window.innerWidth - 0.5) * 0.5;
-                const y = (e.clientY / window.innerHeight - 0.5) * 0.5;
-                
-                gsap.to(treeGroup.rotation, {
-                    x: y * 0.3,
-                    y: x * 0.3 + treeGroup.rotation.y,
-                    duration: 1.5,
-                    ease: "power2.out"
-                });
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 0.3;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 0.3;
             });
             
+            // Smooth follow for parallax
+            function updateParallax() {
+                if (treeGroup) {
+                    gsap.to(treeGroup.rotation, {
+                        x: mouseY * 0.2,
+                        y: mouseX * 0.2 + treeGroup.rotation.y * 0.9,
+                        duration: 1.5,
+                        ease: "power2.out"
+                    });
+                }
+                requestAnimationFrame(updateParallax);
+            }
+            updateParallax();
+            
             // Double-click for fullscreen
-            document.getElementById('tree-canvas').addEventListener('dblclick', function() {
+            const canvas = document.getElementById('tree-canvas');
+            canvas.addEventListener('dblclick', function() {
                 if (!document.fullscreenElement) {
-                    this.requestFullscreen().catch(err => {
+                    canvas.requestFullscreen().catch(err => {
                         console.log(`Error attempting to enable fullscreen: ${err.message}`);
                     });
                 } else {
                     document.exitFullscreen();
                 }
             });
+            
+            // Fullscreen change event
+            document.addEventListener('fullscreenchange', updateCanvasSize);
+            
+            function updateCanvasSize() {
+                setTimeout(() => {
+                    onWindowResize();
+                }, 100);
+            }
         });
         
         // Setup control buttons
@@ -816,25 +1179,21 @@
             const snowBtn = document.getElementById('snowBtn');
             const lightsBtn = document.getElementById('lightsBtn');
             const autoRotateBtn = document.getElementById('autoRotateBtn');
-            const playPauseIcon = playPauseBtn.querySelector('i');
-            const snowIcon = snowBtn.querySelector('i');
-            const lightsIcon = lightsBtn.querySelector('i');
-            const autoRotateIcon = autoRotateBtn.querySelector('i');
-            
-            let snowEnabled = true;
-            let lightsEnabled = true;
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
             
             // Play/Pause button
             playPauseBtn.addEventListener('click', function() {
                 if (isAnimating) {
                     // Pause animations
                     gsap.globalTimeline.pause();
-                    playPauseIcon.className = 'fas fa-play';
+                    playPauseBtn.querySelector('i').className = 'fas fa-play';
+                    playPauseBtn.classList.remove('active');
                     isAnimating = false;
                 } else {
                     // Resume animations
                     gsap.globalTimeline.resume();
-                    playPauseIcon.className = 'fas fa-pause';
+                    playPauseBtn.querySelector('i').className = 'fas fa-pause';
+                    playPauseBtn.classList.add('active');
                     isAnimating = true;
                 }
             });
@@ -847,25 +1206,31 @@
                     // Disable snow
                     gsap.killTweensOf(snowflakes);
                     snowflakes.forEach(snowflake => {
-                        snowflake.style.opacity = '0';
+                        gsap.to(snowflake, {
+                            opacity: 0,
+                            duration: 1
+                        });
                     });
-                    snowIcon.style.color = '#666';
+                    snowBtn.classList.remove('active');
                     snowEnabled = false;
                 } else {
                     // Enable snow
                     snowflakes.forEach((snowflake, index) => {
-                        snowflake.style.opacity = `${Math.random() * 0.5 + 0.3}`;
+                        gsap.to(snowflake, {
+                            opacity: Math.random() * 0.6 + 0.2,
+                            duration: 1
+                        });
                         gsap.to(snowflake, {
                             y: window.innerHeight + 20,
                             x: `+=${Math.random() * 100 - 50}`,
                             rotation: Math.random() * 360,
-                            duration: Math.random() * 15 + 10,
+                            duration: Math.random() * 20 + 15,
                             ease: "none",
                             repeat: -1,
                             delay: Math.random() * 5
                         });
                     });
-                    snowIcon.style.color = '#e9c46a';
+                    snowBtn.classList.add('active');
                     snowEnabled = true;
                 }
             });
@@ -875,18 +1240,30 @@
                 if (lightsEnabled) {
                     // Turn off lights
                     lights.forEach(light => {
-                        light.light.intensity = 0;
-                        light.mesh.material.opacity = 0;
+                        gsap.to(light.light, {
+                            intensity: 0,
+                            duration: 1
+                        });
+                        gsap.to(light.mesh.material, {
+                            opacity: 0,
+                            duration: 1
+                        });
                     });
-                    lightsIcon.style.color = '#666';
+                    lightsBtn.classList.remove('active');
                     lightsEnabled = false;
                 } else {
                     // Turn on lights
                     lights.forEach(light => {
-                        light.light.intensity = 2;
-                        light.mesh.material.opacity = 0.8;
+                        gsap.to(light.light, {
+                            intensity: 3,
+                            duration: 1
+                        });
+                        gsap.to(light.mesh.material, {
+                            opacity: 0.9,
+                            duration: 1
+                        });
                     });
-                    lightsIcon.style.color = '#e9c46a';
+                    lightsBtn.classList.add('active');
                     lightsEnabled = true;
                 }
             });
@@ -897,11 +1274,33 @@
                 controls.autoRotate = autoRotate;
                 
                 if (autoRotate) {
-                    autoRotateIcon.style.color = '#e9c46a';
-                    autoRotateIcon.style.animation = 'spin 2s linear infinite';
+                    autoRotateBtn.classList.add('active');
                 } else {
-                    autoRotateIcon.style.color = '#666';
-                    autoRotateIcon.style.animation = 'none';
+                    autoRotateBtn.classList.remove('active');
+                }
+            });
+            
+            // Fullscreen button
+            fullscreenBtn.addEventListener('click', function() {
+                const canvas = document.getElementById('tree-canvas');
+                
+                if (!document.fullscreenElement) {
+                    canvas.requestFullscreen().catch(err => {
+                        console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+            
+            // Update fullscreen button on change
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    fullscreenBtn.querySelector('i').className = 'fas fa-compress';
+                    fullscreenBtn.classList.add('active');
+                } else {
+                    fullscreenBtn.querySelector('i').className = 'fas fa-expand';
+                    fullscreenBtn.classList.remove('active');
                 }
             });
         }
