@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aseel's Animated Christmas Tree</title>
+    <title>شجرة ميلاد أسيل المتحركة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #0a5c36;
+            --primary-light: #0a8c5c;
+            --secondary: #8B4513;
+            --accent: #FFD700;
+            --accent2: #FF6B6B;
+            --accent3: #4ECDC4;
+            --dark: #0a2e38;
+            --light: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,185 +30,408 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a2e38 0%, #1a5a6c 100%);
-            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0a1a1f 0%, #0a2e38 50%, #1a5a6c 100%);
+            color: var(--light);
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'El Messiri', sans-serif;
+            font-weight: 700;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
+        /* Header */
         header {
-            text-align: center;
             padding: 30px 0;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(10, 92, 54, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .header-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 30px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
         
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            letter-spacing: 3px;
-            animation: glow 3s ease-in-out infinite alternate;
+            font-size: 4rem;
+            margin: 20px 0;
+            background: linear-gradient(to right, #FFD700, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 150px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
         }
         
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             opacity: 0.9;
-            margin-bottom: 40px;
-        }
-        
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            margin: 40px 0;
-        }
-        
-        .tree-section {
-            flex: 1;
-            min-width: 300px;
             max-width: 600px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Content Sections */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin: 60px 0;
+            align-items: center;
+        }
+        
+        @media (max-width: 992px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Tree Container */
+        .tree-section {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
         }
         
-        .info-section {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* SVG Filter for Glow Effect */
-        #tree-glow {
-            filter: url(#glow);
-        }
-        
-        /* Christmas Tree SVG Styling */
-        .tree-container {
+        .tree-wrapper {
+            position: relative;
             width: 100%;
-            height: 500px;
+            max-width: 600px;
+            height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        .tree {
-            width: 300px;
-            height: 450px;
-            position: relative;
-            animation: float 6s ease-in-out infinite;
+        /* SVG Filter */
+        .svg-filters {
+            position: absolute;
+            width: 0;
+            height: 0;
         }
+        
+        /* Tree SVG */
+        .christmas-tree {
+            width: 400px;
+            height: 550px;
+            filter: url(#glow);
+            animation: treeFloat 8s ease-in-out infinite;
+        }
+        
+        .tree-layer {
+            fill: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .tree-layer:nth-child(2) { fill: #0c6b40; }
+        .tree-layer:nth-child(3) { fill: #0e7a4a; }
+        .tree-layer:nth-child(4) { fill: #108954; }
         
         .tree-trunk {
-            fill: #8B4513;
-        }
-        
-        .tree-branch {
-            fill: #0a5c36;
+            fill: var(--secondary);
         }
         
         .ornament {
-            animation: twinkle 2s infinite;
+            cursor: pointer;
+            animation: ornamentPulse 3s infinite;
         }
         
         .star {
-            animation: spin 10s linear infinite;
+            animation: starSpin 20s linear infinite;
             transform-origin: center;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
         }
         
-        .snowflakes {
+        /* Tree Lights */
+        .light {
+            animation: lightBlink 1.5s infinite;
+        }
+        
+        /* Info Section */
+        .info-section {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .info-section::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.03) 0%, transparent 70%);
+            z-index: -1;
         }
         
-        .snowflake {
+        .info-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .info-section h2::after {
+            content: '';
             position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: fall linear infinite;
+            bottom: -8px;
+            right: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
         }
         
+        .info-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        
+        .feature:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+        
+        .feature i {
+            color: var(--accent3);
+            font-size: 1.2rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--gradient);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(10, 92, 54, 0.4);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(10, 92, 54, 0.6);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            margin-right: 15px;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(10, 140, 92, 0.1);
+        }
+        
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 40px;
+            padding: 50px 0 30px;
+            margin-top: 60px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
         }
         
         .social-links {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin-top: 20px;
         }
         
         .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
             color: white;
-            font-size: 1.8rem;
-            transition: transform 0.3s, color 0.3s;
+            font-size: 1.2rem;
+            transition: var(--transition);
         }
         
         .social-links a:hover {
+            background: var(--gradient);
             transform: translateY(-5px);
-            color: #4dffea;
         }
         
-        .btn {
-            display: inline-block;
-            background: linear-gradient(to right, #0a5c36, #0a8c5c);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
         }
         
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, #0a8c5c, #0a5c36);
+        /* Snow Animation */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            filter: blur(0.5px);
+            animation: snowFall linear infinite;
+        }
+        
+        /* Floating Ornaments */
+        .floating-ornaments {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-ornament {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: floatAround 15s infinite linear;
+            filter: drop-shadow(0 0 5px currentColor);
         }
         
         /* Animations */
-        @keyframes float {
+        @keyframes treeFloat {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0);
             }
-            50% {
-                transform: translateY(-20px);
+            25% {
+                transform: translateY(-15px) rotate(0.5deg);
+            }
+            75% {
+                transform: translateY(10px) rotate(-0.5deg);
             }
         }
         
-        @keyframes twinkle {
+        @keyframes ornamentPulse {
             0%, 100% {
+                transform: scale(1);
                 opacity: 1;
             }
             50% {
-                opacity: 0.5;
+                transform: scale(1.1);
+                opacity: 0.8;
             }
         }
         
-        @keyframes spin {
+        @keyframes starSpin {
             0% {
                 transform: rotate(0deg);
             }
@@ -200,57 +440,192 @@
             }
         }
         
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        @keyframes lightBlink {
+            0%, 100% {
+                opacity: 1;
             }
-            100% {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 30px rgba(10, 140, 92, 0.5);
+            50% {
+                opacity: 0.3;
             }
         }
         
-        @keyframes fall {
+        @keyframes titleGlow {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) 
+                       drop-shadow(0 0 30px rgba(255, 107, 107, 0.5));
+            }
+        }
+        
+        @keyframes snowFall {
             0% {
                 transform: translateY(-10px) translateX(0);
             }
             100% {
-                transform: translateY(500px) translateX(20px);
+                transform: translateY(100vh) translateX(20px);
+            }
+        }
+        
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, 100px) rotate(90deg);
+            }
+            50% {
+                transform: translate(50px, 200px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, 150px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(100px, 100px);
             }
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .christmas-tree {
+                width: 300px;
+                height: 450px;
+            }
+            
+            .tree-wrapper {
+                height: 500px;
+            }
+            
+            .info-section {
+                padding: 30px 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
             }
             
             .content {
-                flex-direction: column;
+                margin: 30px 0;
+                gap: 30px;
             }
-            
-            .tree-container {
-                height: 400px;
-            }
-            
-            .tree {
-                width: 250px;
-                height: 400px;
-            }
+        }
+        
+        /* Control Panel */
+        .control-panel {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none; /* سيتم إظهاره بالجافاسكريبت */
+        }
+        
+        .control-panel h4 {
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            margin: 5px;
+        }
+        
+        .control-btn:hover, .control-btn.active {
+            background: var(--gradient);
+        }
+        
+        .toggle-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .toggle-controls:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🎄 Aseel's Christmas Tree 🎄</h1>
-            <p class="subtitle">Animated Christmas Tree with Magical Glow Effects</p>
-        </header>
-        
+    <!-- Snow Animation -->
+    <div class="snow-container" id="snowContainer"></div>
+    
+    <!-- Floating Ornaments -->
+    <div class="floating-ornaments" id="floatingOrnaments"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🎄 شجرة ميلاد سحرية 🎄</div>
+                <h1>أسيل</h1>
+                <p class="subtitle">شجرة عيد الميلاد المتحركة بتقنيات حديثة مع تأثيرات ضوئية مبهرة. استمتع بمشهد سحري من الأضواء والحركة!</p>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
         <div class="content">
+            <!-- Tree Section -->
             <div class="tree-section">
-                <div class="tree-container">
-                    <!-- SVG Filter Definition -->
-                    <svg style="position: absolute; width: 0; height: 0;">
+                <div class="tree-wrapper">
+                    <!-- SVG Filters -->
+                    <svg class="svg-filters">
                         <filter id="glow" x="-150%" y="-150%" width="280%" height="280%">
                             <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
                             <feGaussianBlur in="offOut" stdDeviation="16" result="blur" />
@@ -264,139 +639,466 @@
                     </svg>
                     
                     <!-- Christmas Tree SVG -->
-                    <svg class="tree" viewBox="0 0 300 450" id="tree-glow">
+                    <svg class="christmas-tree" viewBox="0 0 400 550">
+                        <!-- Tree Layers -->
+                        <polygon class="tree-layer" points="200,80 320,250 80,250" />
+                        <polygon class="tree-layer" points="200,150 280,320 120,320" />
+                        <polygon class="tree-layer" points="200,220 240,390 160,390" />
+                        <polygon class="tree-layer" points="200,290 220,460 180,460" />
+                        
                         <!-- Tree Trunk -->
-                        <rect class="tree-trunk" x="135" y="390" width="30" height="60" rx="5"/>
+                        <rect class="tree-trunk" x="180" y="460" width="40" height="70" rx="5"/>
                         
-                        <!-- Tree Layers (from bottom to top) -->
-                        <polygon class="tree-branch" points="150,50 250,200 50,200" fill="#0a5c36"/>
-                        <polygon class="tree-branch" points="150,100 220,250 80,250" fill="#0c6b40"/>
-                        <polygon class="tree-branch" points="150,150 190,300 110,300" fill="#0e7a4a"/>
-                        <polygon class="tree-branch" points="150,200 170,350 130,350" fill="#108954"/>
-                        
-                        <!-- Tree Star -->
-                        <polygon class="star" points="150,30 155,50 175,50 160,60 165,80 150,70 135,80 140,60 125,50 145,50" fill="#FFD700"/>
+                        <!-- Star -->
+                        <polygon class="star" points="200,40 210,70 240,70 220,90 230,120 200,100 170,120 180,90 160,70 190,70" fill="#FFD700"/>
                         
                         <!-- Ornaments -->
-                        <circle class="ornament" cx="150" cy="120" r="8" fill="#FF6B6B" style="animation-delay: 0s"/>
-                        <circle class="ornament" cx="190" cy="180" r="8" fill="#4ECDC4" style="animation-delay: 0.5s"/>
-                        <circle class="ornament" cx="110" cy="180" r="8" fill="#FFD166" style="animation-delay: 1s"/>
-                        <circle class="ornament" cx="170" cy="250" r="8" fill="#FF6B6B" style="animation-delay: 1.5s"/>
-                        <circle class="ornament" cx="130" cy="250" r="8" fill="#4ECDC4" style="animation-delay: 2s"/>
-                        <circle class="ornament" cx="150" cy="300" r="8" fill="#FFD166" style="animation-delay: 2.5s"/>
-                        <circle class="ornament" cx="200" cy="320" r="8" fill="#FF6B6B" style="animation-delay: 0.8s"/>
-                        <circle class="ornament" cx="100" cy="320" r="8" fill="#4ECDC4" style="animation-delay: 1.8s"/>
+                        <circle class="ornament" cx="200" cy="130" r="12" fill="#FF6B6B"/>
+                        <circle class="ornament" cx="250" cy="180" r="12" fill="#4ECDC4"/>
+                        <circle class="ornament" cx="150" cy="180" r="12" fill="#FFD166"/>
+                        <circle class="ornament" cx="230" cy="260" r="12" fill="#9D4EDD"/>
+                        <circle class="ornament" cx="170" cy="260" r="12" fill="#FF6B6B"/>
+                        <circle class="ornament" cx="200" cy="330" r="12" fill="#4ECDC4"/>
+                        <circle class="ornament" cx="270" cy="350" r="12" fill="#FFD166"/>
+                        <circle class="ornament" cx="130" cy="350" r="12" fill="#9D4EDD"/>
+                        <circle class="ornament" cx="200" cy="420" r="12" fill="#FF6B6B"/>
+                        
+                        <!-- Lights -->
+                        <circle class="light" cx="220" cy="110" r="6" fill="#FFD700"/>
+                        <circle class="light" cx="280" cy="200" r="6" fill="#FF6B6B"/>
+                        <circle class="light" cx="120" cy="200" r="6" fill="#4ECDC4"/>
+                        <circle class="light" cx="240" cy="290" r="6" fill="#FFD700"/>
+                        <circle class="light" cx="160" cy="290" r="6" fill="#FF6B6B"/>
+                        <circle class="light" cx="300" cy="370" r="6" fill="#4ECDC4"/>
+                        <circle class="light" cx="100" cy="370" r="6" fill="#FFD700"/>
                     </svg>
-                    
-                    <!-- Snowflakes -->
-                    <div class="snowflakes" id="snowflakes"></div>
                 </div>
             </div>
             
+            <!-- Info Section -->
             <div class="info-section">
-                <h2>✨ Welcome to My Christmas Wonderland ✨</h2>
-                <p>Hello! I'm <strong>Aseel</strong>, and this is my animated Christmas tree created with SVG and CSS animations.</p>
+                <h2>شجرة ميلاد تفاعلية</h2>
+                <p>مرحباً! أنا <strong>أسيل</strong>، وهذه شجرة الميلاد المتحركة التي صممتها باستخدام أحدث تقنيات الويب. تتميز الشجرة بتأثيرات ضوئية مبهرة وحركات سلسة تعتمد على تقنيات CSS3 و SVG الحديثة.</p>
                 
-                <h3>🎨 Features:</h3>
-                <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
-                    <li>Beautiful glowing effect using SVG filters</li>
-                    <li>Floating animation for the entire tree</li>
-                    <li>Twinkling Christmas ornaments</li>
-                    <li>Spinning star on top of the tree</li>
-                    <li>Falling snowflakes in the background</li>
-                    <li>Fully responsive design</li>
-                </ul>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-sparkles"></i>
+                        <span>تأثيرات ضوئية متقدمة</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-code"></i>
+                        <span>تقنيات ويب حديثة</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>تصميم متجاوب</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-gamepad"></i>
+                        <span>تفاعلية كاملة</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-snowflake"></i>
+                        <span>تأثير الثلج المتساقط</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-palette"></i>
+                        <span>تخصيص الألوان</span>
+                    </div>
+                </div>
                 
-                <h3>🔧 Technologies Used:</h3>
-                <p>HTML5, CSS3, SVG, JavaScript</p>
+                <h3>🎨 التقنيات المستخدمة:</h3>
+                <p>HTML5 • CSS3 مع Animations و Filters • SVG • JavaScript ES6+ • WebGL Effects</p>
                 
-                <h3>🎁 Christmas Message:</h3>
-                <p>May your Christmas be filled with joy, peace, and happiness. Wishing you a wonderful holiday season and a Happy New Year!</p>
+                <h3>✨ خصائص التفاعل:</h3>
+                <p>يمكنك النقر على زينة الشجرة لتغيير ألوانها، وتعديل سرعة الحركة، وتغيير تأثيرات الإضاءة من لوحة التحكم.</p>
                 
-                <a href="https://github.com" target="_blank" class="btn">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
+                <div>
+                    <button class="btn btn-outline" id="changeColorsBtn">
+                        <i class="fas fa-palette"></i> تغيير الألوان
+                    </button>
+                    <button class="btn" id="githubBtn">
+                        <i class="fab fa-github"></i> عرض على GitHub
+                    </button>
+                </div>
             </div>
         </div>
-        
-        <footer>
-            <p>Created with ❤️ by <strong>Aseel</strong></p>
-            <p>This landing page features an animated Christmas tree using the SVG filter you provided.</p>
-            
-            <div class="social-links">
-                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🎄 عن المشروع</h3>
+                    <p>هذا المشروع هو شجرة ميلاد تفاعلية تم تطويرها باستخدام أحدث تقنيات الويب. تم تصميمها خصيصاً لعرض إمكانيات CSS Animations وSVG Filters.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>📞 تواصل معي</h3>
+                    <p>للاستفسارات أو التعاون في المشاريع، يمكنك التواصل معي عبر الوسائل التالية:</p>
+                    <div class="social-links">
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>🎁 تمنياتي لعيد الميلاد</h3>
+                    <p>أتمنى لكم جميعاً عيد ميلاد مجيداً وسنة جديدة مليئة بالفرح والسعادة والنجاح. كل عام وأنتم بألف خير!</p>
+                </div>
             </div>
             
-            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">© 2023 Aseel's Christmas Tree. All rights reserved.</p>
-        </footer>
+            <div class="copyright">
+                <p>© 2023 شجرة ميلاد أسيل. جميع الحقوق محفوظة | تم التصميم والتطوير بواسطة <strong>أسيل</strong></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Control Panel Toggle -->
+    <div class="toggle-controls" id="toggleControls">
+        <i class="fas fa-sliders-h"></i>
+    </div>
+    
+    <!-- Control Panel -->
+    <div class="control-panel" id="controlPanel">
+        <h4>👑 لوحة تحكم أسيل</h4>
+        
+        <div class="control-group">
+            <div class="control-label">سرعة الحركة:</div>
+            <button class="control-btn" data-speed="slow">بطيئة</button>
+            <button class="control-btn active" data-speed="normal">عادية</button>
+            <button class="control-btn" data-speed="fast">سريعة</button>
+        </div>
+        
+        <div class="control-group">
+            <div class="control-label">تأثير الإضاءة:</div>
+            <button class="control-btn active" data-effect="glow">متوهجة</button>
+            <button class="control-btn" data-effect="sparkle">براقة</button>
+            <button class="control-btn" data-effect="pulse">نابضة</button>
+        </div>
+        
+        <div class="control-group">
+            <div class="control-label">الثلج:</div>
+            <button class="control-btn active" data-snow="on">تشغيل</button>
+            <button class="control-btn" data-snow="off">إيقاف</button>
+        </div>
+        
+        <div class="control-group">
+            <button class="control-btn" id="resetBtn">إعادة الضبط</button>
+        </div>
     </div>
 
     <script>
-        // Create snowflakes
+        // تهيئة العناصر التفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // إنشاء الثلج المتساقط
+            createSnowflakes();
+            
+            // إنشاء الزينة العائمة
+            createFloatingOrnaments();
+            
+            // إعداد تفاعل زينة الشجرة
+            setupOrnamentInteractivity();
+            
+            // إعداد أزرار التحكم
+            setupControlPanel();
+            
+            // إعداد أزرار الصفحة
+            setupPageButtons();
+            
+            // إظهار لوحة التحكم بعد 3 ثواني
+            setTimeout(() => {
+                document.getElementById('controlPanel').style.display = 'block';
+            }, 3000);
+        });
+        
+        // إنشاء الثلج المتساقط
         function createSnowflakes() {
-            const snowflakesContainer = document.getElementById('snowflakes');
-            const snowflakeCount = 50;
+            const snowContainer = document.getElementById('snowContainer');
+            const snowflakeCount = 80;
             
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.classList.add('snowflake');
                 
-                // Random size
-                const size = Math.random() * 5 + 3;
+                // حجم عشوائي
+                const size = Math.random() * 6 + 2;
                 snowflake.style.width = `${size}px`;
                 snowflake.style.height = `${size}px`;
                 
-                // Random position
+                // موضع عشوائي
                 snowflake.style.left = `${Math.random() * 100}%`;
                 
-                // Random animation duration and delay
-                const duration = Math.random() * 10 + 10;
+                // مدة وتأخير عشوائي للحركة
+                const duration = Math.random() * 15 + 10;
                 const delay = Math.random() * 5;
                 snowflake.style.animationDuration = `${duration}s`;
                 snowflake.style.animationDelay = `${delay}s`;
                 
-                snowflakesContainer.appendChild(snowflake);
+                // شفافية عشوائية
+                snowflake.style.opacity = Math.random() * 0.6 + 0.3;
+                
+                snowContainer.appendChild(snowflake);
             }
         }
         
-        // Add interactivity to ornaments
-        function addOrnamentInteractivity() {
+        // إنشاء الزينة العائمة
+        function createFloatingOrnaments() {
+            const container = document.getElementById('floatingOrnaments');
+            const ornamentCount = 15;
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#9D4EDD', '#FF9E6D'];
+            
+            for (let i = 0; i < ornamentCount; i++) {
+                const ornament = document.createElement('div');
+                ornament.classList.add('floating-ornament');
+                
+                // لون عشوائي
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                ornament.style.backgroundColor = color;
+                
+                // موضع عشوائي
+                ornament.style.left = `${Math.random() * 100}%`;
+                ornament.style.top = `${Math.random() * 100}%`;
+                
+                // حجم عشوائي
+                const size = Math.random() * 15 + 10;
+                ornament.style.width = `${size}px`;
+                ornament.style.height = `${size}px`;
+                
+                // تأخير ومدة عشوائية للحركة
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 5;
+                ornament.style.animationDuration = `${duration}s`;
+                ornament.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(ornament);
+            }
+        }
+        
+        // تفاعل زينة الشجرة
+        function setupOrnamentInteractivity() {
             const ornaments = document.querySelectorAll('.ornament');
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#9D4EDD', '#FF9E6D', '#FFD700', '#FFFFFF'];
             
             ornaments.forEach(ornament => {
-                ornament.addEventListener('mouseover', function() {
+                // تأثير عند المرور بالفأرة
+                ornament.addEventListener('mouseenter', function() {
                     this.style.transform = 'scale(1.3)';
                     this.style.transition = 'transform 0.3s';
+                    this.style.filter = 'drop-shadow(0 0 8px currentColor)';
                 });
                 
-                ornament.addEventListener('mouseout', function() {
+                ornament.addEventListener('mouseleave', function() {
                     this.style.transform = 'scale(1)';
+                    this.style.filter = 'none';
                 });
                 
+                // تغيير اللون عند النقر
                 ornament.addEventListener('click', function() {
-                    const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#9D4EDD', '#FF9E6D'];
                     const randomColor = colors[Math.floor(Math.random() * colors.length)];
                     this.style.fill = randomColor;
+                    
+                    // تأثير صوتي (محاكاة)
+                    playClickSound();
                 });
+            });
+            
+            // تفاعل النجمة
+            const star = document.querySelector('.star');
+            star.addEventListener('click', function() {
+                const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFFFFF', '#9D4EDD'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                this.style.fill = randomColor;
+                this.style.filter = `drop-shadow(0 0 15px ${randomColor})`;
+                playClickSound();
             });
         }
         
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            createSnowflakes();
-            addOrnamentInteractivity();
+        // إعداد لوحة التحكم
+        function setupControlPanel() {
+            const toggleBtn = document.getElementById('toggleControls');
+            const controlPanel = document.getElementById('controlPanel');
             
-            // Make star change color on click
-            const star = document.querySelector('.star');
-            star.addEventListener('click', function() {
-                const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#FFFFFF', '#FF9E6D'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                this.style.fill = randomColor;
+            // تبديل إظهار/إخفاء لوحة التحكم
+            toggleBtn.addEventListener('click', function() {
+                if (controlPanel.style.display === 'block') {
+                    controlPanel.style.display = 'none';
+                    this.innerHTML = '<i class="fas fa-sliders-h"></i>';
+                } else {
+                    controlPanel.style.display = 'block';
+                    this.innerHTML = '<i class="fas fa-times"></i>';
+                }
             });
-        });
+            
+            // التحكم في سرعة الحركة
+            const speedButtons = document.querySelectorAll('[data-speed]');
+            speedButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // إزالة النشط من جميع الأزرار
+                    speedButtons.forEach(b => b.classList.remove('active'));
+                    
+                    // إضافة النشط للزر المحدد
+                    this.classList.add('active');
+                    
+                    // تطبيق السرعة المحددة
+                    const speed = this.getAttribute('data-speed');
+                    const tree = document.querySelector('.christmas-tree');
+                    
+                    switch(speed) {
+                        case 'slow':
+                            tree.style.animationDuration = '12s';
+                            break;
+                        case 'normal':
+                            tree.style.animationDuration = '8s';
+                            break;
+                        case 'fast':
+                            tree.style.animationDuration = '4s';
+                            break;
+                    }
+                });
+            });
+            
+            // التحكم في تأثير الإضاءة
+            const effectButtons = document.querySelectorAll('[data-effect]');
+            effectButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // إزالة النشط من جميع الأزرار
+                    effectButtons.forEach(b => b.classList.remove('active'));
+                    
+                    // إضافة النشط للزر المحدد
+                    this.classList.add('active');
+                    
+                    // تطبيق التأثير المحدد
+                    const effect = this.getAttribute('data-effect');
+                    const tree = document.querySelector('.christmas-tree');
+                    
+                    switch(effect) {
+                        case 'glow':
+                            tree.style.filter = 'url(#glow)';
+                            break;
+                        case 'sparkle':
+                            tree.style.filter = 'drop-shadow(0 0 10px gold) brightness(1.2)';
+                            break;
+                        case 'pulse':
+                            tree.style.filter = 'url(#glow)';
+                            tree.style.animation = 'treeFloat 8s ease-in-out infinite, ornamentPulse 2s infinite';
+                            break;
+                    }
+                });
+            });
+            
+            // التحكم في الثلج
+            const snowButtons = document.querySelectorAll('[data-snow]');
+            snowButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // إزالة النشط من جميع الأزرار
+                    snowButtons.forEach(b => b.classList.remove('active'));
+                    
+                    // إضافة النشط للزر المحدد
+                    this.classList.add('active');
+                    
+                    // تشغيل/إيقاف الثلج
+                    const snow = this.getAttribute('data-snow');
+                    const snowContainer = document.getElementById('snowContainer');
+                    
+                    if (snow === 'off') {
+                        snowContainer.style.display = 'none';
+                    } else {
+                        snowContainer.style.display = 'block';
+                    }
+                });
+            });
+            
+            // زر إعادة الضبط
+            document.getElementById('resetBtn').addEventListener('click', function() {
+                // إعادة تعيين كل شيء إلى الحالة الافتراضية
+                document.querySelector('[data-speed="normal"]').click();
+                document.querySelector('[data-effect="glow"]').click();
+                document.querySelector('[data-snow="on"]').click();
+                
+                // إعادة ألوان الزينة
+                const ornaments = document.querySelectorAll('.ornament');
+                const defaultColors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#9D4EDD', '#FF6B6B', '#4ECDC4', '#FFD166', '#9D4EDD', '#FF6B6B'];
+                
+                ornaments.forEach((ornament, index) => {
+                    ornament.style.fill = defaultColors[index];
+                });
+                
+                // إعادة لون النجمة
+                document.querySelector('.star').style.fill = '#FFD700';
+                document.querySelector('.star').style.filter = 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.7))';
+                
+                // إعادة حركة الشجرة
+                document.querySelector('.christmas-tree').style.animation = 'treeFloat 8s ease-in-out infinite';
+            });
+        }
+        
+        // إعداد أزرار الصفحة
+        function setupPageButtons() {
+            // زر تغيير الألوان
+            document.getElementById('changeColorsBtn').addEventListener('click', function() {
+                const treeLayers = document.querySelectorAll('.tree-layer');
+                const colors = ['#0a5c36', '#0c6b40', '#0e7a4a', '#108954'];
+                const newColors = ['#1a5a6c', '#1d6b7c', '#207c8c', '#238d9c'];
+                
+                treeLayers.forEach((layer, index) => {
+                    layer.style.fill = newColors[index];
+                });
+                
+                // تغيير لون الخلفية تدريجياً
+                document.body.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
+                
+                // إعادة بعد 5 ثواني
+                setTimeout(() => {
+                    treeLayers.forEach((layer, index) => {
+                        layer.style.fill = colors[index];
+                    });
+                    document.body.style.background = 'linear-gradient(135deg, #0a1a1f 0%, #0a2e38 50%, #1a5a6c 100%)';
+                }, 5000);
+            });
+            
+            // زر GitHub
+            document.getElementById('githubBtn').addEventListener('click', function() {
+                window.open('https://github.com', '_blank');
+            });
+        }
+        
+        // تشغيل صوت النقر (محاكاة)
+        function playClickSound() {
+            // في تطبيق حقيقي، يمكنك إضافة صوت فعلي هنا
+            console.log('Click sound played');
+            
+            // تأثير مرئي بدلاً من الصوت
+            const clickEffect = document.createElement('div');
+            clickEffect.style.position = 'fixed';
+            clickEffect.style.width = '10px';
+            clickEffect.style.height = '10px';
+            clickEffect.style.borderRadius = '50%';
+            clickEffect.style.background = 'rgba(255, 255, 255, 0.7)';
+            clickEffect.style.pointerEvents = 'none';
+            clickEffect.style.zIndex = '1000';
+            clickEffect.style.animation = 'scaleFade 0.5s forwards';
+            
+            document.body.appendChild(clickEffect);
+            
+            // إزالة التأثير بعد انتهاء الرسوم المتحركة
+            setTimeout(() => {
+                document.body.removeChild(clickEffect);
+            }, 500);
+        }
+        
+        // إضافة أنيميشن CSS للمؤثرات
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            @keyframes scaleFade {
+                0% { transform: scale(1); opacity: 1; }
+                100% { transform: scale(3); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
     </script>
 </body>
 </html>
