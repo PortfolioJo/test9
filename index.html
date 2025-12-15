@@ -6,9 +6,7 @@
     <title>Aseel | New Beginning 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
     <style>
         :root {
             --primary-black: #0a0a0a;
@@ -19,6 +17,8 @@
             --dark-green: #1d7873;
             --deep-blue: #0f1a2a;
             --light-blue: #1a365d;
+            --tree-green: #2a7d5e;
+            --tree-light: #4caf7d;
         }
         
         * {
@@ -150,81 +150,180 @@
             padding: 20px 0 100px;
         }
         
-        /* Tree Container with improved positioning */
+        /* 2D Tree Design */
         .tree-section {
             width: 100%;
             display: flex;
             justify-content: center;
             position: relative;
+            margin: 40px 0;
         }
         
         .tree-container {
             position: relative;
-            width: 600px;
+            width: 400px;
             height: 600px;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
         }
         
-        #tree-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* 2D Tree */
+        .tree-2d {
+            position: relative;
             width: 100%;
             height: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(42, 157, 143, 0.3);
-            box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.5),
-                0 0 60px rgba(42, 157, 143, 0.2),
-                inset 0 0 40px rgba(42, 157, 143, 0.1);
-            transition: box-shadow 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
-        #tree-canvas:hover {
-            box-shadow: 
-                0 15px 50px rgba(0, 0, 0, 0.6),
-                0 0 80px rgba(42, 157, 143, 0.3),
-                inset 0 0 40px rgba(42, 157, 143, 0.15);
-        }
-        
-        /* Star overlay - centered */
-        .star-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-            pointer-events: none;
-        }
-        
-        .shining-star {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
-            opacity: 0.7;
-            border-radius: 50%;
-            filter: blur(15px);
-            animation: starPulse 3s ease-in-out infinite alternate;
-        }
-        
-        .star {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(0deg);
+        /* Tree Trunk */
+        .trunk {
             width: 60px;
-            height: 60px;
+            height: 120px;
+            background: linear-gradient(to bottom, #8B4513, #5D2906);
+            border-radius: 10px;
+            margin-top: -20px;
+            z-index: 2;
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.3),
+                0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Tree Layers */
+        .tree-layer {
+            width: 0;
+            height: 0;
+            border-left: 120px solid transparent;
+            border-right: 120px solid transparent;
+            border-bottom: 140px solid var(--tree-green);
+            position: relative;
+            margin-top: -80px;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+            z-index: 3;
+        }
+        
+        .tree-layer:nth-child(2) {
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-bottom: 160px solid var(--tree-light);
+            margin-top: -100px;
+            z-index: 2;
+        }
+        
+        .tree-layer:nth-child(3) {
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-bottom: 180px solid var(--tree-green);
+            margin-top: -120px;
+            z-index: 1;
+        }
+        
+        /* Tree Decorations */
+        .ornament {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.4),
+                inset 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: float 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .ornament:hover {
+            transform: scale(1.3);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.6),
+                inset 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .ornament i {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Ornament positions */
+        .ornament-1 { top: 120px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle at 30% 30%, #e63946, #b91d1d); animation-delay: 0s; }
+        .ornament-2 { top: 180px; left: 40%; background: radial-gradient(circle at 30% 30%, #2a9d8f, #1d7873); animation-delay: 0.5s; }
+        .ornament-3 { top: 180px; left: 60%; background: radial-gradient(circle at 30% 30%, #e9c46a, #d4a017); animation-delay: 1s; }
+        .ornament-4 { top: 240px; left: 35%; background: radial-gradient(circle at 30% 30%, #4361ee, #3a0ca3); animation-delay: 1.5s; }
+        .ornament-5 { top: 240px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle at 30% 30%, #f4a261, #e76f51); animation-delay: 2s; }
+        .ornament-6 { top: 240px; left: 65%; background: radial-gradient(circle at 30% 30%, #9d4edd, #7b2cbf); animation-delay: 2.5s; }
+        .ornament-7 { top: 300px; left: 45%; background: radial-gradient(circle at 30% 30%, #06d6a0, #04a777); animation-delay: 3s; }
+        .ornament-8 { top: 300px; left: 55%; background: radial-gradient(circle at 30% 30%, #ffd166, #ff9e00); animation-delay: 3.5s; }
+        .ornament-9 { top: 360px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle at 30% 30%, #ef476f, #d00000); animation-delay: 4s; }
+        
+        /* Star on top */
+        .tree-star {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
             background: var(--accent-gold);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            animation: starRotate 25s linear infinite;
-            box-shadow: 0 0 30px var(--accent-gold);
+            z-index: 20;
+            box-shadow: 0 0 40px var(--accent-gold);
+            animation: starGlow 2s ease-in-out infinite alternate;
+        }
+        
+        .tree-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
+            opacity: 0.4;
+            border-radius: 50%;
+            filter: blur(10px);
+            z-index: -1;
+        }
+        
+        /* Tree Lights */
+        .light {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            z-index: 5;
+            animation: lightTwinkle 1.5s ease-in-out infinite;
+        }
+        
+        .light:nth-child(1) { top: 100px; left: 45%; background: #ff6b6b; animation-delay: 0s; }
+        .light:nth-child(2) { top: 100px; left: 55%; background: #4ecdc4; animation-delay: 0.3s; }
+        .light:nth-child(3) { top: 160px; left: 42%; background: #ffd166; animation-delay: 0.6s; }
+        .light:nth-child(4) { top: 160px; left: 58%; background: #9d4edd; animation-delay: 0.9s; }
+        .light:nth-child(5) { top: 220px; left: 40%; background: #ff6b6b; animation-delay: 1.2s; }
+        .light:nth-child(6) { top: 220px; left: 60%; background: #4ecdc4; animation-delay: 1.5s; }
+        .light:nth-child(7) { top: 280px; left: 43%; background: #ffd166; animation-delay: 1.8s; }
+        .light:nth-child(8) { top: 280px; left: 57%; background: #9d4edd; animation-delay: 2.1s; }
+        .light:nth-child(9) { top: 340px; left: 46%; background: #ff6b6b; animation-delay: 2.4s; }
+        .light:nth-child(10) { top: 340px; left: 54%; background: #4ecdc4; animation-delay: 2.7s; }
+        
+        /* Ground */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 40px;
+            background: linear-gradient(to top, #3e2723, #5d4037);
+            border-radius: 50% 50% 0 0;
+            z-index: 1;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
         }
         
         /* Info Panel */
@@ -266,7 +365,7 @@
             z-index: 1;
         }
         
-        /* Improved Controls */
+        /* Controls */
         .controls-container {
             position: fixed;
             bottom: 30px;
@@ -402,26 +501,6 @@
         }
         
         /* Animations */
-        @keyframes starRotate {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-        
-        @keyframes starPulse {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.5;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.3);
-                opacity: 0.8;
-            }
-        }
-        
         @keyframes nameGlow {
             0% {
                 text-shadow: 0 0 20px rgba(233, 196, 106, 0.4);
@@ -433,10 +512,45 @@
         
         @keyframes float {
             0%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        .ornament-2, .ornament-3, .ornament-4, .ornament-6, .ornament-7, .ornament-8 {
+            animation-name: floatSide;
+        }
+        
+        @keyframes floatSide {
+            0%, 100% {
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes starGlow {
+            0% {
+                box-shadow: 0 0 30px var(--accent-gold);
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                box-shadow: 0 0 60px var(--accent-gold), 0 0 80px rgba(233, 196, 106, 0.5);
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+        
+        @keyframes lightTwinkle {
+            0%, 100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
             }
         }
         
@@ -477,14 +591,76 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Responsive Design */
-        @media (max-width: 1100px) {
-            .tree-container {
-                width: 500px;
-                height: 500px;
+        /* Gift boxes under tree */
+        .gifts {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 2;
+        }
+        
+        .gift-box {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: giftFloat 4s ease-in-out infinite;
+        }
+        
+        .gift-box:nth-child(1) {
+            background: linear-gradient(45deg, #e63946, #ff6b6b);
+            animation-delay: 0s;
+        }
+        
+        .gift-box:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #2a9d8f, #4ecdc4);
+            animation-delay: 1s;
+        }
+        
+        .gift-box:nth-child(3) {
+            background: linear-gradient(45deg, #e9c46a, #ffd166);
+            animation-delay: 2s;
+        }
+        
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: inherit;
+            filter: brightness(1.2);
+        }
+        
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+        
+        @keyframes giftFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
             }
         }
         
+        /* Responsive Design */
         @media (max-width: 992px) {
             .name {
                 font-size: 4rem;
@@ -496,12 +672,26 @@
             }
             
             .tree-container {
-                width: 450px;
-                height: 450px;
+                width: 350px;
+                height: 550px;
             }
             
-            .info-panel {
-                max-width: 600px;
+            .tree-layer {
+                border-left: 100px solid transparent;
+                border-right: 100px solid transparent;
+                border-bottom: 120px solid var(--tree-green);
+            }
+            
+            .tree-layer:nth-child(2) {
+                border-left: 120px solid transparent;
+                border-right: 120px solid transparent;
+                border-bottom: 140px solid var(--tree-light);
+            }
+            
+            .tree-layer:nth-child(3) {
+                border-left: 140px solid transparent;
+                border-right: 140px solid transparent;
+                border-bottom: 160px solid var(--tree-green);
             }
         }
         
@@ -545,8 +735,39 @@
             }
             
             .tree-container {
-                width: 380px;
-                height: 380px;
+                width: 300px;
+                height: 500px;
+            }
+            
+            .tree-layer {
+                border-left: 80px solid transparent;
+                border-right: 80px solid transparent;
+                border-bottom: 100px solid var(--tree-green);
+            }
+            
+            .tree-layer:nth-child(2) {
+                border-left: 100px solid transparent;
+                border-right: 100px solid transparent;
+                border-bottom: 120px solid var(--tree-light);
+            }
+            
+            .tree-layer:nth-child(3) {
+                border-left: 120px solid transparent;
+                border-right: 120px solid transparent;
+                border-bottom: 140px solid var(--tree-green);
+            }
+            
+            .ornament {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .ornament i {
+                font-size: 10px;
+            }
+            
+            .ground {
+                width: 400px;
             }
             
             .info-panel {
@@ -597,21 +818,53 @@
             }
             
             .tree-container {
-                width: 320px;
-                height: 320px;
+                width: 250px;
+                height: 450px;
             }
             
-            .star-overlay {
-                width: 100px;
-                height: 100px;
+            .tree-layer {
+                border-left: 60px solid transparent;
+                border-right: 60px solid transparent;
+                border-bottom: 80px solid var(--tree-green);
             }
             
-            .shining-star {
-                width: 80px;
-                height: 80px;
+            .tree-layer:nth-child(2) {
+                border-left: 80px solid transparent;
+                border-right: 80px solid transparent;
+                border-bottom: 100px solid var(--tree-light);
             }
             
-            .star {
+            .tree-layer:nth-child(3) {
+                border-left: 100px solid transparent;
+                border-right: 100px solid transparent;
+                border-bottom: 120px solid var(--tree-green);
+            }
+            
+            .tree-star {
+                width: 40px;
+                height: 40px;
+                top: 20px;
+            }
+            
+            .ornament {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .ornament i {
+                font-size: 8px;
+            }
+            
+            .ground {
+                width: 300px;
+            }
+            
+            .gift-box {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .gift-box:nth-child(2) {
                 width: 50px;
                 height: 50px;
             }
@@ -664,19 +917,76 @@
     <main class="main-content">
         <div class="tree-section">
             <div class="tree-container">
-                <canvas id="tree-canvas"></canvas>
-                
-                <!-- Star Overlay -->
-                <div class="star-overlay">
-                    <div class="shining-star"></div>
-                    <div class="star"></div>
+                <!-- 2D Tree -->
+                <div class="tree-2d">
+                    <!-- Star -->
+                    <div class="tree-star"></div>
+                    
+                    <!-- Tree layers -->
+                    <div class="tree-layer"></div>
+                    <div class="tree-layer"></div>
+                    <div class="tree-layer"></div>
+                    
+                    <!-- Trunk -->
+                    <div class="trunk"></div>
+                    
+                    <!-- Lights -->
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    <div class="light"></div>
+                    
+                    <!-- Ornaments -->
+                    <div class="ornament ornament-1" title="Hope">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="ornament ornament-2" title="Growth">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="ornament ornament-3" title="Wisdom">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="ornament ornament-4" title="Peace">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <div class="ornament ornament-5" title="Joy">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="ornament ornament-6" title="Love">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="ornament ornament-7" title="Strength">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="ornament ornament-8" title="Success">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="ornament ornament-9" title="New Beginnings">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    
+                    <!-- Gifts -->
+                    <div class="gifts">
+                        <div class="gift-box"></div>
+                        <div class="gift-box"></div>
+                        <div class="gift-box"></div>
+                    </div>
+                    
+                    <!-- Ground -->
+                    <div class="ground"></div>
                 </div>
             </div>
         </div>
         
         <div class="info-panel">
             <h3 class="info-title">A Symbol of New Beginnings</h3>
-            <p class="info-text">The tree represents growth, strength, and new opportunities. Each ornament symbolizes achievements and dreams for the coming year. Rotate and explore to discover the hidden details.</p>
+            <p class="info-text">This elegant tree represents growth, strength, and new opportunities in 2026. Each ornament holds a special meaning - hover over them to discover their significance. The glowing lights symbolize hope and guidance for the journey ahead.</p>
         </div>
     </main>
     
@@ -691,8 +1001,8 @@
         <button class="control-btn active" id="lightsBtn" title="Toggle Lights">
             <i class="fas fa-lightbulb"></i>
         </button>
-        <button class="control-btn active" id="autoRotateBtn" title="Auto Rotate">
-            <i class="fas fa-sync-alt"></i>
+        <button class="control-btn" id="musicBtn" title="Play Music">
+            <i class="fas fa-music"></i>
         </button>
         <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
             <i class="fas fa-expand"></i>
@@ -704,9 +1014,9 @@
         <div class="instructions-title">
             <i class="fas fa-info-circle"></i> INTERACTION GUIDE
         </div>
-        <p><i class="fas fa-mouse-pointer"></i> Drag to rotate</p>
-        <p><i class="fas fa-mouse"></i> Scroll to zoom</p>
-        <p><i class="fas fa-expand"></i> Double-click for fullscreen</p>
+        <p><i class="fas fa-mouse-pointer"></i> Hover over ornaments</p>
+        <p><i class="fas fa-lightbulb"></i> Click buttons below</p>
+        <p><i class="fas fa-expand"></i> Fullscreen available</p>
     </div>
     
     <!-- Footer -->
@@ -718,376 +1028,13 @@
     
     <!-- Snow Container -->
     <div class="snow-container" id="snowContainer"></div>
+    
+    <!-- Audio for background music -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-deep-ambient-478.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Three.js 3D Tree Implementation
-        let scene, camera, renderer, controls;
-        let treeGroup, star, ornaments = [], lights = [];
-        let isAnimating = true;
-        let autoRotate = true;
-        let snowEnabled = true;
-        let lightsEnabled = true;
-        
-        // Initialize Three.js scene
-        function init() {
-            // Scene
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x0a0a0a);
-            scene.fog = new THREE.Fog(0x0a0a0a, 10, 40);
-            
-            // Camera
-            const canvas = document.getElementById('tree-canvas');
-            camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-            camera.position.set(0, 5, 15);
-            
-            // Renderer
-            renderer = new THREE.WebGLRenderer({ 
-                canvas, 
-                antialias: true, 
-                alpha: true,
-                powerPreference: "high-performance"
-            });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            renderer.outputColorSpace = THREE.SRGBColorSpace;
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 1.2;
-            
-            // Controls
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.enableZoom = true;
-            controls.enablePan = false;
-            controls.minDistance = 8;
-            controls.maxDistance = 25;
-            controls.maxPolarAngle = Math.PI / 2.2;
-            controls.autoRotate = autoRotate;
-            controls.autoRotateSpeed = 0.3;
-            
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(5, 15, 5);
-            directionalLight.castShadow = true;
-            directionalLight.shadow.camera.left = -10;
-            directionalLight.shadow.camera.right = 10;
-            directionalLight.shadow.camera.top = 10;
-            directionalLight.shadow.camera.bottom = -10;
-            scene.add(directionalLight);
-            
-            const treeLight = new THREE.PointLight(0xe9c46a, 3, 25);
-            treeLight.position.set(0, 12, 0);
-            scene.add(treeLight);
-            
-            // Create realistic tree
-            createRealisticTree();
-            
-            // Create ornaments
-            createOrnaments();
-            
-            // Create twinkling lights
-            createTwinklingLights();
-            
-            // Add floating particles
-            createFloatingParticles();
-            
-            // Handle window resize
-            window.addEventListener('resize', onWindowResize);
-            
-            // Start animation
-            animate();
-            
-            // Hide loading screen
-            setTimeout(() => {
-                gsap.to('#loadingScreen', {
-                    opacity: 0,
-                    duration: 1,
-                    onComplete: () => {
-                        document.getElementById('loadingScreen').style.visibility = 'hidden';
-                    }
-                });
-            }, 1500);
-        }
-        
-        // Create realistic 3D Christmas tree
-        function createRealisticTree() {
-            treeGroup = new THREE.Group();
-            treeGroup.position.y = -2;
-            
-            // Tree trunk
-            const trunkGeometry = new THREE.CylinderGeometry(0.5, 0.7, 3, 10);
-            const trunkMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0x5d4037,
-                roughness: 0.9,
-                metalness: 0.1
-            });
-            const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
-            trunk.position.y = 1.5;
-            trunk.castShadow = true;
-            trunk.receiveShadow = true;
-            treeGroup.add(trunk);
-            
-            // Tree branches (layers) with color gradient
-            const branchColors = [0x1b5e20, 0x2e7d32, 0x388e3c, 0x43a047];
-            const branchHeights = [4.5, 3.8, 3.0, 2.2];
-            const branchRadii = [3.5, 2.8, 2.2, 1.6];
-            
-            for (let i = 0; i < 4; i++) {
-                const segments = 10 + i * 2;
-                const branchGeometry = new THREE.ConeGeometry(branchRadii[i], branchHeights[i], segments);
-                const branchMaterial = new THREE.MeshStandardMaterial({ 
-                    color: branchColors[i],
-                    roughness: 0.8,
-                    metalness: 0.05,
-                    side: THREE.DoubleSide
-                });
-                
-                const branch = new THREE.Mesh(branchGeometry, branchMaterial);
-                branch.position.y = 3 + i * 2.5;
-                branch.castShadow = true;
-                branch.receiveShadow = true;
-                treeGroup.add(branch);
-            }
-            
-            // Star on top
-            const starGeometry = new THREE.ConeGeometry(0.4, 1, 5);
-            const starMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0xffd700,
-                emissive: 0xffd700,
-                emissiveIntensity: 0.8,
-                roughness: 0.1,
-                metalness: 1.0
-            });
-            
-            star = new THREE.Mesh(starGeometry, starMaterial);
-            star.position.y = 13;
-            star.castShadow = true;
-            
-            // Star glow effect
-            const starGlowGeometry = new THREE.SphereGeometry(0.8, 16, 16);
-            const starGlowMaterial = new THREE.MeshBasicMaterial({
-                color: 0xffd700,
-                transparent: true,
-                opacity: 0.3
-            });
-            const starGlow = new THREE.Mesh(starGlowGeometry, starGlowMaterial);
-            star.add(starGlow);
-            
-            treeGroup.add(star);
-            scene.add(treeGroup);
-        }
-        
-        // Create ornaments with coordinated colors
-        function createOrnaments() {
-            const ornamentColors = [
-                0xe53935, // Red
-                0x2a9d8f, // Teal
-                0xffb300, // Amber
-                0x1e88e5, // Blue
-                0x8e24aa, // Purple
-                0x43a047  // Green
-            ];
-            
-            // Ornament positions on the tree
-            const positions = [
-                {y: 5, radius: 1.6, angle: 0},
-                {y: 6.5, radius: 2.0, angle: Math.PI/2},
-                {y: 8, radius: 2.4, angle: Math.PI},
-                {y: 9.5, radius: 2.0, angle: Math.PI*1.5},
-                {y: 7, radius: 1.3, angle: Math.PI/4},
-                {y: 10, radius: 1.6, angle: Math.PI*0.75},
-                {y: 4.5, radius: 1.0, angle: Math.PI*0.3},
-                {y: 11, radius: 1.2, angle: Math.PI*1.2},
-            ];
-            
-            positions.forEach((pos, index) => {
-                const color = ornamentColors[index % ornamentColors.length];
-                
-                // Main ornament sphere
-                const ornamentGeometry = new THREE.SphereGeometry(0.3, 16, 16);
-                const ornamentMaterial = new THREE.MeshStandardMaterial({ 
-                    color: color,
-                    roughness: 0.2,
-                    metalness: 0.8,
-                    clearcoat: 0.8,
-                    clearcoatRoughness: 0.1
-                });
-                
-                const ornament = new THREE.Mesh(ornamentGeometry, ornamentMaterial);
-                
-                // Calculate position
-                const x = Math.cos(pos.angle) * pos.radius;
-                const z = Math.sin(pos.angle) * pos.radius;
-                ornament.position.set(x, pos.y, z);
-                ornament.castShadow = true;
-                
-                // Metallic ring on top
-                const ringGeometry = new THREE.TorusGeometry(0.35, 0.04, 8, 16);
-                const ringMaterial = new THREE.MeshStandardMaterial({ 
-                    color: 0xd4af37,
-                    roughness: 0.1,
-                    metalness: 1.0
-                });
-                const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-                ring.position.y = 0.35;
-                ornament.add(ring);
-                
-                treeGroup.add(ornament);
-                ornaments.push({mesh: ornament, color: color});
-            });
-        }
-        
-        // Create twinkling lights
-        function createTwinklingLights() {
-            const lightColors = [0xff5252, 0x40c4ff, 0xffd740, 0x7c4dff];
-            const lightPositions = [
-                {y: 5.5, radius: 1.8, angle: Math.PI/6},
-                {y: 7.2, radius: 2.2, angle: Math.PI/1.8},
-                {y: 8.8, radius: 2.6, angle: Math.PI/1.2},
-                {y: 10.5, radius: 2.1, angle: Math.PI/0.9},
-                {y: 4.8, radius: 1.3, angle: Math.PI/0.7},
-                {y: 6.3, radius: 1.6, angle: Math.PI/0.5}
-            ];
-            
-            lightPositions.forEach((pos, index) => {
-                const light = new THREE.PointLight(lightColors[index % lightColors.length], 3, 6);
-                
-                const x = Math.cos(pos.angle) * pos.radius;
-                const z = Math.sin(pos.angle) * pos.radius;
-                light.position.set(x, pos.y, z);
-                
-                // Visual representation of the light
-                const lightSphere = new THREE.SphereGeometry(0.12, 8, 8);
-                const lightMaterial = new THREE.MeshBasicMaterial({ 
-                    color: lightColors[index % lightColors.length],
-                    transparent: true,
-                    opacity: 0.9
-                });
-                const lightMesh = new THREE.Mesh(lightSphere, lightMaterial);
-                lightMesh.position.copy(light.position);
-                
-                treeGroup.add(light);
-                treeGroup.add(lightMesh);
-                lights.push({light: light, mesh: lightMesh});
-            });
-        }
-        
-        // Create floating particles
-        function createFloatingParticles() {
-            const particleCount = 100;
-            const particles = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-            
-            const color = new THREE.Color();
-            
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                
-                // Random positions in a sphere around the tree
-                positions[i3] = (Math.random() - 0.5) * 20;
-                positions[i3 + 1] = Math.random() * 15;
-                positions[i3 + 2] = (Math.random() - 0.5) * 20;
-                
-                // Random colors
-                color.setHSL(Math.random() * 0.1 + 0.5, 0.8, 0.6);
-                colors[i3] = color.r;
-                colors[i3 + 1] = color.g;
-                colors[i3 + 2] = color.b;
-            }
-            
-            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            
-            const particleMaterial = new THREE.PointsMaterial({
-                size: 0.1,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.6
-            });
-            
-            const particleSystem = new THREE.Points(particles, particleMaterial);
-            scene.add(particleSystem);
-            
-            // Animate particles
-            function animateParticles() {
-                const positions = particles.attributes.position.array;
-                
-                for (let i = 0; i < particleCount; i++) {
-                    const i3 = i * 3;
-                    positions[i3 + 1] += 0.01;
-                    
-                    if (positions[i3 + 1] > 15) {
-                        positions[i3 + 1] = 0;
-                    }
-                }
-                
-                particles.attributes.position.needsUpdate = true;
-            }
-            
-            // Store reference for animation
-            scene.userData.particleSystem = particleSystem;
-            scene.userData.animateParticles = animateParticles;
-        }
-        
-        // Handle window resize
-        function onWindowResize() {
-            const canvas = document.getElementById('tree-canvas');
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        }
-        
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            // Auto rotation
-            if (controls.autoRotate) {
-                controls.update();
-            }
-            
-            // Animate star
-            if (star) {
-                star.rotation.y += 0.015;
-                const scale = 1 + Math.sin(Date.now() * 0.0015) * 0.1;
-                star.scale.setScalar(scale);
-            }
-            
-            // Animate ornaments
-            ornaments.forEach((ornament, index) => {
-                ornament.mesh.rotation.y += 0.01;
-                const floatY = Math.sin(Date.now() * 0.001 + index) * 0.08;
-                ornament.mesh.position.y += floatY * 0.008;
-            });
-            
-            // Animate lights (twinkling effect)
-            if (lightsEnabled) {
-                lights.forEach((light, index) => {
-                    const intensity = 1.5 + Math.sin(Date.now() * 0.002 + index) * 1.2;
-                    light.light.intensity = intensity;
-                    light.mesh.material.opacity = 0.5 + intensity * 0.2;
-                });
-            }
-            
-            // Animate particles
-            if (scene.userData.animateParticles) {
-                scene.userData.animateParticles();
-            }
-            
-            // Gentle tree movement
-            if (treeGroup) {
-                treeGroup.rotation.y += 0.0005;
-            }
-            
-            renderer.render(scene, camera);
-        }
-        
         // Create snow with GSAP
         function createSnowWithGSAP() {
             const snowContainer = document.getElementById('snowContainer');
@@ -1121,80 +1068,102 @@
             }
         }
         
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            init();
-            createSnowWithGSAP();
-            setupControls();
+        // Ornament interactions
+        function setupOrnamentInteractions() {
+            const ornaments = document.querySelectorAll('.ornament');
             
-            // Add parallax effect on mouse move
-            let mouseX = 0, mouseY = 0;
-            
-            document.addEventListener('mousemove', (e) => {
-                if (!treeGroup) return;
+            ornaments.forEach(ornament => {
+                ornament.addEventListener('mouseenter', function() {
+                    const title = this.getAttribute('title');
+                    if (title) {
+                        // Create a tooltip
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip';
+                        tooltip.textContent = title;
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
+                        tooltip.style.color = 'white';
+                        tooltip.style.padding = '5px 10px';
+                        tooltip.style.borderRadius = '5px';
+                        tooltip.style.fontSize = '12px';
+                        tooltip.style.whiteSpace = 'nowrap';
+                        tooltip.style.zIndex = '1000';
+                        tooltip.style.top = '-30px';
+                        tooltip.style.left = '50%';
+                        tooltip.style.transform = 'translateX(-50%)';
+                        
+                        this.appendChild(tooltip);
+                    }
+                });
                 
-                mouseX = (e.clientX / window.innerWidth - 0.5) * 0.3;
-                mouseY = (e.clientY / window.innerHeight - 0.5) * 0.3;
-            });
-            
-            // Smooth follow for parallax
-            function updateParallax() {
-                if (treeGroup) {
-                    gsap.to(treeGroup.rotation, {
-                        x: mouseY * 0.2,
-                        y: mouseX * 0.2 + treeGroup.rotation.y * 0.9,
-                        duration: 1.5,
-                        ease: "power2.out"
+                ornament.addEventListener('mouseleave', function() {
+                    const tooltip = this.querySelector('.tooltip');
+                    if (tooltip) {
+                        tooltip.remove();
+                    }
+                });
+                
+                ornament.addEventListener('click', function() {
+                    // Create a sparkle effect
+                    const sparkle = document.createElement('div');
+                    sparkle.style.position = 'absolute';
+                    sparkle.style.width = '30px';
+                    sparkle.style.height = '30px';
+                    sparkle.style.background = 'radial-gradient(circle, white, transparent)';
+                    sparkle.style.borderRadius = '50%';
+                    sparkle.style.top = '50%';
+                    sparkle.style.left = '50%';
+                    sparkle.style.transform = 'translate(-50%, -50%)';
+                    sparkle.style.pointerEvents = 'none';
+                    sparkle.style.zIndex = '100';
+                    
+                    this.appendChild(sparkle);
+                    
+                    // Animate the sparkle
+                    gsap.to(sparkle, {
+                        scale: 2,
+                        opacity: 0,
+                        duration: 0.5,
+                        onComplete: () => sparkle.remove()
                     });
-                }
-                requestAnimationFrame(updateParallax);
-            }
-            updateParallax();
-            
-            // Double-click for fullscreen
-            const canvas = document.getElementById('tree-canvas');
-            canvas.addEventListener('dblclick', function() {
-                if (!document.fullscreenElement) {
-                    canvas.requestFullscreen().catch(err => {
-                        console.log(`Error attempting to enable fullscreen: ${err.message}`);
-                    });
-                } else {
-                    document.exitFullscreen();
-                }
+                });
             });
-            
-            // Fullscreen change event
-            document.addEventListener('fullscreenchange', updateCanvasSize);
-            
-            function updateCanvasSize() {
-                setTimeout(() => {
-                    onWindowResize();
-                }, 100);
-            }
-        });
+        }
         
         // Setup control buttons
         function setupControls() {
             const playPauseBtn = document.getElementById('playPauseBtn');
             const snowBtn = document.getElementById('snowBtn');
             const lightsBtn = document.getElementById('lightsBtn');
-            const autoRotateBtn = document.getElementById('autoRotateBtn');
+            const musicBtn = document.getElementById('musicBtn');
             const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const music = document.getElementById('backgroundMusic');
+            
+            let animationsPlaying = true;
+            let snowEnabled = true;
+            let lightsEnabled = true;
+            let musicPlaying = false;
             
             // Play/Pause button
             playPauseBtn.addEventListener('click', function() {
-                if (isAnimating) {
+                const ornaments = document.querySelectorAll('.ornament, .light, .gift-box');
+                
+                if (animationsPlaying) {
                     // Pause animations
                     gsap.globalTimeline.pause();
+                    ornaments.forEach(el => {
+                        gsap.killTweensOf(el);
+                    });
                     playPauseBtn.querySelector('i').className = 'fas fa-play';
                     playPauseBtn.classList.remove('active');
-                    isAnimating = false;
+                    animationsPlaying = false;
                 } else {
                     // Resume animations
                     gsap.globalTimeline.resume();
+                    restartAnimations();
                     playPauseBtn.querySelector('i').className = 'fas fa-pause';
                     playPauseBtn.classList.add('active');
-                    isAnimating = true;
+                    animationsPlaying = true;
                 }
             });
             
@@ -1237,16 +1206,15 @@
             
             // Lights toggle button
             lightsBtn.addEventListener('click', function() {
+                const lights = document.querySelectorAll('.light');
+                
                 if (lightsEnabled) {
                     // Turn off lights
                     lights.forEach(light => {
-                        gsap.to(light.light, {
-                            intensity: 0,
-                            duration: 1
-                        });
-                        gsap.to(light.mesh.material, {
-                            opacity: 0,
-                            duration: 1
+                        gsap.to(light, {
+                            opacity: 0.1,
+                            scale: 0.8,
+                            duration: 0.5
                         });
                     });
                     lightsBtn.classList.remove('active');
@@ -1254,13 +1222,10 @@
                 } else {
                     // Turn on lights
                     lights.forEach(light => {
-                        gsap.to(light.light, {
-                            intensity: 3,
-                            duration: 1
-                        });
-                        gsap.to(light.mesh.material, {
-                            opacity: 0.9,
-                            duration: 1
+                        gsap.to(light, {
+                            opacity: 0.7,
+                            scale: 1,
+                            duration: 0.5
                         });
                     });
                     lightsBtn.classList.add('active');
@@ -1268,24 +1233,29 @@
                 }
             });
             
-            // Auto rotate toggle button
-            autoRotateBtn.addEventListener('click', function() {
-                autoRotate = !autoRotate;
-                controls.autoRotate = autoRotate;
-                
-                if (autoRotate) {
-                    autoRotateBtn.classList.add('active');
+            // Music button
+            musicBtn.addEventListener('click', function() {
+                if (musicPlaying) {
+                    music.pause();
+                    musicBtn.querySelector('i').className = 'fas fa-music';
+                    musicBtn.classList.remove('active');
+                    musicPlaying = false;
                 } else {
-                    autoRotateBtn.classList.remove('active');
+                    music.play().catch(e => {
+                        console.log("Autoplay prevented. User interaction required.");
+                        // If autoplay is blocked, show a message
+                        alert("Click the music button again to play background music.");
+                    });
+                    musicBtn.querySelector('i').className = 'fas fa-volume-up';
+                    musicBtn.classList.add('active');
+                    musicPlaying = true;
                 }
             });
             
             // Fullscreen button
             fullscreenBtn.addEventListener('click', function() {
-                const canvas = document.getElementById('tree-canvas');
-                
                 if (!document.fullscreenElement) {
-                    canvas.requestFullscreen().catch(err => {
+                    document.documentElement.requestFullscreen().catch(err => {
                         console.log(`Error attempting to enable fullscreen: ${err.message}`);
                     });
                 } else {
@@ -1304,6 +1274,82 @@
                 }
             });
         }
+        
+        // Restart animations
+        function restartAnimations() {
+            // Restart ornament animations
+            const ornaments = document.querySelectorAll('.ornament');
+            ornaments.forEach((ornament, index) => {
+                gsap.to(ornament, {
+                    y: -10,
+                    duration: 3,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "sine.inOut",
+                    delay: index * 0.5
+                });
+            });
+            
+            // Restart light animations
+            const lights = document.querySelectorAll('.light');
+            lights.forEach((light, index) => {
+                gsap.to(light, {
+                    scale: 1.2,
+                    opacity: 1,
+                    duration: 1.5,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "sine.inOut",
+                    delay: index * 0.3
+                });
+            });
+            
+            // Restart gift animations
+            const gifts = document.querySelectorAll('.gift-box');
+            gifts.forEach((gift, index) => {
+                gsap.to(gift, {
+                    y: -10,
+                    duration: 4,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "sine.inOut",
+                    delay: index
+                });
+            });
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createSnowWithGSAP();
+            setupOrnamentInteractions();
+            setupControls();
+            restartAnimations();
+            
+            // Hide loading screen
+            setTimeout(() => {
+                gsap.to('#loadingScreen', {
+                    opacity: 0,
+                    duration: 1,
+                    onComplete: () => {
+                        document.getElementById('loadingScreen').style.visibility = 'hidden';
+                    }
+                });
+            }, 1500);
+            
+            // Add parallax effect on mouse move
+            document.addEventListener('mousemove', (e) => {
+                const treeContainer = document.querySelector('.tree-container');
+                const x = (e.clientX / window.innerWidth - 0.5) * 10;
+                const y = (e.clientY / window.innerHeight - 0.5) * 10;
+                
+                gsap.to(treeContainer, {
+                    x: x,
+                    y: y,
+                    duration: 1,
+                    ease: "power2.out"
+                });
+            });
+        });
     </script>
 </body>
 </html>
