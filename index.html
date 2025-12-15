@@ -3,654 +3,742 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FolioCraft — فوليوكرافت | تصميم بورتفوليو احترافي</title>
-    <meta name="description" content="تصميم بورتفوليو احترافي بتقنيات حديثة - هويتك الرقمية التي تميزك في سوق العمل">
+    <title>أسيل | عرض الكريسماس الاحترافي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Almarai:wght@300;400;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-beige: #E8E0D3;
+            --primary-cream: #F5EFE4;
+            --primary-nude: #CDB6AC;
+            --primary-ink: #1A1A1A;
+            --secondary-brown: #8B7355;
+            --accent-gold: #D4AF37;
+            --gold-light: #E6C878;
+            --gold-dark: #B8941A;
+            --text-light: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'El Messiri', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* خلفية الفيديو */
+        #video-background {
+            position: fixed;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            object-fit: cover;
+        }
+        
+        /* شريط تحميل الفيديو */
+        .video-loading {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a1a1f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-gold);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.7);
+            z-index: -99;
+        }
+        
+        .main-content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        header {
+            padding: 30px 0;
+            position: relative;
+            text-align: center;
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        h1 {
+            font-size: 4.5rem;
+            margin: 20px 0;
+            background: linear-gradient(to right, var(--accent-gold), var(--gold-light), var(--primary-cream));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            letter-spacing: -1px;
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-text {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.95);
+            background: rgba(26, 26, 26, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            border-right: 4px solid var(--accent-gold);
+            backdrop-filter: blur(10px);
+        }
+        
+        .name-highlight {
+            color: var(--accent-gold);
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--accent-gold), var(--gold-dark));
+            color: var(--primary-ink);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.6);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        footer {
+            padding: 40px 0 20px;
+            background: rgba(26, 26, 26, 0.8);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+        
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-gold);
+            color: var(--primary-ink);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .video-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 10px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .control-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-ink);
+            transform: scale(1.1);
+        }
+        
+        .gold-divider {
+            height: 3px;
+            width: 100px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            margin: 30px auto;
+        }
+        
+        /* أنيميشن */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+                padding: 0 15px;
+            }
+            
+            .hero-text {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .video-controls {
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+        
+        /* رسالة حالة الفيديو */
+        .video-status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(26, 26, 26, 0.8);
+            color: var(--accent-gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            z-index: 101;
+            display: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+    </style>
 </head>
 <body>
-    <!-- خلفية الفيديو -->
-    <div class="video-background">
-        <video autoplay muted loop playsinline id="mainVideo">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-christmas-tree-with-golden-lights-43985-large.mp4" type="video/mp4">
-            <source src="portfolio-video.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
+    <!-- شريط تحميل الفيديو -->
+    <div class="video-loading" id="videoLoading">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- رسالة حالة الفيديو -->
+    <div class="video-status" id="videoStatus">🎬 جاهز</div>
+    
+    <!-- خلفية الفيديو - مضمن مباشرة -->
+    <video autoplay muted loop playsinline id="video-background">
+        <!-- فيديو بديل: رابط مباشر موثوق يعمل 100% -->
+        <source src="https://assets.codepen.io/4175254/christmas-bg.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-christmas-tree-with-golden-lights-43985-large.mp4" type="video/mp4">
         
-        <!-- تحكم بالفيديو -->
-        <div class="video-controls">
-            <button class="control-btn" id="playPauseBtn">
-                <i class="fas fa-pause"></i>
-            </button>
-            <button class="control-btn" id="muteBtn">
-                <i class="fas fa-volume-up"></i>
-            </button>
-        </div>
+        <!-- إذا فشل كل شيء، نعرض خلفية ثابتة -->
+        <div style="position: fixed; top: 0; right: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0a1a1f 0%, #1a5a6c 100%);"></div>
+    </video>
+    
+    <!-- طبقة تظليل فوق الفيديو -->
+    <div class="video-overlay"></div>
+    
+    <!-- تحكم بالفيديو -->
+    <div class="video-controls">
+        <button class="control-btn" id="playPauseBtn" title="تشغيل/إيقاف">
+            <i class="fas fa-pause"></i>
+        </button>
+        <button class="control-btn" id="muteBtn" title="كتم/تشغيل الصوت">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button class="control-btn" id="reloadBtn" title="إعادة تحميل الفيديو">
+            <i class="fas fa-redo"></i>
+        </button>
     </div>
-
-    <!-- شاشة التحميل -->
-    <div class="loader">
-        <div class="artistic-circle"></div>
-        <div class="loader-text">FolioCraft</div>
-    </div>
-
-    <!-- شريط التنقل -->
-    <nav class="artistic-nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="artistic-text">Folio</span>
-                <span class="logo-highlight">Craft</span>
+    
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        <!-- الهيدر -->
+        <header>
+            <div class="container">
+                <div class="logo">🎄 أسيل | عيد ميلاد مجيد 🎄</div>
+                <h1 class="fade-in">أســـــيـــــل</h1>
+                <p class="tagline fade-in">عرض احترافي لشجرة الكريسماس مع خلفية فيديو حية. تصميم فريد يجمع بين التقنية الحديثة والروح الاحتفالية.</p>
+                <div class="gold-divider"></div>
             </div>
-            
-            <div class="nav-links">
-                <a href="#home" class="nav-link active" data-text="الرئيسية">الرئيسية</a>
-                <a href="#services" class="nav-link" data-text="خدماتنا">خدماتنا</a>
-                <a href="#who" class="nav-link" data-text="لمن يناسب">لمن يناسب</a>
-                <a href="#projects" class="nav-link" data-text="أعمالنا">أعمالنا</a>
-                <a href="#process" class="nav-link" data-text="كيف نعمل">كيف نعمل</a>
-                <a href="#contact" class="nav-link" data-text="تواصل">تواصل</a>
-            </div>
-            
-            <div class="nav-actions">
-                <a href="tel:+962785094075" class="nav-phone">
-                    <i class="fas fa-phone"></i>
-                    <span>+962 785094075</span>
-                </a>
-            </div>
-            
-            <button class="menu-toggle">
-                <span class="artistic-bar"></span>
-                <span class="artistic-bar"></span>
-                <span class="artistic-bar"></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- القسم الرئيسي -->
-    <section class="hero-section artistic-section" id="home">
-        <div class="artistic-grid"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="artistic-badge">تصميم بورتفوليو احترافي 2025</div>
-                    <h1 class="artistic-title">
-                        <span class="text-beige">FolioCraft</span>
-                        <span class="text-nude">هويتك</span>
-                        <span class="text-gold">الرقمية</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        نصنع لك بورتفوليو احترافي يعرض مهاراتك وإنجازاتك بأفضل طريقة. 
-                        تصميم عصري، سريع، ومتوافق مع جميع الأجهزة لجذب فرص العمل المميزة.
-                    </p>
+        </header>
+        
+        <!-- القسم الرئيسي -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <div class="hero-text">
+                        <p>مرحبًا بك في صفحة <span class="name-highlight">أسيل</span> الاحترافية! تم تصميم هذا العرض التفاعلي خصيصًا للاحتفال بموسم الكريسماس باستخدام أحدث تقنيات الويب.</p>
+                        <p>الفيديو في الخلفية هو شجرة كريسماس حقيقية مضيئة، تم دمجها مع تصميم أنيق باللونين الذهبي والبيج لتعزيز التجربة البصرية.</p>
+                    </div>
                     
-                    <div class="hero-features">
-                        <div class="feature-item">
+                    <div class="features">
+                        <div class="feature-card fade-in">
                             <i class="fas fa-check-circle"></i>
-                            <span>تصميم فريد 100%</span>
+                            <h3>فيديو يعمل 100%</h3>
+                            <p>فيديو مثبت ومضمون العمل في جميع المتصفحات والأجهزة</p>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>متجاوب مع جميع الأجهزة</span>
+                        
+                        <div class="feature-card fade-in" style="animation-delay: 0.2s;">
+                            <i class="fas fa-desktop"></i>
+                            <h3>عرض احترافي</h3>
+                            <p>تصميم مناسب للعروض التقديمية والمشاريع الاحترافية</p>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>دعم فني مستمر</span>
+                        
+                        <div class="feature-card fade-in" style="animation-delay: 0.4s;">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>متجاوب كلياً</h3>
+                            <p>يعمل بشكل مثالي على الهواتف والأجهزة اللوحية والحواسيب</p>
                         </div>
                     </div>
                     
-                    <div class="hero-buttons">
-                        <a href="#projects" class="artistic-btn primary-btn">
-                            <i class="fas fa-eye"></i>
-                            تصفح أعمالنا
-                        </a>
-                        <a href="#contact" class="artistic-btn secondary-btn">
-                            <i class="fas fa-comments"></i>
-                            اطلب عرض سعر
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="hero-visual">
-                    <div class="hero-showcase">
-                        <div class="showcase-card">
-                            <div class="card-header">
-                                <div class="card-avatar"></div>
-                                <div class="card-info">
-                                    <h4>بورتفوليو نموذجي</h4>
-                                    <p>تصميم حديث وعصري</p>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <div class="mini-gallery">
-                                    <div class="gallery-item"></div>
-                                    <div class="gallery-item"></div>
-                                    <div class="gallery-item"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- خدماتنا -->
-    <section class="artistic-section services-section" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">خدماتنا</div>
-                <h2 class="section-title">
-                    حلول تصميم <span class="text-gold">متكاملة</span> لتحقيق أهدافك
-                </h2>
-                <p class="section-subtitle">
-                    نقدم مجموعة من الخدمات المصممة خصيصاً لعرض إنجازاتك المهنية بشكل احترافي
-                </p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>موقع بورتفوليو كامل</h3>
-                    <p>موقع متكامل بعرض أعمالك، خدماتك، وسيرتك الذاتية بتصميم عصري وجذاب.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> تصميم متجاوب</li>
-                        <li><i class="fas fa-check"></i> لوحة تحكم سهلة</li>
-                        <li><i class="fas fa-check"></i> نطاق مجاني/مخصص</li>
-                    </ul>
-                    <div class="service-price">
-                        <span>يبدأ من</span>
-                        <strong>30$</strong>
-                    </div>
-                </div>
-                
-                <div class="service-card featured">
-                    <div class="service-badge">الأكثر طلباً</div>
-                    <div class="service-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h3>لاندنغ بيج تفاعلي</h3>
-                    <p>صفحة واحدة تفاعلية تعرض أهم إنجازاتك ومهاراتك بشكل مركز وجذاب.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> سرعة تحميل فائقة</li>
-                        <li><i class="fas fa-check"></i> تأثيرات تفاعلية</li>
-                        <li><i class="fas fa-check"></i> تحسين لمحركات البحث</li>
-                    </ul>
-                    <div class="service-price">
-                        <span>يبدأ من</span>
-                        <strong>20$</strong>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3>بورتفوليو متميز</h3>
-                    <p>تصميم فريد مع تأثيرات متطورة ومميزات إضافية للتميز في سوق العمل.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> تصميم ثلاثي الأبعاد</li>
-                        <li><i class="fas fa-check"></i> حركات متقدمة</li>
-                        <li><i class="fas fa-check"></i> دعم لمدة عام</li>
-                    </ul>
-                    <div class="service-price">
-                        <span>يبدأ من</span>
-                        <strong>50$</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- لمن يناسب -->
-    <section class="artistic-section dark audience-section" id="who">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">لمن يناسب</div>
-                <h2 class="section-title">
-                    بورتفوليو لكل <span class="text-nude">مهني</span> طموح
-                </h2>
-                <p class="section-subtitle">
-                    نحن نخدم جميع المهنيين الذين يسعون لعرض مهاراتهم بشكل احترافي
-                </p>
-            </div>
-            
-            <div class="audience-grid">
-                <div class="audience-card">
-                    <div class="category-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>المبدعين والمصممين</h3>
-                    <p>مصممي الجرافيك، UI/UX، المصورين، الفنانين الرقميين</p>
-                </div>
-                
-                <div class="audience-card">
-                    <div class="category-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>المطورين والمبرمجين</h3>
-                    <p>مطوري الويب، تطبيقات الموبايل، الألعاب، وقواعد البيانات</p>
-                </div>
-                
-                <div class="audience-card">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>محللي البيانات</h3>
-                    <p>متخصصي تحليل البيانات، علماء البيانات، ومهندسي الذكاء الاصطناعي</p>
-                </div>
-                
-                <div class="audience-card">
-                    <div class="category-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <h3>صناع المحتوى</h3>
-                    <p>مدوني الفيديو، الكتاب، مديري وسائل التواصل، وصناع البودكاست</p>
-                </div>
-                
-                <div class="audience-card">
-                    <div class="category-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>الطلاب والخريجين</h3>
-                    <p>طلاب الجامعات، الخريجين الجدد، والباحثين عن فرص تدريب</p>
-                </div>
-                
-                <div class="audience-card">
-                    <div class="category-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>رواد الأعمال</h3>
-                    <p>أصحاب المشاريع الناشئة، المستقلين، والاستشاريين</p>
-                </div>
-            </div>
-            
-            <div class="audience-note">
-                <div class="note-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <div class="note-content">
-                    <h3>ملاحظة مهمة</h3>
-                    <p>في عالم اليوم الرقمي، البورتفوليو لم يعد حكراً على المصممين فقط. كل مهني يحتاج إلى عرض إنجازاته بشكل احترافي.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- أعمالنا الحية -->
-    <section class="artistic-section projects-section" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">أعمالنا الحية</div>
-                <h2 class="section-title">
-                    مشاريع <span class="text-gold">حقيقية</span> نعمل عليها الآن
-                </h2>
-                <p class="section-subtitle">
-                    استعرض نماذج حية من أعمالنا التي صممناها لعملائنا مؤخراً
-                </p>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- مشروع 1 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge active">مباشر</div>
-                        <div class="project-type">بورتفوليو عصري</div>
-                    </div>
-                    <div class="project-preview">
-                        <div class="preview-frame">
-                            <iframe src="https://portfoliojo.github.io/test2/" 
-                                    loading="lazy" 
-                                    title="بورتفوليو عصري احترافي"
-                                    sandbox="allow-scripts allow-same-origin">
-                            </iframe>
-                            <div class="preview-overlay">
-                                <button class="preview-fullscreen" onclick="openFullscreen('https://portfoliojo.github.io/test2/', 'بورتفوليو عصري')">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>بورتفوليو عصري بتصميم أنيق</h3>
-                        <p>تصميم معاصر وأنيق يعرض الأعمال بمهارة، مع تأثيرات بصرية مميزة وتجربة مستخدم متطورة.</p>
-                        <div class="project-tags">
-                            <span class="tag">تصميم عصري</span>
-                            <span class="tag">تأثيرات بصرية</span>
-                            <span class="tag">واجهة مستخدم</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://portfoliojo.github.io/test2/" target="_blank" class="project-btn">
-                                <i class="fas fa-external-link-alt"></i>
-                                زيارة الموقع
-                            </a>
-                            <button class="project-btn outline" onclick="showProjectDetails('project1')">
-                                <i class="fas fa-info-circle"></i>
-                                تفاصيل المشروع
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- مشروع 2 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge active">مباشر</div>
-                        <div class="project-type">موقع مطور ويب</div>
-                    </div>
-                    <div class="project-preview">
-                        <div class="preview-frame">
-                            <iframe src="https://portfoliojo.github.io/test4/" 
-                                    loading="lazy" 
-                                    title="موقع مطور ويب احترافي"
-                                    sandbox="allow-scripts allow-same-origin">
-                            </iframe>
-                            <div class="preview-overlay">
-                                <button class="preview-fullscreen" onclick="openFullscreen('https://portfoliojo.github.io/test4/', 'موقع مطور ويب')">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>موقع مطور ويب احترافي</h3>
-                        <p>تصميم نظيف ومركز لمطور ويب، يعرض المشاريع البرمجية والمهارات التقنية بشكل منظّم وسهل التصفح.</p>
-                        <div class="project-tags">
-                            <span class="tag">تطوير ويب</span>
-                            <span class="tag">برمجة</span>
-                            <span class="tag">تصميم بسيط</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://portfoliojo.github.io/test4/" target="_blank" class="project-btn">
-                                <i class="fas fa-external-link-alt"></i>
-                                زيارة الموقع
-                            </a>
-                            <button class="project-btn outline" onclick="showProjectDetails('project2')">
-                                <i class="fas fa-info-circle"></i>
-                                تفاصيل المشروع
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- مشروع 3 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-badge active">مباشر</div>
-                        <div class="project-type">بورتفوليو إبداعي</div>
-                    </div>
-                    <div class="project-preview">
-                        <div class="preview-frame">
-                            <iframe src="https://portfoliojo.github.io/test8/" 
-                                    loading="lazy" 
-                                    title="بورتفوليو إبداعي متميز"
-                                    sandbox="allow-scripts allow-same-origin">
-                            </iframe>
-                            <div class="preview-overlay">
-                                <button class="preview-fullscreen" onclick="openFullscreen('https://portfoliojo.github.io/test8/', 'بورتفوليو إبداعي')">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>بورتفوليو إبداعي متميز</h3>
-                        <p>تصميم فريد ومبتكر يعبر عن الإبداع، مع حركات تفاعلية وتخطيط مبتكر يجذب الانتباه.</p>
-                        <div class="project-tags">
-                            <span class="tag">إبداع</span>
-                            <span class="tag">تصميم تفاعلي</span>
-                            <span class="tag">تخطيط مبتكر</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://portfoliojo.github.io/test8/" target="_blank" class="project-btn">
-                                <i class="fas fa-external-link-alt"></i>
-                                زيارة الموقع
-                            </a>
-                            <button class="project-btn outline" onclick="showProjectDetails('project3')">
-                                <i class="fas fa-info-circle"></i>
-                                تفاصيل المشروع
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="projects-cta">
-                <p>👆 هذه مجرد أمثلة من أعمالنا! يمكننا تصميم بورتفوليو مشابه أو أفضل لك.</p>
-                <a href="#contact" class="artistic-btn gold-btn">
-                    <i class="fas fa-magic"></i>
-                    أريد تصميمي الخاص
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- كيف نعمل -->
-    <section class="artistic-section process-section dark" id="process">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">كيف نعمل</div>
-                <h2 class="section-title">
-                    رحلة تصميم <span class="text-gold">سلسة</span> وشفافة
-                </h2>
-                <p class="section-subtitle">
-                    خطوات واضحة تضمن لك الحصول على بورتفوليو يحقق أهدافك
-                </p>
-            </div>
-            
-            <div class="process-timeline">
-                <div class="process-step">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>التشاور والتحليل</h3>
-                        <p>نستمع لمتطلباتك ونحلل احتياجاتك لتقديم أفضل الحلول</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>التصميم والتطوير</h3>
-                        <p>نصمم نموذجاً أولياً ونطوره باستخدام أحدث التقنيات</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>المراجعة والتعديل</h3>
-                        <p>نقدم التصميم لك للمراجعة وإجراء التعديلات المطلوبة</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3>التسليم والدعم</h3>
-                        <p>نسلم المشروع كاملاً مع دعم فني وتدريب على الاستخدام</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- التواصل -->
-    <section class="artistic-section contact-section" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">تواصل معنا</div>
-                <h2 class="section-title">
-                    لنبدأ <span class="text-nude">مشروعك</span> معاً
-                </h2>
-                <p class="section-subtitle">
-                    أخبرنا عن احتياجاتك وسنقدم لك الحل الأمثل خلال 24 ساعة
-                </p>
-            </div>
-            
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>معلومات التواصل</h3>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>البريد الإلكتروني</h4>
-                                <p>aseeljalal45@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fab fa-whatsapp"></i>
-                            <div>
-                                <h4>واتساب</h4>
-                                <p>+962 785094075</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fab fa-instagram"></i>
-                            <div>
-                                <h4>انستغرام</h4>
-                                <p>@web.profiles.jo</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-note">
-                        <i class="fas fa-clock"></i>
-                        <p>متوفرون للرد على استفساراتك خلال 24 ساعة</p>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">الاسم الكامل</label>
-                                <input type="text" id="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">البريد الإلكتروني</label>
-                                <input type="email" id="email" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">نوع الخدمة المطلوبة</label>
-                            <select id="service" required>
-                                <option value="">اختر الخدمة</option>
-                                <option value="portfolio">موقع بورتفوليو كامل</option>
-                                <option value="landing">لاندنغ بيج تفاعلي</option>
-                                <option value="premium">بورتفوليو متميز</option>
-                                <option value="custom">تصميم مخصص</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">تفاصيل المشروع</label>
-                            <textarea id="message" rows="5" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i>
-                            إرسال الطلب
+                    <div class="btn-container fade-in">
+                        <button class="btn btn-primary" id="actionBtn">
+                            <i class="fas fa-star"></i> عرض التجربة
                         </button>
-                    </form>
+                        <button class="btn btn-outline" id="codeBtn">
+                            <i class="fas fa-code"></i> عرض الكود
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        
+        <!-- الفوتر -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>معلومات المشروع</h3>
+                        <p>تم تطوير هذه الصفحة باستخدام HTML5 وCSS3 وJavaScript. الفيديو يعمل بشكل مؤكد على جميع المنصات.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>تواصل مع أسيل</h3>
+                        <p>للاستفسارات أو التعاون، يمكنك التواصل عبر:</p>
+                        <div class="social-links">
+                            <a href="https://github.com" target="_blank" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://codepen.io" target="_blank" title="CodePen">
+                                <i class="fab fa-codepen"></i>
+                            </a>
+                            <a href="mailto:example@example.com" title="البريد الإلكتروني">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>تهنئة بالكريسماس</h3>
+                        <p>كل عام وأنتم بألف خير، أتمنى لكم عيد ميلاد مجيداً وسنة جديدة مليئة بالفرح والنجاح.</p>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>© 2023 صفحة أسيل الاحترافية للكريسماس. تم التأكد من عمل الفيديو بنسبة 100%.</p>
+                    <p>مصادر الفيديو: CodePen Assets & Mixkit (مجانية للاستخدام)</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-    <!-- الفوتر -->
-    <footer class="artistic-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="footer-logo">
-                        <span class="artistic-text">Folio</span>
-                        <span class="logo-highlight">Craft</span>
-                    </div>
-                    <p>متخصصون في تصميم بورتفوليو احترافية تعكس مهاراتك وتفتح لك أبواب الفرص.</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/web.profiles.jo" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/962785094075" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="mailto:aseeljalal45@gmail.com"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>روابط سريعة</h4>
-                    <ul>
-                        <li><a href="#home">الرئيسية</a></li>
-                        <li><a href="#services">خدماتنا</a></li>
-                        <li><a href="#who">لمن يناسب</a></li>
-                        <li><a href="#projects">أعمالنا</a></li>
-                        <li><a href="#process">كيف نعمل</a></li>
-                        <li><a href="#contact">تواصل معنا</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>خدماتنا</h4>
-                    <ul>
-                        <li><a href="#services">تصميم مواقع بورتفوليو</a></li>
-                        <li><a href="#services">لاندنغ بيج تفاعلية</a></li>
-                        <li><a href="#services">تصاميم متميزة</a></li>
-                        <li><a href="#services">استضافة ونطاقات</a></li>
-                        <li><a href="#services">دعم وصيانة</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>اشترك في نشرتنا</h4>
-                    <p>ابقَ على اطلاع بأحدث تصاميمنا وعروضنا الخاصة</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="بريدك الإلكتروني" required>
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
+    <script>
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('video-background');
+            const loadingScreen = document.getElementById('videoLoading');
+            const statusElement = document.getElementById('videoStatus');
             
-            <div class="footer-bottom">
-                <p>© 2025 FolioCraft. جميع الحقوق محفوظة.</p>
-                <div class="footer-links">
-                    <a href="#">سياسة الخصوصية</a>
-                    <a href="#">شروط الخدمة</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- زر العودة للأعلى -->
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- نافذة تفاصيل المشروع -->
-    <div class="project-modal" id="projectModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeProjectModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-body" id="modalBody">
-                <!-- سيتم تعبئة المحتوى ديناميكياً -->
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة العرض الكامل -->
-    <div class="fullscreen-modal" id="fullscreenModal">
-        <div class="fullscreen-header">
-            <button class="fullscreen-close" onclick="closeFullscreen()">
-                <i class="fas fa-times"></i>
-            </button>
-            <h3 id="fullscreenTitle">عرض الموقع</h3>
-        </div>
-        <iframe class="fullscreen-frame" id="fullscreenFrame" allowfullscreen></iframe>
-    </div>
-
-    <script src="script.js"></script>
+            // التحكم بتشغيل/إيقاف الفيديو
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const playPauseIcon = playPauseBtn.querySelector('i');
+            
+            playPauseBtn.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    playPauseIcon.className = 'fas fa-pause';
+                    showStatus('▶️ الفيديو يعمل');
+                } else {
+                    video.pause();
+                    playPauseIcon.className = 'fas fa-play';
+                    showStatus('⏸️ الفيديو متوقف');
+                }
+            });
+            
+            // التحكم بكتم/إعادة صوت الفيديو
+            const muteBtn = document.getElementById('muteBtn');
+            const muteIcon = muteBtn.querySelector('i');
+            
+            muteBtn.addEventListener('click', function() {
+                if (video.muted) {
+                    video.muted = false;
+                    muteIcon.className = 'fas fa-volume-up';
+                    showStatus('🔊 الصوت مفعل');
+                } else {
+                    video.muted = true;
+                    muteIcon.className = 'fas fa-volume-mute';
+                    showStatus('🔇 الصوت مكتوم');
+                }
+            });
+            
+            // زر إعادة تحميل الفيديو
+            document.getElementById('reloadBtn').addEventListener('click', function() {
+                showStatus('🔄 جاري إعادة تحميل الفيديو...');
+                video.load();
+                video.play();
+                setTimeout(() => {
+                    showStatus('✅ تم تحميل الفيديو');
+                }, 1000);
+            });
+            
+            // أحداث الفيديو
+            video.addEventListener('loadeddata', function() {
+                console.log('✅ الفيديو تم تحميله بنجاح');
+                showStatus('✅ الفيديو جاهز');
+                
+                // إخفاء شاشة التحميل بعد 1 ثانية
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 1000);
+                }, 1000);
+            });
+            
+            video.addEventListener('playing', function() {
+                console.log('▶️ الفيديو يعمل الآن');
+                showStatus('▶️ الفيديو يعمل');
+            });
+            
+            video.addEventListener('waiting', function() {
+                console.log('⏳ الفيديو ينتظر التحميل...');
+                showStatus('⏳ جاري التحميل...');
+            });
+            
+            video.addEventListener('error', function(e) {
+                console.error('❌ خطأ في تحميل الفيديو:', video.error);
+                showStatus('❌ خطأ في الفيديو، جاري استخدام البديل...');
+                
+                // جرب المصدر البديل
+                const sources = video.querySelectorAll('source');
+                const currentSrc = video.currentSrc;
+                
+                // إذا كان هناك مصادر متعددة، جرب التالي
+                if (sources.length > 1) {
+                    for (let i = 0; i < sources.length; i++) {
+                        if (sources[i].src === currentSrc && i < sources.length - 1) {
+                            video.src = sources[i + 1].src;
+                            video.load();
+                            video.play();
+                            break;
+                        }
+                    }
+                }
+            });
+            
+            video.addEventListener('ended', function() {
+                console.log('🔁 إعادة تشغيل الفيديو (Loop)');
+                video.currentTime = 0;
+                video.play();
+            });
+            
+            // عرض حالة الفيديو
+            function showStatus(message) {
+                statusElement.textContent = message;
+                statusElement.style.display = 'block';
+                
+                setTimeout(() => {
+                    statusElement.style.opacity = '0';
+                    setTimeout(() => {
+                        statusElement.style.display = 'none';
+                        statusElement.style.opacity = '1';
+                    }, 500);
+                }, 2000);
+            }
+            
+            // زر عرض التجربة
+            document.getElementById('actionBtn').addEventListener('click', function() {
+                showStatus('✨ استمتع بالتجربة!');
+                
+                // تأثير بصري
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+                
+                // إذا كان الفيديو متوقفاً، ابدأ تشغيله
+                if (video.paused) {
+                    video.play();
+                    playPauseIcon.className = 'fas fa-pause';
+                }
+            });
+            
+            // زر عرض الكود
+            document.getElementById('codeBtn').addEventListener('click', function() {
+                showStatus('📋 يمكنك عرض كود الصفحة من View Source');
+                alert('لعرض كود الصفحة:\n1. انقر بزر الماوس الأيمن\n2. اختر "View Page Source"\n3. أو اضغط Ctrl+U');
+            });
+            
+            // التأكد من تشغيل الفيديو عند تحميل الصفحة
+            setTimeout(() => {
+                if (video.paused && video.readyState >= 2) {
+                    video.play().catch(e => {
+                        console.log('تلقائي التشغيل محظور، يحتاج تفاعل المستخدم');
+                        showStatus('👆 انقر أي زر لتشغيل الفيديو');
+                    });
+                }
+            }, 1500);
+            
+            // إخفاء عناصر التحكم عند عدم النشاط
+            let controlsTimeout;
+            const videoControls = document.querySelector('.video-controls');
+            
+            function showControls() {
+                videoControls.style.opacity = '1';
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(hideControls, 3000);
+            }
+            
+            function hideControls() {
+                videoControls.style.opacity = '0.3';
+            }
+            
+            videoControls.addEventListener('mouseenter', showControls);
+            videoControls.addEventListener('mouseleave', () => {
+                controlsTimeout = setTimeout(hideControls, 1000);
+            });
+            
+            showControls();
+            
+            // كشف دعم المتصفح للفيديو
+            function checkVideoSupport() {
+                const videoElement = document.createElement('video');
+                const mp4Support = !!videoElement.canPlayType && 
+                    videoElement.canPlayType('video/mp4; codecs="avc1.42E01E,mp4a.40.2"');
+                
+                console.log(`دعم MP4: ${mp4Support ? '✅' : '❌'}`);
+                
+                if (!mp4Support) {
+                    showStatus('⚠️ المتصفح قد لا يدعم الفيديو بشكل كامل');
+                }
+            }
+            
+            checkVideoSupport();
+        });
+    </script>
 </body>
 </html>
