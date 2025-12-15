@@ -3,48 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شجرة ميلاد أسيل - تصميم فاخر</title>
+    <title>أسيل | عيد ميلاد ساحر</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* ألوان الثيم الجديدة */
             --primary-beige: #E8E0D3;
             --primary-cream: #F5EFE4;
             --primary-nude: #CDB6AC;
             --primary-ink: #1A1A1A;
             --secondary-brown: #8B7355;
             --accent-gold: #D4AF37;
-            
-            /* درجات إضافية */
             --gold-light: #E6C878;
             --gold-dark: #B8941A;
-            --beige-light: #F2EDE4;
-            --beige-dark: #D9CFBF;
-            
-            /* خلفيات فاتحة */
-            --bg-light: #F5EFE4;
-            --bg-lighter: #E8E0D3;
-            --bg-card: #FFFFFF;
-            --bg-card-light: #F9F5F0;
-            --bg-dark: #1A1A1A;
-            
-            /* نصوص */
-            --text-primary: #1A1A1A;
-            --text-secondary: #4A4A4A;
-            --text-muted: #7A7A7A;
-            
-            /* تدرجات خاصة */
-            --gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, var(--gold-light) 100%);
-            --gradient-beige: linear-gradient(135deg, var(--primary-cream) 0%, var(--primary-beige) 100%);
-            --gradient-nude: linear-gradient(135deg, var(--primary-nude) 0%, var(--beige-dark) 100%);
-            
-            --shadow-light: 0 10px 30px rgba(26, 26, 26, 0.08);
-            --shadow-medium: 0 15px 40px rgba(26, 26, 26, 0.12);
-            --shadow-dark: 0 20px 50px rgba(26, 26, 26, 0.15);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --text-light: #FFFFFF;
         }
         
         * {
@@ -55,8 +29,7 @@
         
         body {
             font-family: 'Cairo', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-primary);
+            color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
             line-height: 1.7;
@@ -67,296 +40,209 @@
             font-weight: 700;
         }
         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* الفيديو كخلفية */
+        #video-background {
+            position: fixed;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            object-fit: cover;
         }
         
-        /* Header */
-        header {
-            padding: 30px 0;
-            position: relative;
-            overflow: hidden;
-            background: var(--gradient-beige);
-            border-bottom: 1px solid rgba(205, 182, 172, 0.3);
-        }
-        
-        .header-bg {
-            position: absolute;
+        .video-overlay {
+            position: fixed;
             top: 0;
             right: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 115, 85, 0.08) 0%, transparent 50%);
-            z-index: 0;
+            background: rgba(10, 10, 10, 0.65);
+            z-index: -99;
         }
         
-        .header-content {
-            text-align: center;
+        /* طبقة المحتوى الرئيسية */
+        .main-content {
             position: relative;
             z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* الهيدر */
+        header {
+            padding: 30px 0;
+            position: relative;
+            text-align: center;
+            background: rgba(26, 26, 26, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
         
         .logo {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: var(--secondary-brown);
+            color: var(--accent-gold);
             margin-bottom: 10px;
             display: inline-block;
             padding: 8px 20px;
             border-radius: 30px;
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(205, 182, 172, 0.4);
-            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         
         h1 {
-            font-size: 4rem;
+            font-size: 4.2rem;
             margin: 20px 0;
-            color: var(--text-primary);
-            position: relative;
-            display: inline-block;
-            letter-spacing: -1px;
-        }
-        
-        .name-highlight {
-            background: var(--gradient-gold);
+            background: linear-gradient(to right, var(--accent-gold), var(--gold-light), var(--primary-cream));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            position: relative;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: -1px;
         }
         
-        .name-highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-gold);
-            border-radius: 3px;
-        }
-        
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.8;
-            max-width: 600px;
+        .tagline {
+            font-size: 1.4rem;
+            max-width: 700px;
             margin: 0 auto 40px;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
         }
         
-        /* Content Sections */
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin: 60px 0;
-            align-items: center;
-        }
-        
-        @media (max-width: 992px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Tree Container */
-        .tree-section {
-            position: relative;
+        /* المحتوى الرئيسي */
+        .hero-section {
+            flex: 1;
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 600px;
+            padding: 60px 0;
+            text-align: center;
         }
         
-        .tree-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            height: 600px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--bg-card);
-            border-radius: 25px;
-            box-shadow: var(--shadow-medium);
-            padding: 30px;
-            border: 1px solid rgba(205, 182, 172, 0.2);
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        /* SVG Filter */
-        .svg-filters {
-            position: absolute;
-            width: 0;
-            height: 0;
+        .hero-text {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(26, 26, 26, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            border-right: 4px solid var(--accent-gold);
+            backdrop-filter: blur(5px);
         }
         
-        /* Tree SVG - تخصيص الألوان للثيم الجديد */
-        .christmas-tree {
-            width: 400px;
-            height: 550px;
-            filter: url(#gold-glow);
-            animation: treeFloat 8s ease-in-out infinite;
+        .name-highlight {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1.5rem;
         }
         
-        .tree-layer {
-            fill: var(--secondary-brown);
-            opacity: 0.9;
-            transition: var(--transition);
-        }
-        
-        .tree-layer:nth-child(2) { fill: #9D8266; }
-        .tree-layer:nth-child(3) { fill: #AF9478; }
-        .tree-layer:nth-child(4) { fill: #C1A68A; }
-        
-        .tree-trunk {
-            fill: var(--primary-nude);
-        }
-        
-        .ornament {
-            cursor: pointer;
-            animation: ornamentPulse 3s infinite;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-        }
-        
-        .star {
-            animation: starSpin 20s linear infinite;
-            transform-origin: center;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-        }
-        
-        /* Tree Lights */
-        .light {
-            animation: lightBlink 1.5s infinite;
-        }
-        
-        /* Info Section */
-        .info-section {
-            padding: 40px;
-            background: var(--bg-card);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            border: 1px solid rgba(205, 182, 172, 0.2);
-            box-shadow: var(--shadow-medium);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .info-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
-            z-index: -1;
-        }
-        
-        .info-section h2 {
-            font-size: 2.3rem;
-            margin-bottom: 25px;
-            color: var(--text-primary);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .info-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            right: 0;
-            width: 80px;
-            height: 3px;
-            background: var(--gradient-gold);
-            border-radius: 3px;
-        }
-        
-        .info-section p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-        }
-        
+        /* الميزات */
         .features {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 25px 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
         }
         
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            border-radius: 12px;
-            background: var(--bg-card-light);
-            border: 1px solid rgba(205, 182, 172, 0.2);
-            transition: var(--transition);
+        .feature-card {
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
-        .feature:hover {
-            background: rgba(212, 175, 55, 0.08);
-            transform: translateX(-5px);
-            border-color: rgba(212, 175, 55, 0.3);
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
         }
         
-        .feature i {
+        .feature-card i {
+            font-size: 2.5rem;
             color: var(--accent-gold);
-            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
         
-        /* Buttons */
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* الأزرار */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: var(--gradient-gold);
-            color: var(--primary-ink);
-            padding: 15px 30px;
+            padding: 16px 35px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            margin-top: 20px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-light);
-            border: none;
-            cursor: pointer;
             font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
         }
         
-        .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: var(--shadow-dark);
+        .btn-primary {
+            background: linear-gradient(to right, var(--accent-gold), var(--gold-dark));
+            color: var(--primary-ink);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.6);
         }
         
         .btn-outline {
             background: transparent;
             border: 2px solid var(--accent-gold);
             color: var(--accent-gold);
-            margin-left: 15px;
         }
         
         .btn-outline:hover {
             background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-5px);
         }
         
-        /* Footer */
+        /* الفوتر */
         footer {
-            padding: 50px 0 30px;
+            padding: 40px 0 20px;
+            background: rgba(26, 26, 26, 0.8);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
             margin-top: 60px;
-            background: var(--primary-cream);
-            border-top: 1px solid rgba(205, 182, 172, 0.3);
-            position: relative;
-            overflow: hidden;
         }
         
         .footer-content {
@@ -369,23 +255,11 @@
         .footer-section h3 {
             font-size: 1.5rem;
             margin-bottom: 20px;
-            color: var(--secondary-brown);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--gradient-gold);
+            color: var(--accent-gold);
         }
         
         .footer-section p {
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .social-links {
@@ -400,17 +274,15 @@
             justify-content: center;
             width: 45px;
             height: 45px;
-            background: var(--bg-card);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            color: var(--secondary-brown);
+            color: var(--accent-gold);
             font-size: 1.2rem;
-            transition: var(--transition);
-            box-shadow: var(--shadow-light);
-            border: 1px solid rgba(205, 182, 172, 0.2);
+            transition: all 0.3s ease;
         }
         
         .social-links a:hover {
-            background: var(--gradient-gold);
+            background: var(--accent-gold);
             color: var(--primary-ink);
             transform: translateY(-5px);
         }
@@ -418,917 +290,300 @@
         .copyright {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(205, 182, 172, 0.2);
-            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
         }
         
-        /* Snow Animation - معدل للألوان الجديدة */
-        .snow-container {
+        /* تحكم بالفيديو */
+        .video-controls {
             position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
         }
         
-        .snowflake {
-            position: absolute;
-            background: var(--primary-nude);
+        .control-btn {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            opacity: 0.6;
-            filter: blur(0.5px);
-            animation: snowFall linear infinite;
+            background: rgba(26, 26, 26, 0.7);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
         
-        /* Floating Ornaments */
-        .floating-ornaments {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+        .control-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-ink);
         }
         
-        .floating-ornament {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: floatAround 15s infinite linear;
-            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
-            background: var(--gradient-gold);
-        }
-        
-        /* Animations */
-        @keyframes treeFloat {
-            0%, 100% {
-                transform: translateY(0) rotate(0);
-            }
-            25% {
-                transform: translateY(-15px) rotate(0.5deg);
-            }
-            75% {
-                transform: translateY(10px) rotate(-0.5deg);
-            }
-        }
-        
-        @keyframes ornamentPulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
-        }
-        
-        @keyframes starSpin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        @keyframes lightBlink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.3;
-            }
-        }
-        
-        @keyframes snowFall {
-            0% {
-                transform: translateY(-10px) translateX(0);
-            }
-            100% {
-                transform: translateY(100vh) translateX(20px);
-            }
-        }
-        
-        @keyframes floatAround {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(100px, 100px) rotate(90deg);
-            }
-            50% {
-                transform: translate(50px, 200px) rotate(180deg);
-            }
-            75% {
-                transform: translate(-50px, 150px) rotate(270deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-            }
-        }
-        
-        /* Responsive Design */
+        /* التجاوب مع الهواتف */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.8rem;
             }
             
-            .subtitle {
+            .tagline {
                 font-size: 1.2rem;
+                padding: 0 15px;
             }
             
-            .christmas-tree {
-                width: 300px;
-                height: 450px;
-            }
-            
-            .tree-wrapper {
-                height: 500px;
+            .hero-text {
+                font-size: 1.1rem;
                 padding: 20px;
-            }
-            
-            .info-section {
-                padding: 30px 20px;
             }
             
             .features {
                 grid-template-columns: 1fr;
+                padding: 0 15px;
             }
             
-            .content {
-                margin: 30px 0;
-                gap: 30px;
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .video-controls {
+                bottom: 10px;
+                left: 10px;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
         }
         
-        /* Control Panel */
-        .control-panel {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            z-index: 100;
-            box-shadow: var(--shadow-medium);
-            border: 1px solid rgba(205, 182, 172, 0.2);
-            display: none;
-            width: 280px;
+        /* تأثيرات إضافية */
+        .gold-divider {
+            height: 3px;
+            width: 100px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            margin: 30px auto;
         }
         
-        .control-panel h4 {
-            margin-bottom: 15px;
-            color: var(--secondary-brown);
-            font-size: 1.2rem;
-            position: relative;
-            display: inline-block;
+        .fade-in {
+            animation: fadeIn 1.5s ease-out;
         }
         
-        .control-panel h4::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--gradient-gold);
-        }
-        
-        .control-group {
-            margin-bottom: 15px;
-        }
-        
-        .control-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-        
-        .control-btn {
-            background: var(--bg-card-light);
-            border: 1px solid rgba(205, 182, 172, 0.3);
-            color: var(--text-secondary);
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            margin: 5px;
-        }
-        
-        .control-btn:hover, .control-btn.active {
-            background: var(--gradient-gold);
-            color: var(--primary-ink);
-            border-color: var(--accent-gold);
-        }
-        
-        .toggle-controls {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-ink);
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 99;
-            box-shadow: var(--shadow-medium);
-            transition: var(--transition);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-        
-        .toggle-controls:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--primary-cream);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-nude);
-            border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-brown);
-        }
-        
-        /* Particle Background */
-        .particles-container {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -2;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: particleMove 20s infinite linear;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <!-- Particle Background -->
-    <div class="particles-container" id="particlesContainer"></div>
+    <!-- خلفية الفيديو -->
+    <video autoplay muted loop playsinline id="video-background">
+        <!-- رابط الفيديو من Pexels -->
+        <source src="https://player.vimeo.com/external/3287305.hd.mp4?s=3d69e65e8ed6472c5e2d5b8b7d6b7f7c&profile_id=174&oauth2_token_id=57447761" type="video/mp4">
+        <!-- رابط بديل في حالة فشل الأول -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-christmas-tree-with-golden-lights-43985-large.mp4" type="video/mp4">
+        <p>متصفحك لا يدعم تشغيل الفيديو. هذه رسالة بديلة.</p>
+    </video>
     
-    <!-- Snow Animation -->
-    <div class="snow-container" id="snowContainer"></div>
+    <!-- طبقة تظليل فوق الفيديو -->
+    <div class="video-overlay"></div>
     
-    <!-- Floating Ornaments -->
-    <div class="floating-ornaments" id="floatingOrnaments"></div>
-    
-    <!-- Header -->
-    <header>
-        <div class="header-bg"></div>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">🎄 شجرة عيد الميلاد الفاخرة 🎄</div>
-                <h1>شجرة <span class="name-highlight">أسيل</span> الذهبية</h1>
-                <p class="subtitle">تصميم فاخر يجمع بين الأناقة الكلاسيكية والتقنيات الحديثة. شجرة عيد ميلاد تفاعلية بتصميم بيج وذهبي راقي.</p>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Main Content -->
-    <main class="container">
-        <div class="content">
-            <!-- Tree Section -->
-            <div class="tree-section">
-                <div class="tree-wrapper">
-                    <!-- SVG Filters -->
-                    <svg class="svg-filters">
-                        <filter id="gold-glow" x="-150%" y="-150%" width="280%" height="280%">
-                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-                            <feGaussianBlur in="offOut" stdDeviation="12" result="blur" />
-                            <feComponentTransfer>
-                                <fefuncR type="linear" slope="0.8" intercept="0.2" />
-                                <fefuncG type="linear" slope="0.7" intercept="0.2" />
-                                <fefuncB type="linear" slope="0.4" intercept="0.1" />
-                            </feComponentTransfer>
-                            <feComposite in="SourceGraphic" operator="over" />
-                        </filter>
-                    </svg>
-                    
-                    <!-- Christmas Tree SVG مع ألوان الثيم الجديد -->
-                    <svg class="christmas-tree" viewBox="0 0 400 550">
-                        <!-- Tree Layers -->
-                        <polygon class="tree-layer" points="200,80 320,250 80,250" />
-                        <polygon class="tree-layer" points="200,150 280,320 120,320" />
-                        <polygon class="tree-layer" points="200,220 240,390 160,390" />
-                        <polygon class="tree-layer" points="200,290 220,460 180,460" />
-                        
-                        <!-- Tree Trunk -->
-                        <rect class="tree-trunk" x="180" y="460" width="40" height="70" rx="5"/>
-                        
-                        <!-- Star -->
-                        <polygon class="star" points="200,40 210,70 240,70 220,90 230,120 200,100 170,120 180,90 160,70 190,70" fill="#D4AF37"/>
-                        
-                        <!-- Ornaments - ألوان تناسب الثيم الجديد -->
-                        <circle class="ornament" cx="200" cy="130" r="12" fill="#8B7355"/>
-                        <circle class="ornament" cx="250" cy="180" r="12" fill="#CDB6AC"/>
-                        <circle class="ornament" cx="150" cy="180" r="12" fill="#D4AF37"/>
-                        <circle class="ornament" cx="230" cy="260" r="12" fill="#8B7355"/>
-                        <circle class="ornament" cx="170" cy="260" r="12" fill="#CDB6AC"/>
-                        <circle class="ornament" cx="200" cy="330" r="12" fill="#D4AF37"/>
-                        <circle class="ornament" cx="270" cy="350" r="12" fill="#8B7355"/>
-                        <circle class="ornament" cx="130" cy="350" r="12" fill="#CDB6AC"/>
-                        <circle class="ornament" cx="200" cy="420" r="12" fill="#D4AF37"/>
-                        
-                        <!-- Lights -->
-                        <circle class="light" cx="220" cy="110" r="6" fill="#D4AF37"/>
-                        <circle class="light" cx="280" cy="200" r="6" fill="#E6C878"/>
-                        <circle class="light" cx="120" cy="200" r="6" fill="#D4AF37"/>
-                        <circle class="light" cx="240" cy="290" r="6" fill="#E6C878"/>
-                        <circle class="light" cx="160" cy="290" r="6" fill="#D4AF37"/>
-                        <circle class="light" cx="300" cy="370" r="6" fill="#E6C878"/>
-                        <circle class="light" cx="100" cy="370" r="6" fill="#D4AF37"/>
-                    </svg>
-                </div>
-            </div>
-            
-            <!-- Info Section -->
-            <div class="info-section">
-                <h2>تصميم فاخر بتقنيات عصرية</h2>
-                <p>مرحباً! أنا <strong>أسيل</strong>، وهذه شجرة الميلاد الفاخرة التي صممتها باستخدام أحدث تقنيات الويب. تم تصميم الثيم بألوان البيج والذهبي ليعطي شعوراً بالفخامة والأناقة مع الحفاظ على جو عيد الميلاد الساحر.</p>
-                
-                <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-gem"></i>
-                        <span>تصميم فاخر وأنيق</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-palette"></i>
-                        <span>ألوان بيج وذهبي راقية</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-mobile-alt"></i>
-                        <span>تصميم متجاوب كامل</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-gamepad"></i>
-                        <span>تفاعلية متقدمة</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-snowflake"></i>
-                        <span>تأثيرات ثلجية أنيقة</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-sliders-h"></i>
-                        <span>لوحة تحكم متكاملة</span>
-                    </div>
-                </div>
-                
-                <h3>🎨 التقنيات المستخدمة:</h3>
-                <p>HTML5 • CSS3 مع متغيرات حديثة • SVG Filters • JavaScript ES6+ • CSS Grid & Flexbox</p>
-                
-                <h3>✨ خصائص التفاعل:</h3>
-                <p>يمكنك النقر على زينة الشجرة لتغيير ألوانها، وتعديل سرعة الحركة، وتغيير تأثيرات الإضاءة من لوحة التحكم المتقدمة.</p>
-                
-                <div>
-                    <button class="btn btn-outline" id="changeThemeBtn">
-                        <i class="fas fa-moon"></i> تبديل الثيم
-                    </button>
-                    <button class="btn" id="githubBtn">
-                        <i class="fab fa-github"></i> عرض على GitHub
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>🎄 عن التصميم</h3>
-                    <p>هذا التصميم يجمع بين أناقة الألوان المحايدة (بيج، كريم، ذهبي) وتقنيات الويب الحديثة لإنشاء تجربة بصرية فريدة لعيد الميلاد.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>📞 تواصل مع أسيل</h3>
-                    <p>للاستفسارات أو التعاون في مشاريع تصميم مشابهة، يمكنك التواصل معي عبر الوسائل التالية:</p>
-                    <div class="social-links">
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" title="Behance"><i class="fab fa-behance"></i></a>
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>🎁 تمنياتي للجميع</h3>
-                    <p>أتمنى لكم جميعاً عيد ميلاد مجيداً مليئاً بالفرح والسلام، وسنة جديدة مليئة بالإنجازات والسعادة. كل عام وأنتم بخير!</p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>© 2023 شجرة ميلاد أسيل الفاخرة. جميع الحقوق محفوظة | تصميم وتطوير: <strong>أسيل</strong></p>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Control Panel Toggle -->
-    <div class="toggle-controls" id="toggleControls">
-        <i class="fas fa-sliders-h"></i>
+    <!-- تحكم بالفيديو -->
+    <div class="video-controls">
+        <button class="control-btn" id="playPauseBtn">
+            <i class="fas fa-pause"></i>
+        </button>
+        <button class="control-btn" id="muteBtn">
+            <i class="fas fa-volume-up"></i>
+        </button>
     </div>
     
-    <!-- Control Panel -->
-    <div class="control-panel" id="controlPanel">
-        <h4>👑 لوحة تحكم أسيل</h4>
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        <!-- الهيدر -->
+        <header>
+            <div class="container">
+                <div class="logo">🎄 عيد ميلاد مجيد 🎄</div>
+                <h1 class="fade-in">أسيل</h1>
+                <p class="tagline fade-in">تصميم احترافي لعرض شجرة الميلاد الساحرة مع خلفية فيديو حية. تجربة بصرية فريدة تجمع بين الأصالة والعصرية.</p>
+                <div class="gold-divider"></div>
+            </div>
+        </header>
         
-        <div class="control-group">
-            <div class="control-label">سرعة الحركة:</div>
-            <button class="control-btn" data-speed="slow">بطيئة</button>
-            <button class="control-btn active" data-speed="normal">عادية</button>
-            <button class="control-btn" data-speed="fast">سريعة</button>
-        </div>
+        <!-- القسم الرئيسي -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <div class="hero-text">
+                        <p>مرحبًا بك في عالم <span class="name-highlight">أسيل</span> الساحر! هذا العرض التفاعلي المصمم خصيصًا للاحتفال بموسم الكريسماس باستخدام أحدث تقنيات الويب. شجرة الميلاد الضخمة المضيئة في الخلفية تمثل جو الاحتفال والبهجة.</p>
+                        <p>تم دمج الفيديو عالي الجودة مع تصميم أنيق باللونين الذهبي والبيج لإنشاء تجربة بصرية فريدة تليق باسمك.</p>
+                    </div>
+                    
+                    <div class="features">
+                        <div class="feature-card fade-in">
+                            <i class="fas fa-video"></i>
+                            <h3>خلفية فيديو حية</h3>
+                            <p>فيديو عالي الجودة لشجرة كريسماس ضخمة كمؤثر بصري رئيسي</p>
+                        </div>
+                        
+                        <div class="feature-card fade-in">
+                            <i class="fas fa-palette"></i>
+                            <h3>تصميم أنيق</h3>
+                            <p>ألوان ذهبية وبيج فاخرة مع خطوط عربية عصرية</p>
+                        </div>
+                        
+                        <div class="feature-card fade-in">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>متجاوب بالكامل</h3>
+                            <p>يتكيف مع جميع أحجام الشاشات والأجهزة</p>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-container fade-in">
+                        <button class="btn btn-primary" id="actionBtn">
+                            <i class="fas fa-gift"></i> اكتشف المزيد
+                        </button>
+                        <button class="btn btn-outline" id="contactBtn">
+                            <i class="fas fa-envelope"></i> تواصل معي
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <div class="control-group">
-            <div class="control-label">تأثير الإضاءة:</div>
-            <button class="control-btn active" data-effect="glow">ذهبي متوهج</button>
-            <button class="control-btn" data-effect="soft">ناعم</button>
-            <button class="control-btn" data-effect="sparkle">لامع</button>
-        </div>
-        
-        <div class="control-group">
-            <div class="control-label">التأثيرات:</div>
-            <button class="control-btn active" data-snow="on">ثلج</button>
-            <button class="control-btn" data-snow="off">لا ثلج</button>
-            <button class="control-btn active" data-particles="on">جسيمات</button>
-            <button class="control-btn" data-particles="off">لا جسيمات</button>
-        </div>
-        
-        <div class="control-group">
-            <button class="control-btn" id="resetBtn">إعادة الضبط</button>
-            <button class="control-btn" id="themeToggleBtn">تبديل الألوان</button>
-        </div>
+        <!-- الفوتر -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>عن المشروع</h3>
+                        <p>صممت هذه الصفحة خصيصًا لعرض شجرة الميلاد بطريقة احترافية مع خلفية فيديو حية. يجمع التصميم بين الحداثة والروح الاحتفالية لموسم الكريسماس.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>تواصل مع أسيل</h3>
+                        <p>للاستفسارات أو التعاون في مشاريع تصميم مشابهة، يمكنك التواصل عبر:</p>
+                        <div class="social-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" title="Behance"><i class="fab fa-behance"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>تهنئة بالكريسماس</h3>
+                        <p>أتمنى لكم جميعًا عيد ميلاد مجيدًا مليئًا بالفرح والسلام، وسنة جديدة سعيدة مليئة بالنجاح والإنجازات. كل عام وأنتم بألف خير!</p>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>© 2023 عرض أسيل للكريسماس. جميع الحقوق محفوظة | تصميم وتطوير: <strong>أسيل</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.8rem;">فيديو الخلفية من Pexels - Christmas Tree Celebration</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <script>
-        // تهيئة العناصر التفاعلية
+        // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            // إنشاء الجسيمات الخلفية
-            createParticles();
+            // التحكم بتشغيل/إيقاف الفيديو
+            const video = document.getElementById('video-background');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const playPauseIcon = playPauseBtn.querySelector('i');
             
-            // إنشاء الثلج المتساقط
-            createSnowflakes();
-            
-            // إنشاء الزينة العائمة
-            createFloatingOrnaments();
-            
-            // إعداد تفاعل زينة الشجرة
-            setupOrnamentInteractivity();
-            
-            // إعداد أزرار التحكم
-            setupControlPanel();
-            
-            // إعداد أزرار الصفحة
-            setupPageButtons();
-            
-            // إظهار لوحة التحكم بعد 3 ثواني
-            setTimeout(() => {
-                document.getElementById('controlPanel').style.display = 'block';
-            }, 3000);
-        });
-        
-        // إنشاء الجسيمات الخلفية
-        function createParticles() {
-            const container = document.getElementById('particlesContainer');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // حجم عشوائي
-                const size = Math.random() * 8 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // موضع عشوائي
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 30 + 20;
-                const delay = Math.random() * 5;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.animationDelay = `${delay}s`;
-                
-                // شفافية عشوائية
-                particle.style.opacity = Math.random() * 0.1 + 0.05;
-                
-                // لون عشوائي من درجات الذهبي
-                const goldColors = ['#D4AF37', '#E6C878', '#B8941A'];
-                const color = goldColors[Math.floor(Math.random() * goldColors.length)];
-                particle.style.background = color;
-                
-                container.appendChild(particle);
-            }
-        }
-        
-        // إنشاء الثلج المتساقط المعدل للألوان الجديدة
-        function createSnowflakes() {
-            const snowContainer = document.getElementById('snowContainer');
-            const snowflakeCount = 60;
-            
-            for (let i = 0; i < snowflakeCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                
-                // حجم عشوائي
-                const size = Math.random() * 5 + 2;
-                snowflake.style.width = `${size}px`;
-                snowflake.style.height = `${size}px`;
-                
-                // موضع عشوائي
-                snowflake.style.left = `${Math.random() * 100}%`;
-                
-                // مدة وتأخير عشوائي للحركة
-                const duration = Math.random() * 15 + 10;
-                const delay = Math.random() * 5;
-                snowflake.style.animationDuration = `${duration}s`;
-                snowflake.style.animationDelay = `${delay}s`;
-                
-                // شفافية عشوائية
-                snowflake.style.opacity = Math.random() * 0.4 + 0.2;
-                
-                // لون عشوائي من درجات البيج
-                const beigeColors = ['#CDB6AC', '#E8E0D3', '#8B7355'];
-                const color = beigeColors[Math.floor(Math.random() * beigeColors.length)];
-                snowflake.style.background = color;
-                
-                snowContainer.appendChild(snowflake);
-            }
-        }
-        
-        // إنشاء الزينة العائمة
-        function createFloatingOrnaments() {
-            const container = document.getElementById('floatingOrnaments');
-            const ornamentCount = 12;
-            const colors = ['#D4AF37', '#8B7355', '#CDB6AC', '#E6C878'];
-            
-            for (let i = 0; i < ornamentCount; i++) {
-                const ornament = document.createElement('div');
-                ornament.classList.add('floating-ornament');
-                
-                // لون عشوائي
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                ornament.style.background = color;
-                
-                // موضع عشوائي
-                ornament.style.left = `${Math.random() * 100}%`;
-                ornament.style.top = `${Math.random() * 100}%`;
-                
-                // حجم عشوائي
-                const size = Math.random() * 15 + 10;
-                ornament.style.width = `${size}px`;
-                ornament.style.height = `${size}px`;
-                
-                // تأخير ومدة عشوائية للحركة
-                const duration = Math.random() * 20 + 15;
-                const delay = Math.random() * 5;
-                ornament.style.animationDuration = `${duration}s`;
-                ornament.style.animationDelay = `${delay}s`;
-                
-                // شكل عشوائي (دائري أو بيضوي)
-                if (Math.random() > 0.5) {
-                    ornament.style.borderRadius = '30% 70% 70% 30% / 30% 30% 70% 70%';
-                }
-                
-                container.appendChild(ornament);
-            }
-        }
-        
-        // تفاعل زينة الشجرة
-        function setupOrnamentInteractivity() {
-            const ornaments = document.querySelectorAll('.ornament');
-            const colors = ['#8B7355', '#CDB6AC', '#D4AF37', '#E6C878', '#B8941A', '#F5EFE4'];
-            
-            ornaments.forEach(ornament => {
-                // تأثير عند المرور بالفأرة
-                ornament.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.3)';
-                    this.style.transition = 'transform 0.3s';
-                    this.style.filter = 'drop-shadow(0 0 8px rgba(0, 0, 0, 0.2))';
-                });
-                
-                ornament.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                    this.style.filter = 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))';
-                });
-                
-                // تغيير اللون عند النقر
-                ornament.addEventListener('click', function() {
-                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                    this.style.fill = randomColor;
-                    
-                    // تأثير صوتي مرئي
-                    createClickEffect(event.clientX, event.clientY, randomColor);
-                });
-            });
-            
-            // تفاعل النجمة
-            const star = document.querySelector('.star');
-            star.addEventListener('click', function() {
-                const colors = ['#D4AF37', '#E6C878', '#B8941A', '#8B7355', '#CDB6AC'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                this.style.fill = randomColor;
-                this.style.filter = `drop-shadow(0 0 15px ${randomColor}88)`;
-                createClickEffect(event.clientX, event.clientY, randomColor);
-            });
-        }
-        
-        // إعداد لوحة التحكم
-        function setupControlPanel() {
-            const toggleBtn = document.getElementById('toggleControls');
-            const controlPanel = document.getElementById('controlPanel');
-            
-            // تبديل إظهار/إخفاء لوحة التحكم
-            toggleBtn.addEventListener('click', function() {
-                if (controlPanel.style.display === 'block') {
-                    controlPanel.style.display = 'none';
-                    this.innerHTML = '<i class="fas fa-sliders-h"></i>';
+            playPauseBtn.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    playPauseIcon.className = 'fas fa-pause';
                 } else {
-                    controlPanel.style.display = 'block';
-                    this.innerHTML = '<i class="fas fa-times"></i>';
+                    video.pause();
+                    playPauseIcon.className = 'fas fa-play';
                 }
             });
             
-            // التحكم في سرعة الحركة
-            const speedButtons = document.querySelectorAll('[data-speed]');
-            speedButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    speedButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const speed = this.getAttribute('data-speed');
-                    const tree = document.querySelector('.christmas-tree');
-                    
-                    switch(speed) {
-                        case 'slow':
-                            tree.style.animationDuration = '12s';
-                            break;
-                        case 'normal':
-                            tree.style.animationDuration = '8s';
-                            break;
-                        case 'fast':
-                            tree.style.animationDuration = '4s';
-                            break;
-                    }
-                });
-            });
+            // التحكم بكتم/إعادة صوت الفيديو
+            const muteBtn = document.getElementById('muteBtn');
+            const muteIcon = muteBtn.querySelector('i');
             
-            // التحكم في تأثير الإضاءة
-            const effectButtons = document.querySelectorAll('[data-effect]');
-            effectButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    effectButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const effect = this.getAttribute('data-effect');
-                    const tree = document.querySelector('.christmas-tree');
-                    
-                    switch(effect) {
-                        case 'glow':
-                            tree.style.filter = 'url(#gold-glow)';
-                            break;
-                        case 'soft':
-                            tree.style.filter = 'drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)) brightness(1.05)';
-                            break;
-                        case 'sparkle':
-                            tree.style.filter = 'url(#gold-glow) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))';
-                            break;
-                    }
-                });
-            });
-            
-            // التحكم في الثلج
-            const snowButtons = document.querySelectorAll('[data-snow]');
-            snowButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    snowButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const snow = this.getAttribute('data-snow');
-                    const snowContainer = document.getElementById('snowContainer');
-                    
-                    if (snow === 'off') {
-                        snowContainer.style.display = 'none';
-                    } else {
-                        snowContainer.style.display = 'block';
-                    }
-                });
-            });
-            
-            // التحكم في الجسيمات
-            const particleButtons = document.querySelectorAll('[data-particles]');
-            particleButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    particleButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const particles = this.getAttribute('data-particles');
-                    const particlesContainer = document.getElementById('particlesContainer');
-                    
-                    if (particles === 'off') {
-                        particlesContainer.style.display = 'none';
-                    } else {
-                        particlesContainer.style.display = 'block';
-                    }
-                });
-            });
-            
-            // زر تبديل الثيم
-            document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
-            
-            // زر إعادة الضبط
-            document.getElementById('resetBtn').addEventListener('click', function() {
-                document.querySelector('[data-speed="normal"]').click();
-                document.querySelector('[data-effect="glow"]').click();
-                document.querySelector('[data-snow="on"]').click();
-                document.querySelector('[data-particles="on"]').click();
-                
-                // إعادة ألوان الزينة
-                const ornaments = document.querySelectorAll('.ornament');
-                const defaultColors = ['#8B7355', '#CDB6AC', '#D4AF37', '#8B7355', '#CDB6AC', '#D4AF37', '#8B7355', '#CDB6AC', '#D4AF37'];
-                
-                ornaments.forEach((ornament, index) => {
-                    ornament.style.fill = defaultColors[index];
-                });
-                
-                // إعادة لون النجمة
-                document.querySelector('.star').style.fill = '#D4AF37';
-                document.querySelector('.star').style.filter = 'drop-shadow(0 0 10px rgba(212, 175, 55, 0.5))';
-                
-                // إعادة حركة الشجرة
-                document.querySelector('.christmas-tree').style.animation = 'treeFloat 8s ease-in-out infinite';
-                
-                // إعادة الثيم الأصلي إذا كان مظلماً
-                if (document.body.classList.contains('dark-theme')) {
-                    toggleTheme();
+            muteBtn.addEventListener('click', function() {
+                if (video.muted) {
+                    video.muted = false;
+                    muteIcon.className = 'fas fa-volume-up';
+                } else {
+                    video.muted = true;
+                    muteIcon.className = 'fas fa-volume-mute';
                 }
             });
-        }
-        
-        // إعداد أزرار الصفحة
-        function setupPageButtons() {
-            // زر تبديل الثيم
-            document.getElementById('changeThemeBtn').addEventListener('click', toggleTheme);
             
-            // زر GitHub
-            document.getElementById('githubBtn').addEventListener('click', function() {
-                window.open('https://github.com', '_blank');
+            // زر اكتشف المزيد
+            document.getElementById('actionBtn').addEventListener('click', function() {
+                alert('شكرًا لاهتمامك! يمكنك زيارة حسابي على GitHub لمشاهدة المزيد من المشاريع.');
             });
-        }
-        
-        // تبديل الثيم بين فاتح وداكن
-        function toggleTheme() {
-            const body = document.body;
-            const isDark = body.classList.contains('dark-theme');
             
-            if (isDark) {
-                // العودة للثيم الفاتح
-                body.classList.remove('dark-theme');
-                document.getElementById('changeThemeBtn').innerHTML = '<i class="fas fa-moon"></i> تبديل الثيم';
+            // زر تواصل معي
+            document.getElementById('contactBtn').addEventListener('click', function() {
+                alert('يمكنك التواصل معي عبر البريد الإلكتروني أو منصات التواصل الاجتماعي المذكورة أسفل الصفحة.');
+            });
+            
+            // إضافة تأثيرات عند التمرير
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // تعيين الخصائص الأولية للعناصر
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            window.addEventListener('scroll', fadeOnScroll);
+            fadeOnScroll(); // تشغيل عند التحميل
+            
+            // ضبط حجم الفيديو ليناسب الصفحة
+            function resizeVideo() {
+                const video = document.getElementById('video-background');
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                const windowRatio = windowWidth / windowHeight;
+                const videoRatio = 16 / 9; // نسبة أبعاد الفيديو
                 
-                // تغيير ألوان الشجرة للفاتح
-                document.querySelectorAll('.tree-layer')[0].style.fill = '#8B7355';
-                document.querySelectorAll('.tree-layer')[1].style.fill = '#9D8266';
-                document.querySelectorAll('.tree-layer')[2].style.fill = '#AF9478';
-                document.querySelectorAll('.tree-layer')[3].style.fill = '#C1A68A';
-                
-                document.querySelector('.tree-trunk').style.fill = '#CDB6AC';
-                
-            } else {
-                // التبديل للثيم الداكن
-                body.classList.add('dark-theme');
-                document.getElementById('changeThemeBtn').innerHTML = '<i class="fas fa-sun"></i> تبديل الثيم';
-                
-                // تغيير ألوان الشجرة للداكن
-                document.querySelectorAll('.tree-layer')[0].style.fill = '#5D4A2A';
-                document.querySelectorAll('.tree-layer')[1].style.fill = '#6D5B3A';
-                document.querySelectorAll('.tree-layer')[2].style.fill = '#7D6C4A';
-                document.querySelectorAll('.tree-layer')[3].style.fill = '#8D7D5A';
-                
-                document.querySelector('.tree-trunk').style.fill = '#A8927C';
-            }
-        }
-        
-        // إنشاء تأثير النقر
-        function createClickEffect(x, y, color) {
-            const effect = document.createElement('div');
-            effect.style.position = 'fixed';
-            effect.style.left = `${x}px`;
-            effect.style.top = `${y}px`;
-            effect.style.width = '10px';
-            effect.style.height = '10px';
-            effect.style.borderRadius = '50%';
-            effect.style.background = color;
-            effect.style.pointerEvents = 'none';
-            effect.style.zIndex = '1000';
-            effect.style.transform = 'translate(-50%, -50%)';
-            effect.style.animation = 'scaleFade 0.5s forwards';
-            
-            document.body.appendChild(effect);
-            
-            setTimeout(() => {
-                document.body.removeChild(effect);
-            }, 500);
-        }
-        
-        // إضافة أنيميشن CSS للمؤثرات
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = `
-            @keyframes scaleFade {
-                0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+                if (windowRatio < videoRatio) {
+                    video.style.width = 'auto';
+                    video.style.height = '100%';
+                } else {
+                    video.style.width = '100%';
+                    video.style.height = 'auto';
+                }
             }
             
-            @keyframes particleMove {
-                0% { transform: translate(0, 0); }
-                25% { transform: translate(50px, 50px); }
-                50% { transform: translate(0, 100px); }
-                75% { transform: translate(-50px, 50px); }
-                100% { transform: translate(0, 0); }
-            }
-            
-            /* ثيم داكن */
-            body.dark-theme {
-                background: #1A1A1A;
-                color: #F5EFE4;
-            }
-            
-            body.dark-theme header {
-                background: linear-gradient(135deg, #2A2A2A 0%, #3A3A3A 100%);
-                border-bottom: 1px solid rgba(100, 100, 100, 0.3);
-            }
-            
-            body.dark-theme .tree-wrapper,
-            body.dark-theme .info-section {
-                background: #2A2A2A;
-                border-color: rgba(100, 100, 100, 0.2);
-            }
-            
-            body.dark-theme .feature {
-                background: #333333;
-                border-color: rgba(100, 100, 100, 0.3);
-            }
-            
-            body.dark-theme footer {
-                background: #2A2A2A;
-                border-top: 1px solid rgba(100, 100, 100, 0.3);
-            }
-            
-            body.dark-theme .subtitle,
-            body.dark-theme .info-section p,
-            body.dark-theme .footer-section p {
-                color: #CCCCCC;
-            }
-            
-            body.dark-theme h1,
-            body.dark-theme h2,
-            body.dark-theme .info-section h2 {
-                color: #F5EFE4;
-            }
-            
-            body.dark-theme .social-links a {
-                background: #333333;
-                color: #CCCCCC;
-                border-color: rgba(100, 100, 100, 0.3);
-            }
-        `;
-        document.head.appendChild(styleSheet);
+            window.addEventListener('resize', resizeVideo);
+            resizeVideo(); // تشغيل عند التحميل
+        });
     </script>
 </body>
 </html>
