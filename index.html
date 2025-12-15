@@ -6,8 +6,6 @@
     <title>Aseel | New Beginning 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
     <style>
         :root {
             --primary-black: #0a0a0a;
@@ -16,6 +14,7 @@
             --accent-gold: #e9c46a;
             --accent-silver: #e0e0e0;
             --dark-green: #1d7873;
+            --tree-green: #1a5c36;
         }
         
         * {
@@ -99,68 +98,81 @@
             margin-top: 20px;
         }
         
-        /* Tree Container with 3D effect */
+        /* Tree Container */
         .tree-container {
             position: relative;
-            width: 700px;
+            width: 600px;
             height: 700px;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        #tree-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid var(--accent-green);
-            box-shadow: 
-                0 0 40px rgba(42, 157, 143, 0.3),
-                inset 0 0 40px rgba(42, 157, 143, 0.1);
+        /* Christmas Tree SVG */
+        .christmas-tree {
+            width: 500px;
+            height: 650px;
+            filter: drop-shadow(0 0 30px rgba(42, 157, 143, 0.3));
+            animation: treeFloat 8s ease-in-out infinite;
         }
         
-        /* Star overlay */
-        .star-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            z-index: 10;
-            pointer-events: none;
+        /* Tree layers with realistic gradient */
+        .tree-layer {
+            fill: var(--tree-green);
+            stroke: var(--accent-green);
+            stroke-width: 2;
+            stroke-opacity: 0.3;
+            transition: all 0.5s ease;
         }
         
-        .shining-star {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
-            opacity: 0.8;
-            border-radius: 50%;
-            filter: blur(20px);
-            animation: starPulse 3s ease-in-out infinite alternate;
+        .tree-layer:nth-child(2) {
+            fill: #1d6b40;
+            stroke-width: 1.8;
         }
         
+        .tree-layer:nth-child(3) {
+            fill: #207a4a;
+            stroke-width: 1.6;
+        }
+        
+        .tree-layer:nth-child(4) {
+            fill: #238954;
+            stroke-width: 1.4;
+        }
+        
+        .tree-trunk {
+            fill: #8B4513;
+            stroke: #654321;
+            stroke-width: 1;
+        }
+        
+        /* Animated Star */
         .star {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(0deg);
-            width: 80px;
-            height: 80px;
-            background: var(--accent-gold);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            animation: starRotate 20s linear infinite;
-            box-shadow: 0 0 40px var(--accent-gold);
+            animation: starSpin 20s linear infinite, starGlow 2s ease-in-out infinite alternate;
+            transform-origin: center;
+            filter: drop-shadow(0 0 15px var(--accent-gold));
         }
         
-        /* Snow effect */
+        /* Realistic Ornaments */
+        .ornament {
+            cursor: pointer;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+        
+        .ornament:hover {
+            filter: drop-shadow(0 0 10px currentColor);
+            transform: scale(1.2);
+        }
+        
+        /* Lights */
+        .light {
+            animation: lightTwinkle 1.5s infinite;
+            filter: drop-shadow(0 0 5px currentColor);
+        }
+        
+        /* Snow Container */
         .snow-container {
             position: fixed;
             top: 0;
@@ -169,6 +181,14 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+        }
+        
+        .snowflake {
+            position: absolute;
+            background-color: var(--accent-silver);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: snowFall linear infinite;
         }
         
         /* Footer */
@@ -194,23 +214,30 @@
         }
         
         /* Animations */
-        @keyframes starRotate {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
+        @keyframes treeFloat {
+            0%, 100% {
+                transform: translateY(0);
             }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
+            50% {
+                transform: translateY(-15px);
             }
         }
         
-        @keyframes starPulse {
+        @keyframes starSpin {
             0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.5;
+                transform: rotate(0deg);
             }
             100% {
-                transform: translate(-50%, -50%) scale(1.2);
-                opacity: 0.9;
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes starGlow {
+            0% {
+                filter: drop-shadow(0 0 10px var(--accent-gold));
+            }
+            100% {
+                filter: drop-shadow(0 0 25px var(--accent-gold)) drop-shadow(0 0 15px rgba(233, 196, 106, 0.5));
             }
         }
         
@@ -223,19 +250,69 @@
             }
         }
         
-        @keyframes float {
+        @keyframes lightTwinkle {
             0%, 100% {
-                transform: translateY(0);
+                opacity: 1;
             }
             50% {
-                transform: translateY(-20px);
+                opacity: 0.3;
             }
+        }
+        
+        @keyframes snowFall {
+            0% {
+                transform: translateY(-10px) translateX(0);
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px);
+            }
+        }
+        
+        /* Interactive Controls */
+        .controls {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background: rgba(42, 157, 143, 0.1);
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(42, 157, 143, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(233, 196, 106, 0.3);
+            color: var(--accent-gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-black);
+            transform: scale(1.1);
         }
         
         /* Responsive */
         @media (max-width: 992px) {
             .tree-container {
-                width: 550px;
+                width: 500px;
+                height: 600px;
+            }
+            
+            .christmas-tree {
+                width: 400px;
                 height: 550px;
             }
             
@@ -252,7 +329,12 @@
         @media (max-width: 768px) {
             .tree-container {
                 width: 400px;
-                height: 400px;
+                height: 500px;
+            }
+            
+            .christmas-tree {
+                width: 350px;
+                height: 450px;
             }
             
             .name {
@@ -281,7 +363,12 @@
         @media (max-width: 480px) {
             .tree-container {
                 width: 320px;
-                height: 320px;
+                height: 420px;
+            }
+            
+            .christmas-tree {
+                width: 280px;
+                height: 380px;
             }
             
             .name {
@@ -291,26 +378,12 @@
             .header {
                 padding: 30px 0 10px;
             }
-        }
-        
-        /* Controls info */
-        .controls-info {
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
-            background: rgba(42, 157, 143, 0.1);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--accent-silver);
-            border: 1px solid rgba(42, 157, 143, 0.3);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-        }
-        
-        .controls-info i {
-            color: var(--accent-gold);
-            margin-right: 5px;
+            
+            .controls {
+                left: 10px;
+                bottom: 70px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -326,19 +399,61 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="tree-container">
-            <canvas id="tree-canvas"></canvas>
-            
-            <!-- Star Overlay -->
-            <div class="star-overlay">
-                <div class="shining-star"></div>
-                <div class="star"></div>
-            </div>
+            <!-- Christmas Tree SVG -->
+            <svg class="christmas-tree" viewBox="0 0 500 650">
+                <!-- Tree Layers with realistic gradients -->
+                <polygon class="tree-layer" points="250,50 450,300 50,300" />
+                <polygon class="tree-layer" points="250,150 400,400 100,400" />
+                <polygon class="tree-layer" points="250,250 350,500 150,500" />
+                <polygon class="tree-layer" points="250,350 300,600 200,600" />
+                
+                <!-- Tree Trunk -->
+                <rect class="tree-trunk" x="230" y="600" width="40" height="50" rx="3"/>
+                
+                <!-- Star -->
+                <polygon class="star" points="250,20 270,60 310,60 280,85 295,125 250,105 205,125 220,85 190,60 230,60" 
+                         fill="#e9c46a"/>
+                
+                <!-- Ornaments -->
+                <circle class="ornament" cx="250" cy="120" r="12" fill="#e63946"/>
+                <circle class="ornament" cx="320" cy="180" r="12" fill="#2a9d8f"/>
+                <circle class="ornament" cx="180" cy="180" r="12" fill="#e9c46a"/>
+                <circle class="ornament" cx="290" cy="280" r="12" fill="#4361ee"/>
+                <circle class="ornament" cx="210" cy="280" r="12" fill="#e63946"/>
+                <circle class="ornament" cx="250" cy="380" r="12" fill="#2a9d8f"/>
+                <circle class="ornament" cx="340" cy="420" r="12" fill="#e9c46a"/>
+                <circle class="ornament" cx="160" cy="420" r="12" fill="#4361ee"/>
+                <circle class="ornament" cx="250" cy="520" r="12" fill="#e63946"/>
+                
+                <!-- Lights -->
+                <circle class="light" cx="270" cy="100" r="5" fill="#e9c46a"/>
+                <circle class="light" cx="350" cy="200" r="5" fill="#2a9d8f"/>
+                <circle class="light" cx="150" cy="200" r="5" fill="#e63946"/>
+                <circle class="light" cx="310" cy="320" r="5" fill="#e9c46a"/>
+                <circle class="light" cx="190" cy="320" r="5" fill="#4361ee"/>
+                <circle class="light" cx="370" cy="450" r="5" fill="#e63946"/>
+                <circle class="light" cx="130" cy="450" r="5" fill="#2a9d8f"/>
+                
+                <!-- Decorative green border effect -->
+                <polygon points="250,45 455,300 45,300" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-opacity="0.1"/>
+                <polygon points="250,145 405,400 95,400" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-opacity="0.1"/>
+                <polygon points="250,245 355,500 145,500" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-opacity="0.1"/>
+                <polygon points="250,345 305,600 195,600" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-opacity="0.1"/>
+            </svg>
         </div>
     </main>
     
-    <!-- Controls Info -->
-    <div class="controls-info">
-        <i class="fas fa-mouse-pointer"></i> Drag to rotate • <i class="fas fa-mouse"></i> Scroll to zoom
+    <!-- Controls -->
+    <div class="controls">
+        <button class="control-btn" id="playPauseBtn" title="Play/Pause Animations">
+            <i class="fas fa-pause"></i>
+        </button>
+        <button class="control-btn" id="snowBtn" title="Toggle Snow">
+            <i class="fas fa-snowflake"></i>
+        </button>
+        <button class="control-btn" id="lightsBtn" title="Toggle Lights">
+            <i class="fas fa-lightbulb"></i>
+        </button>
     </div>
     
     <!-- Footer -->
@@ -352,340 +467,204 @@
     <div class="snow-container" id="snowContainer"></div>
 
     <script>
-        // Three.js 3D Tree Implementation
-        let scene, camera, renderer, controls;
-        let treeGroup, star;
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create snowflakes
+            createSnowflakes();
+            
+            // Setup ornament interactions
+            setupOrnaments();
+            
+            // Setup controls
+            setupControls();
+            
+            // Add subtle parallax effect
+            setupParallax();
+        });
         
-        // Initialize Three.js scene
-        function init() {
-            // Scene
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x0a0a0a);
-            scene.fog = new THREE.Fog(0x0a0a0a, 10, 50);
-            
-            // Camera
-            camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
-            camera.position.set(0, 5, 15);
-            
-            // Renderer
-            const canvas = document.getElementById('tree-canvas');
-            renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            
-            // Controls
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.minDistance = 5;
-            controls.maxDistance = 30;
-            controls.maxPolarAngle = Math.PI / 2;
-            
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(5, 10, 7);
-            directionalLight.castShadow = true;
-            directionalLight.shadow.mapSize.width = 2048;
-            directionalLight.shadow.mapSize.height = 2048;
-            scene.add(directionalLight);
-            
-            const pointLight = new THREE.PointLight(0xe9c46a, 1, 50);
-            pointLight.position.set(0, 10, 0);
-            scene.add(pointLight);
-            
-            // Create tree
-            createTree();
-            
-            // Create star
-            createStar();
-            
-            // Add decorative elements
-            createDecorations();
-            
-            // Create snow
-            createSnow();
-            
-            // Handle window resize
-            window.addEventListener('resize', onWindowResize);
-            
-            // Start animation
-            animate();
-        }
-        
-        // Create 3D Christmas tree
-        function createTree() {
-            treeGroup = new THREE.Group();
-            
-            // Tree trunk
-            const trunkGeometry = new THREE.CylinderGeometry(0.5, 0.7, 3, 8);
-            const trunkMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0x8B4513,
-                roughness: 0.8,
-                metalness: 0.2
-            });
-            const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
-            trunk.position.y = 1.5;
-            trunk.castShadow = true;
-            treeGroup.add(trunk);
-            
-            // Tree branches (layers)
-            const branchColors = [0x1a5c36, 0x1d6b40, 0x207a4a, 0x238954];
-            
-            for (let i = 0; i < 4; i++) {
-                const height = 2 + i * 1.5;
-                const radius = 3 - i * 0.5;
-                
-                const branchGeometry = new THREE.ConeGeometry(radius, height, 8);
-                const branchMaterial = new THREE.MeshStandardMaterial({ 
-                    color: branchColors[i],
-                    roughness: 0.9,
-                    metalness: 0.1,
-                    side: THREE.DoubleSide
-                });
-                
-                const branch = new THREE.Mesh(branchGeometry, branchMaterial);
-                branch.position.y = 3 + i * 1.2;
-                branch.castShadow = true;
-                treeGroup.add(branch);
-            }
-            
-            // Add white/silver edges to branches
-            for (let i = 0; i < 4; i++) {
-                const edgesGeometry = new THREE.ConeGeometry(3.1 - i * 0.5, 2 + i * 1.5, 8);
-                const edgesMaterial = new THREE.MeshBasicMaterial({ 
-                    color: 0xe0e0e0,
-                    transparent: true,
-                    opacity: 0.3,
-                    wireframe: true
-                });
-                
-                const edges = new THREE.Mesh(edgesGeometry, edgesMaterial);
-                edges.position.y = 3 + i * 1.2;
-                treeGroup.add(edges);
-            }
-            
-            scene.add(treeGroup);
-        }
-        
-        // Create animated star
-        function createStar() {
-            const starGeometry = new THREE.ConeGeometry(0.5, 1, 5);
-            const starMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0xe9c46a,
-                emissive: 0xe9c46a,
-                emissiveIntensity: 0.5,
-                roughness: 0.3,
-                metalness: 0.8
-            });
-            
-            star = new THREE.Mesh(starGeometry, starMaterial);
-            star.position.y = 10;
-            star.castShadow = true;
-            
-            // Add glow effect
-            const starGlowGeometry = new THREE.SphereGeometry(0.8, 16, 16);
-            const starGlowMaterial = new THREE.MeshBasicMaterial({
-                color: 0xe9c46a,
-                transparent: true,
-                opacity: 0.3
-            });
-            
-            const starGlow = new THREE.Mesh(starGlowGeometry, starGlowMaterial);
-            star.add(starGlow);
-            
-            treeGroup.add(star);
-        }
-        
-        // Create decorations
-        function createDecorations() {
-            const ornamentColors = [0xe63946, 0x2a9d8f, 0xe9c46a, 0xffffff, 0x4361ee];
-            
-            // Create ornament positions
-            const positions = [
-                {y: 4, angle: 0, radius: 1.5},
-                {y: 5, angle: Math.PI/3, radius: 1.8},
-                {y: 6, angle: Math.PI/1.5, radius: 2.1},
-                {y: 7, angle: Math.PI, radius: 2.4},
-                {y: 8, angle: Math.PI*1.3, radius: 2.7},
-                {y: 4.5, angle: Math.PI/6, radius: 1.5},
-                {y: 5.5, angle: Math.PI/2, radius: 1.8},
-                {y: 6.5, angle: Math.PI*0.8, radius: 2.1},
-            ];
-            
-            positions.forEach((pos, index) => {
-                const ornamentGeometry = new THREE.SphereGeometry(0.3, 16, 16);
-                const ornamentMaterial = new THREE.MeshStandardMaterial({ 
-                    color: ornamentColors[index % ornamentColors.length],
-                    roughness: 0.4,
-                    metalness: 0.6
-                });
-                
-                const ornament = new THREE.Mesh(ornamentGeometry, ornamentMaterial);
-                
-                // Calculate position
-                const x = Math.cos(pos.angle) * pos.radius;
-                const z = Math.sin(pos.angle) * pos.radius;
-                
-                ornament.position.set(x, pos.y, z);
-                ornament.castShadow = true;
-                
-                // Add metallic ring
-                const ringGeometry = new THREE.TorusGeometry(0.32, 0.05, 8, 16);
-                const ringMaterial = new THREE.MeshStandardMaterial({ 
-                    color: 0xc0c0c0,
-                    roughness: 0.3,
-                    metalness: 0.9
-                });
-                
-                const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-                ring.position.y = 0.4;
-                ornament.add(ring);
-                
-                treeGroup.add(ornament);
-            });
-            
-            // Add green wireframe for tree outline
-            const wireframeGeometry = new THREE.ConeGeometry(3.5, 10, 8);
-            const wireframeMaterial = new THREE.MeshBasicMaterial({
-                color: 0x2a9d8f,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.2
-            });
-            
-            const wireframe = new THREE.Mesh(wireframeGeometry, wireframeMaterial);
-            wireframe.position.y = 6;
-            treeGroup.add(wireframe);
-        }
-        
-        // Create snow particles
-        function createSnow() {
-            const snowCount = 1000;
-            const snowGeometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(snowCount * 3);
-            
-            for (let i = 0; i < snowCount * 3; i += 3) {
-                positions[i] = (Math.random() - 0.5) * 50;
-                positions[i + 1] = Math.random() * 30;
-                positions[i + 2] = (Math.random() - 0.5) * 50;
-            }
-            
-            snowGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            
-            const snowMaterial = new THREE.PointsMaterial({
-                color: 0xffffff,
-                size: 0.1,
-                transparent: true,
-                opacity: 0.7
-            });
-            
-            const snow = new THREE.Points(snowGeometry, snowMaterial);
-            scene.add(snow);
-            
-            // Animate snow
-            function animateSnow() {
-                const positions = snow.geometry.attributes.position.array;
-                
-                for (let i = 1; i < positions.length; i += 3) {
-                    positions[i] -= 0.05;
-                    
-                    if (positions[i] < -5) {
-                        positions[i] = 30;
-                    }
-                }
-                
-                snow.geometry.attributes.position.needsUpdate = true;
-            }
-            
-            // Store animation function
-            window.animateSnow = animateSnow;
-        }
-        
-        // Create CSS snow
-        function createCSSSnow() {
+        // Create snowflakes
+        function createSnowflakes() {
             const snowContainer = document.getElementById('snowContainer');
-            const snowflakeCount = 50;
+            const snowflakeCount = 80;
             
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
-                snowflake.style.position = 'absolute';
-                snowflake.style.width = `${Math.random() * 5 + 2}px`;
-                snowflake.style.height = snowflake.style.width;
-                snowflake.style.backgroundColor = 'white';
-                snowflake.style.borderRadius = '50%';
-                snowflake.style.opacity = `${Math.random() * 0.5 + 0.3}`;
-                snowflake.style.left = `${Math.random() * 100}%`;
-                snowflake.style.top = `${Math.random() * 100}%`;
-                snowflake.style.animation = `fall ${Math.random() * 10 + 10}s linear infinite`;
-                snowflake.style.animationDelay = `${Math.random() * 5}s`;
+                snowflake.classList.add('snowflake');
                 
-                // Add keyframes for falling animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes fall {
-                        0% { transform: translateY(-100px) translateX(0); }
-                        100% { transform: translateY(100vh) translateX(${Math.random() * 100 - 50}px); }
-                    }
-                `;
-                document.head.appendChild(style);
+                // Random size
+                const size = Math.random() * 5 + 2;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                
+                // Random position
+                snowflake.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 15 + 10;
+                const delay = Math.random() * 5;
+                snowflake.style.animationDuration = `${duration}s`;
+                snowflake.style.animationDelay = `${delay}s`;
+                
+                // Random opacity
+                snowflake.style.opacity = Math.random() * 0.6 + 0.2;
                 
                 snowContainer.appendChild(snowflake);
             }
         }
         
-        // Handle window resize
-        function onWindowResize() {
-            const canvas = document.getElementById('tree-canvas');
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        // Setup ornament interactions
+        function setupOrnaments() {
+            const ornaments = document.querySelectorAll('.ornament');
+            const colors = ['#e63946', '#2a9d8f', '#e9c46a', '#4361ee', '#ffffff'];
+            
+            ornaments.forEach(ornament => {
+                // Change color on click
+                ornament.addEventListener('click', function() {
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    this.style.fill = randomColor;
+                    
+                    // Add sparkle effect
+                    createSparkleEffect(this.getBoundingClientRect().left + 12, this.getBoundingClientRect().top + 12, randomColor);
+                });
+            });
         }
         
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
+        // Setup controls
+        function setupControls() {
+            const tree = document.querySelector('.christmas-tree');
+            const star = document.querySelector('.star');
+            const lights = document.querySelectorAll('.light');
+            const snowBtn = document.getElementById('snowBtn');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const lightsBtn = document.getElementById('lightsBtn');
+            const playPauseIcon = playPauseBtn.querySelector('i');
+            const snowIcon = snowBtn.querySelector('i');
+            const lightsIcon = lightsBtn.querySelector('i');
             
-            // Rotate tree slowly
-            if (treeGroup) {
-                treeGroup.rotation.y += 0.002;
-            }
+            let animationsRunning = true;
+            let snowEnabled = true;
+            let lightsEnabled = true;
             
-            // Animate star
-            if (star) {
-                star.rotation.y += 0.02;
-                star.scale.setScalar(1 + Math.sin(Date.now() * 0.003) * 0.1);
-            }
-            
-            // Animate snow
-            if (window.animateSnow) {
-                window.animateSnow();
-            }
-            
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            init();
-            createCSSSnow();
-            
-            // Add parallax effect on mouse move
-            document.addEventListener('mousemove', function(e) {
-                const x = (e.clientX / window.innerWidth - 0.5) * 0.5;
-                const y = (e.clientY / window.innerHeight - 0.5) * 0.5;
-                
-                if (treeGroup) {
-                    treeGroup.rotation.x = y;
-                    treeGroup.rotation.y = x + (treeGroup.rotation.y % (Math.PI * 2));
+            // Play/Pause button
+            playPauseBtn.addEventListener('click', function() {
+                if (animationsRunning) {
+                    // Pause all animations
+                    tree.style.animationPlayState = 'paused';
+                    star.style.animationPlayState = 'paused';
+                    document.querySelectorAll('.light').forEach(light => {
+                        light.style.animationPlayState = 'paused';
+                    });
+                    
+                    playPauseIcon.className = 'fas fa-play';
+                    animationsRunning = false;
+                } else {
+                    // Resume all animations
+                    tree.style.animationPlayState = 'running';
+                    star.style.animationPlayState = 'running';
+                    document.querySelectorAll('.light').forEach(light => {
+                        light.style.animationPlayState = 'running';
+                    });
+                    
+                    playPauseIcon.className = 'fas fa-pause';
+                    animationsRunning = true;
                 }
             });
-        });
+            
+            // Snow toggle button
+            snowBtn.addEventListener('click', function() {
+                const snowflakes = document.querySelectorAll('.snowflake');
+                
+                if (snowEnabled) {
+                    // Disable snow
+                    snowflakes.forEach(snowflake => {
+                        snowflake.style.display = 'none';
+                    });
+                    snowIcon.style.color = '#666';
+                    snowEnabled = false;
+                } else {
+                    // Enable snow
+                    snowflakes.forEach(snowflake => {
+                        snowflake.style.display = 'block';
+                    });
+                    snowIcon.style.color = '#e9c46a';
+                    snowEnabled = true;
+                }
+            });
+            
+            // Lights toggle button
+            lightsBtn.addEventListener('click', function() {
+                if (lightsEnabled) {
+                    // Turn off lights
+                    lights.forEach(light => {
+                        light.style.opacity = '0.2';
+                        light.style.animationPlayState = 'paused';
+                    });
+                    lightsIcon.style.color = '#666';
+                    lightsEnabled = false;
+                } else {
+                    // Turn on lights
+                    lights.forEach(light => {
+                        light.style.opacity = '1';
+                        light.style.animationPlayState = 'running';
+                    });
+                    lightsIcon.style.color = '#e9c46a';
+                    lightsEnabled = true;
+                }
+            });
+        }
+        
+        // Setup subtle parallax effect
+        function setupParallax() {
+            const treeContainer = document.querySelector('.tree-container');
+            
+            window.addEventListener('mousemove', function(e) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                treeContainer.style.transform = `translate(${x}px, ${y}px)`;
+            });
+            
+            // Reset on mouse leave
+            document.addEventListener('mouseleave', function() {
+                treeContainer.style.transform = 'translate(0, 0)';
+            });
+        }
+        
+        // Create sparkle effect
+        function createSparkleEffect(x, y, color) {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            sparkle.style.width = '20px';
+            sparkle.style.height = '20px';
+            sparkle.style.backgroundColor = color;
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1000';
+            sparkle.style.transform = 'translate(-50%, -50%)';
+            sparkle.style.animation = 'sparkleEffect 0.5s forwards';
+            
+            // Add keyframes for sparkle effect
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes sparkleEffect {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.7; }
+                    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(sparkle);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (sparkle.parentNode) {
+                    document.body.removeChild(sparkle);
+                }
+            }, 500);
+        }
     </script>
 </body>
 </html>
