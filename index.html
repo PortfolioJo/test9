@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* نفس CSS السابق بالضبط */
         :root {
             --primary-beige: #E8E0D3;
             --primary-cream: #F5EFE4;
@@ -40,7 +41,6 @@
             font-weight: 700;
         }
         
-        /* الفيديو كخلفية */
         #video-background {
             position: fixed;
             top: 0;
@@ -63,50 +63,6 @@
             z-index: -99;
         }
         
-        /* رسالة خطأ الفيديو */
-        .video-error {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(26, 26, 26, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            z-index: 1000;
-            border: 2px solid var(--accent-gold);
-            max-width: 500px;
-            width: 90%;
-        }
-        
-        .video-error h3 {
-            color: var(--accent-gold);
-            margin-bottom: 15px;
-        }
-        
-        .video-error p {
-            margin-bottom: 20px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .video-error button {
-            background: var(--accent-gold);
-            color: var(--primary-ink);
-            border: none;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .video-error button:hover {
-            background: var(--gold-light);
-            transform: scale(1.05);
-        }
-        
-        /* طبقة المحتوى الرئيسية */
         .main-content {
             position: relative;
             z-index: 1;
@@ -122,14 +78,13 @@
             width: 100%;
         }
         
-        /* الهيدر */
         header {
             padding: 30px 0;
             position: relative;
             text-align: center;
-            background: rgba(26, 26, 26, 0.4);
+            background: rgba(26, 26, 26, 0.5);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         }
         
         .logo {
@@ -140,251 +95,304 @@
             display: inline-block;
             padding: 8px 20px;
             border-radius: 30px;
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.4);
         }
         
         h1 {
-            font-size: 4.2rem;
+            font-size: 4.5rem;
             margin: 20px 0;
             background: linear-gradient(to right, var(--accent-gold), var(--gold-light), var(--primary-cream));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
             letter-spacing: -1px;
         }
         
         .tagline {
-            font-size: 1.4rem;
-            max-width: 700px;
+            font-size: 1.5rem;
+            max-width: 800px;
             margin: 0 auto 40px;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.7;
         }
         
-        /* المحتوى الرئيسي */
         .hero-section {
             flex: 1;
             display: flex;
             align-items: center;
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
         }
         
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
         .hero-text {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            color: rgba(255, 255, 255, 0.9);
-            background: rgba(26, 26, 26, 0.5);
-            padding: 25px;
-            border-radius: 15px;
-            border-right: 4px solid var(--accent-gold);
-            backdrop-filter: blur(5px);
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.95);
+            background: rgba(26, 26, 26, 0.6);
+            padding: 30px;
+            border-radius: 20px;
+            border-right: 5px solid var(--accent-gold);
+            backdrop-filter: blur(10px);
+            line-height: 1.8;
         }
         
         .name-highlight {
             color: var(--accent-gold);
-            font-weight: 700;
-            font-size: 1.5rem;
+            font-weight: 800;
+            font-size: 1.6rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
         
-        /* الميزات */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 50px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
         }
         
         .feature-card {
-            background: rgba(26, 26, 26, 0.7);
-            padding: 30px 25px;
-            border-radius: 15px;
+            background: rgba(26, 26, 26, 0.75);
+            padding: 35px 30px;
+            border-radius: 20px;
             text-align: center;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(15px);
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.03);
             border-color: var(--accent-gold);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25);
         }
         
         .feature-card i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--accent-gold);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.7rem;
+            margin-bottom: 20px;
             color: var(--text-light);
         }
         
         .feature-card p {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
         }
         
-        /* الأزرار */
         .btn-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
-            margin-top: 40px;
+            margin-top: 50px;
         }
         
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 16px 35px;
+            gap: 12px;
+            padding: 18px 40px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-weight: 800;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
             cursor: pointer;
             border: none;
+            min-width: 200px;
         }
         
         .btn-primary {
-            background: linear-gradient(to right, var(--accent-gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--accent-gold), var(--gold-dark));
             color: var(--primary-ink);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
         }
         
         .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.6);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.7);
         }
         
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--accent-gold);
+            border: 3px solid var(--accent-gold);
             color: var(--accent-gold);
         }
         
         .btn-outline:hover {
-            background: rgba(212, 175, 55, 0.1);
-            transform: translateY(-5px);
+            background: rgba(212, 175, 55, 0.15);
+            transform: translateY(-8px) scale(1.05);
         }
         
-        /* الفوتر */
         footer {
-            padding: 40px 0 20px;
-            background: rgba(26, 26, 26, 0.8);
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            margin-top: 60px;
+            padding: 50px 0 25px;
+            background: rgba(26, 26, 26, 0.85);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 80px;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
         }
         
         .footer-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
             color: var(--accent-gold);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: 3px;
         }
         
         .footer-section p {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 20px;
+            margin-top: 25px;
         }
         
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.12);
             border-radius: 50%;
             color: var(--accent-gold);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
+            font-size: 1.4rem;
+            transition: all 0.4s ease;
         }
         
         .social-links a:hover {
             background: var(--accent-gold);
             color: var(--primary-ink);
-            transform: translateY(-5px);
+            transform: translateY(-8px) rotate(5deg);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
         }
         
-        /* تحكم بالفيديو */
         .video-controls {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
+            bottom: 30px;
+            left: 30px;
             z-index: 100;
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
         
         .control-btn {
-            width: 45px;
-            height: 45px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            background: rgba(26, 26, 26, 0.7);
+            background: rgba(26, 26, 26, 0.8);
             color: var(--accent-gold);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 2px solid rgba(212, 175, 55, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
         }
         
         .control-btn:hover {
             background: var(--accent-gold);
             color: var(--primary-ink);
+            transform: scale(1.1) rotate(90deg);
         }
         
-        /* مؤشر تحميل */
-        .video-loading {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            color: var(--accent-gold);
-            font-size: 1.5rem;
-            background: rgba(26, 26, 26, 0.9);
-            padding: 20px 30px;
-            border-radius: 15px;
-            display: none;
+        .gold-divider {
+            height: 4px;
+            width: 150px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            margin: 40px auto;
+            border-radius: 2px;
         }
         
-        /* التجاوب مع الهواتف */
+        .fade-in {
+            animation: fadeIn 2s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(40px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.3rem;
+                padding: 0 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+            
+            .hero-text {
+                font-size: 1.2rem;
+                padding: 25px;
+                margin: 0 20px 40px;
+            }
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.8rem;
@@ -392,7 +400,6 @@
             
             .tagline {
                 font-size: 1.2rem;
-                padding: 0 15px;
             }
             
             .hero-text {
@@ -400,9 +407,35 @@
                 padding: 20px;
             }
             
-            .features {
-                grid-template-columns: 1fr;
-                padding: 0 15px;
+            .feature-card {
+                padding: 30px 20px;
+            }
+            
+            .btn {
+                min-width: 180px;
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .video-controls {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .control-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
             }
             
             .btn-container {
@@ -416,59 +449,22 @@
             }
             
             .video-controls {
-                bottom: 10px;
-                left: 10px;
+                flex-direction: column;
+                bottom: 20px;
+                left: 20px;
             }
-            
-            .control-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-        
-        /* تأثيرات إضافية */
-        .gold-divider {
-            height: 3px;
-            width: 100px;
-            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
-            margin: 30px auto;
-        }
-        
-        .fade-in {
-            animation: fadeIn 1.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <!-- مؤشر تحميل الفيديو -->
-    <div class="video-loading" id="videoLoading">
-        <i class="fas fa-spinner fa-spin"></i> جاري تحميل الفيديو...
-    </div>
-    
-    <!-- رسالة خطأ الفيديو -->
-    <div class="video-error" id="videoError">
-        <h3><i class="fas fa-exclamation-triangle"></i> مشكلة في تحميل الفيديو</h3>
-        <p>عذراً، حدثت مشكلة في تحميل فيديو الخلفية. يمكنك:</p>
-        <p>1. تحديث الصفحة وحاول مرة أخرى</p>
-        <p>2. استخدام خلفية بديلة</p>
-        <button id="useBackupVideo">استخدام خلفية بديلة</button>
-        <button id="continueWithoutVideo" style="margin-right: 10px; background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);">المتابعة بدون فيديو</button>
-    </div>
-    
-    <!-- خلفية الفيديو -->
-    <video autoplay muted loop playsinline id="video-background">
-        <!-- رابط الفيديو الرئيسي من Pexels (تم تعديله ليكون رابطاً مباشراً) -->
-        <source src="https://player.vimeo.com/external/3287305.hd.mp4?s=3d69e65e8ed6472c5e2d5b8b7d6b7f7c&profile_id=174&oauth2_token_id=57447761" type="video/mp4">
-        <!-- رابط احتياطي مباشر من Pexels -->
-        <source src="https://videos.pexels.com/video-files/3287305/3287305-hd_1080_1920_25fps.mp4" type="video/mp4">
-        <!-- رابط احتياطي آخر -->
+    <!-- خلفية الفيديو - رابط مباشر من الإنترنت -->
+    <video autoplay muted loop playsinline id="video-background" poster="https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+        <!-- رابط فيديو بديل عالي الجودة للكريسماس -->
         <source src="https://assets.mixkit.co/videos/preview/mixkit-christmas-tree-with-golden-lights-43985-large.mp4" type="video/mp4">
+        
+        <!-- إذا أردت استخدام فيديو محلي، أرفعه على GitHub واستخدم الرابط التالي -->
+        <!-- <source src="https://raw.githubusercontent.com/اسم-المستخدم/اسم-المستودع/main/christmas-tree-video.mp4" type="video/mp4"> -->
+        
         <p>متصفحك لا يدعم تشغيل الفيديو. هذه رسالة بديلة.</p>
     </video>
     
@@ -483,6 +479,9 @@
         <button class="control-btn" id="muteBtn">
             <i class="fas fa-volume-up"></i>
         </button>
+        <button class="control-btn" id="fullscreenBtn">
+            <i class="fas fa-expand"></i>
+        </button>
     </div>
     
     <!-- المحتوى الرئيسي -->
@@ -490,9 +489,9 @@
         <!-- الهيدر -->
         <header>
             <div class="container">
-                <div class="logo">🎄 عيد ميلاد مجيد 🎄</div>
-                <h1 class="fade-in">أسيل</h1>
-                <p class="tagline fade-in">تصميم احترافي لعرض شجرة الميلاد الساحرة مع خلفية فيديو حية. تجربة بصرية فريدة تجمع بين الأصالة والعصرية.</p>
+                <div class="logo floating">🎄 عيد ميلاد مجيد 2023 🎄</div>
+                <h1 class="fade-in">أســـــــيــــــل</h1>
+                <p class="tagline fade-in">تصميم ويب احترافي لعرض شجرة الكريسماس الساحرة مع خلفية فيديو حية. تجربة بصرية فريدة تخلق جوًا احتفاليًا لا يُنسى.</p>
                 <div class="gold-divider"></div>
             </div>
         </header>
@@ -500,38 +499,48 @@
         <!-- القسم الرئيسي -->
         <section class="hero-section">
             <div class="container">
-                <div class="hero-content fade-in">
-                    <div class="hero-text">
-                        <p>مرحبًا بك في عالم <span class="name-highlight">أسيل</span> الساحر! هذا العرض التفاعلي المصمم خصيصًا للاحتفال بموسم الكريسماس باستخدام أحدث تقنيات الويب. شجرة الميلاد الضخمة المضيئة في الخلفية تمثل جو الاحتفال والبهجة.</p>
-                        <p>تم دمج الفيديو عالي الجودة مع تصميم أنيق باللونين الذهبي والبيج لإنشاء تجربة بصرية فريدة تليق باسمك.</p>
+                <div class="hero-content">
+                    <div class="hero-text fade-in">
+                        <p>مرحبًا بك في عالم <span class="name-highlight">أسيل</span> الساحر! هذا العرض التفاعلي المصمم خصيصًا للاحتفال بموسم الكريسماس باستخدام أحدث تقنيات الويب.</p>
+                        <p>شجرة الميلاد الضخمة المضيئة في الخلفية تمثل جو الاحتفال والبهجة، بينما يجمع التصميم بين أناقة الألوان الذهبية والبيج مع عراقة الخطوط العربية.</p>
+                        <p>تم تطوير هذه الصفحة بعناية لتعكس الاحترافية والجمال في آن واحد، مع الحفاظ على أداء عالي وسلاسة في التجربة.</p>
                     </div>
                     
                     <div class="features">
                         <div class="feature-card fade-in">
                             <i class="fas fa-video"></i>
-                            <h3>خلفية فيديو حية</h3>
-                            <p>فيديو عالي الجودة لشجرة كريسماس ضخمة كمؤثر بصري رئيسي</p>
+                            <h3>خلفية فيديو 4K</h3>
+                            <p>فيديو عالي الدقة لشجرة كريسماس ضخمة كمؤثر بصري رئيسي مع تحكم كامل</p>
                         </div>
                         
-                        <div class="feature-card fade-in">
+                        <div class="feature-card fade-in" style="animation-delay: 0.2s;">
                             <i class="fas fa-palette"></i>
-                            <h3>تصميم أنيق</h3>
-                            <p>ألوان ذهبية وبيج فاخرة مع خطوط عربية عصرية</p>
+                            <h3>تصميم فاخر</h3>
+                            <p>ألوان ذهبية وبيج فاخرة مع خطوط عربية عصرية وتدرجات أنيقة</p>
                         </div>
                         
-                        <div class="feature-card fade-in">
+                        <div class="feature-card fade-in" style="animation-delay: 0.4s;">
                             <i class="fas fa-mobile-alt"></i>
                             <h3>متجاوب بالكامل</h3>
-                            <p>يتكيف مع جميع أحجام الشاشات والأجهزة</p>
+                            <p>يتكيف مع جميع أحجام الشاشات من الهواتف إلى أجهزة التلفاز الكبيرة</p>
+                        </div>
+                        
+                        <div class="feature-card fade-in" style="animation-delay: 0.6s;">
+                            <i class="fas fa-code"></i>
+                            <h3>تقنيات حديثة</h3>
+                            <p>مبنية بأحدث تقنيات HTML5، CSS3، JavaScript مع أداء محسّن</p>
                         </div>
                     </div>
                     
-                    <div class="btn-container fade-in">
-                        <button class="btn btn-primary" id="actionBtn">
+                    <div class="btn-container">
+                        <button class="btn btn-primary fade-in" id="actionBtn" style="animation-delay: 0.8s;">
                             <i class="fas fa-gift"></i> اكتشف المزيد
                         </button>
-                        <button class="btn btn-outline" id="contactBtn">
+                        <button class="btn btn-outline fade-in" id="contactBtn" style="animation-delay: 1s;">
                             <i class="fas fa-envelope"></i> تواصل معي
+                        </button>
+                        <button class="btn btn-outline fade-in" id="githubBtn" style="animation-delay: 1.2s;">
+                            <i class="fab fa-github"></i> GitHub
                         </button>
                     </div>
                 </div>
@@ -543,30 +552,31 @@
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-section">
-                        <h3>عن المشروع</h3>
-                        <p>صممت هذه الصفحة خصيصًا لعرض شجرة الميلاد بطريقة احترافية مع خلفية فيديو حية. يجمع التصميم بين الحداثة والروح الاحتفالية لموسم الكريسماس.</p>
+                        <h3>🎄 عن المشروع</h3>
+                        <p>صممت هذه الصفحة خصيصًا لعرض شجرة الميلاد بطريقة احترافية مع خلفية فيديو حية. يجمع التصميم بين الحداثة والروح الاحتفالية لموسم الكريسماس مع الحفاظ على الهوية العربية.</p>
                     </div>
                     
                     <div class="footer-section">
-                        <h3>تواصل مع أسيل</h3>
-                        <p>للاستفسارات أو التعاون في مشاريع تصميم مشابهة، يمكنك التواصل عبر:</p>
+                        <h3>📞 تواصل مع أسيل</h3>
+                        <p>للاستفسارات أو التعاون في مشاريع تصميم وتطوير ويب مشابهة، يمكنك التواصل عبر منصات التواصل الاجتماعي:</p>
                         <div class="social-links">
-                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="#" title="Behance"><i class="fab fa-behance"></i></a>
-                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://github.com" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://behance.net" target="_blank" title="Behance"><i class="fab fa-behance"></i></a>
+                            <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     
                     <div class="footer-section">
-                        <h3>تهنئة بالكريسماس</h3>
+                        <h3>🎁 تهنئة بالكريسماس</h3>
                         <p>أتمنى لكم جميعًا عيد ميلاد مجيدًا مليئًا بالفرح والسلام، وسنة جديدة سعيدة مليئة بالنجاح والإنجازات. كل عام وأنتم بألف خير!</p>
+                        <p style="margin-top: 15px; font-style: italic; color: var(--gold-light);">"قد يكون الكريسماس في القلب وليس فقط تحت الشجرة"</p>
                     </div>
                 </div>
                 
                 <div class="copyright">
-                    <p>© 2023 عرض أسيل للكريسماس. جميع الحقوق محفوظة | تصميم وتطوير: <strong>أسيل</strong></p>
-                    <p style="margin-top: 10px; font-size: 0.8rem;">فيديو الخلفية من Pexels - Christmas Tree Celebration</p>
+                    <p>© 2023 عرض أسيل الاحترافي للكريسماس. جميع الحقوق محفوظة | تصميم وتطوير: <strong style="color: var(--accent-gold);">أسيل</strong></p>
+                    <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">تم تطوير هذه الصفحة باستخدام HTML5، CSS3، JavaScript | الفيديو من مكتبة Mixkit المجانية</p>
                 </div>
             </div>
         </footer>
@@ -575,99 +585,144 @@
     <script>
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
+            // التحكم بتشغيل/إيقاف الفيديو
             const video = document.getElementById('video-background');
-            const videoLoading = document.getElementById('videoLoading');
-            const videoError = document.getElementById('videoError');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const playPauseIcon = playPauseBtn.querySelector('i');
-            const muteBtn = document.getElementById('muteBtn');
-            const muteIcon = muteBtn.querySelector('i');
-            const useBackupVideoBtn = document.getElementById('useBackupVideo');
-            const continueWithoutVideoBtn = document.getElementById('continueWithoutVideo');
             
-            // إظهار مؤشر التحميل
-            videoLoading.style.display = 'block';
-            
-            // التحقق من حالة تحميل الفيديو
-            video.addEventListener('loadeddata', function() {
-                // الفيديو تم تحميله بنجاح
-                videoLoading.style.display = 'none';
-                videoError.style.display = 'none';
-            });
-            
-            // التعامل مع أخطاء تحميل الفيديو
-            video.addEventListener('error', function(e) {
-                videoLoading.style.display = 'none';
-                videoError.style.display = 'block';
-                
-                console.error('خطأ في تحميل الفيديو:', e);
-            });
-            
-            // التحقق بعد 5 ثوان إذا كان الفيديو لا يزال يحمل
-            setTimeout(function() {
-                if (video.readyState < 2) { // أقل من HAVE_CURRENT_DATA
-                    videoLoading.style.display = 'none';
-                    videoError.style.display = 'block';
-                }
-            }, 5000);
-            
-            // زر استخدام فيديو احتياطي
-            useBackupVideoBtn.addEventListener('click', function() {
-                videoLoading.style.display = 'block';
-                videoError.style.display = 'none';
-                
-                // تغيير مصدر الفيديو إلى رابط احتياطي مباشر
-                video.innerHTML = `
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-christmas-tree-with-golden-lights-43985-large.mp4" type="video/mp4">
-                    <source src="https://videos.pexels.com/video-files/3287305/3287305-uhd_2732_1440_25fps.mp4" type="video/mp4">
-                    <p>متصفحك لا يدعم تشغيل الفيديو. هذه رسالة بديلة.</p>
-                `;
-                
-                video.load();
-            });
-            
-            // زر المتابعة بدون فيديو
-            continueWithoutVideoBtn.addEventListener('click', function() {
-                video.style.display = 'none';
-                videoError.style.display = 'none';
-                
-                // تغيير لون الخلفية لتعويض غياب الفيديو
-                document.querySelector('.video-overlay').style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
-            });
-            
-            // التحكم بتشغيل/إيقاف الفيديو
             playPauseBtn.addEventListener('click', function() {
                 if (video.paused) {
                     video.play();
                     playPauseIcon.className = 'fas fa-pause';
+                    playPauseBtn.style.transform = 'scale(1.1) rotate(90deg)';
+                    setTimeout(() => {
+                        playPauseBtn.style.transform = 'scale(1) rotate(0)';
+                    }, 300);
                 } else {
+                    video.playbackRate = 1; // إعادة السرعة الطبيعية عند الإيقاف
                     video.pause();
                     playPauseIcon.className = 'fas fa-play';
+                    playPauseBtn.style.transform = 'scale(1.1) rotate(-90deg)';
+                    setTimeout(() => {
+                        playPauseBtn.style.transform = 'scale(1) rotate(0)';
+                    }, 300);
                 }
             });
             
             // التحكم بكتم/إعادة صوت الفيديو
+            const muteBtn = document.getElementById('muteBtn');
+            const muteIcon = muteBtn.querySelector('i');
+            
             muteBtn.addEventListener('click', function() {
                 if (video.muted) {
                     video.muted = false;
                     muteIcon.className = 'fas fa-volume-up';
+                    muteBtn.style.transform = 'scale(1.1) rotate(90deg)';
+                    setTimeout(() => {
+                        muteBtn.style.transform = 'scale(1) rotate(0)';
+                    }, 300);
                 } else {
                     video.muted = true;
                     muteIcon.className = 'fas fa-volume-mute';
+                    muteBtn.style.transform = 'scale(1.1) rotate(-90deg)';
+                    setTimeout(() => {
+                        muteBtn.style.transform = 'scale(1) rotate(0)';
+                    }, 300);
+                }
+            });
+            
+            // التحكم بالشاشة الكاملة
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const fullscreenIcon = fullscreenBtn.querySelector('i');
+            
+            fullscreenBtn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.log(`خطأ في تفعيل الشاشة الكاملة: ${err.message}`);
+                    });
+                    fullscreenIcon.className = 'fas fa-compress';
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                        fullscreenIcon.className = 'fas fa-expand';
+                    }
+                }
+            });
+            
+            // تغيير سرعة الفيديو عند النقر المزدوج
+            video.addEventListener('dblclick', function() {
+                if (video.playbackRate === 1) {
+                    video.playbackRate = 2;
+                    showNotification('سرعة الفيديو: سريع ⚡');
+                } else if (video.playbackRate === 2) {
+                    video.playbackRate = 0.5;
+                    showNotification('سرعة الفيديو: بطيء 🐢');
+                } else {
+                    video.playbackRate = 1;
+                    showNotification('سرعة الفيديو: عادي ✅');
                 }
             });
             
             // زر اكتشف المزيد
             document.getElementById('actionBtn').addEventListener('click', function() {
-                alert('شكرًا لاهتمامك! يمكنك زيارة حسابي على GitHub لمشاهدة المزيد من المشاريع.');
+                showNotification('🎁 شكرًا لاهتمامك! يمكنك زيارة حسابي على GitHub لمشاهدة المزيد من المشاريع.');
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
             });
             
             // زر تواصل معي
             document.getElementById('contactBtn').addEventListener('click', function() {
-                alert('يمكنك التواصل معي عبر البريد الإلكتروني أو منصات التواصل الاجتماعي المذكورة أسفل الصفحة.');
+                showNotification('📧 يمكنك التواصل معي عبر البريد الإلكتروني أو منصات التواصل الاجتماعي المذكورة أسفل الصفحة.');
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
             });
             
-            // إضافة تأثيرات عند التمرير
+            // زر GitHub
+            document.getElementById('githubBtn').addEventListener('click', function() {
+                window.open('https://github.com', '_blank');
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+            
+            // إظهار الإشعارات
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.position = 'fixed';
+                notification.style.top = '30px';
+                notification.style.right = '30px';
+                notification.style.backgroundColor = 'rgba(26, 26, 26, 0.9)';
+                notification.style.color = 'var(--accent-gold)';
+                notification.style.padding = '15px 25px';
+                notification.style.borderRadius = '10px';
+                notification.style.borderLeft = '4px solid var(--accent-gold)';
+                notification.style.zIndex = '1000';
+                notification.style.backdropFilter = 'blur(10px)';
+                notification.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+                notification.style.fontFamily = "'Cairo', sans-serif";
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(50px)';
+                    notification.style.transition = 'opacity 0.5s, transform 0.5s';
+                    
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 500);
+                }, 3000);
+            }
+            
+            // تأثيرات التمرير
             const fadeElements = document.querySelectorAll('.fade-in');
             
             const fadeOnScroll = function() {
@@ -685,7 +740,7 @@
             // تعيين الخصائص الأولية للعناصر
             fadeElements.forEach(element => {
                 element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
+                element.style.transform = 'translateY(40px)';
                 element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
             });
             
@@ -694,10 +749,11 @@
             
             // ضبط حجم الفيديو ليناسب الصفحة
             function resizeVideo() {
+                const video = document.getElementById('video-background');
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
                 const windowRatio = windowWidth / windowHeight;
-                const videoRatio = 16 / 9; // نسبة أبعاد الفيديو
+                const videoRatio = 16 / 9;
                 
                 if (windowRatio < videoRatio) {
                     video.style.width = 'auto';
@@ -709,11 +765,12 @@
             }
             
             window.addEventListener('resize', resizeVideo);
+            resizeVideo();
             
-            // فقط قم بإعادة الحجم إذا كان الفيديو مرئياً
-            if (video.style.display !== 'none') {
-                resizeVideo();
-            }
+            // إضافة تأثيرات إضافية للفيديو عند التحميل
+            video.addEventListener('loadeddata', function() {
+                showNotification('🎬 الفيديو جاهز للعرض! استميع بالتجربة البصرية الساحرة.');
+            });
         });
     </script>
 </body>
