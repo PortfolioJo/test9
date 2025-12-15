@@ -59,8 +59,51 @@
             right: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 10, 0.65);
+            background: rgba(10, 10, 10, 0.7);
             z-index: -99;
+        }
+        
+        /* رسالة خطأ الفيديو */
+        .video-error {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 26, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 1000;
+            border: 2px solid var(--accent-gold);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .video-error h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+        
+        .video-error p {
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .video-error button {
+            background: var(--accent-gold);
+            color: var(--primary-ink);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .video-error button:hover {
+            background: var(--gold-light);
+            transform: scale(1.05);
         }
         
         /* طبقة المحتوى الرئيسية */
@@ -326,6 +369,21 @@
             color: var(--primary-ink);
         }
         
+        /* مؤشر تحميل */
+        .video-loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 20px 30px;
+            border-radius: 15px;
+            display: none;
+        }
+        
         /* التجاوب مع الهواتف */
         @media (max-width: 768px) {
             h1 {
@@ -388,11 +446,28 @@
     </style>
 </head>
 <body>
+    <!-- مؤشر تحميل الفيديو -->
+    <div class="video-loading" id="videoLoading">
+        <i class="fas fa-spinner fa-spin"></i> جاري تحميل الفيديو...
+    </div>
+    
+    <!-- رسالة خطأ الفيديو -->
+    <div class="video-error" id="videoError">
+        <h3><i class="fas fa-exclamation-triangle"></i> مشكلة في تحميل الفيديو</h3>
+        <p>عذراً، حدثت مشكلة في تحميل فيديو الخلفية. يمكنك:</p>
+        <p>1. تحديث الصفحة وحاول مرة أخرى</p>
+        <p>2. استخدام خلفية بديلة</p>
+        <button id="useBackupVideo">استخدام خلفية بديلة</button>
+        <button id="continueWithoutVideo" style="margin-right: 10px; background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);">المتابعة بدون فيديو</button>
+    </div>
+    
     <!-- خلفية الفيديو -->
     <video autoplay muted loop playsinline id="video-background">
-        <!-- رابط الفيديو من Pexels -->
+        <!-- رابط الفيديو الرئيسي من Pexels (تم تعديله ليكون رابطاً مباشراً) -->
         <source src="https://player.vimeo.com/external/3287305.hd.mp4?s=3d69e65e8ed6472c5e2d5b8b7d6b7f7c&profile_id=174&oauth2_token_id=57447761" type="video/mp4">
-        <!-- رابط بديل في حالة فشل الأول -->
+        <!-- رابط احتياطي مباشر من Pexels -->
+        <source src="https://videos.pexels.com/video-files/3287305/3287305-hd_1080_1920_25fps.mp4" type="video/mp4">
+        <!-- رابط احتياطي آخر -->
         <source src="https://assets.mixkit.co/videos/preview/mixkit-christmas-tree-with-golden-lights-43985-large.mp4" type="video/mp4">
         <p>متصفحك لا يدعم تشغيل الفيديو. هذه رسالة بديلة.</p>
     </video>
@@ -500,11 +575,67 @@
     <script>
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            // التحكم بتشغيل/إيقاف الفيديو
             const video = document.getElementById('video-background');
+            const videoLoading = document.getElementById('videoLoading');
+            const videoError = document.getElementById('videoError');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const playPauseIcon = playPauseBtn.querySelector('i');
+            const muteBtn = document.getElementById('muteBtn');
+            const muteIcon = muteBtn.querySelector('i');
+            const useBackupVideoBtn = document.getElementById('useBackupVideo');
+            const continueWithoutVideoBtn = document.getElementById('continueWithoutVideo');
             
+            // إظهار مؤشر التحميل
+            videoLoading.style.display = 'block';
+            
+            // التحقق من حالة تحميل الفيديو
+            video.addEventListener('loadeddata', function() {
+                // الفيديو تم تحميله بنجاح
+                videoLoading.style.display = 'none';
+                videoError.style.display = 'none';
+            });
+            
+            // التعامل مع أخطاء تحميل الفيديو
+            video.addEventListener('error', function(e) {
+                videoLoading.style.display = 'none';
+                videoError.style.display = 'block';
+                
+                console.error('خطأ في تحميل الفيديو:', e);
+            });
+            
+            // التحقق بعد 5 ثوان إذا كان الفيديو لا يزال يحمل
+            setTimeout(function() {
+                if (video.readyState < 2) { // أقل من HAVE_CURRENT_DATA
+                    videoLoading.style.display = 'none';
+                    videoError.style.display = 'block';
+                }
+            }, 5000);
+            
+            // زر استخدام فيديو احتياطي
+            useBackupVideoBtn.addEventListener('click', function() {
+                videoLoading.style.display = 'block';
+                videoError.style.display = 'none';
+                
+                // تغيير مصدر الفيديو إلى رابط احتياطي مباشر
+                video.innerHTML = `
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-christmas-tree-with-golden-lights-43985-large.mp4" type="video/mp4">
+                    <source src="https://videos.pexels.com/video-files/3287305/3287305-uhd_2732_1440_25fps.mp4" type="video/mp4">
+                    <p>متصفحك لا يدعم تشغيل الفيديو. هذه رسالة بديلة.</p>
+                `;
+                
+                video.load();
+            });
+            
+            // زر المتابعة بدون فيديو
+            continueWithoutVideoBtn.addEventListener('click', function() {
+                video.style.display = 'none';
+                videoError.style.display = 'none';
+                
+                // تغيير لون الخلفية لتعويض غياب الفيديو
+                document.querySelector('.video-overlay').style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
+            });
+            
+            // التحكم بتشغيل/إيقاف الفيديو
             playPauseBtn.addEventListener('click', function() {
                 if (video.paused) {
                     video.play();
@@ -516,9 +647,6 @@
             });
             
             // التحكم بكتم/إعادة صوت الفيديو
-            const muteBtn = document.getElementById('muteBtn');
-            const muteIcon = muteBtn.querySelector('i');
-            
             muteBtn.addEventListener('click', function() {
                 if (video.muted) {
                     video.muted = false;
@@ -566,7 +694,6 @@
             
             // ضبط حجم الفيديو ليناسب الصفحة
             function resizeVideo() {
-                const video = document.getElementById('video-background');
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
                 const windowRatio = windowWidth / windowHeight;
@@ -582,7 +709,11 @@
             }
             
             window.addEventListener('resize', resizeVideo);
-            resizeVideo(); // تشغيل عند التحميل
+            
+            // فقط قم بإعادة الحجم إذا كان الفيديو مرئياً
+            if (video.style.display !== 'none') {
+                resizeVideo();
+            }
         });
     </script>
 </body>
