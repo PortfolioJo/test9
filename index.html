@@ -1,1355 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aseel | New Beginning 2026</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <style>
-        :root {
-            --primary-black: #0a0a0a;
-            --primary-white: #ffffff;
-            --accent-green: #2a9d8f;
-            --accent-gold: #e9c46a;
-            --accent-silver: #e0e0e0;
-            --dark-green: #1d7873;
-            --deep-blue: #0f1a2a;
-            --light-blue: #1a365d;
-            --tree-green: #2a7d5e;
-            --tree-light: #4caf7d;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--primary-black) 100%);
-            color: var(--primary-white);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* Background pattern */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(42, 157, 143, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(233, 196, 106, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 40% 40%, rgba(29, 120, 115, 0.05) 0%, transparent 30%);
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Improved Header */
-        .header {
-            padding: 30px 0 15px;
-            text-align: center;
-            position: relative;
-            z-index: 100;
-        }
-        
-        .name-wrapper {
-            display: inline-block;
-            position: relative;
-            padding: 0 40px;
-        }
-        
-        .name {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-silver), var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0;
-            position: relative;
-            text-shadow: 0 0 40px rgba(233, 196, 106, 0.3);
-            animation: nameGlow 3s ease-in-out infinite alternate;
-        }
-        
-        .name::before, .name::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 30px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-gold));
-            transform: translateY(-50%);
-        }
-        
-        .name::before {
-            left: -40px;
-            background: linear-gradient(90deg, var(--accent-gold), transparent);
-        }
-        
-        .name::after {
-            right: -40px;
-            background: linear-gradient(90deg, transparent, var(--accent-gold));
-        }
-        
-        .year-tagline {
-            font-size: 1.6rem;
-            font-weight: 400;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--accent-silver);
-            margin-top: 15px;
-            position: relative;
-            display: inline-block;
-            padding: 0 15px;
-        }
-        
-        .year-tagline span {
-            color: var(--accent-gold);
-            font-weight: 500;
-        }
-        
-        .year-tagline::before, .year-tagline::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 30px;
-            height: 1px;
-            background: var(--accent-green);
-            transform: translateY(-50%);
-        }
-        
-        .year-tagline::before {
-            left: -40px;
-        }
-        
-        .year-tagline::after {
-            right: -40px;
-        }
-        
-        /* Main Content Layout */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 70vh;
-            position: relative;
-            padding: 20px 0 100px;
-        }
-        
-        /* 2D Tree Design */
-        .tree-section {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            position: relative;
-            margin: 40px 0;
-        }
-        
-        .tree-container {
-            position: relative;
-            width: 400px;
-            height: 600px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-        }
-        
-        /* 2D Tree */
-        .tree-2d {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        /* Tree Trunk */
-        .trunk {
-            width: 60px;
-            height: 120px;
-            background: linear-gradient(to bottom, #8B4513, #5D2906);
-            border-radius: 10px;
-            margin-top: -20px;
-            z-index: 2;
-            box-shadow: 
-                inset 0 0 10px rgba(0, 0, 0, 0.3),
-                0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* Tree Layers */
-        .tree-layer {
-            width: 0;
-            height: 0;
-            border-left: 120px solid transparent;
-            border-right: 120px solid transparent;
-            border-bottom: 140px solid var(--tree-green);
-            position: relative;
-            margin-top: -80px;
-            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
-            z-index: 3;
-        }
-        
-        .tree-layer:nth-child(2) {
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
-            border-bottom: 160px solid var(--tree-light);
-            margin-top: -100px;
-            z-index: 2;
-        }
-        
-        .tree-layer:nth-child(3) {
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-bottom: 180px solid var(--tree-green);
-            margin-top: -120px;
-            z-index: 1;
-        }
-        
-        /* Tree Decorations */
-        .ornament {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            z-index: 10;
-            box-shadow: 
-                0 0 15px rgba(255, 255, 255, 0.4),
-                inset 0 0 10px rgba(255, 255, 255, 0.2);
-            animation: float 3s ease-in-out infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .ornament:hover {
-            transform: scale(1.3);
-            box-shadow: 
-                0 0 25px rgba(255, 255, 255, 0.6),
-                inset 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-        
-        .ornament i {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        /* Ornament positions */
-        .ornament-1 { top: 120px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle at 30% 30%, #e63946, #b91d1d); animation-delay: 0s; }
-        .ornament-2 { top: 180px; left: 40%; background: radial-gradient(circle at 30% 30%, #2a9d8f, #1d7873); animation-delay: 0.5s; }
-        .ornament-3 { top: 180px; left: 60%; background: radial-gradient(circle at 30% 30%, #e9c46a, #d4a017); animation-delay: 1s; }
-        .ornament-4 { top: 240px; left: 35%; background: radial-gradient(circle at 30% 30%, #4361ee, #3a0ca3); animation-delay: 1.5s; }
-        .ornament-5 { top: 240px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle at 30% 30%, #f4a261, #e76f51); animation-delay: 2s; }
-        .ornament-6 { top: 240px; left: 65%; background: radial-gradient(circle at 30% 30%, #9d4edd, #7b2cbf); animation-delay: 2.5s; }
-        .ornament-7 { top: 300px; left: 45%; background: radial-gradient(circle at 30% 30%, #06d6a0, #04a777); animation-delay: 3s; }
-        .ornament-8 { top: 300px; left: 55%; background: radial-gradient(circle at 30% 30%, #ffd166, #ff9e00); animation-delay: 3.5s; }
-        .ornament-9 { top: 360px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle at 30% 30%, #ef476f, #d00000); animation-delay: 4s; }
-        
-        /* Star on top */
-        .tree-star {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
-            background: var(--accent-gold);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            z-index: 20;
-            box-shadow: 0 0 40px var(--accent-gold);
-            animation: starGlow 2s ease-in-out infinite alternate;
-        }
-        
-        .tree-star::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
-            opacity: 0.4;
-            border-radius: 50%;
-            filter: blur(10px);
-            z-index: -1;
-        }
-        
-        /* Tree Lights */
-        .light {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            z-index: 5;
-            animation: lightTwinkle 1.5s ease-in-out infinite;
-        }
-        
-        .light:nth-child(1) { top: 100px; left: 45%; background: #ff6b6b; animation-delay: 0s; }
-        .light:nth-child(2) { top: 100px; left: 55%; background: #4ecdc4; animation-delay: 0.3s; }
-        .light:nth-child(3) { top: 160px; left: 42%; background: #ffd166; animation-delay: 0.6s; }
-        .light:nth-child(4) { top: 160px; left: 58%; background: #9d4edd; animation-delay: 0.9s; }
-        .light:nth-child(5) { top: 220px; left: 40%; background: #ff6b6b; animation-delay: 1.2s; }
-        .light:nth-child(6) { top: 220px; left: 60%; background: #4ecdc4; animation-delay: 1.5s; }
-        .light:nth-child(7) { top: 280px; left: 43%; background: #ffd166; animation-delay: 1.8s; }
-        .light:nth-child(8) { top: 280px; left: 57%; background: #9d4edd; animation-delay: 2.1s; }
-        .light:nth-child(9) { top: 340px; left: 46%; background: #ff6b6b; animation-delay: 2.4s; }
-        .light:nth-child(10) { top: 340px; left: 54%; background: #4ecdc4; animation-delay: 2.7s; }
-        
-        /* Ground */
-        .ground {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 500px;
-            height: 40px;
-            background: linear-gradient(to top, #3e2723, #5d4037);
-            border-radius: 50% 50% 0 0;
-            z-index: 1;
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
-        }
-        
-        /* Info Panel */
-        .info-panel {
-            margin-top: 40px;
-            text-align: center;
-            max-width: 700px;
-            padding: 25px;
-            background: rgba(10, 10, 10, 0.7);
-            border-radius: 20px;
-            border: 1px solid rgba(42, 157, 143, 0.2);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .info-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--accent-gold);
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-        
-        .info-text {
-            color: var(--accent-silver);
-            line-height: 1.6;
-            font-size: 1rem;
-            margin-bottom: 20px;
-        }
-        
-        /* Snow effect */
-        .snow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        /* Controls */
-        .controls-container {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 100;
-            background: rgba(15, 26, 42, 0.85);
-            padding: 15px 25px;
-            border-radius: 50px;
-            border: 1px solid rgba(42, 157, 143, 0.3);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        
-        .control-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(42, 157, 143, 0.2), rgba(233, 196, 106, 0.1));
-            border: 1px solid rgba(233, 196, 106, 0.3);
-            color: var(--accent-gold);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .control-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-green));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .control-btn:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(233, 196, 106, 0.3);
-            color: var(--primary-black);
-            border-color: transparent;
-        }
-        
-        .control-btn:hover::before {
-            opacity: 1;
-        }
-        
-        .control-btn.active {
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-green));
-            color: var(--primary-black);
-            box-shadow: 0 0 20px rgba(233, 196, 106, 0.5);
-        }
-        
-        /* Footer */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            padding: 15px 0;
-            text-align: center;
-            z-index: 50;
-            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
-        }
-        
-        .signature {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            letter-spacing: 3px;
-            color: var(--accent-silver);
-            opacity: 0.9;
-            transition: all 0.3s ease;
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            background: rgba(233, 196, 106, 0.05);
-            border: 1px solid rgba(233, 196, 106, 0.1);
-        }
-        
-        .signature:hover {
-            opacity: 1;
-            background: rgba(233, 196, 106, 0.1);
-            border-color: rgba(233, 196, 106, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        /* Instructions */
-        .instructions {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            background: rgba(15, 26, 42, 0.85);
-            padding: 20px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            color: var(--accent-silver);
-            border: 1px solid rgba(233, 196, 106, 0.2);
-            backdrop-filter: blur(15px);
-            z-index: 100;
-            max-width: 220px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .instructions-title {
-            color: var(--accent-gold);
-            font-size: 1rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .instructions i {
-            color: var(--accent-gold);
-            margin-right: 10px;
-            width: 16px;
-            text-align: center;
-        }
-        
-        .instructions p {
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-        }
-        
-        /* Animations */
-        @keyframes nameGlow {
-            0% {
-                text-shadow: 0 0 20px rgba(233, 196, 106, 0.4);
-            }
-            100% {
-                text-shadow: 0 0 40px rgba(233, 196, 106, 0.7), 0 0 60px rgba(233, 196, 106, 0.4);
-            }
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            50% {
-                transform: translateY(-10px) translateX(-50%);
-            }
-        }
-        
-        .ornament-2, .ornament-3, .ornament-4, .ornament-6, .ornament-7, .ornament-8 {
-            animation-name: floatSide;
-        }
-        
-        @keyframes floatSide {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        @keyframes starGlow {
-            0% {
-                box-shadow: 0 0 30px var(--accent-gold);
-                transform: translateX(-50%) scale(1);
-            }
-            100% {
-                box-shadow: 0 0 60px var(--accent-gold), 0 0 80px rgba(233, 196, 106, 0.5);
-                transform: translateX(-50%) scale(1.05);
-            }
-        }
-        
-        @keyframes lightTwinkle {
-            0%, 100% {
-                opacity: 0.7;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-        
-        /* Loading screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--deep-blue);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            transition: opacity 1s, visibility 1s;
-        }
-        
-        .loader {
-            width: 70px;
-            height: 70px;
-            border: 5px solid rgba(233, 196, 106, 0.2);
-            border-radius: 50%;
-            border-top-color: var(--accent-gold);
-            border-bottom-color: var(--accent-green);
-            animation: spin 1.5s ease-in-out infinite;
-            margin-bottom: 20px;
-        }
-        
-        .loading-text {
-            color: var(--accent-silver);
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Gift boxes under tree */
-        .gifts {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 2;
-        }
-        
-        .gift-box {
-            width: 60px;
-            height: 60px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: giftFloat 4s ease-in-out infinite;
-        }
-        
-        .gift-box:nth-child(1) {
-            background: linear-gradient(45deg, #e63946, #ff6b6b);
-            animation-delay: 0s;
-        }
-        
-        .gift-box:nth-child(2) {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #2a9d8f, #4ecdc4);
-            animation-delay: 1s;
-        }
-        
-        .gift-box:nth-child(3) {
-            background: linear-gradient(45deg, #e9c46a, #ffd166);
-            animation-delay: 2s;
-        }
-        
-        .gift-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: inherit;
-            filter: brightness(1.2);
-        }
-        
-        .gift-box::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
-        }
-        
-        @keyframes giftFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .name {
-                font-size: 4rem;
-            }
-            
-            .year-tagline {
-                font-size: 1.4rem;
-                letter-spacing: 4px;
-            }
-            
-            .tree-container {
-                width: 350px;
-                height: 550px;
-            }
-            
-            .tree-layer {
-                border-left: 100px solid transparent;
-                border-right: 100px solid transparent;
-                border-bottom: 120px solid var(--tree-green);
-            }
-            
-            .tree-layer:nth-child(2) {
-                border-left: 120px solid transparent;
-                border-right: 120px solid transparent;
-                border-bottom: 140px solid var(--tree-light);
-            }
-            
-            .tree-layer:nth-child(3) {
-                border-left: 140px solid transparent;
-                border-right: 140px solid transparent;
-                border-bottom: 160px solid var(--tree-green);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header {
-                padding: 20px 0 10px;
-            }
-            
-            .name {
-                font-size: 3.2rem;
-                letter-spacing: 2px;
-            }
-            
-            .name::before, .name::after {
-                width: 20px;
-            }
-            
-            .name::before {
-                left: -30px;
-            }
-            
-            .name::after {
-                right: -30px;
-            }
-            
-            .year-tagline {
-                font-size: 1.1rem;
-                letter-spacing: 3px;
-            }
-            
-            .year-tagline::before, .year-tagline::after {
-                width: 20px;
-            }
-            
-            .year-tagline::before {
-                left: -30px;
-            }
-            
-            .year-tagline::after {
-                right: -30px;
-            }
-            
-            .tree-container {
-                width: 300px;
-                height: 500px;
-            }
-            
-            .tree-layer {
-                border-left: 80px solid transparent;
-                border-right: 80px solid transparent;
-                border-bottom: 100px solid var(--tree-green);
-            }
-            
-            .tree-layer:nth-child(2) {
-                border-left: 100px solid transparent;
-                border-right: 100px solid transparent;
-                border-bottom: 120px solid var(--tree-light);
-            }
-            
-            .tree-layer:nth-child(3) {
-                border-left: 120px solid transparent;
-                border-right: 120px solid transparent;
-                border-bottom: 140px solid var(--tree-green);
-            }
-            
-            .ornament {
-                width: 20px;
-                height: 20px;
-            }
-            
-            .ornament i {
-                font-size: 10px;
-            }
-            
-            .ground {
-                width: 400px;
-            }
-            
-            .info-panel {
-                margin-top: 30px;
-                padding: 20px;
-            }
-            
-            .controls-container {
-                padding: 12px 20px;
-                gap: 15px;
-                bottom: 20px;
-            }
-            
-            .control-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-            }
-            
-            .instructions {
-                top: 20px;
-                right: 20px;
-                padding: 15px;
-                max-width: 200px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .name {
-                font-size: 2.5rem;
-            }
-            
-            .name::before, .name::after {
-                width: 15px;
-            }
-            
-            .name::before {
-                left: -25px;
-            }
-            
-            .name::after {
-                right: -25px;
-            }
-            
-            .year-tagline {
-                font-size: 0.9rem;
-                letter-spacing: 2px;
-            }
-            
-            .tree-container {
-                width: 250px;
-                height: 450px;
-            }
-            
-            .tree-layer {
-                border-left: 60px solid transparent;
-                border-right: 60px solid transparent;
-                border-bottom: 80px solid var(--tree-green);
-            }
-            
-            .tree-layer:nth-child(2) {
-                border-left: 80px solid transparent;
-                border-right: 80px solid transparent;
-                border-bottom: 100px solid var(--tree-light);
-            }
-            
-            .tree-layer:nth-child(3) {
-                border-left: 100px solid transparent;
-                border-right: 100px solid transparent;
-                border-bottom: 120px solid var(--tree-green);
-            }
-            
-            .tree-star {
-                width: 40px;
-                height: 40px;
-                top: 20px;
-            }
-            
-            .ornament {
-                width: 16px;
-                height: 16px;
-            }
-            
-            .ornament i {
-                font-size: 8px;
-            }
-            
-            .ground {
-                width: 300px;
-            }
-            
-            .gift-box {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .gift-box:nth-child(2) {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .controls-container {
-                padding: 10px 15px;
-                gap: 10px;
-                bottom: 15px;
-            }
-            
-            .control-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
-            .instructions {
-                position: static;
-                margin: 20px auto;
-                max-width: 300px;
-            }
-            
-            .info-panel {
-                margin: 20px 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader"></div>
-        <div class="loading-text">LOADING NEW BEGINNING</div>
-    </div>
-    
-    <!-- Background Pattern -->
-    <div class="bg-pattern"></div>
-    
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="name-wrapper">
-                <h1 class="name">Aseel</h1>
-            </div>
-            <div class="year-tagline">NEW BEGINNING <span>2026</span></div>
-        </div>
-    </header>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="tree-section">
-            <div class="tree-container">
-                <!-- 2D Tree -->
-                <div class="tree-2d">
-                    <!-- Star -->
-                    <div class="tree-star"></div>
-                    
-                    <!-- Tree layers -->
-                    <div class="tree-layer"></div>
-                    <div class="tree-layer"></div>
-                    <div class="tree-layer"></div>
-                    
-                    <!-- Trunk -->
-                    <div class="trunk"></div>
-                    
-                    <!-- Lights -->
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    <div class="light"></div>
-                    
-                    <!-- Ornaments -->
-                    <div class="ornament ornament-1" title="Hope">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="ornament ornament-2" title="Growth">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="ornament ornament-3" title="Wisdom">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="ornament ornament-4" title="Peace">
-                        <i class="fas fa-dove"></i>
-                    </div>
-                    <div class="ornament ornament-5" title="Joy">
-                        <i class="fas fa-smile"></i>
-                    </div>
-                    <div class="ornament ornament-6" title="Love">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="ornament ornament-7" title="Strength">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="ornament ornament-8" title="Success">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="ornament ornament-9" title="New Beginnings">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    
-                    <!-- Gifts -->
-                    <div class="gifts">
-                        <div class="gift-box"></div>
-                        <div class="gift-box"></div>
-                        <div class="gift-box"></div>
-                    </div>
-                    
-                    <!-- Ground -->
-                    <div class="ground"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="info-panel">
-            <h3 class="info-title">A Symbol of New Beginnings</h3>
-            <p class="info-text">This elegant tree represents growth, strength, and new opportunities in 2026. Each ornament holds a special meaning - hover over them to discover their significance. The glowing lights symbolize hope and guidance for the journey ahead.</p>
-        </div>
-    </main>
-    
-    <!-- Controls -->
-    <div class="controls-container">
-        <button class="control-btn active" id="playPauseBtn" title="Play/Pause Animations">
-            <i class="fas fa-pause"></i>
-        </button>
-        <button class="control-btn active" id="snowBtn" title="Toggle Snow">
-            <i class="fas fa-snowflake"></i>
-        </button>
-        <button class="control-btn active" id="lightsBtn" title="Toggle Lights">
-            <i class="fas fa-lightbulb"></i>
-        </button>
-        <button class="control-btn" id="musicBtn" title="Play Music">
-            <i class="fas fa-music"></i>
-        </button>
-        <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
-            <i class="fas fa-expand"></i>
-        </button>
-    </div>
-    
-    <!-- Instructions -->
-    <div class="instructions">
-        <div class="instructions-title">
-            <i class="fas fa-info-circle"></i> INTERACTION GUIDE
-        </div>
-        <p><i class="fas fa-mouse-pointer"></i> Hover over ornaments</p>
-        <p><i class="fas fa-lightbulb"></i> Click buttons below</p>
-        <p><i class="fas fa-expand"></i> Fullscreen available</p>
-    </div>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="signature">ESTABLISHED 2026</div>
-        </div>
-    </footer>
-    
-    <!-- Snow Container -->
-    <div class="snow-container" id="snowContainer"></div>
-    
-    <!-- Audio for background music -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-deep-ambient-478.mp3" type="audio/mpeg">
-    </audio>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بداية جديدة 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --gold:#d4af37;
+      --dark:#0b0f1a;
+      --soft:#1a2035;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif}
+    body{
+      background:linear-gradient(180deg,var(--dark),#000);
+      color:#fff;
+      overflow-x:hidden;
+    }/* Hero */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,4rem);
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:20px;
+}
+.hero h1 span{color:var(--gold)}
+.hero p{
+  font-size:1.2rem;
+  opacity:.9;
+  max-width:600px;
+  margin:auto;
+}
 
+/* Glass card */
+.card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px);
+  border-radius:20px;
+  padding:50px 40px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  animation:fadeUp 1.6s ease;
+}
+
+/* Christmas Tree */
+.tree{
+  position:relative;
+  width:0;
+  height:0;
+  border-left:120px solid transparent;
+  border-right:120px solid transparent;
+  border-bottom:220px solid #0f7a3d;
+  margin:60px auto 20px;
+  filter:drop-shadow(0 0 25px rgba(0,255,150,.4));
+}
+.tree:before{
+  content:"";
+  position:absolute;
+  top:60px;
+  left:-100px;
+  border-left:100px solid transparent;
+  border-right:100px solid transparent;
+  border-bottom:180px solid #129e52;
+}
+.tree:after{
+  content:"";
+  position:absolute;
+  top:120px;
+  left:-80px;
+  border-left:80px solid transparent;
+  border-right:80px solid transparent;
+  border-bottom:140px solid #18b564;
+}
+.star{
+  position:absolute;
+  top:-40px;
+  left:-18px;
+  font-size:2.5rem;
+  color:var(--gold);
+  animation:pulse 2s infinite;
+}
+
+/* Snow */
+.snow{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+}
+.snow span{
+  position:absolute;
+  top:-10px;
+  width:6px;height:6px;
+  background:white;
+  border-radius:50%;
+  opacity:.8;
+  animation:fall linear infinite;
+}
+
+/* Footer */
+footer{
+  padding:40px 20px;
+  text-align:center;
+  opacity:.6;
+  font-size:.9rem;
+}
+
+/* Animations */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+}
+@keyframes fall{
+  to{transform:translateY(110vh)}
+}
+
+  </style>
+</head>
+<body>  <!-- Snow -->  <div class="snow">
     <script>
-        // Create snow with GSAP
-        function createSnowWithGSAP() {
-            const snowContainer = document.getElementById('snowContainer');
-            const snowflakeCount = 80;
-            
-            for (let i = 0; i < snowflakeCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.position = 'absolute';
-                const size = Math.random() * 4 + 2;
-                snowflake.style.width = snowflake.style.height = `${size}px`;
-                snowflake.style.backgroundColor = 'white';
-                snowflake.style.borderRadius = '50%';
-                snowflake.style.opacity = `${Math.random() * 0.6 + 0.2}`;
-                snowflake.style.left = `${Math.random() * 100}%`;
-                snowflake.style.top = '-10px';
-                snowflake.style.zIndex = '1';
-                
-                // Use GSAP for smooth snow animation
-                gsap.to(snowflake, {
-                    y: window.innerHeight + 20,
-                    x: `+=${Math.random() * 100 - 50}`,
-                    rotation: Math.random() * 360,
-                    duration: Math.random() * 20 + 15,
-                    ease: "none",
-                    repeat: -1,
-                    delay: Math.random() * 10
-                });
-                
-                snowContainer.appendChild(snowflake);
-            }
-        }
-        
-        // Ornament interactions
-        function setupOrnamentInteractions() {
-            const ornaments = document.querySelectorAll('.ornament');
-            
-            ornaments.forEach(ornament => {
-                ornament.addEventListener('mouseenter', function() {
-                    const title = this.getAttribute('title');
-                    if (title) {
-                        // Create a tooltip
-                        const tooltip = document.createElement('div');
-                        tooltip.className = 'tooltip';
-                        tooltip.textContent = title;
-                        tooltip.style.position = 'absolute';
-                        tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
-                        tooltip.style.color = 'white';
-                        tooltip.style.padding = '5px 10px';
-                        tooltip.style.borderRadius = '5px';
-                        tooltip.style.fontSize = '12px';
-                        tooltip.style.whiteSpace = 'nowrap';
-                        tooltip.style.zIndex = '1000';
-                        tooltip.style.top = '-30px';
-                        tooltip.style.left = '50%';
-                        tooltip.style.transform = 'translateX(-50%)';
-                        
-                        this.appendChild(tooltip);
-                    }
-                });
-                
-                ornament.addEventListener('mouseleave', function() {
-                    const tooltip = this.querySelector('.tooltip');
-                    if (tooltip) {
-                        tooltip.remove();
-                    }
-                });
-                
-                ornament.addEventListener('click', function() {
-                    // Create a sparkle effect
-                    const sparkle = document.createElement('div');
-                    sparkle.style.position = 'absolute';
-                    sparkle.style.width = '30px';
-                    sparkle.style.height = '30px';
-                    sparkle.style.background = 'radial-gradient(circle, white, transparent)';
-                    sparkle.style.borderRadius = '50%';
-                    sparkle.style.top = '50%';
-                    sparkle.style.left = '50%';
-                    sparkle.style.transform = 'translate(-50%, -50%)';
-                    sparkle.style.pointerEvents = 'none';
-                    sparkle.style.zIndex = '100';
-                    
-                    this.appendChild(sparkle);
-                    
-                    // Animate the sparkle
-                    gsap.to(sparkle, {
-                        scale: 2,
-                        opacity: 0,
-                        duration: 0.5,
-                        onComplete: () => sparkle.remove()
-                    });
-                });
-            });
-        }
-        
-        // Setup control buttons
-        function setupControls() {
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const snowBtn = document.getElementById('snowBtn');
-            const lightsBtn = document.getElementById('lightsBtn');
-            const musicBtn = document.getElementById('musicBtn');
-            const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const music = document.getElementById('backgroundMusic');
-            
-            let animationsPlaying = true;
-            let snowEnabled = true;
-            let lightsEnabled = true;
-            let musicPlaying = false;
-            
-            // Play/Pause button
-            playPauseBtn.addEventListener('click', function() {
-                const ornaments = document.querySelectorAll('.ornament, .light, .gift-box');
-                
-                if (animationsPlaying) {
-                    // Pause animations
-                    gsap.globalTimeline.pause();
-                    ornaments.forEach(el => {
-                        gsap.killTweensOf(el);
-                    });
-                    playPauseBtn.querySelector('i').className = 'fas fa-play';
-                    playPauseBtn.classList.remove('active');
-                    animationsPlaying = false;
-                } else {
-                    // Resume animations
-                    gsap.globalTimeline.resume();
-                    restartAnimations();
-                    playPauseBtn.querySelector('i').className = 'fas fa-pause';
-                    playPauseBtn.classList.add('active');
-                    animationsPlaying = true;
-                }
-            });
-            
-            // Snow toggle button
-            snowBtn.addEventListener('click', function() {
-                const snowflakes = document.querySelectorAll('.snowflake');
-                
-                if (snowEnabled) {
-                    // Disable snow
-                    gsap.killTweensOf(snowflakes);
-                    snowflakes.forEach(snowflake => {
-                        gsap.to(snowflake, {
-                            opacity: 0,
-                            duration: 1
-                        });
-                    });
-                    snowBtn.classList.remove('active');
-                    snowEnabled = false;
-                } else {
-                    // Enable snow
-                    snowflakes.forEach((snowflake, index) => {
-                        gsap.to(snowflake, {
-                            opacity: Math.random() * 0.6 + 0.2,
-                            duration: 1
-                        });
-                        gsap.to(snowflake, {
-                            y: window.innerHeight + 20,
-                            x: `+=${Math.random() * 100 - 50}`,
-                            rotation: Math.random() * 360,
-                            duration: Math.random() * 20 + 15,
-                            ease: "none",
-                            repeat: -1,
-                            delay: Math.random() * 5
-                        });
-                    });
-                    snowBtn.classList.add('active');
-                    snowEnabled = true;
-                }
-            });
-            
-            // Lights toggle button
-            lightsBtn.addEventListener('click', function() {
-                const lights = document.querySelectorAll('.light');
-                
-                if (lightsEnabled) {
-                    // Turn off lights
-                    lights.forEach(light => {
-                        gsap.to(light, {
-                            opacity: 0.1,
-                            scale: 0.8,
-                            duration: 0.5
-                        });
-                    });
-                    lightsBtn.classList.remove('active');
-                    lightsEnabled = false;
-                } else {
-                    // Turn on lights
-                    lights.forEach(light => {
-                        gsap.to(light, {
-                            opacity: 0.7,
-                            scale: 1,
-                            duration: 0.5
-                        });
-                    });
-                    lightsBtn.classList.add('active');
-                    lightsEnabled = true;
-                }
-            });
-            
-            // Music button
-            musicBtn.addEventListener('click', function() {
-                if (musicPlaying) {
-                    music.pause();
-                    musicBtn.querySelector('i').className = 'fas fa-music';
-                    musicBtn.classList.remove('active');
-                    musicPlaying = false;
-                } else {
-                    music.play().catch(e => {
-                        console.log("Autoplay prevented. User interaction required.");
-                        // If autoplay is blocked, show a message
-                        alert("Click the music button again to play background music.");
-                    });
-                    musicBtn.querySelector('i').className = 'fas fa-volume-up';
-                    musicBtn.classList.add('active');
-                    musicPlaying = true;
-                }
-            });
-            
-            // Fullscreen button
-            fullscreenBtn.addEventListener('click', function() {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen().catch(err => {
-                        console.log(`Error attempting to enable fullscreen: ${err.message}`);
-                    });
-                } else {
-                    document.exitFullscreen();
-                }
-            });
-            
-            // Update fullscreen button on change
-            document.addEventListener('fullscreenchange', () => {
-                if (document.fullscreenElement) {
-                    fullscreenBtn.querySelector('i').className = 'fas fa-compress';
-                    fullscreenBtn.classList.add('active');
-                } else {
-                    fullscreenBtn.querySelector('i').className = 'fas fa-expand';
-                    fullscreenBtn.classList.remove('active');
-                }
-            });
-        }
-        
-        // Restart animations
-        function restartAnimations() {
-            // Restart ornament animations
-            const ornaments = document.querySelectorAll('.ornament');
-            ornaments.forEach((ornament, index) => {
-                gsap.to(ornament, {
-                    y: -10,
-                    duration: 3,
-                    yoyo: true,
-                    repeat: -1,
-                    ease: "sine.inOut",
-                    delay: index * 0.5
-                });
-            });
-            
-            // Restart light animations
-            const lights = document.querySelectorAll('.light');
-            lights.forEach((light, index) => {
-                gsap.to(light, {
-                    scale: 1.2,
-                    opacity: 1,
-                    duration: 1.5,
-                    yoyo: true,
-                    repeat: -1,
-                    ease: "sine.inOut",
-                    delay: index * 0.3
-                });
-            });
-            
-            // Restart gift animations
-            const gifts = document.querySelectorAll('.gift-box');
-            gifts.forEach((gift, index) => {
-                gsap.to(gift, {
-                    y: -10,
-                    duration: 4,
-                    yoyo: true,
-                    repeat: -1,
-                    ease: "sine.inOut",
-                    delay: index
-                });
-            });
-        }
-        
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            createSnowWithGSAP();
-            setupOrnamentInteractions();
-            setupControls();
-            restartAnimations();
-            
-            // Hide loading screen
-            setTimeout(() => {
-                gsap.to('#loadingScreen', {
-                    opacity: 0,
-                    duration: 1,
-                    onComplete: () => {
-                        document.getElementById('loadingScreen').style.visibility = 'hidden';
-                    }
-                });
-            }, 1500);
-            
-            // Add parallax effect on mouse move
-            document.addEventListener('mousemove', (e) => {
-                const treeContainer = document.querySelector('.tree-container');
-                const x = (e.clientX / window.innerWidth - 0.5) * 10;
-                const y = (e.clientY / window.innerHeight - 0.5) * 10;
-                
-                gsap.to(treeContainer, {
-                    x: x,
-                    y: y,
-                    duration: 1,
-                    ease: "power2.out"
-                });
-            });
-        });
+      for(let i=0;i<60;i++){
+        const s=document.createElement('span');
+        s.style.left=Math.random()*100+'%';
+        s.style.animationDuration=5+Math.random()*10+'s';
+        s.style.opacity=Math.random();
+        document.currentScript.parentElement.appendChild(s);
+      }
     </script>
-</body>
+  </div>  <section class="hero">
+    <div class="card">
+      <h1>أنا <span>وبداية جديدة</span> ✨ 2026</h1>
+      <p>
+        هذه الصفحة ليست مجرد تصميم… بل إعلان هادئ عن نسخة أقوى،
+        أوضح، وأكثر توازنًا مني في عام 2026.
+      </p><div class="tree">
+    <div class="star">★</div>
+  </div>
+
+  <p style="margin-top:20px;font-weight:600;color:var(--gold)">
+    سنة جديدة • رؤية جديدة • طاقة مختلفة
+  </p>
+</div>
+
+  </section>  <footer>
+    © 2026 — A New Chapter Begins
+  </footer></body>
 </html>
