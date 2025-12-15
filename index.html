@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aseel | New Beginning 2026</title>
+    <title>Aseel | TARDIS New Beginning 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
     <style>
         :root {
             --primary-black: #0a0a0a;
             --primary-white: #ffffff;
-            --accent-green: #2a9d8f;
+            --tardis-blue: #003b6f;
+            --tardis-light-blue: #0066cc;
+            --tardis-dark-blue: #00264d;
+            --tardis-accent: #4da6ff;
+            --tardis-glow: #66b3ff;
             --accent-gold: #e9c46a;
             --accent-silver: #e0e0e0;
-            --dark-green: #1d7873;
+            --deep-space: #0f1a2a;
         }
         
         * {
@@ -27,10 +29,42 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, #000428 0%, var(--deep-space) 100%);
             color: var(--primary-white);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Space background with stars */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 59, 111, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 80%, rgba(77, 166, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(ellipse at 40% 50%, rgba(0, 102, 204, 0.03) 0%, transparent 30%);
+            z-index: -2;
+        }
+        
+        /* Animated stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
         }
         
         .container {
@@ -39,47 +73,79 @@
             padding: 0 20px;
         }
         
-        /* Minimal Header */
+        /* Header */
         .header {
-            padding: 40px 0 20px;
+            padding: 30px 0 15px;
             text-align: center;
             position: relative;
             z-index: 100;
         }
         
+        .name-wrapper {
+            display: inline-block;
+            position: relative;
+            padding: 0 40px;
+        }
+        
         .name {
             font-family: 'Playfair Display', serif;
-            font-size: 5.5rem;
+            font-size: 5rem;
             font-weight: 700;
             letter-spacing: 3px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--primary-white), var(--accent-silver));
+            background: linear-gradient(90deg, var(--tardis-accent), var(--accent-silver), var(--tardis-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(233, 196, 106, 0.3);
-            animation: nameGlow 4s ease-in-out infinite alternate;
+            margin: 0;
+            position: relative;
+            text-shadow: 0 0 40px rgba(77, 166, 255, 0.5);
+            animation: nameGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .name::before, .name::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--tardis-accent));
+            transform: translateY(-50%);
+        }
+        
+        .name::before {
+            left: -40px;
+            background: linear-gradient(90deg, var(--tardis-accent), transparent);
+        }
+        
+        .name::after {
+            right: -40px;
+            background: linear-gradient(90deg, transparent, var(--tardis-accent));
         }
         
         .year-tagline {
-            font-size: 1.8rem;
-            font-weight: 300;
-            letter-spacing: 8px;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 6px;
             text-transform: uppercase;
             color: var(--accent-silver);
-            margin-top: 10px;
+            margin-top: 15px;
             position: relative;
             display: inline-block;
+            padding: 0 15px;
+        }
+        
+        .year-tagline span {
+            color: var(--tardis-accent);
+            font-weight: 500;
         }
         
         .year-tagline::before, .year-tagline::after {
-            content: '✦';
+            content: '✧';
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--accent-gold);
+            color: var(--tardis-accent);
             font-size: 1.2rem;
-            opacity: 0.7;
         }
         
         .year-tagline::before {
@@ -93,208 +159,594 @@
         /* Main Content */
         .main-content {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 70vh;
+            position: relative;
+            padding: 20px 0 100px;
+        }
+        
+        /* TARDIS Container */
+        .tardis-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .tardis-container {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+        
+        /* TARDIS Structure */
+        .tardis {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* TARDIS Body */
+        .tardis-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--tardis-blue), var(--tardis-dark-blue));
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 40px rgba(0, 102, 204, 0.5),
+                inset 0 0 30px rgba(77, 166, 255, 0.2);
+            border: 3px solid var(--tardis-dark-blue);
+        }
+        
+        /* TARDIS Roof */
+        .tardis-roof {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--tardis-dark-blue), #001a33);
+            clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+            z-index: 2;
+        }
+        
+        .roof-light {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 40px;
+            background: var(--tardis-accent);
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 0 30px var(--tardis-glow);
+            animation: lightPulse 2s infinite alternate;
+            z-index: 1;
+        }
+        
+        /* TARDIS Police Box Sign */
+        .police-sign {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 40px;
+            background: #003366;
+            border: 2px solid var(--accent-silver);
+            border-radius: 4px;
+            display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 75vh;
-            position: relative;
-            margin-top: 20px;
+            z-index: 3;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
         
-        /* Tree Container with 3D effect */
-        .tree-container {
-            position: relative;
-            width: 700px;
-            height: 700px;
-            margin: 0 auto;
+        .police-text {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-align: center;
         }
         
-        #tree-canvas {
+        /* TARDIS Windows */
+        .tardis-windows {
+            position: absolute;
+            width: 100%;
+            height: 40%;
+            top: 25%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        
+        .window {
+            background: linear-gradient(135deg, var(--tardis-light-blue), var(--tardis-accent));
+            border: 3px solid var(--tardis-dark-blue);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                inset 0 0 20px rgba(255, 255, 255, 0.3),
+                0 0 15px rgba(77, 166, 255, 0.5);
+        }
+        
+        .window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .window::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 2px;
+            background: var(--tardis-dark-blue);
+        }
+        
+        /* TARDIS Doors */
+        .tardis-doors {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40%;
+            display: flex;
+            z-index: 3;
+        }
+        
+        .door {
+            flex: 1;
+            background: linear-gradient(to bottom, var(--tardis-blue), var(--tardis-dark-blue));
+            border: 2px solid var(--tardis-dark-blue);
+            position: relative;
+            transition: transform 1s ease;
+        }
+        
+        .door.left {
+            border-right: 1px solid var(--tardis-dark-blue);
+            transform-origin: left center;
+        }
+        
+        .door.right {
+            border-left: 1px solid var(--tardis-dark-blue);
+            transform-origin: right center;
+        }
+        
+        .door-handle {
+            position: absolute;
+            top: 50%;
+            width: 10px;
+            height: 30px;
+            background: var(--accent-gold);
+            border-radius: 5px;
+            transform: translateY(-50%);
+        }
+        
+        .door.left .door-handle {
+            right: 15px;
+        }
+        
+        .door.right .door-handle {
+            left: 15px;
+        }
+        
+        /* TARDIS Details */
+        .tardis-details {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+        
+        .detail-panel {
+            position: absolute;
+            top: 35%;
+            left: 10px;
+            width: 15px;
+            height: 30%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            border: 1px solid var(--tardis-dark-blue);
+        }
+        
+        /* Stellar Rift Effect */
+        .stellar-rift {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid var(--accent-green);
-            box-shadow: 
-                0 0 40px rgba(42, 157, 143, 0.3),
-                inset 0 0 40px rgba(42, 157, 143, 0.1);
-        }
-        
-        /* Star overlay */
-        .star-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            z-index: 10;
+            background: radial-gradient(circle at center, transparent 30%, rgba(77, 166, 255, 0.1) 70%);
+            opacity: 0;
+            border-radius: 8px;
+            z-index: 5;
             pointer-events: none;
         }
         
-        .shining-star {
+        /* Time Vortex Effect */
+        .time-vortex {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
-            opacity: 0.8;
+            width: 0;
+            height: 0;
             border-radius: 50%;
+            background: radial-gradient(circle, var(--tardis-accent) 0%, transparent 70%);
+            opacity: 0;
             filter: blur(20px);
-            animation: starPulse 3s ease-in-out infinite alternate;
+            z-index: 1;
+            pointer-events: none;
         }
         
-        .star {
+        /* Gallifreyan Symbols */
+        .gallifreyan-symbols {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(0deg);
-            width: 80px;
-            height: 80px;
-            background: var(--accent-gold);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            animation: starRotate 20s linear infinite;
-            box-shadow: 0 0 40px var(--accent-gold);
-        }
-        
-        /* Snow effect */
-        .snow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 1;
         }
         
-        /* Footer */
-        .footer {
-            position: fixed;
-            bottom: 30px;
-            width: 100%;
+        .symbol {
+            position: absolute;
+            color: var(--tardis-accent);
+            font-size: 1.5rem;
+            opacity: 0.5;
+            animation: symbolFloat 20s linear infinite;
+        }
+        
+        /* Info Panel */
+        .info-panel {
+            margin-top: 40px;
             text-align: center;
-            z-index: 50;
+            max-width: 700px;
+            padding: 25px;
+            background: rgba(10, 10, 10, 0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(77, 166, 255, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         
-        .signature {
+        .info-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
+            color: var(--tardis-accent);
+            margin-bottom: 15px;
             letter-spacing: 2px;
+        }
+        
+        .info-text {
             color: var(--accent-silver);
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-        
-        .signature:hover {
-            opacity: 1;
-        }
-        
-        /* Animations */
-        @keyframes starRotate {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-        
-        @keyframes starPulse {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.5;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.2);
-                opacity: 0.9;
-            }
-        }
-        
-        @keyframes nameGlow {
-            0% {
-                text-shadow: 0 0 20px rgba(233, 196, 106, 0.3);
-            }
-            100% {
-                text-shadow: 0 0 40px rgba(233, 196, 106, 0.6), 0 0 60px rgba(233, 196, 106, 0.4);
-            }
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
         
         /* Controls */
-        .controls {
+        .controls-container {
             position: fixed;
-            bottom: 80px;
-            left: 20px;
-            background: rgba(42, 157, 143, 0.1);
-            padding: 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(42, 157, 143, 0.3);
-            backdrop-filter: blur(10px);
-            z-index: 100;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 10px;
+            gap: 20px;
+            z-index: 100;
+            background: rgba(15, 26, 42, 0.85);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(77, 166, 255, 0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
         
         .control-btn {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(233, 196, 106, 0.3);
-            color: var(--accent-gold);
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.2), rgba(77, 166, 255, 0.1));
+            border: 1px solid rgba(77, 166, 255, 0.3);
+            color: var(--tardis-accent);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--tardis-accent), var(--tardis-light-blue));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
         }
         
         .control-btn:hover {
-            background: var(--accent-gold);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(77, 166, 255, 0.3);
             color: var(--primary-black);
-            transform: scale(1.1);
+            border-color: transparent;
         }
         
-        /* Responsive */
-        @media (max-width: 992px) {
-            .tree-container {
-                width: 550px;
-                height: 550px;
+        .control-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .control-btn.active {
+            background: linear-gradient(135deg, var(--tardis-accent), var(--tardis-light-blue));
+            color: var(--primary-black);
+            box-shadow: 0 0 20px rgba(77, 166, 255, 0.5);
+        }
+        
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            z-index: 50;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
+        }
+        
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            color: var(--accent-silver);
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(77, 166, 255, 0.05);
+            border: 1px solid rgba(77, 166, 255, 0.1);
+        }
+        
+        .signature:hover {
+            opacity: 1;
+            background: rgba(77, 166, 255, 0.1);
+            border-color: rgba(77, 166, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Instructions */
+        .instructions {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(15, 26, 42, 0.85);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: var(--accent-silver);
+            border: 1px solid rgba(77, 166, 255, 0.2);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            max-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .instructions-title {
+            color: var(--tardis-accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .instructions i {
+            color: var(--tardis-accent);
+            margin-right: 10px;
+            width: 16px;
+            text-align: center;
+        }
+        
+        .instructions p {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Animations */
+        @keyframes nameGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(77, 166, 255, 0.4);
             }
-            
+            100% {
+                text-shadow: 0 0 40px rgba(77, 166, 255, 0.7), 0 0 60px rgba(77, 166, 255, 0.4);
+            }
+        }
+        
+        @keyframes lightPulse {
+            0% {
+                box-shadow: 0 0 20px var(--tardis-glow);
+                opacity: 0.8;
+            }
+            100% {
+                box-shadow: 0 0 40px var(--tardis-glow), 0 0 60px rgba(77, 166, 255, 0.5);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes tardisFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes doorOpenLeft {
+            0% {
+                transform: rotateY(0);
+            }
+            100% {
+                transform: rotateY(-45deg);
+            }
+        }
+        
+        @keyframes doorOpenRight {
+            0% {
+                transform: rotateY(0);
+            }
+            100% {
+                transform: rotateY(45deg);
+            }
+        }
+        
+        @keyframes vortexExpand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                width: 500px;
+                height: 500px;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes riftGlow {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes symbolFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(100px, -100px) rotate(360deg);
+            }
+        }
+        
+        /* Loading screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--deep-space);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 1s, visibility 1s;
+        }
+        
+        .loader {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(77, 166, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--tardis-accent);
+            border-bottom-color: var(--tardis-light-blue);
+            animation: spin 1.5s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            color: var(--accent-silver);
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
             .name {
                 font-size: 4rem;
             }
             
             .year-tagline {
                 font-size: 1.4rem;
-                letter-spacing: 5px;
+                letter-spacing: 4px;
+            }
+            
+            .tardis-container {
+                width: 250px;
+                height: 500px;
             }
         }
         
         @media (max-width: 768px) {
-            .tree-container {
-                width: 400px;
-                height: 400px;
+            .header {
+                padding: 20px 0 10px;
             }
             
             .name {
-                font-size: 3rem;
+                font-size: 3.2rem;
                 letter-spacing: 2px;
+            }
+            
+            .name::before, .name::after {
+                width: 20px;
+            }
+            
+            .name::before {
+                left: -30px;
+            }
+            
+            .name::after {
+                right: -30px;
             }
             
             .year-tagline {
@@ -314,79 +766,84 @@
                 right: -30px;
             }
             
-            .controls {
-                left: 10px;
-                bottom: 70px;
-                padding: 10px;
+            .tardis-container {
+                width: 200px;
+                height: 400px;
+            }
+            
+            .info-panel {
+                margin-top: 30px;
+                padding: 20px;
+            }
+            
+            .controls-container {
+                padding: 12px 20px;
+                gap: 15px;
+                bottom: 20px;
+            }
+            
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .instructions {
+                top: 20px;
+                right: 20px;
+                padding: 15px;
+                max-width: 200px;
             }
         }
         
         @media (max-width: 480px) {
-            .tree-container {
-                width: 320px;
-                height: 320px;
-            }
-            
             .name {
                 font-size: 2.5rem;
             }
             
-            .header {
-                padding: 30px 0 10px;
+            .name::before, .name::after {
+                width: 15px;
             }
-        }
-        
-        /* Loading screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0a0a0a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 1s, visibility 1s;
-        }
-        
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(233, 196, 106, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--accent-gold);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Instructions */
-        .instructions {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(26, 26, 26, 0.8);
-            padding: 15px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--accent-silver);
-            border: 1px solid rgba(233, 196, 106, 0.2);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            max-width: 250px;
-        }
-        
-        .instructions i {
-            color: var(--accent-gold);
-            margin-right: 8px;
-        }
-        
-        .instructions p {
-            margin: 5px 0;
+            
+            .name::before {
+                left: -25px;
+            }
+            
+            .name::after {
+                right: -25px;
+            }
+            
+            .year-tagline {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+            
+            .tardis-container {
+                width: 180px;
+                height: 360px;
+            }
+            
+            .controls-container {
+                padding: 10px 15px;
+                gap: 10px;
+                bottom: 15px;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .instructions {
+                position: static;
+                margin: 20px auto;
+                max-width: 300px;
+            }
+            
+            .info-panel {
+                margin: 20px 15px;
+            }
         }
     </style>
 </head>
@@ -394,524 +851,434 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader"></div>
+        <div class="loading-text">INITIALIZING TARDIS SYSTEMS</div>
     </div>
+    
+    <!-- Space Background -->
+    <div class="space-bg"></div>
+    <div class="stars" id="starsContainer"></div>
     
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1 class="name">Aseel</h1>
-            <div class="year-tagline">New Beginning 2026</div>
+            <div class="name-wrapper">
+                <h1 class="name">Aseel</h1>
+            </div>
+            <div class="year-tagline">NEW BEGINNING <span>2026</span></div>
         </div>
     </header>
     
     <!-- Main Content -->
     <main class="main-content">
-        <div class="tree-container">
-            <canvas id="tree-canvas"></canvas>
-            
-            <!-- Star Overlay -->
-            <div class="star-overlay">
-                <div class="shining-star"></div>
-                <div class="star"></div>
+        <div class="tardis-section">
+            <div class="tardis-container">
+                <!-- Gallifreyan Symbols -->
+                <div class="gallifreyan-symbols" id="gallifreyanSymbols"></div>
+                
+                <!-- Time Vortex Effect -->
+                <div class="time-vortex" id="timeVortex"></div>
+                
+                <!-- TARDIS -->
+                <div class="tardis" id="tardis">
+                    <!-- Roof Light -->
+                    <div class="roof-light"></div>
+                    
+                    <!-- TARDIS Roof -->
+                    <div class="tardis-roof"></div>
+                    
+                    <!-- TARDIS Body -->
+                    <div class="tardis-body">
+                        <!-- Police Sign -->
+                        <div class="police-sign">
+                            <div class="police-text">POLICE PUBLIC CALL BOX</div>
+                        </div>
+                        
+                        <!-- Windows -->
+                        <div class="tardis-windows">
+                            <div class="window"></div>
+                            <div class="window"></div>
+                            <div class="window"></div>
+                            <div class="window"></div>
+                        </div>
+                        
+                        <!-- Doors -->
+                        <div class="tardis-doors">
+                            <div class="door left" id="leftDoor">
+                                <div class="door-handle"></div>
+                            </div>
+                            <div class="door right" id="rightDoor">
+                                <div class="door-handle"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Details -->
+                        <div class="tardis-details">
+                            <div class="detail-panel"></div>
+                        </div>
+                        
+                        <!-- Stellar Rift Effect -->
+                        <div class="stellar-rift" id="stellarRift"></div>
+                    </div>
+                </div>
             </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3 class="info-title">TARDIS - A New Beginning in Time and Space</h3>
+            <p class="info-text">The TARDIS (Time And Relative Dimension In Space) represents infinite possibilities and new beginnings. Bigger on the inside, it symbolizes that 2026 holds more potential than can be seen from the outside. Each journey through time and space begins with a single step through these doors.</p>
         </div>
     </main>
     
     <!-- Controls -->
-    <div class="controls">
-        <button class="control-btn" id="playPauseBtn" title="Play/Pause Animations">
-            <i class="fas fa-pause"></i>
+    <div class="controls-container">
+        <button class="control-btn active" id="doorsBtn" title="Open/Close TARDIS Doors">
+            <i class="fas fa-door-open"></i>
         </button>
-        <button class="control-btn" id="snowBtn" title="Toggle Snow">
-            <i class="fas fa-snowflake"></i>
-        </button>
-        <button class="control-btn" id="lightsBtn" title="Toggle Lights">
+        <button class="control-btn active" id="lightsBtn" title="Toggle TARDIS Lights">
             <i class="fas fa-lightbulb"></i>
         </button>
-        <button class="control-btn" id="autoRotateBtn" title="Auto Rotate">
-            <i class="fas fa-sync-alt"></i>
+        <button class="control-btn" id="vortexBtn" title="Activate Time Vortex">
+            <i class="fas fa-infinity"></i>
+        </button>
+        <button class="control-btn" id="soundBtn" title="TARDIS Sound">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
+            <i class="fas fa-expand"></i>
         </button>
     </div>
     
     <!-- Instructions -->
     <div class="instructions">
-        <p><i class="fas fa-mouse-pointer"></i> Drag to rotate</p>
-        <p><i class="fas fa-mouse"></i> Scroll to zoom</p>
-        <p><i class="fas fa-expand"></i> Double-click for fullscreen</p>
+        <div class="instructions-title">
+            <i class="fas fa-info-circle"></i> TARDIS CONTROLS
+        </div>
+        <p><i class="fas fa-door-open"></i> Open/Close Doors</p>
+        <p><i class="fas fa-lightbulb"></i> Toggle Lights</p>
+        <p><i class="fas fa-infinity"></i> Time Vortex</p>
+        <p><i class="fas fa-volume-up"></i> TARDIS Sound</p>
     </div>
     
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="signature">EST. 2026</div>
+            <div class="signature">TIME AND RELATIVE DIMENSION IN SPACE</div>
         </div>
     </footer>
     
-    <!-- Snow Container -->
-    <div class="snow-container" id="snowContainer"></div>
+    <!-- Audio for TARDIS sounds -->
+    <audio id="tardisSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-spaceship-engine-904.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="doorSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-metal-door-opening-1360.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Three.js 3D Tree Implementation
-        let scene, camera, renderer, controls;
-        let treeGroup, star, ornaments = [], lights = [];
-        let isAnimating = true;
-        let autoRotate = true;
-        
-        // Initialize Three.js scene
-        function init() {
-            // Scene
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x0a0a0a);
-            scene.fog = new THREE.Fog(0x0a0a0a, 10, 50);
+        // Create starfield
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const starCount = 150;
             
-            // Camera
-            const canvas = document.getElementById('tree-canvas');
-            camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-            camera.position.set(0, 8, 18);
-            
-            // Renderer
-            renderer = new THREE.WebGLRenderer({ 
-                canvas, 
-                antialias: true, 
-                alpha: true,
-                powerPreference: "high-performance"
-            });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            renderer.outputColorSpace = THREE.SRGBColorSpace;
-            
-            // Controls
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.enableZoom = true;
-            controls.enablePan = false;
-            controls.minDistance = 8;
-            controls.maxDistance = 25;
-            controls.maxPolarAngle = Math.PI / 2.2;
-            controls.autoRotate = autoRotate;
-            controls.autoRotateSpeed = 0.5;
-            
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
-            directionalLight.position.set(10, 20, 10);
-            directionalLight.castShadow = true;
-            scene.add(directionalLight);
-            
-            const treeLight = new THREE.PointLight(0xe9c46a, 2, 30);
-            treeLight.position.set(0, 15, 0);
-            scene.add(treeLight);
-            
-            // Create realistic tree
-            createRealisticTree();
-            
-            // Create ornaments
-            createOrnaments();
-            
-            // Create twinkling lights
-            createTwinklingLights();
-            
-            // Handle window resize
-            window.addEventListener('resize', onWindowResize);
-            
-            // Start animation
-            animate();
-            
-            // Hide loading screen
-            setTimeout(() => {
-                document.getElementById('loadingScreen').style.opacity = '0';
-                document.getElementById('loadingScreen').style.visibility = 'hidden';
-            }, 1500);
-        }
-        
-        // Create realistic 3D Christmas tree
-        function createRealisticTree() {
-    treeGroup = new THREE.Group();
-
-    /* ===== Glass Outline Tree ===== */
-    const points = [];
-
-    const height = 10;
-    const layers = 12;
-
-    for (let i = 0; i <= layers; i++) {
-        const y = (i / layers) * height;
-        const radius = 4 - i * 0.3;
-        points.push(new THREE.Vector3(radius, y, 0));
-    }
-
-    const curve = new THREE.CatmullRomCurve3(points);
-    const geometry = new THREE.TubeGeometry(curve, 200, 0.12, 12, false);
-
-    const material = new THREE.MeshPhysicalMaterial({
-        color: 0x2a9d8f,
-        transparent: true,
-        opacity: 0.65,
-        roughness: 0.1,
-        metalness: 0.3,
-        transmission: 0.9,
-        thickness: 1.2,
-        clearcoat: 1,
-        clearcoatRoughness: 0.05
-    });
-
-    const leftSide = new THREE.Mesh(geometry, material);
-    leftSide.rotation.y = Math.PI / 2;
-    treeGroup.add(leftSide);
-
-    const rightSide = leftSide.clone();
-    rightSide.scale.x = -1;
-    treeGroup.add(rightSide);
-
-    /* ===== Center Line ===== */
-    const centerLine = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.05, 0.05, height, 16),
-        new THREE.MeshStandardMaterial({
-            color: 0x2a9d8f,
-            emissive: 0x2a9d8f,
-            emissiveIntensity: 0.4
-        })
-    );
-    centerLine.position.y = height / 2;
-    treeGroup.add(centerLine);
-
-    /* ===== Minimal Luxury Star ===== */
-    star = new THREE.Mesh(
-        new THREE.OctahedronGeometry(0.45),
-        new THREE.MeshStandardMaterial({
-            color: 0xe9c46a,
-            emissive: 0xe9c46a,
-            emissiveIntensity: 1,
-            metalness: 1,
-            roughness: 0.15
-        })
-    );
-    star.position.y = height + 0.8;
-
-    const glow = new THREE.Mesh(
-        new THREE.SphereGeometry(1.2, 32, 32),
-        new THREE.MeshBasicMaterial({
-            color: 0xe9c46a,
-            transparent: true,
-            opacity: 0.35
-        })
-    );
-    star.add(glow);
-
-    treeGroup.add(star);
-
-    /* ===== Position & Scale ===== */
-    treeGroup.position.y = -1;
-    treeGroup.scale.set(1, 1, 1);
-
-    scene.add(treeGroup);
-}
-}
-        
-        // Create ornaments with coordinated colors
-        function createOrnaments() {
-            const ornamentColors = [
-                0xe63946, // Red
-                0x2a9d8f, // Green
-                0xe9c46a, // Gold
-                0x4361ee, // Blue
-                0xf4a261, // Orange
-                0x9d4edd  // Purple
-            ];
-            
-            // Ornament positions on the tree
-            const positions = [
-                {y: 5, radius: 1.8, angle: 0},
-                {y: 6.5, radius: 2.2, angle: Math.PI/2},
-                {y: 8, radius: 2.6, angle: Math.PI},
-                {y: 9.5, radius: 2.2, angle: Math.PI*1.5},
-                {y: 7, radius: 1.5, angle: Math.PI/4},
-                {y: 10, radius: 1.8, angle: Math.PI*0.75},
-                {y: 4.5, radius: 1.2, angle: Math.PI*0.3},
-                {y: 11, radius: 1.4, angle: Math.PI*1.2},
-            ];
-            
-            positions.forEach((pos, index) => {
-                const color = ornamentColors[index % ornamentColors.length];
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
                 
-                // Main ornament sphere
-                const ornamentGeometry = new THREE.SphereGeometry(0.35, 16, 16);
-                const ornamentMaterial = new THREE.MeshStandardMaterial({ 
-                    color: color,
-                    roughness: 0.3,
-                    metalness: 0.7,
-                    clearcoat: 0.5,
-                    clearcoatRoughness: 0.1
-                });
+                const size = Math.random() * 3 + 1;
+                star.style.width = star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                star.style.animationDelay = `${Math.random() * 3}s`;
                 
-                const ornament = new THREE.Mesh(ornamentGeometry, ornamentMaterial);
-                
-                // Calculate position
-                const x = Math.cos(pos.angle) * pos.radius;
-                const z = Math.sin(pos.angle) * pos.radius;
-                ornament.position.set(x, pos.y, z);
-                ornament.castShadow = true;
-                
-                // Metallic ring on top
-                const ringGeometry = new THREE.TorusGeometry(0.4, 0.05, 8, 16);
-                const ringMaterial = new THREE.MeshStandardMaterial({ 
-                    color: 0xc0c0c0,
-                    roughness: 0.2,
-                    metalness: 0.9
-                });
-                const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-                ring.position.y = 0.4;
-                ornament.add(ring);
-                
-                treeGroup.add(ornament);
-                ornaments.push({mesh: ornament, color: color});
-            });
-        }
-        
-        // Create twinkling lights
-        function createTwinklingLights() {
-            const lightColors = [0xff6b6b, 0x4ecdc4, 0xffd166, 0x9d4edd];
-            const lightPositions = [
-                {y: 5.5, radius: 2, angle: Math.PI/6},
-                {y: 7.2, radius: 2.4, angle: Math.PI/1.8},
-                {y: 8.8, radius: 2.8, angle: Math.PI/1.2},
-                {y: 10.5, radius: 2.3, angle: Math.PI/0.9},
-                {y: 4.8, radius: 1.5, angle: Math.PI/0.7},
-                {y: 6.3, radius: 1.8, angle: Math.PI/0.5}
-            ];
-            
-            lightPositions.forEach((pos, index) => {
-                const light = new THREE.PointLight(lightColors[index % lightColors.length], 2, 8);
-                
-                const x = Math.cos(pos.angle) * pos.radius;
-                const z = Math.sin(pos.angle) * pos.radius;
-                light.position.set(x, pos.y, z);
-                
-                // Visual representation of the light
-                const lightSphere = new THREE.SphereGeometry(0.15, 8, 8);
-                const lightMaterial = new THREE.MeshBasicMaterial({ 
-                    color: lightColors[index % lightColors.length],
-                    transparent: true,
-                    opacity: 0.8
-                });
-                const lightMesh = new THREE.Mesh(lightSphere, lightMaterial);
-                lightMesh.position.copy(light.position);
-                
-                treeGroup.add(light);
-                treeGroup.add(lightMesh);
-                lights.push({light: light, mesh: lightMesh});
-            });
-        }
-        
-        // Handle window resize
-        function onWindowResize() {
-            const canvas = document.getElementById('tree-canvas');
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        }
-        
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            // Auto rotation
-            if (controls.autoRotate) {
-                controls.update();
-            }
-            
-            // Animate star
-            if (star) {
-                star.rotation.y += 0.02;
-                const scale = 1 + Math.sin(Date.now() * 0.002) * 0.15;
-                star.scale.setScalar(scale);
-            }
-            
-            // Animate ornaments
-            ornaments.forEach((ornament, index) => {
-                ornament.mesh.rotation.y += 0.005;
-                const floatY = Math.sin(Date.now() * 0.001 + index) * 0.1;
-                ornament.mesh.position.y += floatY * 0.01;
-            });
-            
-            // Animate lights (twinkling effect)
-            lights.forEach((light, index) => {
-                const intensity = 1 + Math.sin(Date.now() * 0.003 + index) * 0.8;
-                light.light.intensity = intensity;
-                light.mesh.material.opacity = 0.4 + intensity * 0.3;
-            });
-            
-            // Gentle tree movement
-            if (treeGroup) {
-                treeGroup.rotation.y += 0.001;
-            }
-            
-            renderer.render(scene, camera);
-        }
-        
-        // Create snow with GSAP
-        function createSnowWithGSAP() {
-            const snowContainer = document.getElementById('snowContainer');
-            const snowflakeCount = 60;
-            
-            for (let i = 0; i < snowflakeCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.style.position = 'absolute';
-                snowflake.style.width = snowflake.style.height = `${Math.random() * 5 + 2}px`;
-                snowflake.style.backgroundColor = 'white';
-                snowflake.style.borderRadius = '50%';
-                snowflake.style.opacity = `${Math.random() * 0.5 + 0.3}`;
-                snowflake.style.left = `${Math.random() * 100}%`;
-                snowflake.style.top = '-10px';
-                
-                // Use GSAP for smooth snow animation
-                gsap.to(snowflake, {
-                    y: window.innerHeight + 20,
-                    x: `+=${Math.random() * 100 - 50}`,
-                    rotation: Math.random() * 360,
-                    duration: Math.random() * 15 + 10,
-                    ease: "none",
-                    repeat: -1,
-                    delay: Math.random() * 5
-                });
-                
-                snowContainer.appendChild(snowflake);
+                starsContainer.appendChild(star);
             }
         }
         
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            init();
-            createSnowWithGSAP();
-            setupControls();
+        // Create Gallifreyan symbols
+        function createGallifreyanSymbols() {
+            const symbolsContainer = document.getElementById('gallifreyanSymbols');
+            const symbolCount = 15;
+            const symbols = ['✧', '✦', '✺', '✹', '✶', '✴', '✳', '♆', '♄', '♃', '♁', '♀', '♂', '☿', '♇'];
             
-            // Add parallax effect on mouse move
-            document.addEventListener('mousemove', (e) => {
-                if (!treeGroup) return;
+            for (let i = 0; i < symbolCount; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'symbol';
+                symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.style.left = `${Math.random() * 100}%`;
+                symbol.style.top = `${Math.random() * 100}%`;
+                symbol.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                symbol.style.animationDelay = `${Math.random() * 5}s`;
                 
-                const x = (e.clientX / window.innerWidth - 0.5) * 0.5;
-                const y = (e.clientY / window.innerHeight - 0.5) * 0.5;
+                symbolsContainer.appendChild(symbol);
+            }
+        }
+        
+        // TARDIS Controls
+        let doorsOpen = false;
+        let lightsOn = true;
+        let vortexActive = false;
+        let soundPlaying = false;
+        
+        const tardisSound = document.getElementById('tardisSound');
+        const doorSound = document.getElementById('doorSound');
+        
+        // Setup control buttons
+        function setupControls() {
+            const doorsBtn = document.getElementById('doorsBtn');
+            const lightsBtn = document.getElementById('lightsBtn');
+            const vortexBtn = document.getElementById('vortexBtn');
+            const soundBtn = document.getElementById('soundBtn');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const leftDoor = document.getElementById('leftDoor');
+            const rightDoor = document.getElementById('rightDoor');
+            const windows = document.querySelectorAll('.window');
+            const tardisBody = document.querySelector('.tardis-body');
+            const roofLight = document.querySelector('.roof-light');
+            const stellarRift = document.getElementById('stellarRift');
+            const timeVortex = document.getElementById('timeVortex');
+            
+            // Doors button
+            doorsBtn.addEventListener('click', function() {
+                if (doorsOpen) {
+                    // Close doors
+                    gsap.to(leftDoor, {
+                        rotationY: 0,
+                        duration: 1,
+                        ease: "power2.out"
+                    });
+                    
+                    gsap.to(rightDoor, {
+                        rotationY: 0,
+                        duration: 1,
+                        ease: "power2.out"
+                    });
+                    
+                    doorsBtn.querySelector('i').className = 'fas fa-door-open';
+                    doorsBtn.classList.remove('active');
+                    
+                    // Play door sound
+                    doorSound.currentTime = 0;
+                    doorSound.play();
+                } else {
+                    // Open doors
+                    gsap.to(leftDoor, {
+                        rotationY: -45,
+                        duration: 1.5,
+                        ease: "power2.out"
+                    });
+                    
+                    gsap.to(rightDoor, {
+                        rotationY: 45,
+                        duration: 1.5,
+                        ease: "power2.out"
+                    });
+                    
+                    doorsBtn.querySelector('i').className = 'fas fa-door-closed';
+                    doorsBtn.classList.add('active');
+                    
+                    // Play door sound
+                    doorSound.currentTime = 0;
+                    doorSound.play();
+                }
                 
-                gsap.to(treeGroup.rotation, {
-                    x: y * 0.3,
-                    y: x * 0.3 + treeGroup.rotation.y,
-                    duration: 1.5,
-                    ease: "power2.out"
-                });
+                doorsOpen = !doorsOpen;
             });
             
-            // Double-click for fullscreen
-            document.getElementById('tree-canvas').addEventListener('dblclick', function() {
+            // Lights button
+            lightsBtn.addEventListener('click', function() {
+                if (lightsOn) {
+                    // Turn off lights
+                    gsap.to(windows, {
+                        opacity: 0.2,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    gsap.to(roofLight, {
+                        opacity: 0.2,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    gsap.to(tardisBody, {
+                        boxShadow: '0 0 20px rgba(0, 102, 204, 0.2)',
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    lightsBtn.classList.remove('active');
+                } else {
+                    // Turn on lights
+                    gsap.to(windows, {
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    gsap.to(roofLight, {
+                        opacity: 0.8,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    gsap.to(tardisBody, {
+                        boxShadow: '0 0 40px rgba(0, 102, 204, 0.5), inset 0 0 30px rgba(77, 166, 255, 0.2)',
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    lightsBtn.classList.add('active');
+                }
+                
+                lightsOn = !lightsOn;
+            });
+            
+            // Vortex button
+            vortexBtn.addEventListener('click', function() {
+                if (vortexActive) {
+                    // Deactivate vortex
+                    gsap.to(stellarRift, {
+                        opacity: 0,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    vortexBtn.classList.remove('active');
+                } else {
+                    // Activate vortex
+                    gsap.to(stellarRift, {
+                        opacity: 0.3,
+                        duration: 1,
+                        ease: "power2.inOut",
+                        repeat: -1,
+                        yoyo: true
+                    });
+                    
+                    // Create vortex expansion
+                    gsap.to(timeVortex, {
+                        width: 500,
+                        height: 500,
+                        opacity: 0.7,
+                        duration: 2,
+                        ease: "power2.out",
+                        onComplete: () => {
+                            gsap.to(timeVortex, {
+                                opacity: 0,
+                                duration: 1
+                            });
+                        }
+                    });
+                    
+                    vortexBtn.classList.add('active');
+                    
+                    // Reset vortex size after animation
+                    setTimeout(() => {
+                        timeVortex.style.width = '0';
+                        timeVortex.style.height = '0';
+                    }, 3000);
+                }
+                
+                vortexActive = !vortexActive;
+            });
+            
+            // Sound button
+            soundBtn.addEventListener('click', function() {
+                if (soundPlaying) {
+                    tardisSound.pause();
+                    tardisSound.currentTime = 0;
+                    soundBtn.querySelector('i').className = 'fas fa-volume-up';
+                    soundBtn.classList.remove('active');
+                } else {
+                    tardisSound.play().catch(e => {
+                        console.log("Autoplay prevented. User interaction required.");
+                    });
+                    soundBtn.querySelector('i').className = 'fas fa-volume-mute';
+                    soundBtn.classList.add('active');
+                }
+                
+                soundPlaying = !soundPlaying;
+            });
+            
+            // Fullscreen button
+            fullscreenBtn.addEventListener('click', function() {
                 if (!document.fullscreenElement) {
-                    this.requestFullscreen().catch(err => {
+                    document.documentElement.requestFullscreen().catch(err => {
                         console.log(`Error attempting to enable fullscreen: ${err.message}`);
                     });
                 } else {
                     document.exitFullscreen();
                 }
             });
-        });
-        
-        // Setup control buttons
-        function setupControls() {
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const snowBtn = document.getElementById('snowBtn');
-            const lightsBtn = document.getElementById('lightsBtn');
-            const autoRotateBtn = document.getElementById('autoRotateBtn');
-            const playPauseIcon = playPauseBtn.querySelector('i');
-            const snowIcon = snowBtn.querySelector('i');
-            const lightsIcon = lightsBtn.querySelector('i');
-            const autoRotateIcon = autoRotateBtn.querySelector('i');
             
-            let snowEnabled = true;
-            let lightsEnabled = true;
-            
-            // Play/Pause button
-            playPauseBtn.addEventListener('click', function() {
-                if (isAnimating) {
-                    // Pause animations
-                    gsap.globalTimeline.pause();
-                    playPauseIcon.className = 'fas fa-play';
-                    isAnimating = false;
+            // Update fullscreen button on change
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    fullscreenBtn.querySelector('i').className = 'fas fa-compress';
+                    fullscreenBtn.classList.add('active');
                 } else {
-                    // Resume animations
-                    gsap.globalTimeline.resume();
-                    playPauseIcon.className = 'fas fa-pause';
-                    isAnimating = true;
+                    fullscreenBtn.querySelector('i').className = 'fas fa-expand';
+                    fullscreenBtn.classList.remove('active');
                 }
             });
             
-            // Snow toggle button
-            snowBtn.addEventListener('click', function() {
-                const snowflakes = document.querySelectorAll('.snowflake');
-                
-                if (snowEnabled) {
-                    // Disable snow
-                    gsap.killTweensOf(snowflakes);
-                    snowflakes.forEach(snowflake => {
-                        snowflake.style.opacity = '0';
-                    });
-                    snowIcon.style.color = '#666';
-                    snowEnabled = false;
-                } else {
-                    // Enable snow
-                    snowflakes.forEach((snowflake, index) => {
-                        snowflake.style.opacity = `${Math.random() * 0.5 + 0.3}`;
-                        gsap.to(snowflake, {
-                            y: window.innerHeight + 20,
-                            x: `+=${Math.random() * 100 - 50}`,
-                            rotation: Math.random() * 360,
-                            duration: Math.random() * 15 + 10,
-                            ease: "none",
-                            repeat: -1,
-                            delay: Math.random() * 5
-                        });
-                    });
-                    snowIcon.style.color = '#e9c46a';
-                    snowEnabled = true;
-                }
+            // TARDIS floating animation
+            gsap.to('.tardis', {
+                y: -10,
+                duration: 3,
+                yoyo: true,
+                repeat: -1,
+                ease: "sine.inOut"
             });
             
-            // Lights toggle button
-            lightsBtn.addEventListener('click', function() {
-                if (lightsEnabled) {
-                    // Turn off lights
-                    lights.forEach(light => {
-                        light.light.intensity = 0;
-                        light.mesh.material.opacity = 0;
-                    });
-                    lightsIcon.style.color = '#666';
-                    lightsEnabled = false;
-                } else {
-                    // Turn on lights
-                    lights.forEach(light => {
-                        light.light.intensity = 2;
-                        light.mesh.material.opacity = 0.8;
-                    });
-                    lightsIcon.style.color = '#e9c46a';
-                    lightsEnabled = true;
-                }
-            });
-            
-            // Auto rotate toggle button
-            autoRotateBtn.addEventListener('click', function() {
-                autoRotate = !autoRotate;
-                controls.autoRotate = autoRotate;
-                
-                if (autoRotate) {
-                    autoRotateIcon.style.color = '#e9c46a';
-                    autoRotateIcon.style.animation = 'spin 2s linear infinite';
-                } else {
-                    autoRotateIcon.style.color = '#666';
-                    autoRotateIcon.style.animation = 'none';
-                }
+            // Pulsing light animation
+            gsap.to('.roof-light', {
+                boxShadow: '0 0 40px var(--tardis-glow), 0 0 60px rgba(77, 166, 255, 0.5)',
+                duration: 2,
+                yoyo: true,
+                repeat: -1,
+                ease: "sine.inOut"
             });
         }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createGallifreyanSymbols();
+            setupControls();
+            
+            // Hide loading screen
+            setTimeout(() => {
+                gsap.to('#loadingScreen', {
+                    opacity: 0,
+                    duration: 1,
+                    onComplete: () => {
+                        document.getElementById('loadingScreen').style.visibility = 'hidden';
+                    }
+                });
+            }, 1500);
+            
+            // Add parallax effect on mouse move
+            document.addEventListener('mousemove', (e) => {
+                const tardis = document.getElementById('tardis');
+                const x = (e.clientX / window.innerWidth - 0.5) * 10;
+                const y = (e.clientY / window.innerHeight - 0.5) * 10;
+                
+                gsap.to(tardis, {
+                    rotationY: x * 0.5,
+                    rotationX: -y * 0.5,
+                    duration: 1,
+                    ease: "power2.out"
+                });
+            });
+            
+            // Click on TARDIS to open doors
+            document.getElementById('tardis').addEventListener('click', function() {
+                const doorsBtn = document.getElementById('doorsBtn');
+                doorsBtn.click();
+            });
+        });
     </script>
 </body>
 </html>
